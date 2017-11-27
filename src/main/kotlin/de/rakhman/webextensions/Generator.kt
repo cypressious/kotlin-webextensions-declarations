@@ -63,10 +63,13 @@ class Generator(val dir: File) {
         val name = type.id
         val properties = type.properties
 
-        generateType(name, properties, fileBuilder)
+        val typeBuilder = generateType(name, properties, fileBuilder, true)
+        type.description?.let { typeBuilder.addKdoc(it + "\n") }
+
+        fileBuilder.addType(typeBuilder.build())
     }
 
-    private fun generateType(name: String, properties: Map<String, Parameter>?, fileBuilder: FileSpec.Builder, external: Boolean = true) {
+    private fun generateType(name: String, properties: Map<String, Parameter>?, fileBuilder: FileSpec.Builder, external: Boolean): TypeSpec.Builder {
         val typeBuilder = TypeSpec.classBuilder(name)
                 .addProperties(properties?.entries?.map {
                     PropertySpec
@@ -88,8 +91,7 @@ class Generator(val dir: File) {
                     .build())
         }
 
-        fileBuilder.addType(typeBuilder
-                .build())
+        return typeBuilder
     }
 
     private fun generateFunctionWithOverloads(f: Function, fileBuilder: FileSpec.Builder): List<FunSpec> {
@@ -145,7 +147,8 @@ class Generator(val dir: File) {
             "boolean" -> "Boolean"
             "object" -> {
                 if (fileBuilder != null) {
-                    generateType(name.capitalize(), p.properties, fileBuilder, false)
+                    val typeBuilder = generateType(name.capitalize(), p.properties, fileBuilder, false)
+                    fileBuilder.addType(typeBuilder.build())
                 }
 
                 name.capitalize()

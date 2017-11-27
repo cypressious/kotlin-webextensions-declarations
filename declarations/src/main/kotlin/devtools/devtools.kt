@@ -37,6 +37,9 @@ class ReloadOptions(
     val preprocessorScript: String
 )
 
+/**
+ * A resource within the inspected page, such as a document, a script, or an image.
+ */
 external class Resource {
   /**
    * The URL of the resource.
@@ -66,6 +69,9 @@ external class InspectedWindow {
 
 class HarLog()
 
+/**
+ * Represents a network request for a document resource (script, image and so on). See HAR Specification for reference.
+ */
 external class Request
 
 external class Network {
@@ -76,14 +82,29 @@ external class Network {
   }
 }
 
+/**
+ * Represents the Elements panel.
+ */
 external class ElementsPanel
 
+/**
+ * Represents the Sources panel.
+ */
 external class SourcesPanel
 
+/**
+ * Represents a panel created by extension.
+ */
 external class ExtensionPanel
 
+/**
+ * A sidebar created by the extension.
+ */
 external class ExtensionSidebarPane
 
+/**
+ * A button created by the extension.
+ */
 external class Button
 
 external class Panels {

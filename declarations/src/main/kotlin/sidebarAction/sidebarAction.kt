@@ -43,6 +43,9 @@ class Details(/**
  */
 val tabId: Int)
 
+/**
+ * Pixel data for an image. Must be an ImageData object (for example, from a <code>canvas</code> element).
+ */
 external class ImageDataType
 
 external class SidebarAction {

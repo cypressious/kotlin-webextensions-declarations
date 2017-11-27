@@ -12,7 +12,8 @@ data class Namespace(
 data class Type(
         val id: String,
         val type: String,
-        val properties: Map<String, Parameter>?
+        val properties: Map<String, Parameter>?,
+        val description: String?
 )
 
 

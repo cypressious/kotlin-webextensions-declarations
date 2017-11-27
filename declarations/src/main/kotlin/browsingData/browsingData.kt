@@ -15,6 +15,9 @@ class Result(
     val dataRemovalPermitted: DataTypeSet
 )
 
+/**
+ * Options that determine exactly what data will be removed.
+ */
 external class RemovalOptions {
   /**
    * Remove data accumulated on or after this date, represented in milliseconds since the epoch (accessible via the <code>getTime</code> method of the JavaScript <code>Date</code> object). If absent, defaults to 0 (which would remove all browsing data).
@@ -32,6 +35,9 @@ external class RemovalOptions {
   val originTypes: OriginTypes
 }
 
+/**
+ * A set of data types. Missing data types are interpreted as <code>false</code>.
+ */
 external class DataTypeSet {
   /**
    * The browser's cache. Note: when removing data, this clears the <em>entire</em> cache: it is not limited to the range you specify.

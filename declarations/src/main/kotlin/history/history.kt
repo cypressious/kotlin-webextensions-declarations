@@ -59,8 +59,14 @@ val startTime: Date, /**
  */
 val endTime: Date)
 
+/**
+ * The $(topic:transition-types)[transition type] for this visit from its referrer.
+ */
 external class TransitionType
 
+/**
+ * An object encapsulating one result of a history query.
+ */
 external class HistoryItem {
   /**
    * The unique identifier for the item.
@@ -93,6 +99,9 @@ external class HistoryItem {
   val typedCount: Int
 }
 
+/**
+ * An object encapsulating one visit to a URL.
+ */
 external class VisitItem {
   /**
    * The unique identifier for the item.

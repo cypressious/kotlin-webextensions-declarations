@@ -1,5 +1,8 @@
 package menusInternal
 
+/**
+ * Information sent when a context menu item is clicked.
+ */
 external class OnClickData {
   /**
    * The ID of the menu item that was clicked.

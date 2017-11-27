@@ -1,9 +1,18 @@
 package omnibox
 
+/**
+ * The style type.
+ */
 external class DescriptionStyleType
 
+/**
+ * The window disposition for the omnibox query. This is the recommended context to display results. For example, if the omnibox command is to navigate to a certain URL, a disposition of 'newForegroundTab' means the navigation should take place in a new selected tab.
+ */
 external class OnInputEnteredDisposition
 
+/**
+ * A suggest result.
+ */
 external class SuggestResult {
   /**
    * The text that is put into the URL bar, and that is sent to the extension when the user chooses this entry.
@@ -26,6 +35,9 @@ external class SuggestResult {
   val descriptionStylesRaw: Array<DescriptionStylesRaw>
 }
 
+/**
+ * A suggest result.
+ */
 external class DefaultSuggestResult {
   /**
    * The text that is displayed in the URL dropdown.

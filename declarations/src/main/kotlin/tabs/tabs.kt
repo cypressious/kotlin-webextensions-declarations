@@ -181,8 +181,14 @@ class ReloadProperties(/**
  */
 val bypassCache: Boolean)
 
+/**
+ * An event that caused a muted state change.
+ */
 external class MutedInfoReason
 
+/**
+ * Tab muted state and the reason for the last state change.
+ */
 external class MutedInfo {
   /**
    * Whether the tab is prevented from playing sound (but hasn't necessarily recently produced sound). Equivalent to whether the muted audio indicator is showing.
@@ -317,10 +323,19 @@ external class Tab {
   val isInReaderMode: Boolean
 }
 
+/**
+ * Defines how zoom changes are handled, i.e. which entity is responsible for the actual scaling of the page; defaults to <code>automatic</code>.
+ */
 external class ZoomSettingsMode
 
+/**
+ * Defines whether zoom changes will persist for the page's origin, or only take effect in this tab; defaults to <code>per-origin</code> when in <code>automatic</code> mode, and <code>per-tab</code> otherwise.
+ */
 external class ZoomSettingsScope
 
+/**
+ * Defines how zoom changes in a tab are handled and at what scope.
+ */
 external class ZoomSettings {
   /**
    * Defines how zoom changes are handled, i.e. which entity is responsible for the actual scaling of the page; defaults to <code>automatic</code>.
@@ -338,6 +353,9 @@ external class ZoomSettings {
   val defaultZoomFactor: Any
 }
 
+/**
+ * The page settings including: orientation, scale, background, margins, headers, footers.
+ */
 external class PageSettings {
   /**
    * The page content orientation: 0 = portrait, 1 = landscape. Default: 0.
@@ -430,8 +448,14 @@ external class PageSettings {
   val marginBottom: Any
 }
 
+/**
+ * Whether the tabs have completed loading.
+ */
 external class TabStatus
 
+/**
+ * The type of window.
+ */
 external class WindowType
 
 external class Tabs {

@@ -1,15 +1,25 @@
 package bookmarks
 
+import history.Query
 import kotlin.js.Promise
 
 class Destination(val parentId: String, val index: Int)
 
 class Changes(val title: String, val url: String)
 
+/**
+ * Indicates the reason why this node is unmodifiable. The <var>managed</var> value indicates that this node was configured by the system administrator or by the custodian of a supervised user. Omitted if the node can be modified by the user and the extension (default).
+ */
 external class BookmarkTreeNodeUnmodifiable
 
+/**
+ * Indicates the type of a BookmarkTreeNode, which can be one of bookmark, folder or separator.
+ */
 external class BookmarkTreeNodeType
 
+/**
+ * A node (either a bookmark or a folder) in the bookmark tree.  Child nodes are ordered within their parent folder.
+ */
 external class BookmarkTreeNode {
   /**
    * The unique identifier for the node. IDs are unique within the current profile, and they remain valid even after the browser is restarted.
@@ -62,6 +72,9 @@ external class BookmarkTreeNode {
   val children: Array<BookmarkTreeNode>
 }
 
+/**
+ * Object passed to the create() function.
+ */
 external class CreateDetails {
   /**
    * Defaults to the Other Bookmarks folder.
