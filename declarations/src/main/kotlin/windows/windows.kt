@@ -120,15 +120,9 @@ class UpdateInfo(
     val titlePreface: String
 )
 
-/**
- * The type of browser window this is. Under some circumstances a Window may not be assigned type property, for example when querying closed windows from the $(ref:sessions) API.
- */
-external class WindowType
+typealias WindowType = String
 
-/**
- * The state of this browser window. Under some circumstances a Window may not be assigned state property, for example when querying closed windows from the $(ref:sessions) API.
- */
-external class WindowState
+typealias WindowState = String
 
 external class Window {
   /**
@@ -197,10 +191,7 @@ external class Window {
   val title: String
 }
 
-/**
- * Specifies what type of browser window to create. The 'panel' and 'detached_panel' types create a popup unless the '--enable-panels' flag is set.
- */
-external class CreateType
+typealias CreateType = String
 
 external class Windows {
   /**

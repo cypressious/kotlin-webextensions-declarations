@@ -21,7 +21,7 @@ class Settings(
     val threads: Array<String>
 )
 
-external class ProfilerFeature
+typealias ProfilerFeature = String
 
 external class GeckoProfiler {
   /**

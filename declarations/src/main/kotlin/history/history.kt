@@ -59,10 +59,7 @@ val startTime: Date, /**
  */
 val endTime: Date)
 
-/**
- * The $(topic:transition-types)[transition type] for this visit from its referrer.
- */
-external class TransitionType
+typealias TransitionType = String
 
 /**
  * An object encapsulating one result of a history query.

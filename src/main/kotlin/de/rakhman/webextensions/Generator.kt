@@ -61,6 +61,14 @@ class Generator(val dir: File) {
 
     private fun generateType(fileBuilder: FileSpec.Builder, type: Type) {
         val name = type.id
+
+        if (type.type in primitiveTypes) {
+            fileBuilder.addTypeAlias(
+                    TypeAliasSpec.builder(name, ClassName.bestGuess(type.type.capitalize()))
+                            .build())
+            return
+        }
+
         val properties = type.properties
 
         val typeBuilder = generateType(name, properties, fileBuilder, true)
@@ -187,3 +195,5 @@ private fun List<Parameter>.getResolvedChoices(): List<List<ResolvedChoice>> {
         }
     }
 }
+
+private val primitiveTypes = setOf("string", "int", "boolean")

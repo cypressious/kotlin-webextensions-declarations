@@ -67,15 +67,9 @@ class UpdateProperties(
     val enabled: Boolean
 )
 
-/**
- * The different contexts a menu can appear in. Specifying 'all' is equivalent to the combination of all other contexts except for 'tab' and 'tools_menu'.
- */
-external class ContextType
+typealias ContextType = String
 
-/**
- * The type of menu item.
- */
-external class ItemType
+typealias ItemType = String
 
 /**
  * Information sent when a context menu item is clicked.
