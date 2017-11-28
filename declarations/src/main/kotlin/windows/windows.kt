@@ -60,10 +60,6 @@ class CreateCreateData(
      */
     val height: Int,
     /**
-     * If true, opens an active window. If false, opens an inactive window.
-     */
-    val focused: Boolean,
-    /**
      * Whether the new window should be an incognito window.
      */
     val incognito: Boolean,

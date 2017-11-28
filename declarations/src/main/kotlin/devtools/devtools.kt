@@ -3,20 +3,7 @@ package devtools
 import devtools.inspectedWindow.Resource
 import kotlin.js.Promise
 
-class EvalOptions(
-    /**
-     * If specified, the expression is evaluated on the iframe whose URL matches the one specified. By default, the expression is evaluated in the top frame of the inspected page.
-     */
-    val frameURL: String,
-    /**
-     * Evaluate the expression in the context of the content script of the calling extension, provided that the content script is already injected into the inspected page. If not, the expression is not evaluated and the callback is invoked with the exception parameter set to an object that has the <code>isError</code> field set to true and the <code>code</code> field set to <code>E_NOTFOUND</code>.
-     */
-    val useContentScriptContext: Boolean,
-    /**
-     * Evaluate the expression in the context of a content script of an extension that matches the specified origin. If given, contextSecurityOrigin overrides the 'true' setting on userContentScriptContext.
-     */
-    val contextSecurityOrigin: String
-)
+class EvalOptions()
 
 class ReloadReloadOptions(
     /**
@@ -30,11 +17,7 @@ class ReloadReloadOptions(
     /**
      * If specified, the script will be injected into every frame of the inspected page immediately upon load, before any of the frame's scripts. The script will not be injected after subsequent reloads&mdash;for example, if the user presses Ctrl+R.
      */
-    val injectedScript: String,
-    /**
-     * If specified, this script evaluates into a function that accepts three string arguments: the source to preprocess, the URL of the source, and a function name if the source is an DOM event handler. The preprocessorerScript function should return a string to be compiled by Chrome in place of the input source. In the case that the source is a DOM event handler, the returned source must compile to a single JS function.
-     */
-    val preprocessorScript: String
+    val injectedScript: String
 )
 
 /**

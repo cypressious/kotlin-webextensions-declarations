@@ -87,21 +87,23 @@ class Generator(val dir: File) {
     private fun generateType(name: String, properties: Map<String, Parameter>?, fileBuilder: FileSpec.Builder, external: Boolean): TypeSpec.Builder {
         val typeBuilder = if (external) TypeSpec.expectClassBuilder(name) else TypeSpec.classBuilder(name)
 
+        val props = properties?.entries?.filter { !it.value.unsupported } ?: emptyList()
+
         typeBuilder
-                .addProperties(properties?.entries?.map {
+                .addProperties(props.map {
                     PropertySpec
                             .builder(it.key.escapeIfKeyword(), ClassName.bestGuess(parameterTypeName(ParameterContext(it.key, it.value, null, null))))
                             .apply { if (!external) initializer(it.key.escapeIfKeyword()) }
                             .apply { it.value.description?.let { addKdoc(it.replace("%", "%%") + "\n") } }
                             .build()
-                } ?: emptyList())
+                })
 
         if (!external) {
             typeBuilder.primaryConstructor(FunSpec.constructorBuilder()
                     .addParameters(
-                            properties?.entries?.map {
+                            props.map {
                                 generateParameter(ParameterContext(it.key, it.value, null, fileBuilder)).build()
-                            } ?: emptyList()
+                            }
                     )
                     .build())
         }

@@ -1,8 +1,8 @@
 package runtime
 
 import events.Event
-import kotlin.js.Promise
 import tabs.Tab
+import kotlin.js.Promise
 
 class GetBackgroundPageBackgroundPage()
 
@@ -15,9 +15,6 @@ val name: String, /**
 val includeTlsChannelId: Boolean)
 
 class SendMessageOptions(/**
- * Whether the TLS channel ID will be passed into onMessageExternal for processes that are listening for the connection event.
- */
-val includeTlsChannelId: Boolean, /**
  * If true, the message will be directed to the extension's proxy sandbox.
  */
 val toProxyScript: Boolean)
@@ -67,11 +64,6 @@ external class MessageSender {
    * The URL of the page or frame that opened the connection. If the sender is in an iframe, it will be iframe's URL not the URL of the page which hosts it.
    */
   val url: String
-
-  /**
-   * The TLS channel ID of the page or frame that opened the connection, if requested by the extension or app, and if available.
-   */
-  val tlsChannelId: String
 }
 
 typealias PlatformOs = String
@@ -91,11 +83,6 @@ external class PlatformInfo {
    * The machine's processor architecture.
    */
   val arch: PlatformArch
-
-  /**
-   * The native client architecture. This may be different from arch on some platforms.
-   */
-  val nacl_arch: PlatformNaclArch
 }
 
 /**

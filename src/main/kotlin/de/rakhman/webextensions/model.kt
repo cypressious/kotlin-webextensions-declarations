@@ -36,7 +36,8 @@ data class Parameter(
         val `$ref`: String?,
         val parameters: List<Parameter>?,
         val items: Parameter?,
-        val choices: List<Parameter>?
+        val choices: List<Parameter>?,
+        val unsupported: Boolean
 )
 
 class Event(

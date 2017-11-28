@@ -51,10 +51,6 @@ class GetAllFramesDetailsResult(
      */
     val errorOccurred: Boolean,
     /**
-     * The ID of the process runs the renderer for this tab.
-     */
-    val processId: Int,
-    /**
      * The ID of the tab in which the frame is.
      */
     val tabId: Int,

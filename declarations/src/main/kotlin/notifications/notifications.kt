@@ -62,11 +62,6 @@ external class CreateNotificationOptions {
   val eventTime: Any
 
   /**
-   * Text and icons for up to two notification action buttons.
-   */
-  val buttons: Array<Buttons>
-
-  /**
    * A URL to the image thumbnail for image-type notifications.
    */
   val imageUrl: String
@@ -127,11 +122,6 @@ external class UpdateNotificationOptions {
    * A timestamp associated with the notification, in milliseconds past the epoch.
    */
   val eventTime: Any
-
-  /**
-   * Text and icons for up to two notification action buttons.
-   */
-  val buttons: Array<Buttons>
 
   /**
    * A URL to the image thumbnail for image-type notifications.

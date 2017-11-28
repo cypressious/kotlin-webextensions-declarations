@@ -37,10 +37,6 @@ class CreateCreateProperties(
      */
     val active: Boolean,
     /**
-     * Whether the tab should become the selected tab in the window. Defaults to <var>true</var>
-     */
-    val selected: Boolean,
-    /**
      * Whether the tab should be pinned. Defaults to <var>false</var>
      */
     val pinned: Boolean,
@@ -143,14 +139,6 @@ class UpdateUpdateProperties(
      */
     val active: Boolean,
     /**
-     * Adds or removes the tab from the current selection.
-     */
-    val highlighted: Boolean,
-    /**
-     * Whether the tab should be selected.
-     */
-    val selected: Boolean,
-    /**
      * Whether the tab should be pinned.
      */
     val pinned: Boolean,
@@ -223,11 +211,6 @@ external class Tab {
    * The ID of the tab that opened this tab, if any. This property is only present if the opener tab still exists.
    */
   val openerTabId: Int
-
-  /**
-   * Whether the tab is selected.
-   */
-  val selected: Boolean
 
   /**
    * Whether the tab is highlighted. Works as an alias of active

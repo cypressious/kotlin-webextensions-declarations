@@ -17,16 +17,6 @@ external class SuggestResult {
    * The text that is displayed in the URL dropdown. Can contain XML-style markup for styling. The supported tags are 'url' (for a literal URL), 'match' (for highlighting text that matched what the user's query), and 'dim' (for dim helper text). The styles can be nested, eg. <dim><match>dimmed match</match></dim>. You must escape the five predefined entities to display them as text: stackoverflow.com/a/1091953/89484 
    */
   val description: String
-
-  /**
-   * An array of style ranges for the description, as provided by the extension.
-   */
-  val descriptionStyles: Array<DescriptionStyles>
-
-  /**
-   * An array of style ranges for the description, as provided by ToValue().
-   */
-  val descriptionStylesRaw: Array<DescriptionStylesRaw>
 }
 
 /**
@@ -37,16 +27,6 @@ external class DefaultSuggestResult {
    * The text that is displayed in the URL dropdown.
    */
   val description: String
-
-  /**
-   * An array of style ranges for the description, as provided by the extension.
-   */
-  val descriptionStyles: Array<DescriptionStyles>
-
-  /**
-   * An array of style ranges for the description, as provided by ToValue().
-   */
-  val descriptionStylesRaw: Array<DescriptionStylesRaw>
 }
 
 external class Omnibox {
