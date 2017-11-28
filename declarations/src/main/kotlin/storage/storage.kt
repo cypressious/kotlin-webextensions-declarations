@@ -1,5 +1,7 @@
 package storage
 
+import kotlin.Any
+
 external class StorageChange {
   /**
    * The old value of the item, if there was an old value.
@@ -12,6 +14,6 @@ external class StorageChange {
   val newValue: Any
 }
 
-external class StorageArea
+typealias StorageArea = Any
 
 external class Storage

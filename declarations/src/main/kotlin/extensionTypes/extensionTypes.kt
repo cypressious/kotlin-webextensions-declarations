@@ -1,5 +1,7 @@
 package extensionTypes
 
+import kotlin.Any
+
 typealias ImageFormat = String
 
 /**
@@ -61,6 +63,6 @@ external class InjectDetails {
   val cssOrigin: CSSOrigin
 }
 
-external class Date
+typealias Date = Any
 
 external class ExtensionTypes

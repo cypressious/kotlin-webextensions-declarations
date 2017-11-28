@@ -1,9 +1,10 @@
 package theme
 
+import kotlin.Any
 import kotlin.js.Promise
 import manifest.ThemeType
 
-class Theme()
+typealias Theme = Any
 
 /**
  * Info provided in the onUpdated listener.

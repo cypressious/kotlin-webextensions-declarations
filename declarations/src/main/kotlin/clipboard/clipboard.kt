@@ -2,7 +2,7 @@ package clipboard
 
 import kotlin.js.Promise
 
-class SetImageDataImageData()
+typealias SetImageDataImageData = Any
 
 external class Clipboard {
   /**

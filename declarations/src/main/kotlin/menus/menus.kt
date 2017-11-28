@@ -1,8 +1,9 @@
 package menus
 
+import kotlin.Any
 import kotlin.js.Promise
 
-class Icons()
+typealias Icons = Any
 
 class CreateCreateProperties(
     /**

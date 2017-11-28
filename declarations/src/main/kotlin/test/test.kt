@@ -1,10 +1,11 @@
 package test
 
+import kotlin.Any
 import kotlin.js.Promise
 
-external class ExpectedError
+typealias ExpectedError = Any
 
-external class Promise
+typealias Promise = Any
 
 external class Test {
   /**

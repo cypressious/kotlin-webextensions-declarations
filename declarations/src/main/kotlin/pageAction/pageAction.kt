@@ -1,5 +1,6 @@
 package pageAction
 
+import kotlin.Any
 import kotlin.js.Promise
 
 class SetTitleDetails(/**
@@ -43,10 +44,7 @@ class GetPopupDetails(/**
  */
 val tabId: Int)
 
-/**
- * Pixel data for an image. Must be an ImageData object (for example, from a <code>canvas</code> element).
- */
-external class ImageDataType
+typealias ImageDataType = Any
 
 external class PageAction {
   /**

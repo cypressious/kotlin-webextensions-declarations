@@ -1,8 +1,9 @@
 package notifications
 
+import kotlin.Any
 import kotlin.js.Promise
 
-class GetAllNotifications()
+typealias GetAllNotifications = Any
 
 typealias TemplateType = String
 

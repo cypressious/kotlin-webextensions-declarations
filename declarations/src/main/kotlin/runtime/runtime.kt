@@ -1,10 +1,11 @@
 package runtime
 
 import events.Event
+import kotlin.Any
 import kotlin.js.Promise
 import tabs.Tab
 
-class GetBackgroundPageBackgroundPage()
+typealias GetBackgroundPageBackgroundPage = Any
 
 class ConnectConnectInfo(/**
  * Will be passed into onConnect for processes that are listening for the connection event.

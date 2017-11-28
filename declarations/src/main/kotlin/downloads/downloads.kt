@@ -1,5 +1,6 @@
 package downloads
 
+import kotlin.Any
 import kotlin.js.Promise
 
 class Headers(/**
@@ -157,10 +158,7 @@ external class BooleanDelta {
   val previous: Boolean
 }
 
-/**
- * A time specified as a Date object, a number or string representing milliseconds since the epoch, or an ISO 8601 string
- */
-external class DownloadTime
+typealias DownloadTime = Any
 
 /**
  * Parameters that combine to specify a predicate that can be used to select a set of downloads.  Used for example in search() and erase()

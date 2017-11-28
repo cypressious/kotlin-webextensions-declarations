@@ -44,34 +44,19 @@ external class InspectedWindow {
 /**
  * Represents a network request for a document resource (script, image and so on). See HAR Specification for reference.
  */
-external class Request
+typealias Request = Any
 
 external class Network
 
-/**
- * Represents the Elements panel.
- */
-external class ElementsPanel
+typealias ElementsPanel = Any
 
-/**
- * Represents the Sources panel.
- */
-external class SourcesPanel
+typealias SourcesPanel = Any
 
-/**
- * Represents a panel created by extension.
- */
-external class ExtensionPanel
+typealias ExtensionPanel = Any
 
-/**
- * A sidebar created by the extension.
- */
-external class ExtensionSidebarPane
+typealias ExtensionSidebarPane = Any
 
-/**
- * A button created by the extension.
- */
-external class Button
+typealias Button = Any
 
 external class Panels {
   /**

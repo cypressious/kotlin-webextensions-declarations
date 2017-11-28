@@ -1,9 +1,10 @@
 package contentScripts
 
 import extensionTypes.RunAt
+import kotlin.Any
 import kotlin.js.Promise
 
-external class ExtensionFileOrCode
+typealias ExtensionFileOrCode = Any
 
 /**
  * Details of a content script registered programmatically
@@ -43,10 +44,7 @@ external class RegisteredContentScriptOptions {
   val runAt: RunAt
 }
 
-/**
- * An object that represents a content script registered programmatically
- */
-external class RegisteredContentScript
+typealias RegisteredContentScript = Any
 
 external class ContentScripts {
   /**

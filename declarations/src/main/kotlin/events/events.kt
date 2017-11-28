@@ -1,5 +1,7 @@
 package events
 
+import kotlin.Any
+
 /**
  * Description of a declarative rule for handling events.
  */
@@ -30,10 +32,7 @@ external class Rule {
   val priority: Int
 }
 
-/**
- * An object which allows the addition and removal of listeners for a Chrome event.
- */
-external class Event
+typealias Event = Any
 
 /**
  * Filters URLs for various criteria. See <a href='events#filtered'>event filtering</a>. All criteria are case sensitive.

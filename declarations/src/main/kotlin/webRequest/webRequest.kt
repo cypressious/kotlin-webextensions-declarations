@@ -1,5 +1,6 @@
 package webRequest
 
+import kotlin.Any
 import kotlin.js.Promise
 
 typealias ResourceType = String
@@ -39,10 +40,7 @@ external class RequestFilter {
   val windowId: Int
 }
 
-/**
- * An array of HTTP headers. Each header is represented as a dictionary containing the keys <code>name</code> and either <code>value</code> or <code>binaryValue</code>.
- */
-external class HttpHeaders
+typealias HttpHeaders = Any
 
 class AuthCredentials(val username: String, val password: String)
 

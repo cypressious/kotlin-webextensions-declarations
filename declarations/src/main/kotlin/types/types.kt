@@ -1,9 +1,11 @@
 package types
 
+import kotlin.Any
+
 typealias SettingScope = String
 
 typealias LevelOfControl = String
 
-external class Setting
+typealias Setting = Any
 
 external class Types

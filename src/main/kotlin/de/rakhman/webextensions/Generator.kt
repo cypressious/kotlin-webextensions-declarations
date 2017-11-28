@@ -73,23 +73,26 @@ class Generator(val dir: File) {
 
         if (type.type in primitiveTypes) {
             fileBuilder.addTypeAlias(
-                    TypeAliasSpec.builder(name, ClassName.bestGuess(type.type.capitalize()))
-                            .build())
+                    TypeAliasSpec.builder(name, ClassName.bestGuess(type.type.capitalize())).build())
             return
         }
 
-        val properties = type.properties
+        if (type.properties == null) {
+            fileBuilder.addTypeAlias(
+                    TypeAliasSpec.builder(name, Any::class).build())
+            return
+        }
 
-        val typeBuilder = generateType(name, properties, fileBuilder, true)
+        val typeBuilder = generateType(name, type.properties, fileBuilder, true)
         type.description?.let { typeBuilder.addKdoc(it + "\n") }
 
         fileBuilder.addType(typeBuilder.build())
     }
 
-    private fun generateType(name: String, properties: Map<String, Parameter>?, fileBuilder: FileSpec.Builder, external: Boolean): TypeSpec.Builder {
+    private fun generateType(name: String, properties: Map<String, Parameter>, fileBuilder: FileSpec.Builder, external: Boolean): TypeSpec.Builder {
         val typeBuilder = if (external) TypeSpec.expectClassBuilder(name) else TypeSpec.classBuilder(name)
 
-        val props = properties?.entries?.filter { !it.value.unsupported } ?: emptyList()
+        val props = properties.entries.filter { !it.value.unsupported } ?: emptyList()
 
         typeBuilder
                 .addProperties(props.map {
@@ -165,8 +168,12 @@ class Generator(val dir: File) {
                 val typeName = prefix + name.capitalize()
 
                 if (context.fileBuilder != null) {
-                    val typeBuilder = generateType(typeName, p.properties, context.fileBuilder, false)
-                    context.fileBuilder.addType(typeBuilder.build())
+                    if (p.properties != null) {
+                        val typeBuilder = generateType(typeName, p.properties, context.fileBuilder, false)
+                        context.fileBuilder.addType(typeBuilder.build())
+                    } else {
+                        context.fileBuilder.addTypeAlias(TypeAliasSpec.builder(typeName, Any::class).build())
+                    }
                 }
 
                 typeName
