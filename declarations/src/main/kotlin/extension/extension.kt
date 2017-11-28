@@ -10,11 +10,11 @@ class GetViewsFetchProperties(
     /**
      * The window to restrict the search to. If omitted, returns all views.
      */
-    val windowId: Int,
+    val windowId: Int?,
     /**
      * Find a view according to a tab id. If this field is omitted, returns all views.
      */
-    val tabId: Int
+    val tabId: Int?
 )
 
 typealias ViewType = String
@@ -28,7 +28,7 @@ external class Extension {
   /**
    * Returns an array of the JavaScript 'window' objects for each of the pages running inside the current extension.
    */
-  fun getViews(fetchProperties: GetViewsFetchProperties)
+  fun getViews(fetchProperties: GetViewsFetchProperties?)
 
   /**
    * Returns the JavaScript 'window' object for the background page running inside the current extension. Returns null if the extension has no background page.

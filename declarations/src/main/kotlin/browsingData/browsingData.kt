@@ -19,15 +19,15 @@ class OriginTypes(
     /**
      * Normal websites.
      */
-    val unprotectedWeb: Boolean,
+    val unprotectedWeb: Boolean?,
     /**
      * Websites that have been installed as hosted applications (be careful!).
      */
-    val protectedWeb: Boolean,
+    val protectedWeb: Boolean?,
     /**
      * Extensions and packaged applications a user has installed (be _really_ careful!).
      */
-    val extension: Boolean
+    val extension: Boolean?
 )
 
 /**
@@ -42,12 +42,12 @@ external class RemovalOptions {
   /**
    * Only remove data associated with these hostnames (only applies to cookies and localStorage).
    */
-  val hostnames: Array<String>
+  val hostnames: Array<String>?
 
   /**
    * An object whose properties specify which origin types ought to be cleared. If this object isn't specified, it defaults to clearing only "unprotected" origins. Please ensure that you <em>really</em> want to remove application data before adding 'protectedWeb' or 'extensions'.
    */
-  val originTypes: OriginTypes
+  val originTypes: OriginTypes?
 }
 
 /**
@@ -57,57 +57,57 @@ external class DataTypeSet {
   /**
    * The browser's cache. Note: when removing data, this clears the <em>entire</em> cache: it is not limited to the range you specify.
    */
-  val cache: Boolean
+  val cache: Boolean?
 
   /**
    * The browser's cookies.
    */
-  val cookies: Boolean
+  val cookies: Boolean?
 
   /**
    * The browser's download list.
    */
-  val downloads: Boolean
+  val downloads: Boolean?
 
   /**
    * The browser's stored form data.
    */
-  val formData: Boolean
+  val formData: Boolean?
 
   /**
    * The browser's history.
    */
-  val history: Boolean
+  val history: Boolean?
 
   /**
    * Websites' IndexedDB data.
    */
-  val indexedDB: Boolean
+  val indexedDB: Boolean?
 
   /**
    * Websites' local storage data.
    */
-  val localStorage: Boolean
+  val localStorage: Boolean?
 
   /**
    * Server-bound certificates.
    */
-  val serverBoundCertificates: Boolean
+  val serverBoundCertificates: Boolean?
 
   /**
    * Stored passwords.
    */
-  val passwords: Boolean
+  val passwords: Boolean?
 
   /**
    * Plugins' data.
    */
-  val pluginData: Boolean
+  val pluginData: Boolean?
 
   /**
    * Service Workers.
    */
-  val serviceWorkers: Boolean
+  val serviceWorkers: Boolean?
 }
 
 external class BrowsingData {

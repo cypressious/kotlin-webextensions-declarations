@@ -6,20 +6,20 @@ class SearchQuery(
     /**
      * A string of words and quoted phrases that are matched against bookmark URLs and titles.
      */
-    val query: String,
+    val query: String?,
     /**
      * The URL of the bookmark; matches verbatim. Note that folders have no URL.
      */
-    val url: String,
+    val url: String?,
     /**
      * The title of the bookmark; matches verbatim.
      */
-    val title: String
+    val title: String?
 )
 
-class MoveDestination(val parentId: String, val index: Int)
+class MoveDestination(val parentId: String?, val index: Int?)
 
-class UpdateChanges(val title: String, val url: String)
+class UpdateChanges(val title: String?, val url: String?)
 
 typealias BookmarkTreeNodeUnmodifiable = String
 
@@ -37,17 +37,17 @@ external class BookmarkTreeNode {
   /**
    * The <code>id</code> of the parent folder.  Omitted for the root node.
    */
-  val parentId: String
+  val parentId: String?
 
   /**
    * The 0-based position of this node within its parent folder.
    */
-  val index: Int
+  val index: Int?
 
   /**
    * The URL navigated to when a user clicks the bookmark. Omitted for folders.
    */
-  val url: String
+  val url: String?
 
   /**
    * The text displayed for the node.
@@ -57,12 +57,12 @@ external class BookmarkTreeNode {
   /**
    * When this node was created, in milliseconds since the epoch (<code>new Date(dateAdded)</code>).
    */
-  val dateAdded: Any
+  val dateAdded: Any?
 
   /**
    * When the contents of this folder last changed, in milliseconds since the epoch.
    */
-  val dateGroupModified: Any
+  val dateGroupModified: Any?
 
   /**
    * Indicates the reason why this node is unmodifiable. The <var>managed</var> value indicates that this node was configured by the system administrator or by the custodian of a supervised user. Omitted if the node can be modified by the user and the extension (default).
@@ -77,7 +77,7 @@ external class BookmarkTreeNode {
   /**
    * An ordered list of children of this node.
    */
-  val children: Array<BookmarkTreeNode>
+  val children: Array<BookmarkTreeNode>?
 }
 
 /**
@@ -87,13 +87,13 @@ external class CreateDetails {
   /**
    * Defaults to the Other Bookmarks folder.
    */
-  val parentId: String
+  val parentId: String?
 
-  val index: Int
+  val index: Int?
 
-  val title: String
+  val title: String?
 
-  val url: String
+  val url: String?
 
   /**
    * Indicates the type of BookmarkTreeNode to create, which can be one of bookmark, folder or separator.

@@ -16,7 +16,7 @@ external class Test {
   /**
    * Notifies the browser process that test code running in the extension passed.  This is only used for internal unit testing.
    */
-  fun notifyPass(message: String)
+  fun notifyPass(message: String?)
 
   /**
    * Logs a message during internal unit testing.
@@ -26,31 +26,31 @@ external class Test {
   /**
    * Sends a string message to the browser process, generating a Notification that C++ test code can wait for.
    */
-  fun sendMessage(arg1: Any, arg2: Any)
+  fun sendMessage(arg1: Any?, arg2: Any?)
 
-  fun fail(message: Any)
+  fun fail(message: Any?)
 
-  fun succeed(message: Any)
+  fun succeed(message: Any?)
 
-  fun assertTrue(test: Any, message: String)
+  fun assertTrue(test: Any?, message: String?)
 
-  fun assertFalse(test: Any, message: String)
+  fun assertFalse(test: Any?, message: String?)
 
   fun assertEq(
-      expected: Any,
-      actual: Any,
-      message: String
+      expected: Any?,
+      actual: Any?,
+      message: String?
   )
 
   fun assertRejects(
       promise: Promise,
       expectedError: ExpectedError,
-      message: String
+      message: String?
   ): Promise<Any>
 
   fun assertThrows(
       func: Any,
       expectedError: ExpectedError,
-      message: String
+      message: String?
   )
 }

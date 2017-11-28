@@ -19,7 +19,7 @@ class SearchQuery(
     /**
      * The maximum number of results to retrieve.  Defaults to 100.
      */
-    val maxResults: Int
+    val maxResults: Int?
 )
 
 class GetVisitsDetails(/**
@@ -35,7 +35,7 @@ class AddUrlDetails(
     /**
      * The title of the page.
      */
-    val title: String,
+    val title: String?,
     /**
      * The $(topic:transition-types)[transition type] for this visit from its referrer.
      */
@@ -73,27 +73,27 @@ external class HistoryItem {
   /**
    * The URL navigated to by a user.
    */
-  val url: String
+  val url: String?
 
   /**
    * The title of the page when it was last loaded.
    */
-  val title: String
+  val title: String?
 
   /**
    * When this page was last loaded, represented in milliseconds since the epoch.
    */
-  val lastVisitTime: Any
+  val lastVisitTime: Any?
 
   /**
    * The number of times the user has navigated to this page.
    */
-  val visitCount: Int
+  val visitCount: Int?
 
   /**
    * The number of times the user has navigated to this page by typing in the address.
    */
-  val typedCount: Int
+  val typedCount: Int?
 }
 
 /**
@@ -113,7 +113,7 @@ external class VisitItem {
   /**
    * When this visit occurred, represented in milliseconds since the epoch.
    */
-  val visitTime: Any
+  val visitTime: Any?
 
   /**
    * The visit ID of the referrer.

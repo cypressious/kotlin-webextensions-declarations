@@ -10,7 +10,7 @@ class GetFrameDetails(
     /**
      * The ID of the process runs the renderer for this tab.
      */
-    val processId: Int,
+    val processId: Int?,
     /**
      * The ID of the frame in the given tab.
      */
@@ -21,7 +21,7 @@ class GetFrameDetailsResult(
     /**
      * True if the last navigation in this frame was interrupted by an error, i.e. the onErrorOccurred event fired.
      */
-    val errorOccurred: Boolean,
+    val errorOccurred: Boolean?,
     /**
      * The URL currently associated with this frame, if the frame identified by the frameId existed at one point in the given tab. The fact that an URL is associated with a given frameId does not imply that the corresponding frame still exists.
      */
@@ -49,7 +49,7 @@ class GetAllFramesDetailsResult(
     /**
      * True if the last navigation in this frame was interrupted by an error, i.e. the onErrorOccurred event fired.
      */
-    val errorOccurred: Boolean,
+    val errorOccurred: Boolean?,
     /**
      * The ID of the tab in which the frame is.
      */
@@ -80,10 +80,10 @@ external class WebNavigation {
   /**
    * Retrieves information about the given frame. A frame refers to an &lt;iframe&gt; or a &lt;frame&gt; of a web page and is identified by a tab ID and a frame ID.
    */
-  fun getFrame(details: GetFrameDetails): Promise<GetFrameDetailsResult>
+  fun getFrame(details: GetFrameDetails): Promise<GetFrameDetailsResult?>
 
   /**
    * Retrieves information about all frames of a given tab.
    */
-  fun getAllFrames(details: GetAllFramesDetails): Promise<Array<GetAllFramesDetailsResult>>
+  fun getAllFrames(details: GetAllFramesDetails): Promise<Array<GetAllFramesDetailsResult>?>
 }

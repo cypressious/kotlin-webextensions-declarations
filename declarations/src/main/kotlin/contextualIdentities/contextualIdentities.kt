@@ -5,7 +5,7 @@ import kotlin.js.Promise
 class QueryDetails(/**
  * Filters the contextual identity by name.
  */
-val name: String)
+val name: String?)
 
 class CreateDetails(
     /**
@@ -26,15 +26,15 @@ class UpdateDetails(
     /**
      * The name of the contextual identity.
      */
-    val name: String,
+    val name: String?,
     /**
      * The color of the contextual identity.
      */
-    val color: String,
+    val color: String?,
     /**
      * The icon of the contextual identity.
      */
-    val icon: String
+    val icon: String?
 )
 
 /**

@@ -9,32 +9,32 @@ class SetTitleDetails(/**
 val title: String, /**
  * Limits the change to when a particular tab is selected. Automatically resets when the tab is closed.
  */
-val tabId: Int)
+val tabId: Int?)
 
 class GetTitleDetails(/**
  * Specify the tab to get the title from. If no tab is specified, the non-tab-specific title is returned.
  */
-val tabId: Int)
+val tabId: Int?)
 
 class SetIconDetails(
     /**
      * Either an ImageData object or a dictionary {size -> ImageData} representing icon to be set. If the icon is specified as a dictionary, the actual image to be used is chosen depending on screen's pixel density. If the number of image pixels that fit into one screen space unit equals <code>scale</code>, then image with size <code>scale</code> * 19 will be selected. Initially only scales 1 and 2 will be supported. At least one image must be specified. Note that 'details.imageData = foo' is equivalent to 'details.imageData = {'19': foo}'
      */
-    val imageData: Any,
+    val imageData: Any?,
     /**
      * Either a relative image path or a dictionary {size -> relative image path} pointing to icon to be set. If the icon is specified as a dictionary, the actual image to be used is chosen depending on screen's pixel density. If the number of image pixels that fit into one screen space unit equals <code>scale</code>, then image with size <code>scale</code> * 19 will be selected. Initially only scales 1 and 2 will be supported. At least one image must be specified. Note that 'details.path = foo' is equivalent to 'details.imageData = {'19': foo}'
      */
-    val path: Any,
+    val path: Any?,
     /**
      * Limits the change to when a particular tab is selected. Automatically resets when the tab is closed.
      */
-    val tabId: Int
+    val tabId: Int?
 )
 
 class SetPopupDetails(/**
  * Limits the change to when a particular tab is selected. Automatically resets when the tab is closed.
  */
-val tabId: Int, /**
+val tabId: Int?, /**
  * The html file to show in a popup.  If set to the empty string (''), no popup is shown.
  */
 val popup: String)
@@ -42,7 +42,7 @@ val popup: String)
 class GetPopupDetails(/**
  * Specify the tab to get the popup from. If no tab is specified, the non-tab-specific popup is returned.
  */
-val tabId: Int)
+val tabId: Int?)
 
 class SetBadgeTextDetails(/**
  * Any number of characters can be passed, but only about four can fit in the space.
@@ -50,12 +50,12 @@ class SetBadgeTextDetails(/**
 val text: String, /**
  * Limits the change to when a particular tab is selected. Automatically resets when the tab is closed.
  */
-val tabId: Int)
+val tabId: Int?)
 
 class GetBadgeTextDetails(/**
  * Specify the tab to get the badge text from. If no tab is specified, the non-tab-specific badge text is returned.
  */
-val tabId: Int)
+val tabId: Int?)
 
 class SetBadgeBackgroundColorDetails(/**
  * An array of four integers in the range [0,255] that make up the RGBA color of the badge. For example, opaque red is <code>[255, 0, 0, 255]</code>. Can also be a string with a CSS value, with opaque red being <code>#FF0000</code> or <code>#F00</code>.
@@ -63,12 +63,12 @@ class SetBadgeBackgroundColorDetails(/**
 val color: Any, /**
  * Limits the change to when a particular tab is selected. Automatically resets when the tab is closed.
  */
-val tabId: Int)
+val tabId: Int?)
 
 class GetBadgeBackgroundColorDetails(/**
  * Specify the tab to get the badge background color from. If no tab is specified, the non-tab-specific badge background color is returned.
  */
-val tabId: Int)
+val tabId: Int?)
 
 typealias ColorArray = Any
 
@@ -123,12 +123,12 @@ external class BrowserAction {
   /**
    * Enables the browser action for a tab. By default, browser actions are enabled.
    */
-  fun enable(tabId: Int): Promise<Any>
+  fun enable(tabId: Int?): Promise<Any>
 
   /**
    * Disables the browser action for a tab.
    */
-  fun disable(tabId: Int): Promise<Any>
+  fun disable(tabId: Int?): Promise<Any>
 
   /**
    * Opens the extension popup window in the active window.

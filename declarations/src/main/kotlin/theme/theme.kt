@@ -18,22 +18,22 @@ external class ThemeUpdateInfo {
   /**
    * The id of the window the theme has been applied to
    */
-  val windowId: Int
+  val windowId: Int?
 }
 
 external class Theme {
   /**
    * Returns the current theme for the specified window or the last focused window.
    */
-  fun getCurrent(windowId: Int): Promise<Any>
+  fun getCurrent(windowId: Int?): Promise<Any>
 
   /**
    * Make complete updates to the theme. Resolves when the update has completed.
    */
-  fun update(windowId: Int, details: ThemeType): Promise<Any>
+  fun update(windowId: Int?, details: ThemeType): Promise<Any>
 
   /**
    * Removes the updates made to the theme.
    */
-  fun reset(windowId: Int): Promise<Any>
+  fun reset(windowId: Int?): Promise<Any>
 }

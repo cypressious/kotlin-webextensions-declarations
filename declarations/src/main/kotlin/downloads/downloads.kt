@@ -19,34 +19,34 @@ class DownloadOptions(
     /**
      * A file path relative to the Downloads directory to contain the downloaded file.
      */
-    val filename: String,
+    val filename: String?,
     /**
      * Whether to associate the download with a private browsing session.
      */
-    val incognito: Boolean,
+    val incognito: Boolean?,
     val conflictAction: FilenameConflictAction,
     /**
      * Use a file-chooser to allow the user to select a filename. If the option is not specified, the file chooser will be shown only if the Firefox "Always ask you where to save files" option is enabled (i.e. the pref <code>browser.download.useDownloadDir</code> is set to <code>false</code>).
      */
-    val saveAs: Boolean,
+    val saveAs: Boolean?,
     /**
      * The HTTP method to use if the URL uses the HTTP[S] protocol.
      */
-    val method: String,
+    val method: String?,
     /**
      * Extra HTTP headers to send with the request if the URL uses the HTTP[s] protocol. Each header is represented as a dictionary containing the keys <code>name</code> and either <code>value</code> or <code>binaryValue</code>, restricted to those allowed by XMLHttpRequest.
      */
-    val headers: Array<Headers>,
+    val headers: Array<Headers>?,
     /**
      * Post body.
      */
-    val body: String
+    val body: String?
 )
 
 class GetFileIconOptions(/**
  * The size of the icon.  The returned icon will be square with dimensions size * size pixels.  The default size for the icon is 32x32 pixels.
  */
-val size: Int)
+val size: Int?)
 
 typealias FilenameConflictAction = String
 
@@ -67,7 +67,7 @@ external class DownloadItem {
    */
   val url: String
 
-  val referrer: String
+  val referrer: String?
 
   /**
    * Absolute local path.
@@ -97,9 +97,9 @@ external class DownloadItem {
   /**
    * Number of milliseconds between the unix epoch and when this download ended.
    */
-  val endTime: String
+  val endTime: String?
 
-  val estimatedEndTime: String
+  val estimatedEndTime: String?
 
   /**
    * Indicates whether the download is progressing, interrupted, or complete.
@@ -135,27 +135,27 @@ external class DownloadItem {
 
   val exists: Boolean
 
-  val byExtensionId: String
+  val byExtensionId: String?
 
-  val byExtensionName: String
+  val byExtensionName: String?
 }
 
 external class StringDelta {
-  val current: String
+  val current: String?
 
-  val previous: String
+  val previous: String?
 }
 
 external class DoubleDelta {
-  val current: Any
+  val current: Any?
 
-  val previous: Any
+  val previous: Any?
 }
 
 external class BooleanDelta {
-  val current: Boolean
+  val current: Boolean?
 
-  val previous: Boolean
+  val previous: Boolean?
 }
 
 typealias DownloadTime = Any
@@ -167,7 +167,7 @@ external class DownloadQuery {
   /**
    * This array of search terms limits results to <a href='#type-DownloadItem'>DownloadItems</a> whose <code>filename</code> or <code>url</code> contain all of the search terms that do not begin with a dash '-' and none of the search terms that do begin with a dash.
    */
-  val query: Array<String>
+  val query: Array<String>?
 
   /**
    * Limits results to downloads that started before the given ms since the epoch.
@@ -192,44 +192,44 @@ external class DownloadQuery {
   /**
    * Limits results to downloads whose totalBytes is greater than the given integer.
    */
-  val totalBytesGreater: Any
+  val totalBytesGreater: Any?
 
   /**
    * Limits results to downloads whose totalBytes is less than the given integer.
    */
-  val totalBytesLess: Any
+  val totalBytesLess: Any?
 
   /**
    * Limits results to <a href='#type-DownloadItem'>DownloadItems</a> whose <code>filename</code> matches the given regular expression.
    */
-  val filenameRegex: String
+  val filenameRegex: String?
 
   /**
    * Limits results to <a href='#type-DownloadItem'>DownloadItems</a> whose <code>url</code> matches the given regular expression.
    */
-  val urlRegex: String
+  val urlRegex: String?
 
   /**
    * Setting this integer limits the number of results. Otherwise, all matching <a href='#type-DownloadItem'>DownloadItems</a> will be returned.
    */
-  val limit: Int
+  val limit: Int?
 
   /**
    * Setting elements of this array to <a href='#type-DownloadItem'>DownloadItem</a> properties in order to sort the search results. For example, setting <code>orderBy='startTime'</code> sorts the <a href='#type-DownloadItem'>DownloadItems</a> by their start time in ascending order. To specify descending order, prefix <code>orderBy</code> with a hyphen: '-startTime'.
    */
-  val orderBy: Array<String>
+  val orderBy: Array<String>?
 
-  val id: Int
+  val id: Int?
 
   /**
    * Absolute URL.
    */
-  val url: String
+  val url: String?
 
   /**
    * Absolute local path.
    */
-  val filename: String
+  val filename: String?
 
   /**
    * Indication of whether this download is thought to be safe or known to be suspicious.
@@ -239,11 +239,11 @@ external class DownloadQuery {
   /**
    * The file's MIME type.
    */
-  val mime: String
+  val mime: String?
 
-  val startTime: String
+  val startTime: String?
 
-  val endTime: String
+  val endTime: String?
 
   /**
    * Indicates whether the download is progressing, interrupted, or complete.
@@ -253,7 +253,7 @@ external class DownloadQuery {
   /**
    * True if the download has stopped reading data from the host, but kept the connection open.
    */
-  val paused: Boolean
+  val paused: Boolean?
 
   /**
    * Why a download was interrupted.
@@ -263,19 +263,19 @@ external class DownloadQuery {
   /**
    * Number of bytes received so far from the host, without considering file compression.
    */
-  val bytesReceived: Any
+  val bytesReceived: Any?
 
   /**
    * Number of bytes in the whole file, without considering file compression, or -1 if unknown.
    */
-  val totalBytes: Any
+  val totalBytes: Any?
 
   /**
    * Number of bytes in the whole file post-decompression, or -1 if unknown.
    */
-  val fileSize: Any
+  val fileSize: Any?
 
-  val exists: Boolean
+  val exists: Boolean?
 }
 
 external class Downloads {
@@ -307,7 +307,7 @@ external class Downloads {
   /**
    * Retrieve an icon for the specified download. For new downloads, file icons are available after the <a href='#event-onCreated'>onCreated</a> event has been received. The image returned by this function while a download is in progress may be different from the image returned after the download is complete. Icon retrieval is done by querying the underlying operating system or toolkit depending on the platform. The icon that is returned will therefore depend on a number of factors including state of the download, platform, registered file types and visual theme. If a file icon cannot be determined, <a href='extension.html#property-lastError'>chrome.extension.lastError</a> will contain an error message.
    */
-  fun getFileIcon(downloadId: Int, options: GetFileIconOptions): Promise<String>
+  fun getFileIcon(downloadId: Int, options: GetFileIconOptions?): Promise<String?>
 
   /**
    * Open the downloaded file.

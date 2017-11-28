@@ -14,38 +14,38 @@ class GetDetails(
     /**
      * The ID of the cookie store in which to look for the cookie. By default, the current execution context's cookie store will be used.
      */
-    val storeId: String
+    val storeId: String?
 )
 
 class GetAllDetails(
     /**
      * Restricts the retrieved cookies to those that would match the given URL.
      */
-    val url: String,
+    val url: String?,
     /**
      * Filters the cookies by name.
      */
-    val name: String,
+    val name: String?,
     /**
      * Restricts the retrieved cookies to those whose domains match or are subdomains of this one.
      */
-    val domain: String,
+    val domain: String?,
     /**
      * Restricts the retrieved cookies to those whose path exactly matches this string.
      */
-    val path: String,
+    val path: String?,
     /**
      * Filters the cookies by their Secure property.
      */
-    val secure: Boolean,
+    val secure: Boolean?,
     /**
      * Filters out session vs. persistent cookies.
      */
-    val session: Boolean,
+    val session: Boolean?,
     /**
      * The cookie store to retrieve cookies from. If omitted, the current execution context's cookie store will be used.
      */
-    val storeId: String
+    val storeId: String?
 )
 
 class SetDetails(
@@ -56,35 +56,35 @@ class SetDetails(
     /**
      * The name of the cookie. Empty by default if omitted.
      */
-    val name: String,
+    val name: String?,
     /**
      * The value of the cookie. Empty by default if omitted.
      */
-    val value: String,
+    val value: String?,
     /**
      * The domain of the cookie. If omitted, the cookie becomes a host-only cookie.
      */
-    val domain: String,
+    val domain: String?,
     /**
      * The path of the cookie. Defaults to the path portion of the url parameter.
      */
-    val path: String,
+    val path: String?,
     /**
      * Whether the cookie should be marked as Secure. Defaults to false.
      */
-    val secure: Boolean,
+    val secure: Boolean?,
     /**
      * Whether the cookie should be marked as HttpOnly. Defaults to false.
      */
-    val httpOnly: Boolean,
+    val httpOnly: Boolean?,
     /**
      * The expiration date of the cookie as the number of seconds since the UNIX epoch. If omitted, the cookie becomes a session cookie.
      */
-    val expirationDate: Any,
+    val expirationDate: Any?,
     /**
      * The ID of the cookie store in which to set the cookie. By default, the cookie is set in the current execution context's cookie store.
      */
-    val storeId: String
+    val storeId: String?
 )
 
 class RemoveDetails(
@@ -99,7 +99,7 @@ class RemoveDetails(
     /**
      * The ID of the cookie store to look in for the cookie. If unspecified, the cookie is looked for by default in the current execution context's cookie store.
      */
-    val storeId: String
+    val storeId: String?
 )
 
 class RemoveDetailsResult(
@@ -164,7 +164,7 @@ external class Cookie {
   /**
    * The expiration date of the cookie as the number of seconds since the UNIX epoch. Not provided for session cookies.
    */
-  val expirationDate: Any
+  val expirationDate: Any?
 
   /**
    * The ID of the cookie store containing this cookie, as provided in getAllCookieStores().
@@ -213,7 +213,7 @@ external class Cookies {
   /**
    * Deletes a cookie by name.
    */
-  fun remove(details: RemoveDetails): Promise<RemoveDetailsResult>
+  fun remove(details: RemoveDetails): Promise<RemoveDetailsResult?>
 
   /**
    * Lists all existing cookie stores.

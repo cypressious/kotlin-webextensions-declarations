@@ -3,15 +3,15 @@ package permissions
 import kotlin.js.Promise
 
 external class Permissions {
-  val permissions: Array<manifest.OptionalPermission>
+  val permissions: Array<manifest.OptionalPermission>?
 
-  val origins: Array<manifest.MatchPattern>
+  val origins: Array<manifest.MatchPattern>?
 }
 
 external class AnyPermissions {
-  val permissions: Array<manifest.Permission>
+  val permissions: Array<manifest.Permission>?
 
-  val origins: Array<manifest.MatchPatternInternal>
+  val origins: Array<manifest.MatchPatternInternal>?
 }
 
 external class Permissions {

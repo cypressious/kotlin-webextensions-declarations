@@ -158,6 +158,8 @@ class Generator(val dir: File) {
 
         p.`$ref`?.let { return it }
 
+        val suffix = if (p.optional) "?" else ""
+
         return when (p.type) {
             "array" -> "Array<${parameterTypeName(context.copy(parameter = p.items!!))}>"
             "integer" -> "Int"
@@ -179,7 +181,7 @@ class Generator(val dir: File) {
                 typeName
             }
             else -> "Any"
-        }
+        } + suffix
     }
 
 

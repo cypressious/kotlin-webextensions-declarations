@@ -18,7 +18,7 @@ class StartSettings(
     /**
      * A list of thread names for which to capture profiles.
      */
-    val threads: Array<String>
+    val threads: Array<String>?
 )
 
 typealias ProfilerFeature = String

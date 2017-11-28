@@ -8,7 +8,7 @@ external class Filter {
   /**
    * The maximum number of entries to be fetched in the requested list. Omit this parameter to fetch the maximum number of entries ($(ref:sessions.MAX_SESSION_RESULTS)).
    */
-  val maxResults: Int
+  val maxResults: Int?
 }
 
 external class Session {
@@ -61,7 +61,7 @@ external class Sessions {
   /**
    * Reopens a $(ref:windows.Window) or $(ref:tabs.Tab), with an optional callback to run when the entry has been restored.
    */
-  fun restore(sessionId: String): Promise<Session>
+  fun restore(sessionId: String?): Promise<Session>
 
   /**
    * Set a key/value pair on a given tab.

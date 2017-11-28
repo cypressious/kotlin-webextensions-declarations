@@ -6,10 +6,10 @@ import manifest.ExtensionID
 class UninstallSelfOptions(/**
  * Whether or not a confirm-uninstall dialog should prompt the user. Defaults to false.
  */
-val showConfirmDialog: Boolean, /**
+val showConfirmDialog: Boolean?, /**
  * The message to display to a user when being asked to confirm removal of the extension.
  */
-val dialogMessage: String)
+val dialogMessage: String?)
 
 /**
  * Information about an icon belonging to an extension.
@@ -49,7 +49,7 @@ external class ExtensionInfo {
   /**
    * A short version of the name of this extension.
    */
-  val shortName: String
+  val shortName: String?
 
   /**
    * The description of this extension.
@@ -64,7 +64,7 @@ external class ExtensionInfo {
   /**
    * The <a href='manifest/version#version_name'>version name</a> of this extension if the manifest specified one.
    */
-  val versionName: String
+  val versionName: String?
 
   /**
    * Whether this extension can be disabled or uninstalled by the user.
@@ -89,12 +89,12 @@ external class ExtensionInfo {
   /**
    * The URL of the homepage of this extension.
    */
-  val homepageUrl: String
+  val homepageUrl: String?
 
   /**
    * The update URL of this extension.
    */
-  val updateUrl: String
+  val updateUrl: String?
 
   /**
    * The url for the item's options page, if it has one.
@@ -104,17 +104,17 @@ external class ExtensionInfo {
   /**
    * A list of icon information. Note that this just reflects what was declared in the manifest, and the actual image at that url may be larger or smaller than what was declared, so you might consider using explicit width and height attributes on img tags referencing these images. See the <a href='manifest/icons'>manifest documentation on icons</a> for more details.
    */
-  val icons: Array<IconInfo>
+  val icons: Array<IconInfo>?
 
   /**
    * Returns a list of API based permissions.
    */
-  val permissions: Array<String>
+  val permissions: Array<String>?
 
   /**
    * Returns a list of host based permissions.
    */
-  val hostPermissions: Array<String>
+  val hostPermissions: Array<String>?
 
   /**
    * How the extension was installed.
@@ -141,7 +141,7 @@ external class Management {
   /**
    * Uninstalls the calling extension. Note: This function can be used without requesting the 'management' permission in the manifest.
    */
-  fun uninstallSelf(options: UninstallSelfOptions): Promise<Any>
+  fun uninstallSelf(options: UninstallSelfOptions?): Promise<Any>
 
   /**
    * Enables or disables the given add-on.

@@ -6,15 +6,15 @@ class CreateAlarmInfo(
     /**
      * Time when the alarm is scheduled to first fire, in milliseconds past the epoch.
      */
-    val `when`: Any,
+    val `when`: Any?,
     /**
      * Number of minutes from the current time after which the alarm should first fire.
      */
-    val delayInMinutes: Any,
+    val delayInMinutes: Any?,
     /**
      * Number of minutes after which the alarm should recur repeatedly.
      */
-    val periodInMinutes: Any
+    val periodInMinutes: Any?
 )
 
 external class Alarm {
@@ -31,19 +31,19 @@ external class Alarm {
   /**
    * When present, signals that the alarm triggers periodically after so many minutes.
    */
-  val periodInMinutes: Any
+  val periodInMinutes: Any?
 }
 
 external class Alarms {
   /**
    * Creates an alarm. After the delay is expired, the onAlarm event is fired. If there is another alarm with the same name (or no name if none is specified), it will be cancelled and replaced by this alarm.
    */
-  fun create(name: String, alarmInfo: CreateAlarmInfo)
+  fun create(name: String?, alarmInfo: CreateAlarmInfo)
 
   /**
    * Retrieves details about the specified alarm.
    */
-  fun get(name: String): Promise<Alarm>
+  fun get(name: String?): Promise<Alarm>
 
   /**
    * Gets an array of all the alarms.
@@ -53,7 +53,7 @@ external class Alarms {
   /**
    * Clears the alarm with the given name.
    */
-  fun clear(name: String): Promise<Boolean>
+  fun clear(name: String?): Promise<Boolean>
 
   /**
    * Clears all alarms.

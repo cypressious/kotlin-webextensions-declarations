@@ -6,17 +6,17 @@ external class Command {
   /**
    * The name of the Extension Command
    */
-  val name: String
+  val name: String?
 
   /**
    * The Extension Command description
    */
-  val description: String
+  val description: String?
 
   /**
    * The shortcut active for this command, or blank if not active.
    */
-  val shortcut: String
+  val shortcut: String?
 }
 
 external class Commands {
