@@ -17,7 +17,7 @@ class GetFrameDetails(
     val frameId: Int
 )
 
-class GetFrameDetails(
+class GetFrameDetailsResult(
     /**
      * True if the last navigation in this frame was interrupted by an error, i.e. the onErrorOccurred event fired.
      */
@@ -45,7 +45,7 @@ class GetAllFramesDetails(/**
  */
 val tabId: Int)
 
-class GetAllFramesDetails(
+class GetAllFramesDetailsResult(
     /**
      * True if the last navigation in this frame was interrupted by an error, i.e. the onErrorOccurred event fired.
      */
@@ -84,10 +84,10 @@ external class WebNavigation {
   /**
    * Retrieves information about the given frame. A frame refers to an &lt;iframe&gt; or a &lt;frame&gt; of a web page and is identified by a tab ID and a frame ID.
    */
-  fun getFrame(details: GetFrameDetails): Promise<GetFrameDetails>
+  fun getFrame(details: GetFrameDetails): Promise<GetFrameDetailsResult>
 
   /**
    * Retrieves information about all frames of a given tab.
    */
-  fun getAllFrames(details: GetAllFramesDetails): Promise<Array<GetAllFramesDetails>>
+  fun getAllFrames(details: GetAllFramesDetails): Promise<Array<GetAllFramesDetailsResult>>
 }

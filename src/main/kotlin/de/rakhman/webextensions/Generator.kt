@@ -140,7 +140,10 @@ class Generator(val dir: File) {
 
             val asyncParam = f.parameters!!.first { it.name == async }.parameters?.firstOrNull()
             val parameterType = asyncParam?.let {
-                parameterTypeName(ParameterContext(it.name, it, f.name, fileBuilder))
+                var name = it.name
+                if (parameters.any { it.name == name }) name += "Result"
+
+                parameterTypeName(ParameterContext(name, it, f.name, fileBuilder))
             } ?: "Any"
 
             builder.returns(parameterType.asPromiseType())

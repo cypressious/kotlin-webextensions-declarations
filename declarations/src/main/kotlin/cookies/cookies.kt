@@ -102,7 +102,7 @@ class RemoveDetails(
     val storeId: String
 )
 
-class RemoveDetails(
+class RemoveDetailsResult(
     /**
      * The URL associated with the cookie that's been removed.
      */
@@ -213,7 +213,7 @@ external class Cookies {
   /**
    * Deletes a cookie by name.
    */
-  fun remove(details: RemoveDetails): Promise<RemoveDetails>
+  fun remove(details: RemoveDetails): Promise<RemoveDetailsResult>
 
   /**
    * Lists all existing cookie stores.
