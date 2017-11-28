@@ -1,11 +1,11 @@
 package bookmarks
 
-import history.Query
+import history.SearchQuery
 import kotlin.js.Promise
 
-class Destination(val parentId: String, val index: Int)
+class MoveDestination(val parentId: String, val index: Int)
 
-class Changes(val title: String, val url: String)
+class UpdateChanges(val title: String, val url: String)
 
 typealias BookmarkTreeNodeUnmodifiable = String
 
@@ -126,7 +126,7 @@ external class Bookmarks {
   /**
    * Searches for BookmarkTreeNodes matching the given query. Queries specified with an object produce BookmarkTreeNodes matching all specified properties.
    */
-  fun search(query: Query): Promise<Array<BookmarkTreeNode>>
+  fun search(query: SearchQuery): Promise<Array<BookmarkTreeNode>>
 
   /**
    * Creates a bookmark or folder under the specified parentId.  If url is NULL or missing, it will be a folder.
@@ -136,12 +136,12 @@ external class Bookmarks {
   /**
    * Moves the specified BookmarkTreeNode to the provided location.
    */
-  fun move(id: String, destination: Destination): Promise<BookmarkTreeNode>
+  fun move(id: String, destination: MoveDestination): Promise<BookmarkTreeNode>
 
   /**
    * Updates the properties of a bookmark or folder. Specify only the properties that you want to change; unspecified properties will be left unchanged.  <b>Note:</b> Currently, only 'title' and 'url' are supported.
    */
-  fun update(id: String, changes: Changes): Promise<BookmarkTreeNode>
+  fun update(id: String, changes: UpdateChanges): Promise<BookmarkTreeNode>
 
   /**
    * Removes a bookmark or an empty bookmark folder.

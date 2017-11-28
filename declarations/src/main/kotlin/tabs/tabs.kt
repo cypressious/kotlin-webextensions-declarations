@@ -6,7 +6,7 @@ import kotlin.Deprecated
 import kotlin.js.Promise
 import windows.Window
 
-class ConnectInfo(/**
+class ConnectConnectInfo(/**
  * Will be passed into onConnect for content scripts that are listening for the connection event.
  */
 val name: String, /**
@@ -14,12 +14,12 @@ val name: String, /**
  */
 val frameId: Int)
 
-class Options(/**
+class SendMessageOptions(/**
  * Send a message to a specific $(topic:frame_ids)[frame] identified by <code>frameId</code> instead of all frames in the tab.
  */
 val frameId: Int)
 
-class CreateProperties(
+class CreateCreateProperties(
     /**
      * The window to create the new tab in. Defaults to the $(topic:current-window)[current window].
      */
@@ -58,7 +58,7 @@ class CreateProperties(
     val openInReaderMode: Boolean
 )
 
-class QueryInfo(
+class QueryQueryInfo(
     /**
      * Whether the tabs are active in their windows.
      */
@@ -125,7 +125,7 @@ class QueryInfo(
     val openerTabId: Int
 )
 
-class HighlightInfo(/**
+class HighlightHighlightInfo(/**
  * The window that contains the tabs.
  */
 val windowId: Int, /**
@@ -133,7 +133,7 @@ val windowId: Int, /**
  */
 val tabs: Any)
 
-class UpdateProperties(
+class UpdateUpdateProperties(
     /**
      * A URL to navigate the tab to.
      */
@@ -168,7 +168,7 @@ class UpdateProperties(
     val loadReplace: Boolean
 )
 
-class MoveProperties(/**
+class MoveMoveProperties(/**
  * Defaults to the window the tab is currently in.
  */
 val windowId: Int, /**
@@ -176,7 +176,7 @@ val windowId: Int, /**
  */
 val index: Int)
 
-class ReloadProperties(/**
+class ReloadReloadProperties(/**
  * Whether using any local cache. Default is false.
  */
 val bypassCache: Boolean)
@@ -457,7 +457,7 @@ external class Tabs {
   /**
    * Connects to the content script(s) in the specified tab. The $(ref:runtime.onConnect) event is fired in each content script running in the specified tab for the current extension. For more details, see $(topic:messaging)[Content Script Messaging].
    */
-  fun connect(tabId: Int, connectInfo: ConnectInfo)
+  fun connect(tabId: Int, connectInfo: ConnectConnectInfo)
 
   /**
    * Sends a single request to the content script(s) in the specified tab, with an optional callback to run when a response is sent back.  The $(ref:extension.onRequest) event is fired in each content script running in the specified tab for the current extension.
@@ -475,7 +475,7 @@ external class Tabs {
   fun sendMessage(
       tabId: Int,
       message: Any,
-      options: Options
+      options: SendMessageOptions
   ): Promise<Any>
 
   /**
@@ -493,7 +493,7 @@ external class Tabs {
   /**
    * Creates a new tab.
    */
-  fun create(createProperties: CreateProperties): Promise<Tab>
+  fun create(createProperties: CreateCreateProperties): Promise<Tab>
 
   /**
    * Duplicates a tab.
@@ -503,32 +503,32 @@ external class Tabs {
   /**
    * Gets all tabs that have the specified properties, or all tabs if no properties are specified.
    */
-  fun query(queryInfo: QueryInfo): Promise<Array<Tab>>
+  fun query(queryInfo: QueryQueryInfo): Promise<Array<Tab>>
 
   /**
    * Highlights the given tabs.
    */
-  fun highlight(highlightInfo: HighlightInfo): Promise<Window>
+  fun highlight(highlightInfo: HighlightHighlightInfo): Promise<Window>
 
   /**
    * Modifies the properties of a tab. Properties that are not specified in <var>updateProperties</var> are not modified.
    */
-  fun update(tabId: Int, updateProperties: UpdateProperties): Promise<Tab>
+  fun update(tabId: Int, updateProperties: UpdateUpdateProperties): Promise<Tab>
 
   /**
    * Moves one or more tabs to a new position within its window, or to a new window. Note that tabs can only be moved to and from normal (window.type === "normal") windows.
    */
-  fun move(tabIds: Int, moveProperties: MoveProperties): Promise<Any>
+  fun move(tabIds: Int, moveProperties: MoveMoveProperties): Promise<Any>
 
   /**
    * Moves one or more tabs to a new position within its window, or to a new window. Note that tabs can only be moved to and from normal (window.type === "normal") windows.
    */
-  fun move(tabIds: Array<Int>, moveProperties: MoveProperties): Promise<Any>
+  fun move(tabIds: Array<Int>, moveProperties: MoveMoveProperties): Promise<Any>
 
   /**
    * Reload a tab.
    */
-  fun reload(tabId: Int, reloadProperties: ReloadProperties): Promise<Any>
+  fun reload(tabId: Int, reloadProperties: ReloadReloadProperties): Promise<Any>
 
   /**
    * Closes one or more tabs.

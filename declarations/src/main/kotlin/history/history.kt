@@ -3,7 +3,7 @@ package history
 import extensionTypes.Date
 import kotlin.js.Promise
 
-class Query(
+class SearchQuery(
     /**
      * A free-text query to the history service.  Leave empty to retrieve all pages.
      */
@@ -22,12 +22,12 @@ class Query(
     val maxResults: Int
 )
 
-class Details(/**
+class GetVisitsDetails(/**
  * The URL for which to retrieve visit information.  It must be in the format as returned from a call to history.search.
  */
 val url: String)
 
-class Details(
+class AddUrlDetails(
     /**
      * The URL to add. Must be a valid URL that can be added to history.
      */
@@ -46,12 +46,12 @@ class Details(
     val visitTime: Date
 )
 
-class Details(/**
+class DeleteUrlDetails(/**
  * The URL to remove.
  */
 val url: String)
 
-class Range(/**
+class DeleteRangeRange(/**
  * Items added to history after this date.
  */
 val startTime: Date, /**
@@ -130,27 +130,27 @@ external class History {
   /**
    * Searches the history for the last visit time of each page matching the query.
    */
-  fun search(query: Query): Promise<Array<HistoryItem>>
+  fun search(query: SearchQuery): Promise<Array<HistoryItem>>
 
   /**
    * Retrieves information about visits to a URL.
    */
-  fun getVisits(details: Details): Promise<Array<VisitItem>>
+  fun getVisits(details: GetVisitsDetails): Promise<Array<VisitItem>>
 
   /**
    * Adds a URL to the history with a default visitTime of the current time and a default $(topic:transition-types)[transition type] of "link".
    */
-  fun addUrl(details: Details): Promise<Any>
+  fun addUrl(details: AddUrlDetails): Promise<Any>
 
   /**
    * Removes all occurrences of the given URL from the history.
    */
-  fun deleteUrl(details: Details): Promise<Any>
+  fun deleteUrl(details: DeleteUrlDetails): Promise<Any>
 
   /**
    * Removes all items within the specified date range from the history.  Pages will not be removed from the history unless all visits fall within the range.
    */
-  fun deleteRange(range: Range): Promise<Any>
+  fun deleteRange(range: DeleteRangeRange): Promise<Any>
 
   /**
    * Deletes all items from the history.

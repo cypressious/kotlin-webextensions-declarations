@@ -90,7 +90,7 @@ class Generator(val dir: File) {
         typeBuilder
                 .addProperties(properties?.entries?.map {
                     PropertySpec
-                            .builder(it.key, ClassName.bestGuess(parameterTypeName(it.key, it.value, null)))
+                            .builder(it.key, ClassName.bestGuess(parameterTypeName(ParameterContext(it.key, it.value, null, null))))
                             .apply { if (!external) initializer(it.key) }
                             .apply { it.value.description?.let { addKdoc(it.replace("%", "%%") + "\n") } }
                             .build()
@@ -100,7 +100,7 @@ class Generator(val dir: File) {
             typeBuilder.primaryConstructor(FunSpec.constructorBuilder()
                     .addParameters(
                             properties?.entries?.map {
-                                generateParameter(it.key, it.value, fileBuilder).build()
+                                generateParameter(ParameterContext(it.key, it.value, null, fileBuilder)).build()
                             } ?: emptyList()
                     )
                     .build())
@@ -125,7 +125,7 @@ class Generator(val dir: File) {
         f.description?.let { builder.addKdoc(it + "\n") }
 
         parameters.forEach {
-            builder.addParameter(generateParameter(it.name, it.type, fileBuilder).build())
+            builder.addParameter(generateParameter(ParameterContext(it.name, it.type, f.name, fileBuilder)).build())
         }
 
         f.deprecated?.let {
@@ -139,7 +139,10 @@ class Generator(val dir: File) {
             }
 
             val asyncParam = f.parameters!!.first { it.name == async }.parameters?.firstOrNull()
-            val parameterType = asyncParam?.let { parameterTypeName(it.name, it, fileBuilder) } ?: "Any"
+            val parameterType = asyncParam?.let {
+                parameterTypeName(ParameterContext(it.name, it, f.name, fileBuilder))
+            } ?: "Any"
+
             builder.returns(parameterType.asPromiseType())
         }
 
@@ -148,30 +151,42 @@ class Generator(val dir: File) {
         return builder.build()
     }
 
-    private fun generateParameter(name: String, parameter: Parameter, fileBuilder: FileSpec.Builder?): ParameterSpec.Builder {
-        return ParameterSpec.builder(name, ClassName.bestGuess(parameterTypeName(name, parameter, fileBuilder)))
+    private fun generateParameter(context: ParameterContext): ParameterSpec.Builder {
+        return ParameterSpec.builder(context.name, ClassName.bestGuess(parameterTypeName(context)))
     }
 
-    private fun parameterTypeName(name: String, p: Parameter, fileBuilder: FileSpec.Builder?): String {
+    private fun parameterTypeName(context: ParameterContext): String {
+        val (name, p) = context
+
         p.`$ref`?.let { return it }
 
         return when (p.type) {
-            "array" -> "Array<${parameterTypeName(name, p.items!!, fileBuilder)}>"
+            "array" -> "Array<${parameterTypeName(context.copy(parameter = p.items!!))}>"
             "integer" -> "Int"
             "string" -> "String"
             "boolean" -> "Boolean"
             "object" -> {
-                if (fileBuilder != null) {
-                    val typeBuilder = generateType(name.capitalize(), p.properties, fileBuilder, false)
-                    fileBuilder.addType(typeBuilder.build())
+                val prefix = context.functionName?.capitalize() ?: ""
+                val typeName = prefix + name.capitalize()
+
+                if (context.fileBuilder != null) {
+                    val typeBuilder = generateType(typeName, p.properties, context.fileBuilder, false)
+                    context.fileBuilder.addType(typeBuilder.build())
                 }
 
-                name.capitalize()
+                typeName
             }
             else -> "Any"
         }
     }
 }
+
+data class ParameterContext(
+        val name: String,
+        val parameter: Parameter,
+        val functionName: String?,
+        val fileBuilder: FileSpec.Builder?
+)
 
 private fun String.asPromiseType(): ParameterizedTypeName {
     return ParameterizedTypeName.get(

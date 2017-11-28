@@ -2,7 +2,7 @@ package windows
 
 import kotlin.js.Promise
 
-class GetInfo(/**
+class GetGetInfo(/**
  * If true, the $(ref:windows.Window) object will have a <var>tabs</var> property that contains a list of the $(ref:tabs.Tab) objects. The <code>Tab</code> objects only contain the <code>url</code>, <code>title</code> and <code>favIconUrl</code> properties if the extension's manifest file includes the <code>"tabs"</code> permission.
  */
 val populate: Boolean, /**
@@ -10,7 +10,7 @@ val populate: Boolean, /**
  */
 val windowTypes: Array<WindowType>)
 
-class GetInfo(/**
+class GetCurrentGetInfo(/**
  * If true, the $(ref:windows.Window) object will have a <var>tabs</var> property that contains a list of the $(ref:tabs.Tab) objects. The <code>Tab</code> objects only contain the <code>url</code>, <code>title</code> and <code>favIconUrl</code> properties if the extension's manifest file includes the <code>"tabs"</code> permission.
  */
 val populate: Boolean, /**
@@ -18,7 +18,7 @@ val populate: Boolean, /**
  */
 val windowTypes: Array<WindowType>)
 
-class GetInfo(/**
+class GetLastFocusedGetInfo(/**
  * If true, the $(ref:windows.Window) object will have a <var>tabs</var> property that contains a list of the $(ref:tabs.Tab) objects. The <code>Tab</code> objects only contain the <code>url</code>, <code>title</code> and <code>favIconUrl</code> properties if the extension's manifest file includes the <code>"tabs"</code> permission.
  */
 val populate: Boolean, /**
@@ -26,7 +26,7 @@ val populate: Boolean, /**
  */
 val windowTypes: Array<WindowType>)
 
-class GetInfo(/**
+class GetAllGetInfo(/**
  * If true, each $(ref:windows.Window) object will have a <var>tabs</var> property that contains a list of the $(ref:tabs.Tab) objects for that window. The <code>Tab</code> objects only contain the <code>url</code>, <code>title</code> and <code>favIconUrl</code> properties if the extension's manifest file includes the <code>"tabs"</code> permission.
  */
 val populate: Boolean, /**
@@ -34,7 +34,7 @@ val populate: Boolean, /**
  */
 val windowTypes: Array<WindowType>)
 
-class CreateData(
+class CreateCreateData(
     /**
      * A URL or array of URLs to open as tabs in the window. Fully-qualified URLs must include a scheme (i.e. 'http://www.google.com', not 'www.google.com'). Relative URLs will be relative to the current page within the extension. Defaults to the New Tab Page.
      */
@@ -85,7 +85,7 @@ class CreateData(
     val titlePreface: String
 )
 
-class UpdateInfo(
+class UpdateUpdateInfo(
     /**
      * The offset from the left edge of the screen to move the window to in pixels. This value is ignored for panels.
      */
@@ -197,32 +197,32 @@ external class Windows {
   /**
    * Gets details about a window.
    */
-  fun get(windowId: Int, getInfo: GetInfo): Promise<Window>
+  fun get(windowId: Int, getInfo: GetGetInfo): Promise<Window>
 
   /**
    * Gets the $(topic:current-window)[current window].
    */
-  fun getCurrent(getInfo: GetInfo): Promise<Window>
+  fun getCurrent(getInfo: GetCurrentGetInfo): Promise<Window>
 
   /**
    * Gets the window that was most recently focused &mdash; typically the window 'on top'.
    */
-  fun getLastFocused(getInfo: GetInfo): Promise<Window>
+  fun getLastFocused(getInfo: GetLastFocusedGetInfo): Promise<Window>
 
   /**
    * Gets all windows.
    */
-  fun getAll(getInfo: GetInfo): Promise<Array<Window>>
+  fun getAll(getInfo: GetAllGetInfo): Promise<Array<Window>>
 
   /**
    * Creates (opens) a new browser with any optional sizing, position or default URL provided.
    */
-  fun create(createData: CreateData): Promise<Window>
+  fun create(createData: CreateCreateData): Promise<Window>
 
   /**
    * Updates the properties of a window. Specify only the properties that you want to change; unspecified properties will be left unchanged.
    */
-  fun update(windowId: Int, updateInfo: UpdateInfo): Promise<Window>
+  fun update(windowId: Int, updateInfo: UpdateUpdateInfo): Promise<Window>
 
   /**
    * Removes (closes) a window, and all the tabs inside it.

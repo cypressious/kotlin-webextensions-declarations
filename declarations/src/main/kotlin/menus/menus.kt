@@ -4,7 +4,7 @@ import kotlin.js.Promise
 
 class Icons()
 
-class CreateProperties(
+class CreateCreateProperties(
     /**
      * The type of menu item. Defaults to 'normal' if not specified.
      */
@@ -52,7 +52,7 @@ class CreateProperties(
     val command: String
 )
 
-class UpdateProperties(
+class UpdateUpdateProperties(
     val type: ItemType,
     val title: String,
     val checked: Boolean,
@@ -150,17 +150,17 @@ external class Menus {
   /**
    * Creates a new context menu item. Note that if an error occurs during creation, you may not find out until the creation callback fires (the details will be in $(ref:runtime.lastError)).
    */
-  fun create(createProperties: CreateProperties, callback: Any)
+  fun create(createProperties: CreateCreateProperties, callback: Any)
 
   /**
    * Updates a previously created context menu item.
    */
-  fun update(id: Int, updateProperties: UpdateProperties): Promise<Any>
+  fun update(id: Int, updateProperties: UpdateUpdateProperties): Promise<Any>
 
   /**
    * Updates a previously created context menu item.
    */
-  fun update(id: String, updateProperties: UpdateProperties): Promise<Any>
+  fun update(id: String, updateProperties: UpdateUpdateProperties): Promise<Any>
 
   /**
    * Removes a context menu item.

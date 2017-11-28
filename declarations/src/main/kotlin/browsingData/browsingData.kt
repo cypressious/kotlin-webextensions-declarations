@@ -3,7 +3,7 @@ package browsingData
 import extensionTypes.Date
 import kotlin.js.Promise
 
-class Result(
+class SettingsResult(
     val options: RemovalOptions,
     /**
      * All of the types will be present in the result, with values of <code>true</code> if they are both selected to be removed and permitted to be removed, otherwise <code>false</code>.
@@ -99,7 +99,7 @@ external class BrowsingData {
   /**
    * Reports which types of data are currently selected in the 'Clear browsing data' settings UI.  Note: some of the data types included in this API are not available in the settings UI, and some UI settings control more than one data type listed here.
    */
-  fun settings(): Promise<Result>
+  fun settings(): Promise<SettingsResult>
 
   /**
    * Clears various types of browsing data stored in a user's profile.

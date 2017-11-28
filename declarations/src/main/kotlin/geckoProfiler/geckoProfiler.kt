@@ -2,7 +2,7 @@ package geckoProfiler
 
 import kotlin.js.Promise
 
-class Settings(
+class StartSettings(
     /**
      * The size in bytes of the buffer used to store profiling data. A larger value allows capturing a profile that covers a greater amount of time.
      */
@@ -27,7 +27,7 @@ external class GeckoProfiler {
   /**
    * Starts the profiler with the specified settings.
    */
-  fun start(settings: Settings): Promise<Any>
+  fun start(settings: StartSettings): Promise<Any>
 
   /**
    * Stops the profiler and discards any captured profile data.

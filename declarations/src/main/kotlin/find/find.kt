@@ -2,7 +2,7 @@ package find
 
 import kotlin.js.Promise
 
-class Params(
+class FindParams(
     /**
      * Tab to query. Defaults to the active tab.
      */
@@ -25,7 +25,7 @@ class Params(
     val includeRangeData: Boolean
 )
 
-class Params(
+class HighlightResultsParams(
     /**
      * Found range to be highlighted. Default highlights all ranges.
      */
@@ -44,12 +44,12 @@ external class Find {
   /**
    * Search for text in document and store found ranges in array, in document order.
    */
-  fun find(queryphrase: String, params: Params): Promise<Any>
+  fun find(queryphrase: String, params: FindParams): Promise<Any>
 
   /**
    * Highlight a range
    */
-  fun highlightResults(params: Params): Promise<Any>
+  fun highlightResults(params: HighlightResultsParams): Promise<Any>
 
   /**
    * Remove all highlighting from previous searches.

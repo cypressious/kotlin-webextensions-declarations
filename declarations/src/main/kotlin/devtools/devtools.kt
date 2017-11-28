@@ -3,7 +3,7 @@ package devtools
 import devtools.inspectedWindow.Resource
 import kotlin.js.Promise
 
-class Options(
+class EvalOptions(
     /**
      * If specified, the expression is evaluated on the iframe whose URL matches the one specified. By default, the expression is evaluated in the top frame of the inspected page.
      */
@@ -18,7 +18,7 @@ class Options(
     val contextSecurityOrigin: String
 )
 
-class ReloadOptions(
+class ReloadReloadOptions(
     /**
      * When true, the loader will bypass the cache for all inspected page resources loaded before the <code>load</code> event is fired. The effect is similar to pressing Ctrl+Shift+R in the inspected window or within the Developer Tools window.
      */
@@ -51,12 +51,12 @@ external class InspectedWindow {
   /**
    * Evaluates a JavaScript expression in the context of the main frame of the inspected page. The expression must evaluate to a JSON-compliant object, otherwise an exception is thrown. The eval function can report either a DevTools-side error or a JavaScript exception that occurs during evaluation. In either case, the <code>result</code> parameter of the callback is <code>undefined</code>. In the case of a DevTools-side error, the <code>isException</code> parameter is non-null and has <code>isError</code> set to true and <code>code</code> set to an error code. In the case of a JavaScript error, <code>isException</code> is set to true and <code>value</code> is set to the string value of thrown object.
    */
-  fun eval(expression: String, options: Options): Promise<Any>
+  fun eval(expression: String, options: EvalOptions): Promise<Any>
 
   /**
    * Reloads the inspected page.
    */
-  fun reload(reloadOptions: ReloadOptions)
+  fun reload(reloadOptions: ReloadReloadOptions)
 
   /**
    * Retrieves the list of resources from the inspected page.
@@ -64,7 +64,7 @@ external class InspectedWindow {
   fun getResources(): Promise<Array<Resource>>
 }
 
-class HarLog()
+class GetHARHarLog()
 
 /**
  * Represents a network request for a document resource (script, image and so on). See HAR Specification for reference.
@@ -75,7 +75,7 @@ external class Network {
   /**
    * Returns HAR log that contains all known network requests.
    */
-  fun getHAR(): Promise<HarLog>
+  fun getHAR(): Promise<GetHARHarLog>
 }
 
 /**

@@ -2,7 +2,7 @@ package pageAction
 
 import kotlin.js.Promise
 
-class Details(/**
+class SetTitleDetails(/**
  * The id of the tab for which you want to modify the page action.
  */
 val tabId: Int, /**
@@ -10,12 +10,12 @@ val tabId: Int, /**
  */
 val title: String)
 
-class Details(/**
+class GetTitleDetails(/**
  * Specify the tab to get the title from.
  */
 val tabId: Int)
 
-class Details(
+class SetIconDetails(
     /**
      * The id of the tab for which you want to modify the page action.
      */
@@ -30,7 +30,7 @@ class Details(
     val path: Any
 )
 
-class Details(/**
+class SetPopupDetails(/**
  * The id of the tab for which you want to modify the page action.
  */
 val tabId: Int, /**
@@ -38,7 +38,7 @@ val tabId: Int, /**
  */
 val popup: String)
 
-class Details(/**
+class GetPopupDetails(/**
  * Specify the tab to get the popup from.
  */
 val tabId: Int)
@@ -62,27 +62,27 @@ external class PageAction {
   /**
    * Sets the title of the page action. This is displayed in a tooltip over the page action.
    */
-  fun setTitle(details: Details)
+  fun setTitle(details: SetTitleDetails)
 
   /**
    * Gets the title of the page action.
    */
-  fun getTitle(details: Details): Promise<String>
+  fun getTitle(details: GetTitleDetails): Promise<String>
 
   /**
    * Sets the icon for the page action. The icon can be specified either as the path to an image file or as the pixel data from a canvas element, or as dictionary of either one of those. Either the <b>path</b> or the <b>imageData</b> property must be specified.
    */
-  fun setIcon(details: Details): Promise<Any>
+  fun setIcon(details: SetIconDetails): Promise<Any>
 
   /**
    * Sets the html document to be opened as a popup when the user clicks on the page action's icon.
    */
-  fun setPopup(details: Details): Promise<Any>
+  fun setPopup(details: SetPopupDetails): Promise<Any>
 
   /**
    * Gets the html document set as the popup for this page action.
    */
-  fun getPopup(details: Details): Promise<String>
+  fun getPopup(details: GetPopupDetails): Promise<String>
 
   /**
    * Opens the extension page action in the active window.
