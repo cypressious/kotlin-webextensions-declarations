@@ -44,6 +44,8 @@ external class RequestFilter {
  */
 external class HttpHeaders
 
+class AuthCredentials(val username: String, val password: String)
+
 /**
  * Returns value for event handlers that have the 'blocking' extraInfoSpec applied. Allows the event handler to modify network requests.
  */

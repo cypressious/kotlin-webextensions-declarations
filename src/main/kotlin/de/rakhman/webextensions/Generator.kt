@@ -94,7 +94,7 @@ class Generator(val dir: File) {
         typeBuilder
                 .addProperties(props.map {
                     PropertySpec
-                            .builder(it.key.escapeIfKeyword(), ClassName.bestGuess(parameterTypeName(ParameterContext(it.key, it.value, null, null))))
+                            .builder(it.key.escapeIfKeyword(), ClassName.bestGuess(parameterTypeName(ParameterContext(it.key, it.value, null, fileBuilder))))
                             .apply { if (!external) initializer(it.key.escapeIfKeyword()) }
                             .apply { it.value.description?.let { addKdoc(it.replace("%", "%%") + "\n") } }
                             .build()
@@ -104,7 +104,7 @@ class Generator(val dir: File) {
             typeBuilder.primaryConstructor(FunSpec.constructorBuilder()
                     .addParameters(
                             props.map {
-                                generateParameter(ParameterContext(it.key, it.value, null, fileBuilder)).build()
+                                generateParameter(ParameterContext(it.key, it.value, null, null)).build()
                             }
                     )
                     .build())

@@ -15,6 +15,21 @@ class SettingsResult(
     val dataRemovalPermitted: DataTypeSet
 )
 
+class OriginTypes(
+    /**
+     * Normal websites.
+     */
+    val unprotectedWeb: Boolean,
+    /**
+     * Websites that have been installed as hosted applications (be careful!).
+     */
+    val protectedWeb: Boolean,
+    /**
+     * Extensions and packaged applications a user has installed (be _really_ careful!).
+     */
+    val extension: Boolean
+)
+
 /**
  * Options that determine exactly what data will be removed.
  */

@@ -3,6 +3,8 @@ package theme
 import kotlin.js.Promise
 import manifest.ThemeType
 
+class Theme()
+
 /**
  * Info provided in the onUpdated listener.
  */
