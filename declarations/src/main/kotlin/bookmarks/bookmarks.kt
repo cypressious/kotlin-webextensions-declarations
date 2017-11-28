@@ -151,14 +151,4 @@ external class Bookmarks {
    * Recursively removes a bookmark folder.
    */
   fun removeTree(id: String): Promise<Any>
-
-  /**
-   * Imports bookmarks from an html bookmark file
-   */
-  fun import(): Promise<Any>
-
-  /**
-   * Exports bookmarks to an html bookmark file
-   */
-  fun export(): Promise<Any>
 }

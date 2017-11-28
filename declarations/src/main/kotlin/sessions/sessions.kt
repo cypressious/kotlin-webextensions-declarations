@@ -59,11 +59,6 @@ external class Sessions {
   fun getRecentlyClosed(filter: Filter): Promise<Array<Session>>
 
   /**
-   * Retrieves all devices with synced sessions.
-   */
-  fun getDevices(filter: Filter): Promise<Array<Device>>
-
-  /**
    * Reopens a $(ref:windows.Window) or $(ref:tabs.Tab), with an optional callback to run when the entry has been restored.
    */
   fun restore(sessionId: String): Promise<Session>

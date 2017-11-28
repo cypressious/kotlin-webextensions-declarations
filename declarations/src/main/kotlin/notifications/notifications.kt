@@ -151,11 +151,6 @@ external class Notifications {
   fun create(notificationId: String, options: CreateNotificationOptions): Promise<String>
 
   /**
-   * Updates an existing notification.
-   */
-  fun update(notificationId: String, options: UpdateNotificationOptions): Promise<Boolean>
-
-  /**
    * Clears an existing notification.
    */
   fun clear(notificationId: String): Promise<Boolean>
@@ -164,9 +159,4 @@ external class Notifications {
    * Retrieves all the notifications.
    */
   fun getAll(): Promise<GetAllNotifications>
-
-  /**
-   * Retrieves whether the user has enabled notifications from this app or extension.
-   */
-  fun getPermissionLevel(): Promise<PermissionLevel>
 }

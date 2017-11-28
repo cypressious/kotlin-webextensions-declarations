@@ -2,9 +2,7 @@ package tabs
 
 import extensionTypes.ImageDetails
 import extensionTypes.InjectDetails
-import kotlin.Deprecated
 import kotlin.js.Promise
-import windows.Window
 
 class ConnectConnectInfo(/**
  * Will be passed into onConnect for content scripts that are listening for the connection event.
@@ -120,14 +118,6 @@ class QueryQueryInfo(
      */
     val openerTabId: Int
 )
-
-class HighlightHighlightInfo(/**
- * The window that contains the tabs.
- */
-val windowId: Int, /**
- * One or more tab indices to highlight.
- */
-val tabs: Any)
 
 class UpdateUpdateProperties(
     /**
@@ -443,16 +433,6 @@ external class Tabs {
   fun connect(tabId: Int, connectInfo: ConnectConnectInfo)
 
   /**
-   * Sends a single request to the content script(s) in the specified tab, with an optional callback to run when a response is sent back.  The $(ref:extension.onRequest) event is fired in each content script running in the specified tab for the current extension.
-   */
-  @Deprecated("Please use $(ref:runtime.sendMessage).")
-  fun sendRequest(
-      tabId: Int,
-      request: Any,
-      responseCallback: Any
-  )
-
-  /**
    * Sends a single message to the content script(s) in the specified tab, with an optional callback to run when a response is sent back.  The $(ref:runtime.onMessage) event is fired in each content script running in the specified tab for the current extension.
    */
   fun sendMessage(
@@ -460,18 +440,6 @@ external class Tabs {
       message: Any,
       options: SendMessageOptions
   ): Promise<Any>
-
-  /**
-   * Gets the tab that is selected in the specified window.
-   */
-  @Deprecated("Please use $(ref:tabs.query) <code>{active: true}</code>.")
-  fun getSelected(windowId: Int): Promise<Tab>
-
-  /**
-   * Gets details about all tabs in the specified window.
-   */
-  @Deprecated("Please use $(ref:tabs.query) <code>{windowId: windowId}</code>.")
-  fun getAllInWindow(windowId: Int): Promise<Array<Tab>>
 
   /**
    * Creates a new tab.
@@ -487,11 +455,6 @@ external class Tabs {
    * Gets all tabs that have the specified properties, or all tabs if no properties are specified.
    */
   fun query(queryInfo: QueryQueryInfo): Promise<Array<Tab>>
-
-  /**
-   * Highlights the given tabs.
-   */
-  fun highlight(highlightInfo: HighlightHighlightInfo): Promise<Window>
 
   /**
    * Modifies the properties of a tab. Properties that are not specified in <var>updateProperties</var> are not modified.

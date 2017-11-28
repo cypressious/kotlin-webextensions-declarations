@@ -107,11 +107,6 @@ external class BrowsingData {
   fun remove(options: RemovalOptions, dataToRemove: DataTypeSet): Promise<Any>
 
   /**
-   * Clears websites' appcache data.
-   */
-  fun removeAppcache(options: RemovalOptions): Promise<Any>
-
-  /**
    * Clears the browser's cache.
    */
   fun removeCache(options: RemovalOptions): Promise<Any>
@@ -127,11 +122,6 @@ external class BrowsingData {
   fun removeDownloads(options: RemovalOptions): Promise<Any>
 
   /**
-   * Clears websites' file system data.
-   */
-  fun removeFileSystems(options: RemovalOptions): Promise<Any>
-
-  /**
    * Clears the browser's stored form data (autofill).
    */
   fun removeFormData(options: RemovalOptions): Promise<Any>
@@ -140,11 +130,6 @@ external class BrowsingData {
    * Clears the browser's history.
    */
   fun removeHistory(options: RemovalOptions): Promise<Any>
-
-  /**
-   * Clears websites' IndexedDB data.
-   */
-  fun removeIndexedDB(options: RemovalOptions): Promise<Any>
 
   /**
    * Clears websites' local storage data.
@@ -160,9 +145,4 @@ external class BrowsingData {
    * Clears the browser's stored passwords.
    */
   fun removePasswords(options: RemovalOptions): Promise<Any>
-
-  /**
-   * Clears websites' WebSQL data.
-   */
-  fun removeWebSQL(options: RemovalOptions): Promise<Any>
 }

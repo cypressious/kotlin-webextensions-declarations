@@ -1,6 +1,5 @@
 package devtools
 
-import devtools.inspectedWindow.Resource
 import kotlin.js.Promise
 
 class EvalOptions()
@@ -40,26 +39,14 @@ external class InspectedWindow {
    * Reloads the inspected page.
    */
   fun reload(reloadOptions: ReloadReloadOptions)
-
-  /**
-   * Retrieves the list of resources from the inspected page.
-   */
-  fun getResources(): Promise<Array<Resource>>
 }
-
-class GetHARHarLog()
 
 /**
  * Represents a network request for a document resource (script, image and so on). See HAR Specification for reference.
  */
 external class Request
 
-external class Network {
-  /**
-   * Returns HAR log that contains all known network requests.
-   */
-  fun getHAR(): Promise<GetHARHarLog>
-}
+external class Network
 
 /**
  * Represents the Elements panel.
@@ -95,16 +82,6 @@ external class Panels {
       iconPath: String,
       pagePath: String
   ): Promise<ExtensionPanel>
-
-  /**
-   * Specifies the function to be called when the user clicks a resource link in the Developer Tools window. To unset the handler, either call the method with no parameters or pass null as the parameter.
-   */
-  fun setOpenResourceHandler(): Promise<Resource>
-
-  /**
-   * Requests DevTools to open a URL in a Developer Tools panel.
-   */
-  fun openResource(url: String, lineNumber: Int): Promise<Any>
 }
 
 external class Devtools {

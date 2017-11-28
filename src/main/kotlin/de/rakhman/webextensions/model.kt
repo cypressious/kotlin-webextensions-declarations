@@ -23,7 +23,8 @@ data class Function(
         val description: String?,
         val async: Any?,
         val parameters: List<Parameter>?,
-        val deprecated: String?
+        val deprecated: String?,
+        val unsupported: Boolean
 )
 
 data class Parameter(

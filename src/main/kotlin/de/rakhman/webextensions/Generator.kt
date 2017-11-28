@@ -57,8 +57,10 @@ class Generator(val dir: File) {
     private fun generateNamespace(ns: Namespace, fileBuilder: FileSpec.Builder): TypeSpec.Builder {
         val name = ns.namespace.substringAfter(".").capitalize()
 
+        val functions = ns.functions?.filter { !it.unsupported } ?: emptyList()
+
         val builder = TypeSpec.expectClassBuilder(ClassName.bestGuess(name)).addModifiers(KModifier.EXPECT)
-        builder.addFunctions(ns.functions?.flatMap { generateFunctionWithOverloads(it, fileBuilder) } ?: emptyList())
+        builder.addFunctions(functions.flatMap { generateFunctionWithOverloads(it, fileBuilder) })
 
         ns.types?.forEach { generateType(fileBuilder, it) }
 

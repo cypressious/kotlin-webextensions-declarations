@@ -35,29 +35,11 @@ external class Test {
 
   fun assertFalse(test: Any, message: String)
 
-  fun assertBool(
-      test: String,
-      expected: Boolean,
-      message: String
-  )
-
-  fun assertBool(
-      test: Boolean,
-      expected: Boolean,
-      message: String
-  )
-
-  fun checkDeepEq(expected: Any, actual: Any)
-
   fun assertEq(
       expected: Any,
       actual: Any,
       message: String
   )
-
-  fun assertNoLastError()
-
-  fun assertLastError(expectedError: String)
 
   fun assertRejects(
       promise: Promise,

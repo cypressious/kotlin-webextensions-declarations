@@ -19,8 +19,6 @@ class SendMessageOptions(/**
  */
 val toProxyScript: Boolean)
 
-class GetPackageDirectoryEntryDirectoryEntry()
-
 /**
  * An object which allows two way communication with other pages.
  */
@@ -148,16 +146,6 @@ external class Runtime {
   fun reload()
 
   /**
-   * Requests an update check for this app/extension.
-   */
-  fun requestUpdateCheck(): Promise<RequestUpdateCheckStatus>
-
-  /**
-   * Restart the device when the app runs in kiosk mode. Otherwise, it's no-op.
-   */
-  fun restart()
-
-  /**
    * Attempts to connect to connect listeners within an extension/app (such as the background page), or other extensions/apps. This is useful for content scripts connecting to their extension processes, inter-app/extension communication, and $(topic:manifest/externally_connectable)[web messaging]. Note that this does not connect to any listeners in a content script. Extensions may connect to content scripts embedded in tabs via $(ref:tabs.connect).
    */
   fun connect(extensionId: String, connectInfo: ConnectConnectInfo)
@@ -190,9 +178,4 @@ external class Runtime {
    * Returns information about the current platform.
    */
   fun getPlatformInfo(): Promise<PlatformInfo>
-
-  /**
-   * Returns a DirectoryEntry for the package directory.
-   */
-  fun getPackageDirectoryEntry(): Promise<GetPackageDirectoryEntryDirectoryEntry>
 }

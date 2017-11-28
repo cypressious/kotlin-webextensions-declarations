@@ -329,16 +329,4 @@ external class Downloads {
   fun erase(query: DownloadQuery): Promise<Array<Int>>
 
   fun removeFile(downloadId: Int): Promise<Any>
-
-  /**
-   * Prompt the user to either accept or cancel a dangerous download. <code>acceptDanger()</code> does not automatically accept dangerous downloads.
-   */
-  fun acceptDanger(downloadId: Int, callback: Any)
-
-  /**
-   * Initiate dragging the file to another application.
-   */
-  fun drag(downloadId: Int)
-
-  fun setShelfEnabled(enabled: Boolean)
 }

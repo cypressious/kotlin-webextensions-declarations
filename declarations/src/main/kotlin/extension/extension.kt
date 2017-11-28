@@ -44,9 +44,4 @@ external class Extension {
    * Retrieves the state of the extension's access to the 'file://' scheme (as determined by the user-controlled 'Allow access to File URLs' checkbox.
    */
   fun isAllowedFileSchemeAccess(): Promise<Boolean>
-
-  /**
-   * Sets the value of the ap CGI parameter used in the extension's update URL.  This value is ignored for extensions that are hosted in the browser vendor's store.
-   */
-  fun setUpdateUrlData(data: String)
 }
