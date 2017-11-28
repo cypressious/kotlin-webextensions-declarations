@@ -2,6 +2,21 @@ package bookmarks
 
 import kotlin.js.Promise
 
+class SearchQuery(
+    /**
+     * A string of words and quoted phrases that are matched against bookmark URLs and titles.
+     */
+    val query: String,
+    /**
+     * The URL of the bookmark; matches verbatim. Note that folders have no URL.
+     */
+    val url: String,
+    /**
+     * The title of the bookmark; matches verbatim.
+     */
+    val title: String
+)
+
 class MoveDestination(val parentId: String, val index: Int)
 
 class UpdateChanges(val title: String, val url: String)

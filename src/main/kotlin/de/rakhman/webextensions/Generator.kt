@@ -120,7 +120,11 @@ class Generator(val dir: File) {
 
         val choices = parameters?.getResolvedChoices() ?: listOf(emptyList())
 
-        return choices.mapIndexed { i, list -> generateFunction(f, list, fileBuilder.takeIf { i == 0 }) }
+        // generate all object types once to prevent duplicates
+        choices.flatMap { it }.distinct().forEach { parameterTypeName(ParameterContext(it.name, it.type, f.name, fileBuilder)) }
+        returnTypeName(f, fileBuilder)
+
+        return choices.mapIndexed { i, list -> generateFunction(f, list, null) }
     }
 
     private fun generateFunction(f: Function, parameters: List<ResolvedChoice>, fileBuilder: FileSpec.Builder?): FunSpec {
@@ -136,24 +140,8 @@ class Generator(val dir: File) {
             builder.addAnnotation(AnnotationSpec.builder(Deprecated::class).addMember("\"$it\"").build())
         }
 
-        f.async?.let { async ->
-            if (async == true) {
-                builder.returns("Any".asPromiseType())
-                return@let
-            }
-
-            val asyncParam = f.parameters!!.first { it.name == async }.parameters?.firstOrNull()
-            val parameterType = asyncParam?.let {
-                var name = it.name
-                if (parameters.any { it.name == name }) name += "Result"
-
-                parameterTypeName(ParameterContext(name, it, f.name, fileBuilder))
-            } ?: "Any"
-
-            builder.returns(parameterType.asPromiseType())
-        }
-
-        //todo functions mustn't emit bodies
+        val returnType = returnTypeName(f, fileBuilder)
+        returnType?.let { builder.returns(returnType.asPromiseType()) }
 
         return builder.build()
     }
@@ -186,6 +174,23 @@ class Generator(val dir: File) {
             else -> "Any"
         }
     }
+
+
+    private fun returnTypeName(f: Function, fileBuilder: FileSpec.Builder?): String? {
+        return when (f.async) {
+            true -> "Any"
+            is String -> {
+                val asyncParam = f.parameters!!.first { it.name == f.async }.parameters?.firstOrNull()
+                asyncParam?.let {
+                    var name = it.name
+                    if (f.parameters.any { it.name == name }) name += "Result"
+
+                    parameterTypeName(ParameterContext(name, it, f.name, fileBuilder))
+                } ?: "Any"
+            }
+            else -> null
+        }
+    }
 }
 
 data class ParameterContext(
@@ -201,7 +206,7 @@ private fun String.asPromiseType(): ParameterizedTypeName {
             ClassName.bestGuess(this))
 }
 
-class ResolvedChoice(val name: String, val type: Parameter)
+data class ResolvedChoice(val name: String, val type: Parameter)
 
 private fun List<Parameter>.getResolvedChoices(): List<List<ResolvedChoice>> {
     require(size > 0) { "Receiver can't be empty" }

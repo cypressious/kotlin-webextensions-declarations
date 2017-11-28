@@ -1,8 +1,8 @@
 package runtime
 
 import events.Event
-import tabs.Tab
 import kotlin.js.Promise
+import tabs.Tab
 
 class GetBackgroundPageBackgroundPage()
 
