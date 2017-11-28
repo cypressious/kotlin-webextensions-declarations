@@ -197,42 +197,35 @@ external class Windows {
   /**
    * Gets details about a window.
    */
-  fun get(windowId: Int, getInfo: GetInfo): Promise<Window> {
-  }
+  fun get(windowId: Int, getInfo: GetInfo): Promise<Window>
 
   /**
    * Gets the $(topic:current-window)[current window].
    */
-  fun getCurrent(getInfo: GetInfo): Promise<Window> {
-  }
+  fun getCurrent(getInfo: GetInfo): Promise<Window>
 
   /**
    * Gets the window that was most recently focused &mdash; typically the window 'on top'.
    */
-  fun getLastFocused(getInfo: GetInfo): Promise<Window> {
-  }
+  fun getLastFocused(getInfo: GetInfo): Promise<Window>
 
   /**
    * Gets all windows.
    */
-  fun getAll(getInfo: GetInfo): Promise<Array<Window>> {
-  }
+  fun getAll(getInfo: GetInfo): Promise<Array<Window>>
 
   /**
    * Creates (opens) a new browser with any optional sizing, position or default URL provided.
    */
-  fun create(createData: CreateData): Promise<Window> {
-  }
+  fun create(createData: CreateData): Promise<Window>
 
   /**
    * Updates the properties of a window. Specify only the properties that you want to change; unspecified properties will be left unchanged.
    */
-  fun update(windowId: Int, updateInfo: UpdateInfo): Promise<Window> {
-  }
+  fun update(windowId: Int, updateInfo: UpdateInfo): Promise<Window>
 
   /**
    * Removes (closes) a window, and all the tabs inside it.
    */
-  fun remove(windowId: Int): Promise<Any> {
-  }
+  fun remove(windowId: Int): Promise<Any>
 }

@@ -447,20 +447,17 @@ external class Tabs {
   /**
    * Retrieves details about the specified tab.
    */
-  fun get(tabId: Int): Promise<Tab> {
-  }
+  fun get(tabId: Int): Promise<Tab>
 
   /**
    * Gets the tab that this script call is being made from. May be undefined if called from a non-tab context (for example: a background page or popup view).
    */
-  fun getCurrent(): Promise<Tab> {
-  }
+  fun getCurrent(): Promise<Tab>
 
   /**
    * Connects to the content script(s) in the specified tab. The $(ref:runtime.onConnect) event is fired in each content script running in the specified tab for the current extension. For more details, see $(topic:messaging)[Content Script Messaging].
    */
-  fun connect(tabId: Int, connectInfo: ConnectInfo) {
-  }
+  fun connect(tabId: Int, connectInfo: ConnectInfo)
 
   /**
    * Sends a single request to the content script(s) in the specified tab, with an optional callback to run when a response is sent back.  The $(ref:extension.onRequest) event is fired in each content script running in the specified tab for the current extension.
@@ -470,8 +467,7 @@ external class Tabs {
       tabId: Int,
       request: Any,
       responseCallback: Any
-  ) {
-  }
+  )
 
   /**
    * Sends a single message to the content script(s) in the specified tab, with an optional callback to run when a response is sent back.  The $(ref:runtime.onMessage) event is fired in each content script running in the specified tab for the current extension.
@@ -480,170 +476,142 @@ external class Tabs {
       tabId: Int,
       message: Any,
       options: Options
-  ): Promise<Any> {
-  }
+  ): Promise<Any>
 
   /**
    * Gets the tab that is selected in the specified window.
    */
   @Deprecated("Please use $(ref:tabs.query) <code>{active: true}</code>.")
-  fun getSelected(windowId: Int): Promise<Tab> {
-  }
+  fun getSelected(windowId: Int): Promise<Tab>
 
   /**
    * Gets details about all tabs in the specified window.
    */
   @Deprecated("Please use $(ref:tabs.query) <code>{windowId: windowId}</code>.")
-  fun getAllInWindow(windowId: Int): Promise<Array<Tab>> {
-  }
+  fun getAllInWindow(windowId: Int): Promise<Array<Tab>>
 
   /**
    * Creates a new tab.
    */
-  fun create(createProperties: CreateProperties): Promise<Tab> {
-  }
+  fun create(createProperties: CreateProperties): Promise<Tab>
 
   /**
    * Duplicates a tab.
    */
-  fun duplicate(tabId: Int): Promise<Tab> {
-  }
+  fun duplicate(tabId: Int): Promise<Tab>
 
   /**
    * Gets all tabs that have the specified properties, or all tabs if no properties are specified.
    */
-  fun query(queryInfo: QueryInfo): Promise<Array<Tab>> {
-  }
+  fun query(queryInfo: QueryInfo): Promise<Array<Tab>>
 
   /**
    * Highlights the given tabs.
    */
-  fun highlight(highlightInfo: HighlightInfo): Promise<Window> {
-  }
+  fun highlight(highlightInfo: HighlightInfo): Promise<Window>
 
   /**
    * Modifies the properties of a tab. Properties that are not specified in <var>updateProperties</var> are not modified.
    */
-  fun update(tabId: Int, updateProperties: UpdateProperties): Promise<Tab> {
-  }
+  fun update(tabId: Int, updateProperties: UpdateProperties): Promise<Tab>
 
   /**
    * Moves one or more tabs to a new position within its window, or to a new window. Note that tabs can only be moved to and from normal (window.type === "normal") windows.
    */
-  fun move(tabIds: Int, moveProperties: MoveProperties): Promise<Any> {
-  }
+  fun move(tabIds: Int, moveProperties: MoveProperties): Promise<Any>
 
   /**
    * Moves one or more tabs to a new position within its window, or to a new window. Note that tabs can only be moved to and from normal (window.type === "normal") windows.
    */
-  fun move(tabIds: Array<Int>, moveProperties: MoveProperties): Promise<Any> {
-  }
+  fun move(tabIds: Array<Int>, moveProperties: MoveProperties): Promise<Any>
 
   /**
    * Reload a tab.
    */
-  fun reload(tabId: Int, reloadProperties: ReloadProperties): Promise<Any> {
-  }
+  fun reload(tabId: Int, reloadProperties: ReloadProperties): Promise<Any>
 
   /**
    * Closes one or more tabs.
    */
-  fun remove(tabIds: Int): Promise<Any> {
-  }
+  fun remove(tabIds: Int): Promise<Any>
 
   /**
    * Closes one or more tabs.
    */
-  fun remove(tabIds: Array<Int>): Promise<Any> {
-  }
+  fun remove(tabIds: Array<Int>): Promise<Any>
 
   /**
    * discards one or more tabs.
    */
-  fun discard(tabIds: Int): Promise<Any> {
-  }
+  fun discard(tabIds: Int): Promise<Any>
 
   /**
    * discards one or more tabs.
    */
-  fun discard(tabIds: Array<Int>): Promise<Any> {
-  }
+  fun discard(tabIds: Array<Int>): Promise<Any>
 
   /**
    * Detects the primary language of the content in a tab.
    */
-  fun detectLanguage(tabId: Int): Promise<String> {
-  }
+  fun detectLanguage(tabId: Int): Promise<String>
 
   /**
    * Toggles reader mode for the document in the tab.
    */
-  fun toggleReaderMode(tabId: Int): Promise<Any> {
-  }
+  fun toggleReaderMode(tabId: Int): Promise<Any>
 
   /**
    * Captures the visible area of the currently active tab in the specified window. You must have $(topic:declare_permissions)[&lt;all_urls&gt;] permission to use this method.
    */
-  fun captureVisibleTab(windowId: Int, options: ImageDetails): Promise<String> {
-  }
+  fun captureVisibleTab(windowId: Int, options: ImageDetails): Promise<String>
 
   /**
    * Injects JavaScript code into a page. For details, see the $(topic:content_scripts)[programmatic injection] section of the content scripts doc.
    */
-  fun executeScript(tabId: Int, details: InjectDetails): Promise<Array<Any>> {
-  }
+  fun executeScript(tabId: Int, details: InjectDetails): Promise<Array<Any>>
 
   /**
    * Injects CSS into a page. For details, see the $(topic:content_scripts)[programmatic injection] section of the content scripts doc.
    */
-  fun insertCSS(tabId: Int, details: InjectDetails): Promise<Any> {
-  }
+  fun insertCSS(tabId: Int, details: InjectDetails): Promise<Any>
 
   /**
    * Removes injected CSS from a page. For details, see the $(topic:content_scripts)[programmatic injection] section of the content scripts doc.
    */
-  fun removeCSS(tabId: Int, details: InjectDetails): Promise<Any> {
-  }
+  fun removeCSS(tabId: Int, details: InjectDetails): Promise<Any>
 
   /**
    * Zooms a specified tab.
    */
-  fun setZoom(tabId: Int, zoomFactor: Any): Promise<Any> {
-  }
+  fun setZoom(tabId: Int, zoomFactor: Any): Promise<Any>
 
   /**
    * Gets the current zoom factor of a specified tab.
    */
-  fun getZoom(tabId: Int): Promise<Any> {
-  }
+  fun getZoom(tabId: Int): Promise<Any>
 
   /**
    * Sets the zoom settings for a specified tab, which define how zoom changes are handled. These settings are reset to defaults upon navigating the tab.
    */
-  fun setZoomSettings(tabId: Int, zoomSettings: ZoomSettings): Promise<Any> {
-  }
+  fun setZoomSettings(tabId: Int, zoomSettings: ZoomSettings): Promise<Any>
 
   /**
    * Gets the current zoom settings of a specified tab.
    */
-  fun getZoomSettings(tabId: Int): Promise<ZoomSettings> {
-  }
+  fun getZoomSettings(tabId: Int): Promise<ZoomSettings>
 
   /**
    * Prints page in active tab.
    */
-  fun print() {
-  }
+  fun print()
 
   /**
    * Shows print preview for page in active tab.
    */
-  fun printPreview(): Promise<Any> {
-  }
+  fun printPreview(): Promise<Any>
 
   /**
    * Saves page in active tab as a PDF file.
    */
-  fun saveAsPDF(pageSettings: PageSettings): Promise<String> {
-  }
+  fun saveAsPDF(pageSettings: PageSettings): Promise<String>
 }

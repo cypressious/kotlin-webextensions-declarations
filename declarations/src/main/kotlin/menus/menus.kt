@@ -150,36 +150,30 @@ external class Menus {
   /**
    * Creates a new context menu item. Note that if an error occurs during creation, you may not find out until the creation callback fires (the details will be in $(ref:runtime.lastError)).
    */
-  fun create(createProperties: CreateProperties, callback: Any) {
-  }
+  fun create(createProperties: CreateProperties, callback: Any)
 
   /**
    * Updates a previously created context menu item.
    */
-  fun update(id: Int, updateProperties: UpdateProperties): Promise<Any> {
-  }
+  fun update(id: Int, updateProperties: UpdateProperties): Promise<Any>
 
   /**
    * Updates a previously created context menu item.
    */
-  fun update(id: String, updateProperties: UpdateProperties): Promise<Any> {
-  }
+  fun update(id: String, updateProperties: UpdateProperties): Promise<Any>
 
   /**
    * Removes a context menu item.
    */
-  fun remove(menuItemId: Int): Promise<Any> {
-  }
+  fun remove(menuItemId: Int): Promise<Any>
 
   /**
    * Removes a context menu item.
    */
-  fun remove(menuItemId: String): Promise<Any> {
-  }
+  fun remove(menuItemId: String): Promise<Any>
 
   /**
    * Removes all context menu items added by this extension.
    */
-  fun removeAll(): Promise<Any> {
-  }
+  fun removeAll(): Promise<Any>
 }

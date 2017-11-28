@@ -53,6 +53,5 @@ external class Omnibox {
   /**
    * Sets the description and styling for the default suggestion. The default suggestion is the text that is displayed in the first suggestion row underneath the URL bar.
    */
-  fun setDefaultSuggestion(suggestion: DefaultSuggestResult) {
-  }
+  fun setDefaultSuggestion(suggestion: DefaultSuggestResult)
 }

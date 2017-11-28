@@ -23,6 +23,5 @@ external class Commands {
   /**
    * Returns all the registered extension commands for this extension and their shortcut (if active).
    */
-  fun getAll(): Promise<Array<Command>> {
-  }
+  fun getAll(): Promise<Array<Command>>
 }

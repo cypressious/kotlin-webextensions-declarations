@@ -80,72 +80,60 @@ external class BrowserAction {
   /**
    * Sets the title of the browser action. This shows up in the tooltip.
    */
-  fun setTitle(details: Details): Promise<Any> {
-  }
+  fun setTitle(details: Details): Promise<Any>
 
   /**
    * Gets the title of the browser action.
    */
-  fun getTitle(details: Details): Promise<String> {
-  }
+  fun getTitle(details: Details): Promise<String>
 
   /**
    * Sets the icon for the browser action. The icon can be specified either as the path to an image file or as the pixel data from a canvas element, or as dictionary of either one of those. Either the <b>path</b> or the <b>imageData</b> property must be specified.
    */
-  fun setIcon(details: Details): Promise<Any> {
-  }
+  fun setIcon(details: Details): Promise<Any>
 
   /**
    * Sets the html document to be opened as a popup when the user clicks on the browser action's icon.
    */
-  fun setPopup(details: Details): Promise<Any> {
-  }
+  fun setPopup(details: Details): Promise<Any>
 
   /**
    * Gets the html document set as the popup for this browser action.
    */
-  fun getPopup(details: Details): Promise<String> {
-  }
+  fun getPopup(details: Details): Promise<String>
 
   /**
    * Sets the badge text for the browser action. The badge is displayed on top of the icon.
    */
-  fun setBadgeText(details: Details): Promise<Any> {
-  }
+  fun setBadgeText(details: Details): Promise<Any>
 
   /**
    * Gets the badge text of the browser action. If no tab is specified, the non-tab-specific badge text is returned.
    */
-  fun getBadgeText(details: Details): Promise<String> {
-  }
+  fun getBadgeText(details: Details): Promise<String>
 
   /**
    * Sets the background color for the badge.
    */
-  fun setBadgeBackgroundColor(details: Details): Promise<Any> {
-  }
+  fun setBadgeBackgroundColor(details: Details): Promise<Any>
 
   /**
    * Gets the background color of the browser action.
    */
-  fun getBadgeBackgroundColor(details: Details): Promise<ColorArray> {
-  }
+  fun getBadgeBackgroundColor(details: Details): Promise<ColorArray>
 
   /**
    * Enables the browser action for a tab. By default, browser actions are enabled.
    */
-  fun enable(tabId: Int): Promise<Any> {
-  }
+  fun enable(tabId: Int): Promise<Any>
 
   /**
    * Disables the browser action for a tab.
    */
-  fun disable(tabId: Int): Promise<Any> {
-  }
+  fun disable(tabId: Int): Promise<Any>
 
   /**
    * Opens the extension popup window in the active window.
    */
-  fun openPopup(): Promise<Any> {
-  }
+  fun openPopup(): Promise<Any>
 }

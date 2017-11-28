@@ -51,20 +51,17 @@ external class InspectedWindow {
   /**
    * Evaluates a JavaScript expression in the context of the main frame of the inspected page. The expression must evaluate to a JSON-compliant object, otherwise an exception is thrown. The eval function can report either a DevTools-side error or a JavaScript exception that occurs during evaluation. In either case, the <code>result</code> parameter of the callback is <code>undefined</code>. In the case of a DevTools-side error, the <code>isException</code> parameter is non-null and has <code>isError</code> set to true and <code>code</code> set to an error code. In the case of a JavaScript error, <code>isException</code> is set to true and <code>value</code> is set to the string value of thrown object.
    */
-  fun eval(expression: String, options: Options): Promise<Any> {
-  }
+  fun eval(expression: String, options: Options): Promise<Any>
 
   /**
    * Reloads the inspected page.
    */
-  fun reload(reloadOptions: ReloadOptions) {
-  }
+  fun reload(reloadOptions: ReloadOptions)
 
   /**
    * Retrieves the list of resources from the inspected page.
    */
-  fun getResources(): Promise<Array<Resource>> {
-  }
+  fun getResources(): Promise<Array<Resource>>
 }
 
 class HarLog()
@@ -78,8 +75,7 @@ external class Network {
   /**
    * Returns HAR log that contains all known network requests.
    */
-  fun getHAR(): Promise<HarLog> {
-  }
+  fun getHAR(): Promise<HarLog>
 }
 
 /**
@@ -115,20 +111,17 @@ external class Panels {
       title: String,
       iconPath: String,
       pagePath: String
-  ): Promise<ExtensionPanel> {
-  }
+  ): Promise<ExtensionPanel>
 
   /**
    * Specifies the function to be called when the user clicks a resource link in the Developer Tools window. To unset the handler, either call the method with no parameters or pass null as the parameter.
    */
-  fun setOpenResourceHandler(): Promise<Resource> {
-  }
+  fun setOpenResourceHandler(): Promise<Resource>
 
   /**
    * Requests DevTools to open a URL in a Developer Tools panel.
    */
-  fun openResource(url: String, lineNumber: Int): Promise<Any> {
-  }
+  fun openResource(url: String, lineNumber: Int): Promise<Any>
 }
 
 external class Devtools {

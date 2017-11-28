@@ -27,42 +27,35 @@ external class GeckoProfiler {
   /**
    * Starts the profiler with the specified settings.
    */
-  fun start(settings: Settings): Promise<Any> {
-  }
+  fun start(settings: Settings): Promise<Any>
 
   /**
    * Stops the profiler and discards any captured profile data.
    */
-  fun stop(): Promise<Any> {
-  }
+  fun stop(): Promise<Any>
 
   /**
    * Pauses the profiler, keeping any profile data that is already written.
    */
-  fun pause(): Promise<Any> {
-  }
+  fun pause(): Promise<Any>
 
   /**
    * Resumes the profiler with the settings that were initially used to start it.
    */
-  fun resume(): Promise<Any> {
-  }
+  fun resume(): Promise<Any>
 
   /**
    * Gathers the profile data from the current profiling session.
    */
-  fun getProfile(): Promise<Any> {
-  }
+  fun getProfile(): Promise<Any>
 
   /**
    * Gathers the profile data from the current profiling session. The returned promise resolves to an array buffer that contains a JSON string.
    */
-  fun getProfileAsArrayBuffer(): Promise<Any> {
-  }
+  fun getProfileAsArrayBuffer(): Promise<Any>
 
   /**
    * Gets the debug symbols for a particular library.
    */
-  fun getSymbols(debugName: String, breakpadId: String): Promise<Any> {
-  }
+  fun getSymbols(debugName: String, breakpadId: String): Promise<Any>
 }

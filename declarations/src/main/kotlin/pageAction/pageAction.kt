@@ -52,48 +52,40 @@ external class PageAction {
   /**
    * Shows the page action. The page action is shown whenever the tab is selected.
    */
-  fun show(tabId: Int): Promise<Any> {
-  }
+  fun show(tabId: Int): Promise<Any>
 
   /**
    * Hides the page action.
    */
-  fun hide(tabId: Int): Promise<Any> {
-  }
+  fun hide(tabId: Int): Promise<Any>
 
   /**
    * Sets the title of the page action. This is displayed in a tooltip over the page action.
    */
-  fun setTitle(details: Details) {
-  }
+  fun setTitle(details: Details)
 
   /**
    * Gets the title of the page action.
    */
-  fun getTitle(details: Details): Promise<String> {
-  }
+  fun getTitle(details: Details): Promise<String>
 
   /**
    * Sets the icon for the page action. The icon can be specified either as the path to an image file or as the pixel data from a canvas element, or as dictionary of either one of those. Either the <b>path</b> or the <b>imageData</b> property must be specified.
    */
-  fun setIcon(details: Details): Promise<Any> {
-  }
+  fun setIcon(details: Details): Promise<Any>
 
   /**
    * Sets the html document to be opened as a popup when the user clicks on the page action's icon.
    */
-  fun setPopup(details: Details): Promise<Any> {
-  }
+  fun setPopup(details: Details): Promise<Any>
 
   /**
    * Gets the html document set as the popup for this page action.
    */
-  fun getPopup(details: Details): Promise<String> {
-  }
+  fun getPopup(details: Details): Promise<String>
 
   /**
    * Opens the extension page action in the active window.
    */
-  fun openPopup(): Promise<Any> {
-  }
+  fun openPopup(): Promise<Any>
 }

@@ -2,17 +2,24 @@ package de.rakhman.webextensions
 
 import com.squareup.kotlinpoet.*
 import java.io.File
+import java.nio.file.Files
 
 class Generator(val dir: File) {
     fun generate(list: List<Namespace>) {
         generateBrowser(list)
         list.groupBy { it.namespace.substringBefore(".") }.forEach(this::generateMainNamespace)
+
+        Files.walk(dir.toPath())
+                .map { it.toFile() }
+                .filter { it.extension == "kt" }
+                .forEach {
+                    it.writeText(it.readText().replace("expect class", "external class"))
+                }
     }
 
     private fun generateBrowser(list: List<Namespace>) {
         FileSpec.builder("", "browser")
-                .addType(TypeSpec.classBuilder("Browser")
-                        .addModifiers(KModifier.EXTERNAL)
+                .addType(TypeSpec.expectClassBuilder("Browser")
                         .addProperties(list
                                 .filter { "." !in it.namespace }
                                 .map {
@@ -50,7 +57,7 @@ class Generator(val dir: File) {
     private fun generateNamespace(ns: Namespace, fileBuilder: FileSpec.Builder): TypeSpec.Builder {
         val name = ns.namespace.substringAfter(".").capitalize()
 
-        val builder = TypeSpec.classBuilder(ClassName.bestGuess(name)).addModifiers(KModifier.EXTERNAL)
+        val builder = TypeSpec.expectClassBuilder(ClassName.bestGuess(name)).addModifiers(KModifier.EXPECT)
         builder.addFunctions(ns.functions?.flatMap { generateFunctionWithOverloads(it, fileBuilder) } ?: emptyList())
 
         ns.types?.forEach { generateType(fileBuilder, it) }
@@ -78,7 +85,9 @@ class Generator(val dir: File) {
     }
 
     private fun generateType(name: String, properties: Map<String, Parameter>?, fileBuilder: FileSpec.Builder, external: Boolean): TypeSpec.Builder {
-        val typeBuilder = TypeSpec.classBuilder(name)
+        val typeBuilder = if (external) TypeSpec.expectClassBuilder(name) else TypeSpec.classBuilder(name)
+
+        typeBuilder
                 .addProperties(properties?.entries?.map {
                     PropertySpec
                             .builder(it.key, ClassName.bestGuess(parameterTypeName(it.key, it.value, null)))
@@ -87,9 +96,7 @@ class Generator(val dir: File) {
                             .build()
                 } ?: emptyList())
 
-        if (external) {
-            typeBuilder.addModifiers(KModifier.EXTERNAL)
-        } else {
+        if (!external) {
             typeBuilder.primaryConstructor(FunSpec.constructorBuilder()
                     .addParameters(
                             properties?.entries?.map {

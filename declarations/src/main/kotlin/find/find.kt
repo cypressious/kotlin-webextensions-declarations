@@ -44,18 +44,15 @@ external class Find {
   /**
    * Search for text in document and store found ranges in array, in document order.
    */
-  fun find(queryphrase: String, params: Params): Promise<Any> {
-  }
+  fun find(queryphrase: String, params: Params): Promise<Any>
 
   /**
    * Highlight a range
    */
-  fun highlightResults(params: Params): Promise<Any> {
-  }
+  fun highlightResults(params: Params): Promise<Any>
 
   /**
    * Remove all highlighting from previous searches.
    */
-  fun removeHighlighting(tabId: Int): Promise<Any> {
-  }
+  fun removeHighlighting(tabId: Int): Promise<Any>
 }

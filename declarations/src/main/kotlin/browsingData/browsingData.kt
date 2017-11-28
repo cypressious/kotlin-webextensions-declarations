@@ -99,84 +99,70 @@ external class BrowsingData {
   /**
    * Reports which types of data are currently selected in the 'Clear browsing data' settings UI.  Note: some of the data types included in this API are not available in the settings UI, and some UI settings control more than one data type listed here.
    */
-  fun settings(): Promise<Result> {
-  }
+  fun settings(): Promise<Result>
 
   /**
    * Clears various types of browsing data stored in a user's profile.
    */
-  fun remove(options: RemovalOptions, dataToRemove: DataTypeSet): Promise<Any> {
-  }
+  fun remove(options: RemovalOptions, dataToRemove: DataTypeSet): Promise<Any>
 
   /**
    * Clears websites' appcache data.
    */
-  fun removeAppcache(options: RemovalOptions): Promise<Any> {
-  }
+  fun removeAppcache(options: RemovalOptions): Promise<Any>
 
   /**
    * Clears the browser's cache.
    */
-  fun removeCache(options: RemovalOptions): Promise<Any> {
-  }
+  fun removeCache(options: RemovalOptions): Promise<Any>
 
   /**
    * Clears the browser's cookies and server-bound certificates modified within a particular timeframe.
    */
-  fun removeCookies(options: RemovalOptions): Promise<Any> {
-  }
+  fun removeCookies(options: RemovalOptions): Promise<Any>
 
   /**
    * Clears the browser's list of downloaded files (<em>not</em> the downloaded files themselves).
    */
-  fun removeDownloads(options: RemovalOptions): Promise<Any> {
-  }
+  fun removeDownloads(options: RemovalOptions): Promise<Any>
 
   /**
    * Clears websites' file system data.
    */
-  fun removeFileSystems(options: RemovalOptions): Promise<Any> {
-  }
+  fun removeFileSystems(options: RemovalOptions): Promise<Any>
 
   /**
    * Clears the browser's stored form data (autofill).
    */
-  fun removeFormData(options: RemovalOptions): Promise<Any> {
-  }
+  fun removeFormData(options: RemovalOptions): Promise<Any>
 
   /**
    * Clears the browser's history.
    */
-  fun removeHistory(options: RemovalOptions): Promise<Any> {
-  }
+  fun removeHistory(options: RemovalOptions): Promise<Any>
 
   /**
    * Clears websites' IndexedDB data.
    */
-  fun removeIndexedDB(options: RemovalOptions): Promise<Any> {
-  }
+  fun removeIndexedDB(options: RemovalOptions): Promise<Any>
 
   /**
    * Clears websites' local storage data.
    */
-  fun removeLocalStorage(options: RemovalOptions): Promise<Any> {
-  }
+  fun removeLocalStorage(options: RemovalOptions): Promise<Any>
 
   /**
    * Clears plugins' data.
    */
-  fun removePluginData(options: RemovalOptions): Promise<Any> {
-  }
+  fun removePluginData(options: RemovalOptions): Promise<Any>
 
   /**
    * Clears the browser's stored passwords.
    */
-  fun removePasswords(options: RemovalOptions): Promise<Any> {
-  }
+  fun removePasswords(options: RemovalOptions): Promise<Any>
 
   /**
    * Clears websites' WebSQL data.
    */
-  fun removeWebSQL(options: RemovalOptions): Promise<Any> {
-  }
+  fun removeWebSQL(options: RemovalOptions): Promise<Any>
 }

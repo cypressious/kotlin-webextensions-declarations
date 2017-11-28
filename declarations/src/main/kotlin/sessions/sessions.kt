@@ -46,32 +46,27 @@ external class Sessions {
   /**
    * Forget a recently closed tab.
    */
-  fun forgetClosedTab(windowId: Int, sessionId: String): Promise<Any> {
-  }
+  fun forgetClosedTab(windowId: Int, sessionId: String): Promise<Any>
 
   /**
    * Forget a recently closed window.
    */
-  fun forgetClosedWindow(sessionId: String): Promise<Any> {
-  }
+  fun forgetClosedWindow(sessionId: String): Promise<Any>
 
   /**
    * Gets the list of recently closed tabs and/or windows.
    */
-  fun getRecentlyClosed(filter: Filter): Promise<Array<Session>> {
-  }
+  fun getRecentlyClosed(filter: Filter): Promise<Array<Session>>
 
   /**
    * Retrieves all devices with synced sessions.
    */
-  fun getDevices(filter: Filter): Promise<Array<Device>> {
-  }
+  fun getDevices(filter: Filter): Promise<Array<Device>>
 
   /**
    * Reopens a $(ref:windows.Window) or $(ref:tabs.Tab), with an optional callback to run when the entry has been restored.
    */
-  fun restore(sessionId: String): Promise<Session> {
-  }
+  fun restore(sessionId: String): Promise<Session>
 
   /**
    * Set a key/value pair on a given tab.
@@ -80,20 +75,17 @@ external class Sessions {
       tabId: Int,
       key: String,
       value: Any
-  ): Promise<Any> {
-  }
+  ): Promise<Any>
 
   /**
    * Retrieve a value that was set for a given key on a given tab.
    */
-  fun getTabValue(tabId: Int, key: String): Promise<Any> {
-  }
+  fun getTabValue(tabId: Int, key: String): Promise<Any>
 
   /**
    * Remove a key/value pair that was set on a given tab.
    */
-  fun removeTabValue(tabId: Int, key: String): Promise<Any> {
-  }
+  fun removeTabValue(tabId: Int, key: String): Promise<Any>
 
   /**
    * Set a key/value pair on a given window.
@@ -102,18 +94,15 @@ external class Sessions {
       windowId: Int,
       key: String,
       value: Any
-  ): Promise<Any> {
-  }
+  ): Promise<Any>
 
   /**
    * Retrieve a value that was set for a given key on a given window.
    */
-  fun getWindowValue(windowId: Int, key: String): Promise<Any> {
-  }
+  fun getWindowValue(windowId: Int, key: String): Promise<Any>
 
   /**
    * Remove a key/value pair that was set on a given window.
    */
-  fun removeWindowValue(windowId: Int, key: String): Promise<Any> {
-  }
+  fun removeWindowValue(windowId: Int, key: String): Promise<Any>
 }

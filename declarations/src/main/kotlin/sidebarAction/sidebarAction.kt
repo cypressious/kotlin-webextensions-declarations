@@ -52,42 +52,35 @@ external class SidebarAction {
   /**
    * Sets the title of the sidebar action. This shows up in the tooltip.
    */
-  fun setTitle(details: Details): Promise<Any> {
-  }
+  fun setTitle(details: Details): Promise<Any>
 
   /**
    * Gets the title of the sidebar action.
    */
-  fun getTitle(details: Details): Promise<Any> {
-  }
+  fun getTitle(details: Details): Promise<Any>
 
   /**
    * Sets the icon for the sidebar action. The icon can be specified either as the path to an image file or as the pixel data from a canvas element, or as dictionary of either one of those. Either the <strong>path</strong> or the <strong>imageData</strong> property must be specified.
    */
-  fun setIcon(details: Details): Promise<Any> {
-  }
+  fun setIcon(details: Details): Promise<Any>
 
   /**
    * Sets the url to the html document to be opened in the sidebar when the user clicks on the sidebar action's icon.
    */
-  fun setPanel(details: Details): Promise<Any> {
-  }
+  fun setPanel(details: Details): Promise<Any>
 
   /**
    * Gets the url to the html document set as the panel for this sidebar action.
    */
-  fun getPanel(details: Details): Promise<Any> {
-  }
+  fun getPanel(details: Details): Promise<Any>
 
   /**
    * Opens the extension sidebar in the active window.
    */
-  fun open(): Promise<Any> {
-  }
+  fun open(): Promise<Any>
 
   /**
    * Closes the extension sidebar in the active window if the sidebar belongs to the extension.
    */
-  fun close(): Promise<Any> {
-  }
+  fun close(): Promise<Any>
 }

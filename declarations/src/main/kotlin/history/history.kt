@@ -130,36 +130,30 @@ external class History {
   /**
    * Searches the history for the last visit time of each page matching the query.
    */
-  fun search(query: Query): Promise<Array<HistoryItem>> {
-  }
+  fun search(query: Query): Promise<Array<HistoryItem>>
 
   /**
    * Retrieves information about visits to a URL.
    */
-  fun getVisits(details: Details): Promise<Array<VisitItem>> {
-  }
+  fun getVisits(details: Details): Promise<Array<VisitItem>>
 
   /**
    * Adds a URL to the history with a default visitTime of the current time and a default $(topic:transition-types)[transition type] of "link".
    */
-  fun addUrl(details: Details): Promise<Any> {
-  }
+  fun addUrl(details: Details): Promise<Any>
 
   /**
    * Removes all occurrences of the given URL from the history.
    */
-  fun deleteUrl(details: Details): Promise<Any> {
-  }
+  fun deleteUrl(details: Details): Promise<Any>
 
   /**
    * Removes all items within the specified date range from the history.  Pages will not be removed from the history unless all visits fall within the range.
    */
-  fun deleteRange(range: Range): Promise<Any> {
-  }
+  fun deleteRange(range: Range): Promise<Any>
 
   /**
    * Deletes all items from the history.
    */
-  fun deleteAll(): Promise<Any> {
-  }
+  fun deleteAll(): Promise<Any>
 }
