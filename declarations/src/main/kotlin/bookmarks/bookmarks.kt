@@ -1,6 +1,5 @@
 package bookmarks
 
-import history.SearchQuery
 import kotlin.js.Promise
 
 class MoveDestination(val parentId: String, val index: Int)

@@ -88,8 +88,10 @@ private fun getFromGithub(token: String?): Sequence<InputStream> {
     val repository = RepositoryService(client).getRepository("mozilla", "gecko-dev")
 
     val contentsService = ContentsService(client)
-    val contents = contentsService.getContents(repository, "browser/components/extensions/schemas/")
 
+    val contents =
+            contentsService.getContents(repository, "browser/components/extensions/schemas/") +
+                    contentsService.getContents(repository, "toolkit/components/extensions/schemas/")
 
     return contents
             .asSequence()

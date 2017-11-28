@@ -90,8 +90,8 @@ class Generator(val dir: File) {
         typeBuilder
                 .addProperties(properties?.entries?.map {
                     PropertySpec
-                            .builder(it.key, ClassName.bestGuess(parameterTypeName(ParameterContext(it.key, it.value, null, null))))
-                            .apply { if (!external) initializer(it.key) }
+                            .builder(it.key.escapeIfKeyword(), ClassName.bestGuess(parameterTypeName(ParameterContext(it.key, it.value, null, null))))
+                            .apply { if (!external) initializer(it.key.escapeIfKeyword()) }
                             .apply { it.value.description?.let { addKdoc(it.replace("%", "%%") + "\n") } }
                             .build()
                 } ?: emptyList())
@@ -152,7 +152,7 @@ class Generator(val dir: File) {
     }
 
     private fun generateParameter(context: ParameterContext): ParameterSpec.Builder {
-        return ParameterSpec.builder(context.name, ClassName.bestGuess(parameterTypeName(context)))
+        return ParameterSpec.builder(context.name.escapeIfKeyword(), ClassName.bestGuess(parameterTypeName(context)))
     }
 
     private fun parameterTypeName(context: ParameterContext): String {
