@@ -17,56 +17,64 @@ class GetFrameDetails(
     val frameId: Int
 )
 
-class GetFrameDetailsResult(
-    /**
-     * True if the last navigation in this frame was interrupted by an error, i.e. the onErrorOccurred event fired.
-     */
-    val errorOccurred: Boolean?,
-    /**
-     * The URL currently associated with this frame, if the frame identified by the frameId existed at one point in the given tab. The fact that an URL is associated with a given frameId does not imply that the corresponding frame still exists.
-     */
-    val url: String,
-    /**
-     * The ID of the tab in which the frame is.
-     */
-    val tabId: Int,
-    /**
-     * The ID of the frame. 0 indicates that this is the main frame; a positive value indicates the ID of a subframe.
-     */
-    val frameId: Int,
-    /**
-     * ID of frame that wraps the frame. Set to -1 of no parent frame exists.
-     */
-    val parentFrameId: Int
-)
+external class GetFrameDetailsResult {
+  /**
+   * True if the last navigation in this frame was interrupted by an error, i.e. the onErrorOccurred event fired.
+   */
+  val errorOccurred: Boolean?
+
+  /**
+   * The URL currently associated with this frame, if the frame identified by the frameId existed at one point in the given tab. The fact that an URL is associated with a given frameId does not imply that the corresponding frame still exists.
+   */
+  val url: String
+
+  /**
+   * The ID of the tab in which the frame is.
+   */
+  val tabId: Int
+
+  /**
+   * The ID of the frame. 0 indicates that this is the main frame; a positive value indicates the ID of a subframe.
+   */
+  val frameId: Int
+
+  /**
+   * ID of frame that wraps the frame. Set to -1 of no parent frame exists.
+   */
+  val parentFrameId: Int
+}
 
 class GetAllFramesDetails(/**
  * The ID of the tab.
  */
 val tabId: Int)
 
-class GetAllFramesDetailsResult(
-    /**
-     * True if the last navigation in this frame was interrupted by an error, i.e. the onErrorOccurred event fired.
-     */
-    val errorOccurred: Boolean?,
-    /**
-     * The ID of the tab in which the frame is.
-     */
-    val tabId: Int,
-    /**
-     * The ID of the frame. 0 indicates that this is the main frame; a positive value indicates the ID of a subframe.
-     */
-    val frameId: Int,
-    /**
-     * ID of frame that wraps the frame. Set to -1 of no parent frame exists.
-     */
-    val parentFrameId: Int,
-    /**
-     * The URL currently associated with this frame.
-     */
-    val url: String
-)
+external class GetAllFramesDetailsResult {
+  /**
+   * True if the last navigation in this frame was interrupted by an error, i.e. the onErrorOccurred event fired.
+   */
+  val errorOccurred: Boolean?
+
+  /**
+   * The ID of the tab in which the frame is.
+   */
+  val tabId: Int
+
+  /**
+   * The ID of the frame. 0 indicates that this is the main frame; a positive value indicates the ID of a subframe.
+   */
+  val frameId: Int
+
+  /**
+   * ID of frame that wraps the frame. Set to -1 of no parent frame exists.
+   */
+  val parentFrameId: Int
+
+  /**
+   * The URL currently associated with this frame.
+   */
+  val url: String
+}
 
 typealias TransitionType = String
 

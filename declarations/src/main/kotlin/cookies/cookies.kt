@@ -102,20 +102,22 @@ class RemoveDetails(
     val storeId: String?
 )
 
-class RemoveDetailsResult(
-    /**
-     * The URL associated with the cookie that's been removed.
-     */
-    val url: String,
-    /**
-     * The name of the cookie that's been removed.
-     */
-    val name: String,
-    /**
-     * The ID of the cookie store from which the cookie was removed.
-     */
-    val storeId: String
-)
+external class RemoveDetailsResult {
+  /**
+   * The URL associated with the cookie that's been removed.
+   */
+  val url: String
+
+  /**
+   * The name of the cookie that's been removed.
+   */
+  val name: String
+
+  /**
+   * The ID of the cookie store from which the cookie was removed.
+   */
+  val storeId: String
+}
 
 /**
  * Represents information about an HTTP cookie.

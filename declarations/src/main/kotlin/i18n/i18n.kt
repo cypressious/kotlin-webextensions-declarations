@@ -7,13 +7,17 @@ class Languages(val language: LanguageCode, /**
  */
 val percentage: Int)
 
-class DetectLanguageResult(/**
- * CLD detected language reliability
- */
-val isReliable: Boolean, /**
- * array of detectedLanguage
- */
-val languages: Array<Languages>)
+external class DetectLanguageResult {
+  /**
+   * CLD detected language reliability
+   */
+  val isReliable: Boolean
+
+  /**
+   * array of detectedLanguage
+   */
+  val languages: Array<Languages>
+}
 
 typealias LanguageCode = String
 

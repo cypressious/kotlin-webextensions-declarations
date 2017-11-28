@@ -92,7 +92,7 @@ class Generator(val dir: File) {
     private fun generateType(name: String, properties: Map<String, Parameter>, fileBuilder: FileSpec.Builder, external: Boolean): TypeSpec.Builder {
         val typeBuilder = if (external) TypeSpec.expectClassBuilder(name) else TypeSpec.classBuilder(name)
 
-        val props = properties.entries.filter { !it.value.unsupported } ?: emptyList()
+        val props = properties.entries.filter { !it.value.unsupported }
 
         typeBuilder
                 .addProperties(props.map {
@@ -127,23 +127,23 @@ class Generator(val dir: File) {
         choices.flatMap { it }.distinct().forEach { parameterTypeName(ParameterContext(it.name, it.type, f.name, fileBuilder)) }
         returnTypeName(f, fileBuilder)
 
-        return choices.mapIndexed { i, list -> generateFunction(f, list, null) }
+        return choices.mapIndexed { i, list -> generateFunction(f, list) }
     }
 
-    private fun generateFunction(f: Function, parameters: List<ResolvedChoice>, fileBuilder: FileSpec.Builder?): FunSpec {
+    private fun generateFunction(f: Function, parameters: List<ResolvedChoice>): FunSpec {
         val builder = FunSpec.builder(f.name)
 
         f.description?.let { builder.addKdoc(it + "\n") }
 
         parameters.forEach {
-            builder.addParameter(generateParameter(ParameterContext(it.name, it.type, f.name, fileBuilder)).build())
+            builder.addParameter(generateParameter(ParameterContext(it.name, it.type, f.name)).build())
         }
 
         f.deprecated?.let {
             builder.addAnnotation(AnnotationSpec.builder(Deprecated::class).addMember("\"$it\"").build())
         }
 
-        val returnType = returnTypeName(f, fileBuilder)
+        val returnType = returnTypeName(f, null)
         returnType?.let { builder.returns(returnType.asPromiseType()) }
 
         return builder.build()
@@ -154,7 +154,7 @@ class Generator(val dir: File) {
     }
 
     private fun parameterTypeName(context: ParameterContext): String {
-        val (name, p) = context
+        val p = context.parameter
 
         p.`$ref`?.let { return it }
 
@@ -167,11 +167,11 @@ class Generator(val dir: File) {
             "boolean" -> "Boolean"
             "object" -> {
                 val prefix = context.functionName?.capitalize() ?: ""
-                val typeName = prefix + name.capitalize()
+                val typeName = prefix + context.name.capitalize()
 
                 if (context.fileBuilder != null) {
                     if (p.properties != null) {
-                        val typeBuilder = generateType(typeName, p.properties, context.fileBuilder, false)
+                        val typeBuilder = generateType(typeName, p.properties, context.fileBuilder, context.external)
                         context.fileBuilder.addType(typeBuilder.build())
                     } else {
                         context.fileBuilder.addTypeAlias(TypeAliasSpec.builder(typeName, Any::class).build())
@@ -194,7 +194,7 @@ class Generator(val dir: File) {
                     var name = it.name
                     if (f.parameters.any { it.name == name }) name += "Result"
 
-                    parameterTypeName(ParameterContext(name, it, f.name, fileBuilder))
+                    parameterTypeName(ParameterContext(name, it, f.name, fileBuilder, true))
                 } ?: "Any"
             }
             else -> null
@@ -206,7 +206,8 @@ data class ParameterContext(
         val name: String,
         val parameter: Parameter,
         val functionName: String?,
-        val fileBuilder: FileSpec.Builder?
+        val fileBuilder: FileSpec.Builder? = null,
+        val external: Boolean = false
 )
 
 private fun String.asPromiseType(): ParameterizedTypeName {
