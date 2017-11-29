@@ -1,6 +1,5 @@
 package test
 
-import kotlin.Any
 import kotlin.js.Promise
 
 typealias ExpectedError = Any
@@ -43,7 +42,7 @@ external class TestNamespace {
   )
 
   fun assertRejects(
-      promise: Promise,
+      promise: Promise<Any?>,
       expectedError: ExpectedError,
       message: String?
   ): Promise<Any>

@@ -159,7 +159,9 @@ class Generator(val dir: File) {
     private fun parameterTypeName(context: ParameterContext): String {
         val p = context.parameter
 
-        p.`$ref`?.let { return it }
+        p.`$ref`?.let {
+            return if (it == "Promise") "Promise<Any?>" else it
+        }
 
         val suffix = if (p.optional) "?" else ""
 
