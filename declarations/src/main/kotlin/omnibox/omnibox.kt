@@ -29,6 +29,52 @@ external class DefaultSuggestResult {
   val description: String
 }
 
+/**
+ * The style ranges for the description, as provided by the extension.
+ */
+external class DescriptionStyles {
+  val offset: Int
+
+  /**
+   * The style type
+   */
+  val type: DescriptionStyleType
+
+  val length: Int?
+}
+
+/**
+ * The style ranges for the description, as provided by ToValue().
+ */
+external class DescriptionStylesRaw {
+  val offset: Int
+
+  val type: Int
+}
+
+/**
+ * The style ranges for the description, as provided by the extension.
+ */
+external class DescriptionStyles2 {
+  val offset: Int
+
+  /**
+   * The style type
+   */
+  val type: DescriptionStyleType
+
+  val length: Int?
+}
+
+/**
+ * The style ranges for the description, as provided by ToValue().
+ */
+external class DescriptionStylesRaw2 {
+  val offset: Int
+
+  val type: Int
+}
+
 external class OmniboxNamespace {
   /**
    * Sets the description and styling for the default suggestion. The default suggestion is the text that is displayed in the first suggestion row underneath the URL bar.

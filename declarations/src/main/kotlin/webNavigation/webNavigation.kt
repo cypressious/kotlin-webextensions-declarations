@@ -2,21 +2,6 @@ package webNavigation
 
 import kotlin.js.Promise
 
-class GetFrameDetails(
-    /**
-     * The ID of the tab in which the frame is.
-     */
-    val tabId: Int,
-    /**
-     * The ID of the process runs the renderer for this tab.
-     */
-    val processId: Int?,
-    /**
-     * The ID of the frame in the given tab.
-     */
-    val frameId: Int
-)
-
 external class GetFrameDetailsResult {
   /**
    * True if the last navigation in this frame was interrupted by an error, i.e. the onErrorOccurred event fired.
@@ -43,11 +28,6 @@ external class GetFrameDetailsResult {
    */
   val parentFrameId: Int
 }
-
-class GetAllFramesDetails(/**
- * The ID of the tab.
- */
-val tabId: Int)
 
 external class GetAllFramesDetailsResult {
   /**
@@ -84,14 +64,44 @@ external class EventUrlFilters {
   val url: Array<events.UrlFilter>
 }
 
+/**
+ * Information about the frame to retrieve information about.
+ */
+external class Details {
+  /**
+   * The ID of the tab in which the frame is.
+   */
+  val tabId: Int
+
+  /**
+   * The ID of the process runs the renderer for this tab.
+   */
+  val processId: Int?
+
+  /**
+   * The ID of the frame in the given tab.
+   */
+  val frameId: Int
+}
+
+/**
+ * Information about the tab to retrieve all frames from.
+ */
+external class Details2 {
+  /**
+   * The ID of the tab.
+   */
+  val tabId: Int
+}
+
 external class WebNavigationNamespace {
   /**
    * Retrieves information about the given frame. A frame refers to an &lt;iframe&gt; or a &lt;frame&gt; of a web page and is identified by a tab ID and a frame ID.
    */
-  fun getFrame(details: GetFrameDetails): Promise<GetFrameDetailsResult?>
+  fun getFrame(details: Details): Promise<GetFrameDetailsResult?>
 
   /**
    * Retrieves information about all frames of a given tab.
    */
-  fun getAllFrames(details: GetAllFramesDetails): Promise<Array<GetAllFramesDetailsResult>?>
+  fun getAllFrames(details: Details2): Promise<Array<GetAllFramesDetailsResult>?>
 }

@@ -2,8 +2,6 @@ package identity
 
 import kotlin.js.Promise
 
-class LaunchWebAuthFlowDetails(val url: String, val interactive: Boolean?)
-
 /**
  * An object encapsulating an OAuth account id.
  */
@@ -14,11 +12,29 @@ external class AccountInfo {
   val id: String
 }
 
+external class Details {
+  val interactive: Boolean?
+
+  val account: AccountInfo
+
+  val scopes: Array<String>?
+}
+
+external class Details2 {
+  val token: String
+}
+
+external class Details3 {
+  val url: String
+
+  val interactive: Boolean?
+}
+
 external class IdentityNamespace {
   /**
    * Starts an auth flow at the specified URL.
    */
-  fun launchWebAuthFlow(details: LaunchWebAuthFlowDetails): Promise<String?>
+  fun launchWebAuthFlow(details: Details3): Promise<String?>
 
   /**
    * Generates a redirect URL to be used in |launchWebAuthFlow|.

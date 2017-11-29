@@ -2,7 +2,7 @@ package de.rakhman.webextensions
 
 data class Namespace(
         val namespace: String,
-        val description: String,
+        val description: String?,
         val types: List<Type>?,
         val properties: Map<String, Parameter>?,
         val functions: List<Function>?,
@@ -10,12 +10,13 @@ data class Namespace(
 )
 
 data class Type(
-        val id: String,
-        val type: String,
+        val id: String?,
+        val type: String?,
         val properties: Map<String, Parameter>?,
-        val description: String?
+        val description: String?,
+        val `$extend`: String?,
+        val choices: List<Any>?
 )
-
 
 data class Function(
         val name: String,
@@ -29,7 +30,7 @@ data class Function(
 
 data class Parameter(
         val type: String?,
-        val name: String,
+        val name: String?,
         val description: String?,
         val optional: Boolean,
         val properties: Map<String, Parameter>?,

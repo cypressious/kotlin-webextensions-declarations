@@ -2,22 +2,34 @@ package extension
 
 import kotlin.js.Promise
 
-class GetViewsFetchProperties(
-    /**
-     * The type of view to get. If omitted, returns all views (including background pages and tabs). Valid values: 'tab', 'popup', 'sidebar'.
-     */
-    val type: ViewType,
-    /**
-     * The window to restrict the search to. If omitted, returns all views.
-     */
-    val windowId: Int?,
-    /**
-     * Find a view according to a tab id. If this field is omitted, returns all views.
-     */
-    val tabId: Int?
-)
-
 typealias ViewType = String
+
+/**
+ * Set for the lifetime of a callback if an ansychronous extension api has resulted in an error. If no error has occured lastError will be <var>undefined</var>.
+ */
+external class LastError {
+  /**
+   * Description of the error that has taken place.
+   */
+  val message: String
+}
+
+external class FetchProperties {
+  /**
+   * The type of view to get. If omitted, returns all views (including background pages and tabs). Valid values: 'tab', 'popup', 'sidebar'.
+   */
+  val type: ViewType
+
+  /**
+   * The window to restrict the search to. If omitted, returns all views.
+   */
+  val windowId: Int?
+
+  /**
+   * Find a view according to a tab id. If this field is omitted, returns all views.
+   */
+  val tabId: Int?
+}
 
 external class ExtensionNamespace {
   /**
@@ -28,7 +40,7 @@ external class ExtensionNamespace {
   /**
    * Returns an array of the JavaScript 'window' objects for each of the pages running inside the current extension.
    */
-  fun getViews(fetchProperties: GetViewsFetchProperties?)
+  fun getViews(fetchProperties: FetchProperties)
 
   /**
    * Returns the JavaScript 'window' object for the background page running inside the current extension. Returns null if the extension has no background page.

@@ -1,5 +1,6 @@
 package test
 
+import kotlin.Any
 import kotlin.js.Promise
 
 typealias ExpectedError = Any

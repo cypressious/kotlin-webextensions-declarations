@@ -2,11 +2,6 @@ package topSites
 
 import kotlin.js.Promise
 
-class GetOptions(/**
- * Which providers to get top sites from. Possible values are "places" and "activityStream".
- */
-val providers: Array<String>?)
-
 /**
  * An object encapsulating a most visited URL, such as the URLs on the new tab page.
  */
@@ -22,9 +17,16 @@ external class MostVisitedURL {
   val title: String?
 }
 
+external class Options {
+  /**
+   * Which providers to get top sites from. Possible values are "places" and "activityStream".
+   */
+  val providers: Array<String>?
+}
+
 external class TopSitesNamespace {
   /**
    * Gets a list of top sites.
    */
-  fun get(options: GetOptions?): Promise<Array<MostVisitedURL>>
+  fun get(options: Options): Promise<Array<MostVisitedURL>>
 }

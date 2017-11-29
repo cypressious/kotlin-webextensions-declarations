@@ -17,10 +17,6 @@ class SearchQuery(
     val title: String?
 )
 
-class MoveDestination(val parentId: String?, val index: Int?)
-
-class UpdateChanges(val title: String?, val url: String?)
-
 typealias BookmarkTreeNodeUnmodifiable = String
 
 typealias BookmarkTreeNodeType = String
@@ -101,6 +97,18 @@ external class CreateDetails {
   val type: BookmarkTreeNodeType
 }
 
+external class Destination {
+  val parentId: String?
+
+  val index: Int?
+}
+
+external class Changes {
+  val title: String?
+
+  val url: String?
+}
+
 external class BookmarksNamespace {
   /**
    * Retrieves the specified BookmarkTreeNode(s).
@@ -150,12 +158,12 @@ external class BookmarksNamespace {
   /**
    * Moves the specified BookmarkTreeNode to the provided location.
    */
-  fun move(id: String, destination: MoveDestination): Promise<BookmarkTreeNode>
+  fun move(id: String, destination: Destination): Promise<BookmarkTreeNode>
 
   /**
    * Updates the properties of a bookmark or folder. Specify only the properties that you want to change; unspecified properties will be left unchanged.  <b>Note:</b> Currently, only 'title' and 'url' are supported.
    */
-  fun update(id: String, changes: UpdateChanges): Promise<BookmarkTreeNode>
+  fun update(id: String, changes: Changes): Promise<BookmarkTreeNode>
 
   /**
    * Removes a bookmark or an empty bookmark folder.

@@ -17,21 +17,6 @@ external class SettingsResult {
   val dataRemovalPermitted: DataTypeSet
 }
 
-class OriginTypes(
-    /**
-     * Normal websites.
-     */
-    val unprotectedWeb: Boolean?,
-    /**
-     * Websites that have been installed as hosted applications (be careful!).
-     */
-    val protectedWeb: Boolean?,
-    /**
-     * Extensions and packaged applications a user has installed (be _really_ careful!).
-     */
-    val extension: Boolean?
-)
-
 /**
  * Options that determine exactly what data will be removed.
  */
@@ -49,7 +34,7 @@ external class RemovalOptions {
   /**
    * An object whose properties specify which origin types ought to be cleared. If this object isn't specified, it defaults to clearing only "unprotected" origins. Please ensure that you <em>really</em> want to remove application data before adding 'protectedWeb' or 'extensions'.
    */
-  val originTypes: OriginTypes?
+  val originTypes: OriginTypes
 }
 
 /**
@@ -110,6 +95,26 @@ external class DataTypeSet {
    * Service Workers.
    */
   val serviceWorkers: Boolean?
+}
+
+/**
+ * An object whose properties specify which origin types ought to be cleared. If this object isn't specified, it defaults to clearing only "unprotected" origins. Please ensure that you <em>really</em> want to remove application data before adding 'protectedWeb' or 'extensions'.
+ */
+external class OriginTypes {
+  /**
+   * Normal websites.
+   */
+  val unprotectedWeb: Boolean?
+
+  /**
+   * Websites that have been installed as hosted applications (be careful!).
+   */
+  val protectedWeb: Boolean?
+
+  /**
+   * Extensions and packaged applications a user has installed (be _really_ careful!).
+   */
+  val extension: Boolean?
 }
 
 external class BrowsingDataNamespace {

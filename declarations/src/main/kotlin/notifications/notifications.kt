@@ -145,6 +145,18 @@ external class UpdateNotificationOptions {
   val isClickable: Boolean?
 }
 
+external class Buttons {
+  val title: String
+
+  val iconUrl: String?
+}
+
+external class Buttons2 {
+  val title: String
+
+  val iconUrl: String?
+}
+
 external class NotificationsNamespace {
   /**
    * Creates and displays a notification.

@@ -3,51 +3,6 @@ package downloads
 import kotlin.Any
 import kotlin.js.Promise
 
-class Headers(/**
- * Name of the HTTP header.
- */
-val name: String, /**
- * Value of the HTTP header.
- */
-val value: String)
-
-class DownloadOptions(
-    /**
-     * The URL to download.
-     */
-    val url: String,
-    /**
-     * A file path relative to the Downloads directory to contain the downloaded file.
-     */
-    val filename: String?,
-    /**
-     * Whether to associate the download with a private browsing session.
-     */
-    val incognito: Boolean?,
-    val conflictAction: FilenameConflictAction,
-    /**
-     * Use a file-chooser to allow the user to select a filename. If the option is not specified, the file chooser will be shown only if the Firefox "Always ask you where to save files" option is enabled (i.e. the pref <code>browser.download.useDownloadDir</code> is set to <code>false</code>).
-     */
-    val saveAs: Boolean?,
-    /**
-     * The HTTP method to use if the URL uses the HTTP[S] protocol.
-     */
-    val method: String?,
-    /**
-     * Extra HTTP headers to send with the request if the URL uses the HTTP[s] protocol. Each header is represented as a dictionary containing the keys <code>name</code> and either <code>value</code> or <code>binaryValue</code>, restricted to those allowed by XMLHttpRequest.
-     */
-    val headers: Array<Headers>?,
-    /**
-     * Post body.
-     */
-    val body: String?
-)
-
-class GetFileIconOptions(/**
- * The size of the icon.  The returned icon will be square with dimensions size * size pixels.  The default size for the icon is 32x32 pixels.
- */
-val size: Int?)
-
 typealias FilenameConflictAction = String
 
 typealias InterruptReason = String
@@ -278,11 +233,68 @@ external class DownloadQuery {
   val exists: Boolean?
 }
 
+class Headers(/**
+ * Name of the HTTP header.
+ */
+val name: String, /**
+ * Value of the HTTP header.
+ */
+val value: String)
+
+/**
+ * What to download and how.
+ */
+external class Options {
+  /**
+   * The URL to download.
+   */
+  val url: String
+
+  /**
+   * A file path relative to the Downloads directory to contain the downloaded file.
+   */
+  val filename: String?
+
+  /**
+   * Whether to associate the download with a private browsing session.
+   */
+  val incognito: Boolean?
+
+  val conflictAction: FilenameConflictAction
+
+  /**
+   * Use a file-chooser to allow the user to select a filename. If the option is not specified, the file chooser will be shown only if the Firefox "Always ask you where to save files" option is enabled (i.e. the pref <code>browser.download.useDownloadDir</code> is set to <code>false</code>).
+   */
+  val saveAs: Boolean?
+
+  /**
+   * The HTTP method to use if the URL uses the HTTP[S] protocol.
+   */
+  val method: String?
+
+  /**
+   * Extra HTTP headers to send with the request if the URL uses the HTTP[s] protocol. Each header is represented as a dictionary containing the keys <code>name</code> and either <code>value</code> or <code>binaryValue</code>, restricted to those allowed by XMLHttpRequest.
+   */
+  val headers: Array<Headers>?
+
+  /**
+   * Post body.
+   */
+  val body: String?
+}
+
+external class Options2 {
+  /**
+   * The size of the icon.  The returned icon will be square with dimensions size * size pixels.  The default size for the icon is 32x32 pixels.
+   */
+  val size: Int?
+}
+
 external class DownloadsNamespace {
   /**
    * Download a URL. If the URL uses the HTTP[S] protocol, then the request will include all cookies currently set for its hostname. If both <code>filename</code> and <code>saveAs</code> are specified, then the Save As dialog will be displayed, pre-populated with the specified <code>filename</code>. If the download started successfully, <code>callback</code> will be called with the new <a href='#type-DownloadItem'>DownloadItem</a>'s <code>downloadId</code>. If there was an error starting the download, then <code>callback</code> will be called with <code>downloadId=undefined</code> and <a href='extension.html#property-lastError'>chrome.extension.lastError</a> will contain a descriptive string. The error strings are not guaranteed to remain backwards compatible between releases. You must not parse it.
    */
-  fun download(options: DownloadOptions): Promise<Int>
+  fun download(options: Options): Promise<Int>
 
   /**
    * Find <a href='#type-DownloadItem'>DownloadItems</a>. Set <code>query</code> to the empty object to get all <a href='#type-DownloadItem'>DownloadItems</a>. To get a specific <a href='#type-DownloadItem'>DownloadItem</a>, set only the <code>id</code> field.
@@ -307,7 +319,7 @@ external class DownloadsNamespace {
   /**
    * Retrieve an icon for the specified download. For new downloads, file icons are available after the <a href='#event-onCreated'>onCreated</a> event has been received. The image returned by this function while a download is in progress may be different from the image returned after the download is complete. Icon retrieval is done by querying the underlying operating system or toolkit depending on the platform. The icon that is returned will therefore depend on a number of factors including state of the download, platform, registered file types and visual theme. If a file icon cannot be determined, <a href='extension.html#property-lastError'>chrome.extension.lastError</a> will contain an error message.
    */
-  fun getFileIcon(downloadId: Int, options: GetFileIconOptions?): Promise<String?>
+  fun getFileIcon(downloadId: Int, options: Options2): Promise<String?>
 
   /**
    * Open the downloaded file.

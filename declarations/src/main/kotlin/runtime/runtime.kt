@@ -1,24 +1,10 @@
 package runtime
 
 import events.Event
-import kotlin.Any
-import kotlin.js.Promise
 import tabs.Tab
+import kotlin.js.Promise
 
 typealias GetBackgroundPageBackgroundPage = Any
-
-class ConnectConnectInfo(/**
- * Will be passed into onConnect for processes that are listening for the connection event.
- */
-val name: String?, /**
- * Whether the TLS channel ID will be passed into onConnectExternal for processes that are listening for the connection event.
- */
-val includeTlsChannelId: Boolean?)
-
-class SendMessageOptions(/**
- * If true, the message will be directed to the extension's proxy sandbox.
- */
-val toProxyScript: Boolean?)
 
 /**
  * An object which allows two way communication with other pages.
@@ -115,6 +101,35 @@ typealias OnInstalledReason = String
 
 typealias OnRestartRequiredReason = String
 
+/**
+ * This will be defined during an API method callback if there was an error
+ */
+external class LastError {
+  /**
+   * Details about the error which occurred.
+   */
+  val message: String?
+}
+
+external class ConnectInfo {
+  /**
+   * Will be passed into onConnect for processes that are listening for the connection event.
+   */
+  val name: String?
+
+  /**
+   * Whether the TLS channel ID will be passed into onConnectExternal for processes that are listening for the connection event.
+   */
+  val includeTlsChannelId: Boolean?
+}
+
+external class Options {
+  /**
+   * If true, the message will be directed to the extension's proxy sandbox.
+   */
+  val toProxyScript: Boolean?
+}
+
 external class RuntimeNamespace {
   /**
    * Retrieves the JavaScript 'window' object for the background page running inside the current extension/app. If the background page is an event page, the system will ensure it is loaded before calling the callback. If there is no background page, an error is set.
@@ -149,7 +164,7 @@ external class RuntimeNamespace {
   /**
    * Attempts to connect to connect listeners within an extension/app (such as the background page), or other extensions/apps. This is useful for content scripts connecting to their extension processes, inter-app/extension communication, and $(topic:manifest/externally_connectable)[web messaging]. Note that this does not connect to any listeners in a content script. Extensions may connect to content scripts embedded in tabs via $(ref:tabs.connect).
    */
-  fun connect(extensionId: String?, connectInfo: ConnectConnectInfo?)
+  fun connect(extensionId: String?, connectInfo: ConnectInfo)
 
   /**
    * Connects to a native application in the host machine.
@@ -162,7 +177,7 @@ external class RuntimeNamespace {
   fun sendMessage(
       extensionId: String?,
       message: Any,
-      options: SendMessageOptions?
+      options: Options
   ): Promise<Any>
 
   /**

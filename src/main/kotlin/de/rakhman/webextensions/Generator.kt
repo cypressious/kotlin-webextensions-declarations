@@ -21,10 +21,12 @@ class Generator(val dir: File) {
         FileSpec.builder("", "browser")
                 .addType(TypeSpec.expectClassBuilder("Browser")
                         .addProperties(list
-                                .filter { "." !in it.namespace }
+                                .map { it.namespace }
+                                .filter { "." !in it }
+                                .distinct()
                                 .map {
                                     PropertySpec
-                                            .builder(it.namespace, ClassName(it.namespace, it.namespace.nameSpaceName()))
+                                            .builder(it, ClassName(it, it.nameSpaceName()))
                                             .build()
                                 })
                         .build())
@@ -34,17 +36,17 @@ class Generator(val dir: File) {
     }
 
     private fun generateMainNamespace(group: Map.Entry<String, List<Namespace>>) {
-        val main = group.value.single { it.namespace == group.key }
+        val mains = group.value.filter { it.namespace == group.key }
 
         val fileBuilder = FileSpec.builder(group.key, group.key)
 
-        val mainTypeBuilder = generateNamespace(main, fileBuilder)
+        val mainTypeBuilder = generateNamespace(mains, fileBuilder)
 
         group.value.filter { it.namespace != group.key }.forEach {
             val name = it.namespace.substringAfter(".")
             mainTypeBuilder.addProperty(PropertySpec.builder(name, ClassName.bestGuess(name.nameSpaceName())).build())
 
-            fileBuilder.addType(generateNamespace(it, fileBuilder).build())
+            fileBuilder.addType(generateNamespace(listOf(it), fileBuilder).build())
         }
 
         fileBuilder.addType(mainTypeBuilder.build())
@@ -54,7 +56,9 @@ class Generator(val dir: File) {
                 .writeTo(dir)
     }
 
-    private fun generateNamespace(ns: Namespace, fileBuilder: FileSpec.Builder): TypeSpec.Builder {
+    private fun generateNamespace(namespaceParts: List<Namespace>, fileBuilder: FileSpec.Builder): TypeSpec.Builder {
+        val ns = merge(namespaceParts)
+
         val name = ns.namespace.substringAfter(".").nameSpaceName()
 
         val functions = ns.functions?.filter { !it.unsupported } ?: emptyList()
@@ -72,11 +76,11 @@ class Generator(val dir: File) {
 
 
     private fun generateType(fileBuilder: FileSpec.Builder, type: Type) {
-        val name = type.id
+        val name = type.id!!
 
         if (type.type in primitiveTypes) {
             fileBuilder.addTypeAlias(
-                    TypeAliasSpec.builder(name, ClassName.bestGuess(type.type.capitalize())).build())
+                    TypeAliasSpec.builder(name, ClassName.bestGuess(type.type!!.capitalize())).build())
             return
         }
 
@@ -195,7 +199,7 @@ class Generator(val dir: File) {
             is String -> {
                 val asyncParam = f.parameters!!.first { it.name == f.async }.parameters?.firstOrNull()
                 asyncParam?.let {
-                    var name = it.name
+                    var name = it.name!!
                     if (f.parameters.any { it.name == name }) name += "Result"
 
                     parameterTypeName(ParameterContext(name, it, f.name, fileBuilder, true))
@@ -228,9 +232,9 @@ private fun List<Parameter>.getResolvedChoices(): List<List<ResolvedChoice>> {
     val param = this[0]
 
     val heads = if (param.choices != null) {
-        param.choices.map { ResolvedChoice(param.name, it) }
+        param.choices.map { ResolvedChoice(param.name!!, it) }
     } else {
-        listOf(ResolvedChoice(param.name, param))
+        listOf(ResolvedChoice(param.name!!, param))
     }
 
     if (size == 1) return heads.map { listOf(it) }

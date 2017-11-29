@@ -2,41 +2,6 @@ package contextualIdentities
 
 import kotlin.js.Promise
 
-class QueryDetails(/**
- * Filters the contextual identity by name.
- */
-val name: String?)
-
-class CreateDetails(
-    /**
-     * The name of the contextual identity.
-     */
-    val name: String,
-    /**
-     * The color of the contextual identity.
-     */
-    val color: String,
-    /**
-     * The icon of the contextual identity.
-     */
-    val icon: String
-)
-
-class UpdateDetails(
-    /**
-     * The name of the contextual identity.
-     */
-    val name: String?,
-    /**
-     * The color of the contextual identity.
-     */
-    val color: String?,
-    /**
-     * The icon of the contextual identity.
-     */
-    val icon: String?
-)
-
 /**
  * Represents information about a contextual identity.
  */
@@ -72,6 +37,56 @@ external class ContextualIdentity {
   val cookieStoreId: String
 }
 
+/**
+ * Information to filter the contextual identities being retrieved.
+ */
+external class Details {
+  /**
+   * Filters the contextual identity by name.
+   */
+  val name: String?
+}
+
+/**
+ * Details about the contextual identity being created.
+ */
+external class Details2 {
+  /**
+   * The name of the contextual identity.
+   */
+  val name: String
+
+  /**
+   * The color of the contextual identity.
+   */
+  val color: String
+
+  /**
+   * The icon of the contextual identity.
+   */
+  val icon: String
+}
+
+/**
+ * Details about the contextual identity being created.
+ */
+external class Details3 {
+  /**
+   * The name of the contextual identity.
+   */
+  val name: String?
+
+  /**
+   * The color of the contextual identity.
+   */
+  val color: String?
+
+  /**
+   * The icon of the contextual identity.
+   */
+  val icon: String?
+}
+
 external class ContextualIdentitiesNamespace {
   /**
    * Retrieves information about a single contextual identity.
@@ -81,17 +96,17 @@ external class ContextualIdentitiesNamespace {
   /**
    * Retrieves all contextual identities
    */
-  fun query(details: QueryDetails): Promise<Any>
+  fun query(details: Details): Promise<Any>
 
   /**
    * Creates a contextual identity with the given data.
    */
-  fun create(details: CreateDetails): Promise<Any>
+  fun create(details: Details2): Promise<Any>
 
   /**
    * Updates a contextual identity with the given data.
    */
-  fun update(cookieStoreId: String, details: UpdateDetails): Promise<Any>
+  fun update(cookieStoreId: String, details: Details3): Promise<Any>
 
   /**
    * Deletes a contetual identity by its cookie Store ID.

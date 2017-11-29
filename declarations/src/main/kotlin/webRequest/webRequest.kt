@@ -42,8 +42,6 @@ external class RequestFilter {
 
 typealias HttpHeaders = Any
 
-class AuthCredentials(val username: String, val password: String)
-
 /**
  * Returns value for event handlers that have the 'blocking' extraInfoSpec applied. Allows the event handler to modify network requests.
  */
@@ -71,7 +69,7 @@ external class BlockingResponse {
   /**
    * Only used as a response to the onAuthRequired event. If set, the request is made using the supplied credentials.
    */
-  val authCredentials: AuthCredentials?
+  val authCredentials: AuthCredentials
 }
 
 /**
@@ -87,6 +85,15 @@ external class UploadData {
    * A string with the file's path and name.
    */
   val file: String?
+}
+
+/**
+ * Only used as a response to the onAuthRequired event. If set, the request is made using the supplied credentials.
+ */
+external class AuthCredentials {
+  val username: String
+
+  val password: String
 }
 
 external class WebRequestNamespace {

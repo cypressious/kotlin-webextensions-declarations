@@ -38,7 +38,6 @@ fun main(args: Array<String>) {
                     gson.fromJson<List<Namespace>>(reader, type).asSequence()
                 }
             }
-            .filter { it.namespace != "manifest" }
             .toList()
 
     val dir = File(arguments.outputPath).apply {

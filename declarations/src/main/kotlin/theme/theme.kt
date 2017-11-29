@@ -4,8 +4,6 @@ import kotlin.Any
 import kotlin.js.Promise
 import manifest.ThemeType
 
-typealias Theme = Any
-
 /**
  * Info provided in the onUpdated listener.
  */
@@ -20,6 +18,8 @@ external class ThemeUpdateInfo {
    */
   val windowId: Int?
 }
+
+typealias Theme = Any
 
 external class ThemeNamespace {
   /**

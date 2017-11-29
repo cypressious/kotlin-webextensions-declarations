@@ -21,6 +21,7 @@ import i18n.I18nNamespace
 import identity.IdentityNamespace
 import idle.IdleNamespace
 import management.ManagementNamespace
+import manifest.ManifestNamespace
 import menus.MenusNamespace
 import menusInternal.MenusInternalNamespace
 import notifications.NotificationsNamespace
@@ -45,6 +46,8 @@ import windows.WindowsNamespace
 
 external class Browser {
   val alarms: AlarmsNamespace
+
+  val manifest: ManifestNamespace
 
   val bookmarks: BookmarksNamespace
 
