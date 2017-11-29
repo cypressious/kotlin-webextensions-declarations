@@ -8,4 +8,4 @@ typealias LevelOfControl = String
 
 typealias Setting = Any
 
-external class Types
+external class TypesNamespace

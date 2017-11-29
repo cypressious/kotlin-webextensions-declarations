@@ -72,7 +72,7 @@ external class ContextualIdentity {
   val cookieStoreId: String
 }
 
-external class ContextualIdentities {
+external class ContextualIdentitiesNamespace {
   /**
    * Retrieves information about a single contextual identity.
    */

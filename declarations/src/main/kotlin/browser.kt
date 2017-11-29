@@ -1,136 +1,136 @@
-import alarms.Alarms
-import bookmarks.Bookmarks
-import browserAction.BrowserAction
-import browserSettings.BrowserSettings
-import browsingData.BrowsingData
-import clipboard.Clipboard
-import commands.Commands
-import contentScripts.ContentScripts
-import contextMenus.ContextMenus
-import contextualIdentities.ContextualIdentities
-import cookies.Cookies
-import devtools.Devtools
-import downloads.Downloads
-import events.Events
-import extension.Extension
-import extensionTypes.ExtensionTypes
-import find.Find
-import geckoProfiler.GeckoProfiler
-import history.History
-import i18n.I18n
-import identity.Identity
-import idle.Idle
-import management.Management
-import menus.Menus
-import menusInternal.MenusInternal
-import notifications.Notifications
-import omnibox.Omnibox
-import pageAction.PageAction
-import permissions.Permissions
-import pkcs11.Pkcs11
-import privacy.Privacy
-import proxy.Proxy
-import runtime.Runtime
-import sessions.Sessions
-import sidebarAction.SidebarAction
-import storage.Storage
-import tabs.Tabs
-import test.Test
-import theme.Theme
-import topSites.TopSites
-import types.Types
-import webNavigation.WebNavigation
-import webRequest.WebRequest
-import windows.Windows
+import alarms.AlarmsNamespace
+import bookmarks.BookmarksNamespace
+import browserAction.BrowserActionNamespace
+import browserSettings.BrowserSettingsNamespace
+import browsingData.BrowsingDataNamespace
+import clipboard.ClipboardNamespace
+import commands.CommandsNamespace
+import contentScripts.ContentScriptsNamespace
+import contextMenus.ContextMenusNamespace
+import contextualIdentities.ContextualIdentitiesNamespace
+import cookies.CookiesNamespace
+import devtools.DevtoolsNamespace
+import downloads.DownloadsNamespace
+import events.EventsNamespace
+import extension.ExtensionNamespace
+import extensionTypes.ExtensionTypesNamespace
+import find.FindNamespace
+import geckoProfiler.GeckoProfilerNamespace
+import history.HistoryNamespace
+import i18n.I18nNamespace
+import identity.IdentityNamespace
+import idle.IdleNamespace
+import management.ManagementNamespace
+import menus.MenusNamespace
+import menusInternal.MenusInternalNamespace
+import notifications.NotificationsNamespace
+import omnibox.OmniboxNamespace
+import pageAction.PageActionNamespace
+import permissions.PermissionsNamespace
+import pkcs11.Pkcs11Namespace
+import privacy.PrivacyNamespace
+import proxy.ProxyNamespace
+import runtime.RuntimeNamespace
+import sessions.SessionsNamespace
+import sidebarAction.SidebarActionNamespace
+import storage.StorageNamespace
+import tabs.TabsNamespace
+import test.TestNamespace
+import theme.ThemeNamespace
+import topSites.TopSitesNamespace
+import types.TypesNamespace
+import webNavigation.WebNavigationNamespace
+import webRequest.WebRequestNamespace
+import windows.WindowsNamespace
 
 external class Browser {
-  val alarms: Alarms
+  val alarms: AlarmsNamespace
 
-  val bookmarks: Bookmarks
+  val bookmarks: BookmarksNamespace
 
-  val browserAction: BrowserAction
+  val browserAction: BrowserActionNamespace
 
-  val browserSettings: BrowserSettings
+  val browserSettings: BrowserSettingsNamespace
 
-  val browsingData: BrowsingData
+  val browsingData: BrowsingDataNamespace
 
-  val clipboard: Clipboard
+  val clipboard: ClipboardNamespace
 
-  val commands: Commands
+  val commands: CommandsNamespace
 
-  val contentScripts: ContentScripts
+  val contentScripts: ContentScriptsNamespace
 
-  val contextualIdentities: ContextualIdentities
+  val contextualIdentities: ContextualIdentitiesNamespace
 
-  val cookies: Cookies
+  val cookies: CookiesNamespace
 
-  val devtools: Devtools
+  val devtools: DevtoolsNamespace
 
-  val downloads: Downloads
+  val downloads: DownloadsNamespace
 
-  val events: Events
+  val events: EventsNamespace
 
-  val extension: Extension
+  val extension: ExtensionNamespace
 
-  val extensionTypes: ExtensionTypes
+  val extensionTypes: ExtensionTypesNamespace
 
-  val find: Find
+  val find: FindNamespace
 
-  val geckoProfiler: GeckoProfiler
+  val geckoProfiler: GeckoProfilerNamespace
 
-  val history: History
+  val history: HistoryNamespace
 
-  val i18n: I18n
+  val i18n: I18nNamespace
 
-  val identity: Identity
+  val identity: IdentityNamespace
 
-  val idle: Idle
+  val idle: IdleNamespace
 
-  val management: Management
+  val management: ManagementNamespace
 
-  val contextMenus: ContextMenus
+  val contextMenus: ContextMenusNamespace
 
-  val menus: Menus
+  val menus: MenusNamespace
 
-  val menusInternal: MenusInternal
+  val menusInternal: MenusInternalNamespace
 
-  val notifications: Notifications
+  val notifications: NotificationsNamespace
 
-  val omnibox: Omnibox
+  val omnibox: OmniboxNamespace
 
-  val pageAction: PageAction
+  val pageAction: PageActionNamespace
 
-  val permissions: Permissions
+  val permissions: PermissionsNamespace
 
-  val pkcs11: Pkcs11
+  val pkcs11: Pkcs11Namespace
 
-  val privacy: Privacy
+  val privacy: PrivacyNamespace
 
-  val proxy: Proxy
+  val proxy: ProxyNamespace
 
-  val runtime: Runtime
+  val runtime: RuntimeNamespace
 
-  val sessions: Sessions
+  val sessions: SessionsNamespace
 
-  val sidebarAction: SidebarAction
+  val sidebarAction: SidebarActionNamespace
 
-  val storage: Storage
+  val storage: StorageNamespace
 
-  val tabs: Tabs
+  val tabs: TabsNamespace
 
-  val test: Test
+  val test: TestNamespace
 
-  val theme: Theme
+  val theme: ThemeNamespace
 
-  val topSites: TopSites
+  val topSites: TopSitesNamespace
 
-  val types: Types
+  val types: TypesNamespace
 
-  val webNavigation: WebNavigation
+  val webNavigation: WebNavigationNamespace
 
-  val webRequest: WebRequest
+  val webRequest: WebRequestNamespace
 
-  val windows: Windows
+  val windows: WindowsNamespace
 }
 
 external val browser: Browser

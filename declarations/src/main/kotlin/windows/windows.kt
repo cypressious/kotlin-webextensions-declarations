@@ -189,7 +189,7 @@ external class Window {
 
 typealias CreateType = String
 
-external class Windows {
+external class WindowsNamespace {
   /**
    * Gets details about a window.
    */

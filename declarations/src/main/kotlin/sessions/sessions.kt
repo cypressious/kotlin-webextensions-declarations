@@ -42,7 +42,7 @@ external class Device {
   val sessions: Array<Session>
 }
 
-external class Sessions {
+external class SessionsNamespace {
   /**
    * Forget a recently closed tab.
    */

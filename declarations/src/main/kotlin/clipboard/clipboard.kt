@@ -5,7 +5,7 @@ import kotlin.js.Promise
 
 typealias SetImageDataImageData = Any
 
-external class Clipboard {
+external class ClipboardNamespace {
   /**
    * Copy an image to the clipboard. The image is re-encoded before it is written to the clipboard. If the image is invalid, the clipboard is not modified.
    */

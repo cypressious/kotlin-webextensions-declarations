@@ -40,7 +40,7 @@ class HighlightResultsParams(
     val noScroll: Boolean?
 )
 
-external class Find {
+external class FindNamespace {
   /**
    * Search for text in document and store found ranges in array, in document order.
    */

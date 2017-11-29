@@ -3,7 +3,7 @@ package proxy
 import kotlin.Deprecated
 import kotlin.js.Promise
 
-external class Proxy {
+external class ProxyNamespace {
   /**
    * Registers the proxy script for the extension.
    */

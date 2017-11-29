@@ -14,7 +14,7 @@ external class AccountInfo {
   val id: String
 }
 
-external class Identity {
+external class IdentityNamespace {
   /**
    * Starts an auth flow at the specified URL.
    */

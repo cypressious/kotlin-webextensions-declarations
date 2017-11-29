@@ -46,7 +46,7 @@ val tabId: Int)
 
 typealias ImageDataType = Any
 
-external class PageAction {
+external class PageActionNamespace {
   /**
    * Shows the page action. The page action is shown whenever the tab is selected.
    */

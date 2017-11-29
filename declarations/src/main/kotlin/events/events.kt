@@ -139,4 +139,4 @@ external class UrlFilter {
   val ports: Array<Any>?
 }
 
-external class Events
+external class EventsNamespace

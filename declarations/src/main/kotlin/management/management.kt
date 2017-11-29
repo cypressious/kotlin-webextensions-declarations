@@ -122,7 +122,7 @@ external class ExtensionInfo {
   val installType: ExtensionInstallType
 }
 
-external class Management {
+external class ManagementNamespace {
   /**
    * Returns a list of information about installed extensions.
    */

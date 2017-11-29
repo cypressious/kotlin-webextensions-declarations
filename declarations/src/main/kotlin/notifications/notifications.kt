@@ -145,7 +145,7 @@ external class UpdateNotificationOptions {
   val isClickable: Boolean?
 }
 
-external class Notifications {
+external class NotificationsNamespace {
   /**
    * Creates and displays a notification.
    */

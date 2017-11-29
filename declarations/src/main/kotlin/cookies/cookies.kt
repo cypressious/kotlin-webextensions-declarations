@@ -196,7 +196,7 @@ external class CookieStore {
 
 typealias OnChangedCause = String
 
-external class Cookies {
+external class CookiesNamespace {
   /**
    * Retrieves information about a single cookie. If more than one cookie of the same name exists for the given URL, the one with the longest path will be returned. For cookies with the same path length, the cookie with the earliest creation time will be returned.
    */

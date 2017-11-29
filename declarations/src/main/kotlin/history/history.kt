@@ -126,7 +126,7 @@ external class VisitItem {
   val transition: TransitionType
 }
 
-external class History {
+external class HistoryNamespace {
   /**
    * Searches the history for the last visit time of each page matching the query.
    */

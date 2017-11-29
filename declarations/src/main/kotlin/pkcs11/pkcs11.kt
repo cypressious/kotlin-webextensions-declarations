@@ -2,7 +2,7 @@ package pkcs11
 
 import kotlin.js.Promise
 
-external class Pkcs11 {
+external class Pkcs11Namespace {
   /**
    * checks whether a PKCS#11 module, given by name, is installed
    */

@@ -60,4 +60,4 @@ external class OnClickData {
   val checked: Boolean?
 }
 
-external class MenusInternal
+external class MenusInternalNamespace

@@ -19,7 +19,7 @@ external class Command {
   val shortcut: String?
 }
 
-external class Commands {
+external class CommandsNamespace {
   /**
    * Returns all the registered extension commands for this extension and their shortcut (if active).
    */

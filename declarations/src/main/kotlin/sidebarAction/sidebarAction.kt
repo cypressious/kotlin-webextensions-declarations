@@ -46,7 +46,7 @@ val tabId: Int?)
 
 typealias ImageDataType = Any
 
-external class SidebarAction {
+external class SidebarActionNamespace {
   /**
    * Sets the title of the sidebar action. This shows up in the tooltip.
    */

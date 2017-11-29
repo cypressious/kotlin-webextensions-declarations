@@ -4,7 +4,7 @@ import kotlin.js.Promise
 
 typealias IdleState = String
 
-external class Idle {
+external class IdleNamespace {
   /**
    * Returns "idle" if the user has not generated any input for a specified number of seconds, or "active" otherwise.
    */

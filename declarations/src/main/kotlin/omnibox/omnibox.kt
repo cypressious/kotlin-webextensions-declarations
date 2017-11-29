@@ -29,7 +29,7 @@ external class DefaultSuggestResult {
   val description: String
 }
 
-external class Omnibox {
+external class OmniboxNamespace {
   /**
    * Sets the description and styling for the default suggestion. The default suggestion is the text that is displayed in the first suggestion row underneath the URL bar.
    */

@@ -21,7 +21,7 @@ external class DetectLanguageResult {
 
 typealias LanguageCode = String
 
-external class I18n {
+external class I18nNamespace {
   /**
    * Gets the accept-languages of the browser. This is different from the locale used by the browser; to get the locale, use $(ref:i18n.getUILanguage).
    */

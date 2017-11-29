@@ -2,18 +2,18 @@ package privacy
 
 typealias IPHandlingPolicy = String
 
-external class Network
+external class NetworkNamespace
 
-external class Services
+external class ServicesNamespace
 
 typealias TrackingProtectionModeOption = String
 
-external class Websites
+external class WebsitesNamespace
 
-external class Privacy {
-  val network: Network
+external class PrivacyNamespace {
+  val network: NetworkNamespace
 
-  val services: Services
+  val services: ServicesNamespace
 
-  val websites: Websites
+  val websites: WebsitesNamespace
 }

@@ -112,7 +112,7 @@ external class DataTypeSet {
   val serviceWorkers: Boolean?
 }
 
-external class BrowsingData {
+external class BrowsingDataNamespace {
   /**
    * Reports which types of data are currently selected in the 'Clear browsing data' settings UI.  Note: some of the data types included in this API are not available in the settings UI, and some UI settings control more than one data type listed here.
    */

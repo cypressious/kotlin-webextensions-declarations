@@ -23,7 +23,7 @@ class StartSettings(
 
 typealias ProfilerFeature = String
 
-external class GeckoProfiler {
+external class GeckoProfilerNamespace {
   /**
    * Starts the profiler with the specified settings.
    */

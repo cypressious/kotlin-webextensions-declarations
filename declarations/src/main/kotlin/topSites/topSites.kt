@@ -22,7 +22,7 @@ external class MostVisitedURL {
   val title: String?
 }
 
-external class TopSites {
+external class TopSitesNamespace {
   /**
    * Gets a list of top sites.
    */

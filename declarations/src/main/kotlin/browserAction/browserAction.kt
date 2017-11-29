@@ -74,7 +74,7 @@ typealias ColorArray = Any
 
 typealias ImageDataType = Any
 
-external class BrowserAction {
+external class BrowserActionNamespace {
   /**
    * Sets the title of the browser action. This shows up in the tooltip.
    */

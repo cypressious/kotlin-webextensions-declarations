@@ -65,4 +65,4 @@ external class InjectDetails {
 
 typealias Date = Any
 
-external class ExtensionTypes
+external class ExtensionTypesNamespace

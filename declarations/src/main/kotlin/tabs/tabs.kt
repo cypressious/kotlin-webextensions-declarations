@@ -416,7 +416,7 @@ typealias TabStatus = String
 
 typealias WindowType = String
 
-external class Tabs {
+external class TabsNamespace {
   /**
    * Retrieves details about the specified tab.
    */

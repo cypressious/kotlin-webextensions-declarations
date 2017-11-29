@@ -24,7 +24,7 @@ class Generator(val dir: File) {
                                 .filter { "." !in it.namespace }
                                 .map {
                                     PropertySpec
-                                            .builder(it.namespace, ClassName(it.namespace, it.namespace.capitalize()))
+                                            .builder(it.namespace, ClassName(it.namespace, it.namespace.nameSpaceName()))
                                             .build()
                                 })
                         .build())
@@ -42,7 +42,7 @@ class Generator(val dir: File) {
 
         group.value.filter { it.namespace != group.key }.forEach {
             val name = it.namespace.substringAfter(".")
-            mainTypeBuilder.addProperty(PropertySpec.builder(name, ClassName.bestGuess(name.capitalize())).build())
+            mainTypeBuilder.addProperty(PropertySpec.builder(name, ClassName.bestGuess(name.nameSpaceName())).build())
 
             fileBuilder.addType(generateNamespace(it, fileBuilder).build())
         }
@@ -55,7 +55,7 @@ class Generator(val dir: File) {
     }
 
     private fun generateNamespace(ns: Namespace, fileBuilder: FileSpec.Builder): TypeSpec.Builder {
-        val name = ns.namespace.substringAfter(".").capitalize()
+        val name = ns.namespace.substringAfter(".").nameSpaceName()
 
         val functions = ns.functions?.filter { !it.unsupported } ?: emptyList()
 
@@ -67,6 +67,9 @@ class Generator(val dir: File) {
         return builder
 
     }
+
+    private fun String.nameSpaceName() = capitalize() + "Namespace"
+
 
     private fun generateType(fileBuilder: FileSpec.Builder, type: Type) {
         val name = type.id
@@ -127,7 +130,7 @@ class Generator(val dir: File) {
         choices.flatMap { it }.distinct().forEach { parameterTypeName(ParameterContext(it.name, it.type, f.name, fileBuilder)) }
         returnTypeName(f, fileBuilder)
 
-        return choices.mapIndexed { i, list -> generateFunction(f, list) }
+        return choices.map { list -> generateFunction(f, list) }
     }
 
     private fun generateFunction(f: Function, parameters: List<ResolvedChoice>): FunSpec {
@@ -183,7 +186,6 @@ class Generator(val dir: File) {
             else -> "Any"
         } + suffix
     }
-
 
     private fun returnTypeName(f: Function, fileBuilder: FileSpec.Builder?): String? {
         return when (f.async) {

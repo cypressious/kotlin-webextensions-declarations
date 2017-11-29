@@ -21,7 +21,7 @@ external class ThemeUpdateInfo {
   val windowId: Int?
 }
 
-external class Theme {
+external class ThemeNamespace {
   /**
    * Returns the current theme for the specified window or the last focused window.
    */

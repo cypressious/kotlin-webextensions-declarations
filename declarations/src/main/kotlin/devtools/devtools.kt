@@ -30,7 +30,7 @@ external class Resource {
   val url: String
 }
 
-external class InspectedWindow {
+external class InspectedWindowNamespace {
   /**
    * Evaluates a JavaScript expression in the context of the main frame of the inspected page. The expression must evaluate to a JSON-compliant object, otherwise an exception is thrown. The eval function can report either a DevTools-side error or a JavaScript exception that occurs during evaluation. In either case, the <code>result</code> parameter of the callback is <code>undefined</code>. In the case of a DevTools-side error, the <code>isException</code> parameter is non-null and has <code>isError</code> set to true and <code>code</code> set to an error code. In the case of a JavaScript error, <code>isException</code> is set to true and <code>value</code> is set to the string value of thrown object.
    */
@@ -44,7 +44,7 @@ external class InspectedWindow {
 
 typealias Request = Any
 
-external class Network
+external class NetworkNamespace
 
 typealias ElementsPanel = Any
 
@@ -56,7 +56,7 @@ typealias ExtensionSidebarPane = Any
 
 typealias Button = Any
 
-external class Panels {
+external class PanelsNamespace {
   /**
    * Creates an extension panel.
    */
@@ -67,10 +67,10 @@ external class Panels {
   ): Promise<ExtensionPanel>
 }
 
-external class Devtools {
-  val inspectedWindow: InspectedWindow
+external class DevtoolsNamespace {
+  val inspectedWindow: InspectedWindowNamespace
 
-  val network: Network
+  val network: NetworkNamespace
 
-  val panels: Panels
+  val panels: PanelsNamespace
 }

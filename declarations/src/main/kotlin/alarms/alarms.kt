@@ -34,7 +34,7 @@ external class Alarm {
   val periodInMinutes: Any?
 }
 
-external class Alarms {
+external class AlarmsNamespace {
   /**
    * Creates an alarm. After the delay is expired, the onAlarm event is fired. If there is another alarm with the same name (or no name if none is specified), it will be cancelled and replaced by this alarm.
    */

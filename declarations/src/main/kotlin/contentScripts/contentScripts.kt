@@ -46,7 +46,7 @@ external class RegisteredContentScriptOptions {
 
 typealias RegisteredContentScript = Any
 
-external class ContentScripts {
+external class ContentScriptsNamespace {
   /**
    * Register a content script programmatically
    */

@@ -89,7 +89,7 @@ external class UploadData {
   val file: String?
 }
 
-external class WebRequest {
+external class WebRequestNamespace {
   /**
    * Needs to be called when the behavior of the webRequest handlers has changed to prevent incorrect handling due to caching. This function call is expensive. Don't call it often.
    */

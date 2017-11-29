@@ -19,7 +19,7 @@ class GetViewsFetchProperties(
 
 typealias ViewType = String
 
-external class Extension {
+external class ExtensionNamespace {
   /**
    * Converts a relative path within an extension install directory to a fully-qualified URL.
    */

@@ -101,7 +101,7 @@ external class CreateDetails {
   val type: BookmarkTreeNodeType
 }
 
-external class Bookmarks {
+external class BookmarksNamespace {
   /**
    * Retrieves the specified BookmarkTreeNode(s).
    */

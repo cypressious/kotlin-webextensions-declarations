@@ -7,7 +7,7 @@ typealias ExpectedError = Any
 
 typealias Promise = Any
 
-external class Test {
+external class TestNamespace {
   /**
    * Notifies the browser process that test code running in the extension failed.  This is only used for internal unit testing.
    */

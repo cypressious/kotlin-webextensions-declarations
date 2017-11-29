@@ -147,7 +147,7 @@ external class OnClickData {
   val modifiers: Array<String>
 }
 
-external class Menus {
+external class MenusNamespace {
   /**
    * Creates a new context menu item. Note that if an error occurs during creation, you may not find out until the creation callback fires (the details will be in $(ref:runtime.lastError)).
    */

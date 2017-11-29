@@ -14,7 +14,7 @@ external class AnyPermissions {
   val origins: Array<manifest.MatchPatternInternal>?
 }
 
-external class Permissions {
+external class PermissionsNamespace {
   /**
    * Get a list of all the extension's permissions.
    */

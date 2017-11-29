@@ -4,4 +4,4 @@ typealias ImageAnimationBehavior = String
 
 typealias ContextMenuMouseEvent = String
 
-external class BrowserSettings
+external class BrowserSettingsNamespace

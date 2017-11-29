@@ -16,4 +16,4 @@ external class StorageChange {
 
 typealias StorageArea = Any
 
-external class Storage
+external class StorageNamespace

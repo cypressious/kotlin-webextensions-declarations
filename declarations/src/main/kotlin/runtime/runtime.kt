@@ -115,7 +115,7 @@ typealias OnInstalledReason = String
 
 typealias OnRestartRequiredReason = String
 
-external class Runtime {
+external class RuntimeNamespace {
   /**
    * Retrieves the JavaScript 'window' object for the background page running inside the current extension/app. If the background page is an event page, the system will ensure it is loaded before calling the callback. If there is no background page, an error is set.
    */

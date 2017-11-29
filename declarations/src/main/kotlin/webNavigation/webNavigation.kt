@@ -84,7 +84,7 @@ external class EventUrlFilters {
   val url: Array<events.UrlFilter>
 }
 
-external class WebNavigation {
+external class WebNavigationNamespace {
   /**
    * Retrieves information about the given frame. A frame refers to an &lt;iframe&gt; or a &lt;frame&gt; of a web page and is identified by a tab ID and a frame ID.
    */
