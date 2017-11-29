@@ -97,17 +97,9 @@ external class CreateDetails {
   val type: BookmarkTreeNodeType
 }
 
-external class Destination {
-  val parentId: String?
+class Destination(val parentId: String?, val index: Int?)
 
-  val index: Int?
-}
-
-external class Changes {
-  val title: String?
-
-  val url: String?
-}
+class Changes(val title: String?, val url: String?)
 
 external class BookmarksNamespace {
   /**

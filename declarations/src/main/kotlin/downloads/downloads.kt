@@ -244,51 +244,42 @@ val value: String)
 /**
  * What to download and how.
  */
-external class Options {
-  /**
-   * The URL to download.
-   */
-  val url: String
+class Options(
+    /**
+     * The URL to download.
+     */
+    val url: String,
+    /**
+     * A file path relative to the Downloads directory to contain the downloaded file.
+     */
+    val filename: String?,
+    /**
+     * Whether to associate the download with a private browsing session.
+     */
+    val incognito: Boolean?,
+    val conflictAction: FilenameConflictAction,
+    /**
+     * Use a file-chooser to allow the user to select a filename. If the option is not specified, the file chooser will be shown only if the Firefox "Always ask you where to save files" option is enabled (i.e. the pref <code>browser.download.useDownloadDir</code> is set to <code>false</code>).
+     */
+    val saveAs: Boolean?,
+    /**
+     * The HTTP method to use if the URL uses the HTTP[S] protocol.
+     */
+    val method: String?,
+    /**
+     * Extra HTTP headers to send with the request if the URL uses the HTTP[s] protocol. Each header is represented as a dictionary containing the keys <code>name</code> and either <code>value</code> or <code>binaryValue</code>, restricted to those allowed by XMLHttpRequest.
+     */
+    val headers: Array<Headers>?,
+    /**
+     * Post body.
+     */
+    val body: String?
+)
 
-  /**
-   * A file path relative to the Downloads directory to contain the downloaded file.
-   */
-  val filename: String?
-
-  /**
-   * Whether to associate the download with a private browsing session.
-   */
-  val incognito: Boolean?
-
-  val conflictAction: FilenameConflictAction
-
-  /**
-   * Use a file-chooser to allow the user to select a filename. If the option is not specified, the file chooser will be shown only if the Firefox "Always ask you where to save files" option is enabled (i.e. the pref <code>browser.download.useDownloadDir</code> is set to <code>false</code>).
-   */
-  val saveAs: Boolean?
-
-  /**
-   * The HTTP method to use if the URL uses the HTTP[S] protocol.
-   */
-  val method: String?
-
-  /**
-   * Extra HTTP headers to send with the request if the URL uses the HTTP[s] protocol. Each header is represented as a dictionary containing the keys <code>name</code> and either <code>value</code> or <code>binaryValue</code>, restricted to those allowed by XMLHttpRequest.
-   */
-  val headers: Array<Headers>?
-
-  /**
-   * Post body.
-   */
-  val body: String?
-}
-
-external class Options2 {
-  /**
-   * The size of the icon.  The returned icon will be square with dimensions size * size pixels.  The default size for the icon is 32x32 pixels.
-   */
-  val size: Int?
-}
+class Options2(/**
+ * The size of the icon.  The returned icon will be square with dimensions size * size pixels.  The default size for the icon is 32x32 pixels.
+ */
+val size: Int?)
 
 external class DownloadsNamespace {
   /**

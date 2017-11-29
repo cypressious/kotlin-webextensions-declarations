@@ -7,7 +7,7 @@ fun merge(list: List<Namespace>): Namespace {
 
     val properties = list
             .flatMap { it.properties?.entries ?: emptySet() }
-            .associate { it.key to it.value.resolve(it.key, types) }
+            .associate { it.key to it.value.resolve(it.key, types, false) }
             .takeUnless { it.isEmpty() }
 
     val functions = list
@@ -34,25 +34,26 @@ private fun mergeTypes(types: List<Type>): MutableMap<String?, Type> {
                         type = left.type ?: right.type,
                         properties = left.properties.orEmpty() + right.properties.orEmpty(),
                         choices = left.choices.orEmpty() + right.choices.orEmpty(),
-                        `$extend` = null
+                        `$extend` = null,
+                        actual = false
                 )
             }
 
     for ((key, value) in result.toMap()) {
         if (key == null) continue
 
-        result[key] = value.copy(properties = value.properties?.entries?.associate { it.key to it.value.resolve(it.key, result) })
+        result[key] = value.copy(properties = value.properties?.entries?.associate { it.key to it.value.resolve(it.key, result, false) })
     }
 
     return result
 }
 
 private fun Function.resolve(types: MutableMap<String?, Type>): Function {
-    return copy(parameters = parameters?.map { it.resolve(it.name!!, types) })
+    return copy(parameters = parameters?.map { it.resolve(it.name!!, types, it.name != async) })
 }
 
-private fun Parameter.resolve(name: String, types: MutableMap<String?, Type>): Parameter {
-    if (type == "array") return copy(items = items?.resolve(name, types))
+private fun Parameter.resolve(name: String, types: MutableMap<String?, Type>, actual: Boolean): Parameter {
+    if (type == "array") return copy(items = items?.resolve(name, types, actual))
     if (type != "object") return this
 
     var typeName = name.capitalize()
@@ -60,13 +61,23 @@ private fun Parameter.resolve(name: String, types: MutableMap<String?, Type>): P
 
     while (types.containsKey(typeName)) typeName = name.capitalize() + ++counter
 
-    types[typeName] = Type(typeName, null, properties, description, null, choices)
+    val choices = choices?.map { it.resolve(name, types, actual) }
+
+    types[typeName] = Type(
+            id = typeName,
+            type = null,
+            properties = properties?.map { it.key to it.value.resolve(it.key, types, actual) }?.toMap(),
+            description = description,
+            `$extend` = null,
+            choices = choices,
+            actual = actual
+    )
 
     return copy(
             type = null,
             properties = null,
             `$ref` = typeName,
-            parameters = parameters?.map { it.resolve(it.name!!, types) },
-            choices = choices?.map { it.resolve(name, types) }
+            parameters = parameters?.map { it.resolve(it.name!!, types, actual) },
+            choices = choices
     )
 }

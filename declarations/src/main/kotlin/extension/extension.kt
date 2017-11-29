@@ -14,22 +14,20 @@ external class LastError {
   val message: String
 }
 
-external class FetchProperties {
-  /**
-   * The type of view to get. If omitted, returns all views (including background pages and tabs). Valid values: 'tab', 'popup', 'sidebar'.
-   */
-  val type: ViewType
-
-  /**
-   * The window to restrict the search to. If omitted, returns all views.
-   */
-  val windowId: Int?
-
-  /**
-   * Find a view according to a tab id. If this field is omitted, returns all views.
-   */
-  val tabId: Int?
-}
+class FetchProperties(
+    /**
+     * The type of view to get. If omitted, returns all views (including background pages and tabs). Valid values: 'tab', 'popup', 'sidebar'.
+     */
+    val type: ViewType,
+    /**
+     * The window to restrict the search to. If omitted, returns all views.
+     */
+    val windowId: Int?,
+    /**
+     * Find a view according to a tab id. If this field is omitted, returns all views.
+     */
+    val tabId: Int?
+)
 
 external class ExtensionNamespace {
   /**

@@ -1,8 +1,9 @@
 package runtime
 
 import events.Event
-import tabs.Tab
+import kotlin.Any
 import kotlin.js.Promise
+import tabs.Tab
 
 typealias GetBackgroundPageBackgroundPage = Any
 
@@ -111,24 +112,18 @@ external class LastError {
   val message: String?
 }
 
-external class ConnectInfo {
-  /**
-   * Will be passed into onConnect for processes that are listening for the connection event.
-   */
-  val name: String?
+class ConnectInfo(/**
+ * Will be passed into onConnect for processes that are listening for the connection event.
+ */
+val name: String?, /**
+ * Whether the TLS channel ID will be passed into onConnectExternal for processes that are listening for the connection event.
+ */
+val includeTlsChannelId: Boolean?)
 
-  /**
-   * Whether the TLS channel ID will be passed into onConnectExternal for processes that are listening for the connection event.
-   */
-  val includeTlsChannelId: Boolean?
-}
-
-external class Options {
-  /**
-   * If true, the message will be directed to the extension's proxy sandbox.
-   */
-  val toProxyScript: Boolean?
-}
+class Options(/**
+ * If true, the message will be directed to the extension's proxy sandbox.
+ */
+val toProxyScript: Boolean?)
 
 external class RuntimeNamespace {
   /**

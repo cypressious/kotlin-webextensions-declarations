@@ -40,52 +40,46 @@ external class ContextualIdentity {
 /**
  * Information to filter the contextual identities being retrieved.
  */
-external class Details {
-  /**
-   * Filters the contextual identity by name.
-   */
-  val name: String?
-}
+class Details(/**
+ * Filters the contextual identity by name.
+ */
+val name: String?)
 
 /**
  * Details about the contextual identity being created.
  */
-external class Details2 {
-  /**
-   * The name of the contextual identity.
-   */
-  val name: String
-
-  /**
-   * The color of the contextual identity.
-   */
-  val color: String
-
-  /**
-   * The icon of the contextual identity.
-   */
-  val icon: String
-}
+class Details2(
+    /**
+     * The name of the contextual identity.
+     */
+    val name: String,
+    /**
+     * The color of the contextual identity.
+     */
+    val color: String,
+    /**
+     * The icon of the contextual identity.
+     */
+    val icon: String
+)
 
 /**
  * Details about the contextual identity being created.
  */
-external class Details3 {
-  /**
-   * The name of the contextual identity.
-   */
-  val name: String?
-
-  /**
-   * The color of the contextual identity.
-   */
-  val color: String?
-
-  /**
-   * The icon of the contextual identity.
-   */
-  val icon: String?
-}
+class Details3(
+    /**
+     * The name of the contextual identity.
+     */
+    val name: String?,
+    /**
+     * The color of the contextual identity.
+     */
+    val color: String?,
+    /**
+     * The icon of the contextual identity.
+     */
+    val icon: String?
+)
 
 external class ContextualIdentitiesNamespace {
   /**

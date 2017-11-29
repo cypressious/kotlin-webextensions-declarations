@@ -67,32 +67,28 @@ external class EventUrlFilters {
 /**
  * Information about the frame to retrieve information about.
  */
-external class Details {
-  /**
-   * The ID of the tab in which the frame is.
-   */
-  val tabId: Int
-
-  /**
-   * The ID of the process runs the renderer for this tab.
-   */
-  val processId: Int?
-
-  /**
-   * The ID of the frame in the given tab.
-   */
-  val frameId: Int
-}
+class Details(
+    /**
+     * The ID of the tab in which the frame is.
+     */
+    val tabId: Int,
+    /**
+     * The ID of the process runs the renderer for this tab.
+     */
+    val processId: Int?,
+    /**
+     * The ID of the frame in the given tab.
+     */
+    val frameId: Int
+)
 
 /**
  * Information about the tab to retrieve all frames from.
  */
-external class Details2 {
-  /**
-   * The ID of the tab.
-   */
-  val tabId: Int
-}
+class Details2(/**
+ * The ID of the tab.
+ */
+val tabId: Int)
 
 external class WebNavigationNamespace {
   /**

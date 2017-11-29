@@ -12,23 +12,15 @@ external class AccountInfo {
   val id: String
 }
 
-external class Details {
-  val interactive: Boolean?
+class Details(
+    val interactive: Boolean?,
+    val account: AccountInfo,
+    val scopes: Array<String>?
+)
 
-  val account: AccountInfo
+class Details2(val token: String)
 
-  val scopes: Array<String>?
-}
-
-external class Details2 {
-  val token: String
-}
-
-external class Details3 {
-  val url: String
-
-  val interactive: Boolean?
-}
+class Details3(val url: String, val interactive: Boolean?)
 
 external class IdentityNamespace {
   /**

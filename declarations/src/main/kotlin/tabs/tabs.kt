@@ -261,211 +261,168 @@ typealias TabStatus = String
 
 typealias WindowType = String
 
-external class ConnectInfo {
-  /**
-   * Will be passed into onConnect for content scripts that are listening for the connection event.
-   */
-  val name: String?
+class ConnectInfo(/**
+ * Will be passed into onConnect for content scripts that are listening for the connection event.
+ */
+val name: String?, /**
+ * Open a port to a specific $(topic:frame_ids)[frame] identified by <code>frameId</code> instead of all frames in the tab.
+ */
+val frameId: Int?)
 
-  /**
-   * Open a port to a specific $(topic:frame_ids)[frame] identified by <code>frameId</code> instead of all frames in the tab.
-   */
-  val frameId: Int?
-}
+class Options(/**
+ * Send a message to a specific $(topic:frame_ids)[frame] identified by <code>frameId</code> instead of all frames in the tab.
+ */
+val frameId: Int?)
 
-external class Options {
-  /**
-   * Send a message to a specific $(topic:frame_ids)[frame] identified by <code>frameId</code> instead of all frames in the tab.
-   */
-  val frameId: Int?
-}
+class CreateProperties(
+    /**
+     * The window to create the new tab in. Defaults to the $(topic:current-window)[current window].
+     */
+    val windowId: Int?,
+    /**
+     * The position the tab should take in the window. The provided value will be clamped to between zero and the number of tabs in the window.
+     */
+    val index: Int?,
+    /**
+     * The URL to navigate the tab to initially. Fully-qualified URLs must include a scheme (i.e. 'http://www.google.com', not 'www.google.com'). Relative URLs will be relative to the current page within the extension. Defaults to the New Tab Page.
+     */
+    val url: String?,
+    /**
+     * Whether the tab should become the active tab in the window. Does not affect whether the window is focused (see $(ref:windows.update)). Defaults to <var>true</var>.
+     */
+    val active: Boolean?,
+    /**
+     * Whether the tab should be pinned. Defaults to <var>false</var>
+     */
+    val pinned: Boolean?,
+    /**
+     * The ID of the tab that opened this tab. If specified, the opener tab must be in the same window as the newly created tab.
+     */
+    val openerTabId: Int?,
+    /**
+     * The CookieStoreId for the tab that opened this tab.
+     */
+    val cookieStoreId: String?,
+    /**
+     * Whether the document in the tab should be opened in reader mode.
+     */
+    val openInReaderMode: Boolean?
+)
 
-external class CreateProperties {
-  /**
-   * The window to create the new tab in. Defaults to the $(topic:current-window)[current window].
-   */
-  val windowId: Int?
+class QueryInfo(
+    /**
+     * Whether the tabs are active in their windows.
+     */
+    val active: Boolean?,
+    /**
+     * Whether the tabs are pinned.
+     */
+    val pinned: Boolean?,
+    /**
+     * Whether the tabs are audible.
+     */
+    val audible: Boolean?,
+    /**
+     * Whether the tabs are muted.
+     */
+    val muted: Boolean?,
+    /**
+     * Whether the tabs are highlighted.  Works as an alias of active.
+     */
+    val highlighted: Boolean?,
+    /**
+     * Whether the tabs are in the $(topic:current-window)[current window].
+     */
+    val currentWindow: Boolean?,
+    /**
+     * Whether the tabs are in the last focused window.
+     */
+    val lastFocusedWindow: Boolean?,
+    /**
+     * Whether the tabs have completed loading.
+     */
+    val status: TabStatus,
+    /**
+     * True while the tabs are not loaded with content.
+     */
+    val discarded: Boolean?,
+    /**
+     * Match page titles against a pattern.
+     */
+    val title: String?,
+    /**
+     * Match tabs against one or more $(topic:match_patterns)[URL patterns]. Note that fragment identifiers are not matched.
+     */
+    val url: Any?,
+    /**
+     * The ID of the parent window, or $(ref:windows.WINDOW_ID_CURRENT) for the $(topic:current-window)[current window].
+     */
+    val windowId: Int?,
+    /**
+     * The type of window the tabs are in.
+     */
+    val windowType: WindowType,
+    /**
+     * The position of the tabs within their windows.
+     */
+    val index: Int?,
+    /**
+     * The CookieStoreId used for the tab.
+     */
+    val cookieStoreId: String?,
+    /**
+     * The ID of the tab that opened this tab. If specified, the opener tab must be in the same window as this tab.
+     */
+    val openerTabId: Int?
+)
 
-  /**
-   * The position the tab should take in the window. The provided value will be clamped to between zero and the number of tabs in the window.
-   */
-  val index: Int?
+class HighlightInfo(/**
+ * The window that contains the tabs.
+ */
+val windowId: Int?, /**
+ * One or more tab indices to highlight.
+ */
+val tabs: Any)
 
-  /**
-   * The URL to navigate the tab to initially. Fully-qualified URLs must include a scheme (i.e. 'http://www.google.com', not 'www.google.com'). Relative URLs will be relative to the current page within the extension. Defaults to the New Tab Page.
-   */
-  val url: String?
+class UpdateProperties(
+    /**
+     * A URL to navigate the tab to.
+     */
+    val url: String?,
+    /**
+     * Whether the tab should be active. Does not affect whether the window is focused (see $(ref:windows.update)).
+     */
+    val active: Boolean?,
+    /**
+     * Whether the tab should be pinned.
+     */
+    val pinned: Boolean?,
+    /**
+     * Whether the tab should be muted.
+     */
+    val muted: Boolean?,
+    /**
+     * The ID of the tab that opened this tab. If specified, the opener tab must be in the same window as this tab.
+     */
+    val openerTabId: Int?,
+    /**
+     * Whether the load should replace the current history entry for the tab.
+     */
+    val loadReplace: Boolean?
+)
 
-  /**
-   * Whether the tab should become the active tab in the window. Does not affect whether the window is focused (see $(ref:windows.update)). Defaults to <var>true</var>.
-   */
-  val active: Boolean?
+class MoveProperties(/**
+ * Defaults to the window the tab is currently in.
+ */
+val windowId: Int?, /**
+ * The position to move the window to. -1 will place the tab at the end of the window.
+ */
+val index: Int)
 
-  /**
-   * Whether the tab should be pinned. Defaults to <var>false</var>
-   */
-  val pinned: Boolean?
-
-  /**
-   * The ID of the tab that opened this tab. If specified, the opener tab must be in the same window as the newly created tab.
-   */
-  val openerTabId: Int?
-
-  /**
-   * The CookieStoreId for the tab that opened this tab.
-   */
-  val cookieStoreId: String?
-
-  /**
-   * Whether the document in the tab should be opened in reader mode.
-   */
-  val openInReaderMode: Boolean?
-}
-
-external class QueryInfo {
-  /**
-   * Whether the tabs are active in their windows.
-   */
-  val active: Boolean?
-
-  /**
-   * Whether the tabs are pinned.
-   */
-  val pinned: Boolean?
-
-  /**
-   * Whether the tabs are audible.
-   */
-  val audible: Boolean?
-
-  /**
-   * Whether the tabs are muted.
-   */
-  val muted: Boolean?
-
-  /**
-   * Whether the tabs are highlighted.  Works as an alias of active.
-   */
-  val highlighted: Boolean?
-
-  /**
-   * Whether the tabs are in the $(topic:current-window)[current window].
-   */
-  val currentWindow: Boolean?
-
-  /**
-   * Whether the tabs are in the last focused window.
-   */
-  val lastFocusedWindow: Boolean?
-
-  /**
-   * Whether the tabs have completed loading.
-   */
-  val status: TabStatus
-
-  /**
-   * True while the tabs are not loaded with content.
-   */
-  val discarded: Boolean?
-
-  /**
-   * Match page titles against a pattern.
-   */
-  val title: String?
-
-  /**
-   * Match tabs against one or more $(topic:match_patterns)[URL patterns]. Note that fragment identifiers are not matched.
-   */
-  val url: Any?
-
-  /**
-   * The ID of the parent window, or $(ref:windows.WINDOW_ID_CURRENT) for the $(topic:current-window)[current window].
-   */
-  val windowId: Int?
-
-  /**
-   * The type of window the tabs are in.
-   */
-  val windowType: WindowType
-
-  /**
-   * The position of the tabs within their windows.
-   */
-  val index: Int?
-
-  /**
-   * The CookieStoreId used for the tab.
-   */
-  val cookieStoreId: String?
-
-  /**
-   * The ID of the tab that opened this tab. If specified, the opener tab must be in the same window as this tab.
-   */
-  val openerTabId: Int?
-}
-
-external class HighlightInfo {
-  /**
-   * The window that contains the tabs.
-   */
-  val windowId: Int?
-
-  /**
-   * One or more tab indices to highlight.
-   */
-  val tabs: Any
-}
-
-external class UpdateProperties {
-  /**
-   * A URL to navigate the tab to.
-   */
-  val url: String?
-
-  /**
-   * Whether the tab should be active. Does not affect whether the window is focused (see $(ref:windows.update)).
-   */
-  val active: Boolean?
-
-  /**
-   * Whether the tab should be pinned.
-   */
-  val pinned: Boolean?
-
-  /**
-   * Whether the tab should be muted.
-   */
-  val muted: Boolean?
-
-  /**
-   * The ID of the tab that opened this tab. If specified, the opener tab must be in the same window as this tab.
-   */
-  val openerTabId: Int?
-
-  /**
-   * Whether the load should replace the current history entry for the tab.
-   */
-  val loadReplace: Boolean?
-}
-
-external class MoveProperties {
-  /**
-   * Defaults to the window the tab is currently in.
-   */
-  val windowId: Int?
-
-  /**
-   * The position to move the window to. -1 will place the tab at the end of the window.
-   */
-  val index: Int
-}
-
-external class ReloadProperties {
-  /**
-   * Whether using any local cache. Default is false.
-   */
-  val bypassCache: Boolean?
-}
+class ReloadProperties(/**
+ * Whether using any local cache. Default is false.
+ */
+val bypassCache: Boolean?)
 
 external class TabsNamespace {
   /**

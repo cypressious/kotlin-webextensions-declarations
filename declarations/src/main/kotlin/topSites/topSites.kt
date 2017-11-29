@@ -17,12 +17,10 @@ external class MostVisitedURL {
   val title: String?
 }
 
-external class Options {
-  /**
-   * Which providers to get top sites from. Possible values are "places" and "activityStream".
-   */
-  val providers: Array<String>?
-}
+class Options(/**
+ * Which providers to get top sites from. Possible values are "places" and "activityStream".
+ */
+val providers: Array<String>?)
 
 external class TopSitesNamespace {
   /**

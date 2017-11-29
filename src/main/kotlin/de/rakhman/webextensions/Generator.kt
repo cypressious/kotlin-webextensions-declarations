@@ -66,7 +66,7 @@ class Generator(val dir: File) {
         val builder = TypeSpec.expectClassBuilder(ClassName.bestGuess(name)).addModifiers(KModifier.EXPECT)
         builder.addFunctions(functions.flatMap { generateFunctionWithOverloads(it, fileBuilder) })
 
-        ns.types?.forEach { generateType(fileBuilder, it) }
+        ns.types?.forEach { generateType(it, fileBuilder) }
 
         return builder
 
@@ -75,7 +75,7 @@ class Generator(val dir: File) {
     private fun String.nameSpaceName() = capitalize() + "Namespace"
 
 
-    private fun generateType(fileBuilder: FileSpec.Builder, type: Type) {
+    private fun generateType(type: Type, fileBuilder: FileSpec.Builder) {
         val name = type.id!!
 
         if (type.type in primitiveTypes) {
@@ -90,7 +90,7 @@ class Generator(val dir: File) {
             return
         }
 
-        val typeBuilder = generateType(name, type.properties, fileBuilder, true)
+        val typeBuilder = generateType(name, type.properties, fileBuilder, !type.actual)
         type.description?.let { typeBuilder.addKdoc(it + "\n") }
 
         fileBuilder.addType(typeBuilder.build())

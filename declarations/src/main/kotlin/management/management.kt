@@ -114,17 +114,13 @@ external class ExtensionInfo {
   val installType: ExtensionInstallType
 }
 
-external class Options {
-  /**
-   * Whether or not a confirm-uninstall dialog should prompt the user. Defaults to false.
-   */
-  val showConfirmDialog: Boolean?
-
-  /**
-   * The message to display to a user when being asked to confirm removal of the extension.
-   */
-  val dialogMessage: String?
-}
+class Options(/**
+ * Whether or not a confirm-uninstall dialog should prompt the user. Defaults to false.
+ */
+val showConfirmDialog: Boolean?, /**
+ * The message to display to a user when being asked to confirm removal of the extension.
+ */
+val dialogMessage: String?)
 
 external class ManagementNamespace {
   /**

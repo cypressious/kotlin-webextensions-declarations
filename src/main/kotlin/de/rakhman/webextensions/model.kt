@@ -15,7 +15,8 @@ data class Type(
         val properties: Map<String, Parameter>?,
         val description: String?,
         val `$extend`: String?,
-        val choices: List<Any>?
+        val choices: List<Any>?,
+        val actual: Boolean
 )
 
 data class Function(

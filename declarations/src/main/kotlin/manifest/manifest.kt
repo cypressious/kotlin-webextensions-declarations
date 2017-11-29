@@ -254,29 +254,41 @@ external class Browser_action {
   val default_area: String?
 }
 
-class Search_provider(
-    val name: String,
-    val keyword: String?,
-    val search_url: String,
-    val favicon_url: String?,
-    val suggest_url: String?,
-    val instant_url: String?,
-    val image_url: String?,
-    val search_url_post_params: String?,
-    val instant_url_post_params: String?,
-    val image_url_post_params: String?,
-    val alternate_urls: Array<String>?,
-    val prepopulated_id: Int?,
-    /**
-     * Sets the default engine to a built-in engine only.
-     */
-    val is_default: Boolean?
-)
+external class Search_provider {
+  val name: String
+
+  val keyword: String?
+
+  val search_url: String
+
+  val favicon_url: String?
+
+  val suggest_url: String?
+
+  val instant_url: String?
+
+  val image_url: String?
+
+  val search_url_post_params: String?
+
+  val instant_url_post_params: String?
+
+  val image_url_post_params: String?
+
+  val alternate_urls: Array<String>?
+
+  val prepopulated_id: Int?
+
+  /**
+   * Sets the default engine to a built-in engine only.
+   */
+  val is_default: Boolean?
+}
 
 external class Chrome_settings_overrides {
   val homepage: String?
 
-  val search_provider: Search_provider?
+  val search_provider: Search_provider
 }
 
 typealias Commands = Any

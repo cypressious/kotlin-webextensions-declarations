@@ -70,75 +70,61 @@ external class VisitItem {
   val transition: TransitionType
 }
 
-external class Query {
-  /**
-   * A free-text query to the history service.  Leave empty to retrieve all pages.
-   */
-  val text: String
+class Query(
+    /**
+     * A free-text query to the history service.  Leave empty to retrieve all pages.
+     */
+    val text: String,
+    /**
+     * Limit results to those visited after this date. If not specified, this defaults to 24 hours in the past.
+     */
+    val startTime: Date,
+    /**
+     * Limit results to those visited before this date.
+     */
+    val endTime: Date,
+    /**
+     * The maximum number of results to retrieve.  Defaults to 100.
+     */
+    val maxResults: Int?
+)
 
-  /**
-   * Limit results to those visited after this date. If not specified, this defaults to 24 hours in the past.
-   */
-  val startTime: Date
+class Details(/**
+ * The URL for which to retrieve visit information.  It must be in the format as returned from a call to history.search.
+ */
+val url: String)
 
-  /**
-   * Limit results to those visited before this date.
-   */
-  val endTime: Date
+class Details2(
+    /**
+     * The URL to add. Must be a valid URL that can be added to history.
+     */
+    val url: String,
+    /**
+     * The title of the page.
+     */
+    val title: String?,
+    /**
+     * The $(topic:transition-types)[transition type] for this visit from its referrer.
+     */
+    val transition: TransitionType,
+    /**
+     * The date when this visit occurred.
+     */
+    val visitTime: Date
+)
 
-  /**
-   * The maximum number of results to retrieve.  Defaults to 100.
-   */
-  val maxResults: Int?
-}
+class Details3(/**
+ * The URL to remove.
+ */
+val url: String)
 
-external class Details {
-  /**
-   * The URL for which to retrieve visit information.  It must be in the format as returned from a call to history.search.
-   */
-  val url: String
-}
-
-external class Details2 {
-  /**
-   * The URL to add. Must be a valid URL that can be added to history.
-   */
-  val url: String
-
-  /**
-   * The title of the page.
-   */
-  val title: String?
-
-  /**
-   * The $(topic:transition-types)[transition type] for this visit from its referrer.
-   */
-  val transition: TransitionType
-
-  /**
-   * The date when this visit occurred.
-   */
-  val visitTime: Date
-}
-
-external class Details3 {
-  /**
-   * The URL to remove.
-   */
-  val url: String
-}
-
-external class Range {
-  /**
-   * Items added to history after this date.
-   */
-  val startTime: Date
-
-  /**
-   * Items added to history before this date.
-   */
-  val endTime: Date
-}
+class Range(/**
+ * Items added to history after this date.
+ */
+val startTime: Date, /**
+ * Items added to history before this date.
+ */
+val endTime: Date)
 
 external class HistoryNamespace {
   /**

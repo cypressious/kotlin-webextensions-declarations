@@ -4,27 +4,24 @@ import kotlin.js.Promise
 
 typealias ProfilerFeature = String
 
-external class Settings {
-  /**
-   * The size in bytes of the buffer used to store profiling data. A larger value allows capturing a profile that covers a greater amount of time.
-   */
-  val bufferSize: Int
-
-  /**
-   * Interval in milliseconds between samples of profiling data. A smaller value will increase the detail of the profiles captured.
-   */
-  val interval: Any
-
-  /**
-   * A list of active features for the profiler.
-   */
-  val features: Array<ProfilerFeature>
-
-  /**
-   * A list of thread names for which to capture profiles.
-   */
-  val threads: Array<String>?
-}
+class Settings(
+    /**
+     * The size in bytes of the buffer used to store profiling data. A larger value allows capturing a profile that covers a greater amount of time.
+     */
+    val bufferSize: Int,
+    /**
+     * Interval in milliseconds between samples of profiling data. A smaller value will increase the detail of the profiles captured.
+     */
+    val interval: Any,
+    /**
+     * A list of active features for the profiler.
+     */
+    val features: Array<ProfilerFeature>,
+    /**
+     * A list of thread names for which to capture profiles.
+     */
+    val threads: Array<String>?
+)
 
 external class GeckoProfilerNamespace {
   /**
