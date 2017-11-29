@@ -131,19 +131,19 @@ class Generator(val dir: File) {
         val choices = parameters?.getResolvedChoices() ?: listOf(emptyList())
 
         // generate all object types once to prevent duplicates
-        choices.flatMap { it }.distinct().forEach { parameterTypeName(ParameterContext(it.name, it.type, f.name, fileBuilder)) }
+        choices.flatMap { it }.distinct().forEach { parameterTypeName(ParameterContext(it.name!!, it, f.name, fileBuilder)) }
         returnTypeName(f, fileBuilder)
 
         return choices.map { list -> generateFunction(f, list) }
     }
 
-    private fun generateFunction(f: Function, parameters: List<ResolvedChoice>): FunSpec {
+    private fun generateFunction(f: Function, parameters: List<Parameter>): FunSpec {
         val builder = FunSpec.builder(f.name)
 
         f.description?.let { builder.addKdoc(it + "\n") }
 
         parameters.forEach {
-            builder.addParameter(generateParameter(ParameterContext(it.name, it.type, f.name)).build())
+            builder.addParameter(generateParameter(ParameterContext(it.name!!, it, f.name)).build())
         }
 
         f.deprecated?.let {
@@ -224,17 +224,15 @@ private fun String.asPromiseType(): ParameterizedTypeName {
             ClassName.bestGuess(this))
 }
 
-data class ResolvedChoice(val name: String, val type: Parameter)
-
-private fun List<Parameter>.getResolvedChoices(): List<List<ResolvedChoice>> {
+private fun List<Parameter>.getResolvedChoices(): List<List<Parameter>> {
     require(size > 0) { "Receiver can't be empty" }
 
     val param = this[0]
 
     val heads = if (param.choices != null) {
-        param.choices.map { ResolvedChoice(param.name!!, it) }
+        param.choices.map { it.copy(name = param.name) }
     } else {
-        listOf(ResolvedChoice(param.name!!, param))
+        listOf(param)
     }
 
     if (size == 1) return heads.map { listOf(it) }
