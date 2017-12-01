@@ -1,10 +1,13 @@
 package idle
 
+import browser.Event
 import kotlin.js.Promise
 
 typealias IdleState = String
 
 external class IdleNamespace {
+    val onStateChanged: Event<(newState: IdleState) -> Unit>
+
     /**
      * Returns "idle" if the user has not generated any input for a specified number of seconds, or "active" otherwise.
      */

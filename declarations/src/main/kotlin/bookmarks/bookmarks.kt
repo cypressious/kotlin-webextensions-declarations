@@ -1,5 +1,6 @@
 package bookmarks
 
+import browser.Event
 import kotlin.js.Promise
 
 /**
@@ -98,7 +99,43 @@ class Destination(val parentId: String?, val index: Int?)
 
 class Changes(val title: String?, val url: String?)
 
+external class RemoveInfo {
+    val parentId: String
+
+    val index: Int
+
+    val node: BookmarkTreeNode
+}
+
+external class ChangeInfo {
+    val title: String
+
+    val url: String?
+}
+
+external class MoveInfo {
+    val parentId: String
+
+    val index: Int
+
+    val oldParentId: String
+
+    val oldIndex: Int
+}
+
+external class ReorderInfo {
+    val childIds: Array<String>
+}
+
 external class BookmarksNamespace {
+    val onCreated: Event<(id: String, bookmark: BookmarkTreeNode) -> Unit>
+
+    val onRemoved: Event<(id: String, removeInfo: RemoveInfo) -> Unit>
+
+    val onChanged: Event<(id: String, changeInfo: ChangeInfo) -> Unit>
+
+    val onMoved: Event<(id: String, moveInfo: MoveInfo) -> Unit>
+
     /**
      * Retrieves the specified BookmarkTreeNode(s).
      */

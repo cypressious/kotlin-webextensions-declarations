@@ -1,5 +1,6 @@
 package geckoProfiler
 
+import browser.Event
 import kotlin.js.Promise
 
 typealias ProfilerFeature = String
@@ -24,6 +25,8 @@ class Settings(
 )
 
 external class GeckoProfilerNamespace {
+    val onRunning: Event<(isRunning: Boolean) -> Unit>
+
     /**
      * Starts the profiler with the specified settings.
      */

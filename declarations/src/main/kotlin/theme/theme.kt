@@ -1,5 +1,6 @@
 package theme
 
+import browser.Event
 import kotlin.js.Promise
 import manifest.ThemeType
 
@@ -23,6 +24,8 @@ external class ThemeUpdateInfo {
 typealias Theme = Any
 
 external class ThemeNamespace {
+    val onUpdated: Event<(updateInfo: ThemeUpdateInfo) -> Unit>
+
     /**
      * Returns the current theme for the specified window or the last focused window.
      */

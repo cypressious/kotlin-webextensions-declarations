@@ -1,5 +1,6 @@
 package cookies
 
+import browser.Event
 import kotlin.js.Promise
 
 /**
@@ -213,7 +214,26 @@ external class Details5 {
     val storeId: String
 }
 
+external class ChangeInfo {
+    /**
+     * True if a cookie was removed.
+     */
+    val removed: Boolean
+
+    /**
+     * Information about the cookie that was set or removed.
+     */
+    val cookie: Cookie
+
+    /**
+     * The underlying reason behind the cookie's change.
+     */
+    val cause: OnChangedCause
+}
+
 external class CookiesNamespace {
+    val onChanged: Event<(changeInfo: ChangeInfo) -> Unit>
+
     /**
      * Retrieves information about a single cookie. If more than one cookie of the same name exists for the given URL, the one with the longest path will be returned. For cookies with the same path length, the cookie with the earliest creation time will be returned.
      */

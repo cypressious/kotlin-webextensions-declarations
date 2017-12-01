@@ -1,5 +1,6 @@
 package management
 
+import browser.Event
 import kotlin.js.Promise
 import manifest.ExtensionID
 
@@ -129,6 +130,14 @@ val showConfirmDialog: Boolean?, /**
 val dialogMessage: String?)
 
 external class ManagementNamespace {
+    val onDisabled: Event<(info: ExtensionInfo) -> Unit>
+
+    val onEnabled: Event<(info: ExtensionInfo) -> Unit>
+
+    val onInstalled: Event<(info: ExtensionInfo) -> Unit>
+
+    val onUninstalled: Event<(info: ExtensionInfo) -> Unit>
+
     /**
      * Returns a list of information about installed extensions.
      */

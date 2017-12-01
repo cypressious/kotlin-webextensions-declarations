@@ -1,5 +1,6 @@
 package downloads
 
+import browser.Event
 import kotlin.js.Promise
 
 typealias FilenameConflictAction = String
@@ -288,7 +289,79 @@ val size: Int?)
 
 typealias Callback = Any
 
+external class DownloadDelta {
+    /**
+     * The <code>id</code> of the <a href='#type-DownloadItem'>DownloadItem</a> that changed.
+     */
+    val id: Int
+
+    /**
+     * Describes a change in a <a href='#type-DownloadItem'>DownloadItem</a>'s <code>url</code>.
+     */
+    val url: StringDelta
+
+    /**
+     * Describes a change in a <a href='#type-DownloadItem'>DownloadItem</a>'s <code>filename</code>.
+     */
+    val filename: StringDelta
+
+    /**
+     * Describes a change in a <a href='#type-DownloadItem'>DownloadItem</a>'s <code>danger</code>.
+     */
+    val danger: StringDelta
+
+    /**
+     * Describes a change in a <a href='#type-DownloadItem'>DownloadItem</a>'s <code>mime</code>.
+     */
+    val mime: StringDelta
+
+    /**
+     * Describes a change in a <a href='#type-DownloadItem'>DownloadItem</a>'s <code>startTime</code>.
+     */
+    val startTime: StringDelta
+
+    /**
+     * Describes a change in a <a href='#type-DownloadItem'>DownloadItem</a>'s <code>endTime</code>.
+     */
+    val endTime: StringDelta
+
+    /**
+     * Describes a change in a <a href='#type-DownloadItem'>DownloadItem</a>'s <code>state</code>.
+     */
+    val state: StringDelta
+
+    val canResume: BooleanDelta
+
+    /**
+     * Describes a change in a <a href='#type-DownloadItem'>DownloadItem</a>'s <code>paused</code>.
+     */
+    val paused: BooleanDelta
+
+    /**
+     * Describes a change in a <a href='#type-DownloadItem'>DownloadItem</a>'s <code>error</code>.
+     */
+    val error: StringDelta
+
+    /**
+     * Describes a change in a <a href='#type-DownloadItem'>DownloadItem</a>'s <code>totalBytes</code>.
+     */
+    val totalBytes: DoubleDelta
+
+    /**
+     * Describes a change in a <a href='#type-DownloadItem'>DownloadItem</a>'s <code>fileSize</code>.
+     */
+    val fileSize: DoubleDelta
+
+    val exists: BooleanDelta
+}
+
 external class DownloadsNamespace {
+    val onCreated: Event<(downloadItem: DownloadItem) -> Unit>
+
+    val onErased: Event<(downloadId: Int) -> Unit>
+
+    val onChanged: Event<(downloadDelta: DownloadDelta) -> Unit>
+
     /**
      * Download a URL. If the URL uses the HTTP[S] protocol, then the request will include all cookies currently set for its hostname. If both <code>filename</code> and <code>saveAs</code> are specified, then the Save As dialog will be displayed, pre-populated with the specified <code>filename</code>. If the download started successfully, <code>callback</code> will be called with the new <a href='#type-DownloadItem'>DownloadItem</a>'s <code>downloadId</code>. If there was an error starting the download, then <code>callback</code> will be called with <code>downloadId=undefined</code> and <a href='extension.html#property-lastError'>chrome.extension.lastError</a> will contain a descriptive string. The error strings are not guaranteed to remain backwards compatible between releases. You must not parse it.
      */

@@ -1,6 +1,8 @@
 package menus
 
+import browser.Event
 import kotlin.js.Promise
+import tabs.Tab
 
 /**
  * The different contexts a menu can appear in. Specifying 'all' is equivalent to the combination of all other contexts except for 'tab' and 'tools_menu'. */
@@ -188,6 +190,8 @@ class UpdateProperties(
 typealias MenuItemId2 = Any
 
 external class MenusNamespace {
+    val onClicked: Event<(info: OnClickData, tab: Tab) -> Unit>
+
     /**
      * Creates a new context menu item. Note that if an error occurs during creation, you may not find out until the creation callback fires (the details will be in $(ref:runtime.lastError)).
      */

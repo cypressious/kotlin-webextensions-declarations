@@ -1,9 +1,14 @@
 package proxy
 
+import browser.Event
 import kotlin.Deprecated
 import kotlin.js.Promise
 
+typealias Error = Any
+
 external class ProxyNamespace {
+    val onProxyError: Event<(error: Error) -> Unit>
+
     /**
      * Registers the proxy script for the extension.
      */

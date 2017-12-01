@@ -44,6 +44,11 @@ data class Parameter(
         val unsupported: Boolean
 )
 
-class Event(
-
+data class Event(
+       val name: String,
+       val unsupported: Boolean,
+       val deprecated: String?,
+       val type: String?,
+       val description: String?,
+       val parameters: List<Parameter>?
 )

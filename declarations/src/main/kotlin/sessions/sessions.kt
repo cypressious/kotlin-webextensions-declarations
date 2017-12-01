@@ -1,5 +1,6 @@
 package sessions
 
+import browser.Event
 import kotlin.js.Promise
 import tabs.Tab
 import windows.Window
@@ -43,6 +44,8 @@ external class Device {
 }
 
 external class SessionsNamespace {
+    val onChanged: Event<() -> Unit>
+
     /**
      * Forget a recently closed tab.
      */

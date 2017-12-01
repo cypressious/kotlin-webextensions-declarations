@@ -1,5 +1,6 @@
 package alarms
 
+import browser.Event
 import kotlin.js.Promise
 
 external class Alarm {
@@ -38,6 +39,8 @@ class AlarmInfo(
 )
 
 external class AlarmsNamespace {
+    val onAlarm: Event<(name: Alarm) -> Unit>
+
     /**
      * Creates an alarm. After the delay is expired, the onAlarm event is fired. If there is another alarm with the same name (or no name if none is specified), it will be cancelled and replaced by this alarm.
      */

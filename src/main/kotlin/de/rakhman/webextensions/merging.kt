@@ -7,11 +7,15 @@ fun merge(list: List<Namespace>): Namespace {
 
     val properties = list
             .flatMap { it.properties?.entries ?: emptySet() }
-            .associate { it.key to it.value.resolve(it.key, types, false) }
+            .associate { it.key to it.value.resolve(it.key, types) }
             .takeUnless { it.isEmpty() }
 
     val functions = list
             .flatMap { it.functions?.map { it.resolve(types) } ?: emptyList() }
+            .takeUnless { it.isEmpty() }
+
+    val events = list
+            .flatMap { it.events?.map { it.resolve(types) } ?: emptyList() }
             .takeUnless { it.isEmpty() }
 
     return Namespace(
@@ -20,7 +24,7 @@ fun merge(list: List<Namespace>): Namespace {
             types = types.values.toList().takeUnless { it.isEmpty() },
             properties = properties,
             functions = functions,
-            events = list.flatMap { it.events ?: emptyList() }.takeUnless { it.isEmpty() }
+            events = events
     )
 }
 
@@ -44,19 +48,32 @@ private fun mergeTypes(types: List<Type>): MutableMap<String?, Type> {
         if (key == null) continue
 
         result[key] = value.copy(
-                properties = value.properties?.entries?.associate { it.key to it.value.resolve(it.key, result, false) },
-                items = value.items?.resolve(key, result, false)
+                properties = value.properties?.entries?.associate { it.key to it.value.resolve(it.key, result) },
+                items = value.items?.resolve(key, result)
         )
     }
 
     return result
 }
 
-private fun Function.resolve(types: MutableMap<String?, Type>): Function {
-    return copy(parameters = parameters?.map { it.resolve(it.name!!, types, it.name != async, it.name == async) })
+private fun Event.resolve(types: MutableMap<String?, Type>): Event {
+    return copy(
+            parameters = parameters?.map { it.resolve(it.name!!, types) }
+    )
 }
 
-private fun Parameter.resolve(name: String, types: MutableMap<String?, Type>, actual: Boolean, isReturn: Boolean = false): Parameter {
+private fun Function.resolve(types: MutableMap<String?, Type>): Function {
+    return copy(
+            parameters = parameters?.map { it.resolve(it.name!!, types, it.name != async, it.name == async) }
+    )
+}
+
+private fun Parameter.resolve(
+        name: String,
+        types: MutableMap<String?, Type>,
+        actual: Boolean = false,
+        isReturn: Boolean = false
+): Parameter {
     if (type == "array") return copy(items = items?.resolve(name, types, actual))
     if (type != "object" && choices == null && parameters == null) return this
 

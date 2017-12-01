@@ -1,5 +1,6 @@
 package windows
 
+import browser.Event
 import kotlin.js.Promise
 
 /**
@@ -212,6 +213,12 @@ class UpdateInfo(
 )
 
 external class WindowsNamespace {
+    val onCreated: Event<(window: Window) -> Unit>
+
+    val onRemoved: Event<(windowId: Int) -> Unit>
+
+    val onFocusChanged: Event<(windowId: Int) -> Unit>
+
     /**
      * Gets details about a window.
      */

@@ -1,5 +1,6 @@
 package history
 
+import browser.Event
 import extensionTypes.Date
 import kotlin.js.Promise
 
@@ -128,7 +129,34 @@ val startTime: Date, /**
  */
 val endTime: Date)
 
+external class Removed {
+    /**
+     * True if all history was removed.  If true, then urls will be empty.
+     */
+    val allHistory: Boolean
+
+    val urls: Array<String>
+}
+
+external class Changed {
+    /**
+     * The URL for which the title has changed
+     */
+    val url: String
+
+    /**
+     * The new title for the URL.
+     */
+    val title: String
+}
+
 external class HistoryNamespace {
+    val onVisited: Event<(result: HistoryItem) -> Unit>
+
+    val onVisitRemoved: Event<(removed: Removed) -> Unit>
+
+    val onTitleChanged: Event<(changed: Changed) -> Unit>
+
     /**
      * Searches the history for the last visit time of each page matching the query.
      */

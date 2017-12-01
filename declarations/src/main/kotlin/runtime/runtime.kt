@@ -148,7 +148,56 @@ val toProxyScript: Boolean?)
 
 typealias DirectoryEntry = Any
 
+external class Details2 {
+    /**
+     * The reason that this event is being dispatched.
+     */
+    val reason: OnInstalledReason
+
+    /**
+     * Indicates the previous version of the extension, which has just been updated. This is present only if 'reason' is 'update'.
+     */
+    val previousVersion: String?
+
+    /**
+     * Indicates whether the addon is installed as a temporary extension.
+     */
+    val temporary: Boolean
+}
+
+/**
+ * The manifest details of the available update.
+ */
+external class Details3 {
+    /**
+     * The version number of the available update.
+     */
+    val version: String
+}
+
 external class RuntimeNamespace {
+    val onStartup: browser.Event<() -> Unit>
+
+    val onInstalled: browser.Event<(details: Details2) -> Unit>
+
+    val onUpdateAvailable: browser.Event<(details: Details3) -> Unit>
+
+    val onConnect: browser.Event<(port: Port) -> Unit>
+
+    val onConnectExternal: browser.Event<(port: Port) -> Unit>
+
+    val onMessage: browser.Event<(
+            message: Any?,
+            sender: MessageSender,
+            sendResponse: () -> Unit
+    ) -> Unit>
+
+    val onMessageExternal: browser.Event<(
+            message: Any?,
+            sender: MessageSender,
+            sendResponse: () -> Unit
+    ) -> Unit>
+
     /**
      * Retrieves the JavaScript 'window' object for the background page running inside the current extension/app. If the background page is an event page, the system will ensure it is loaded before calling the callback. If there is no background page, an error is set.
      */

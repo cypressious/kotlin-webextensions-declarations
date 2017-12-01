@@ -1,5 +1,6 @@
 package devtools
 
+import browser.Event
 import kotlin.js.Promise
 
 /**
@@ -87,7 +88,9 @@ typealias Request = Any
  * A HAR log. See HAR specification for details. */
 typealias HarLog = Any
 
-external class NetworkNamespace
+external class NetworkNamespace {
+    val onNavigated: Event<(url: String) -> Unit>
+}
 
 /**
  * Represents the Elements panel. */
@@ -110,6 +113,8 @@ typealias ExtensionSidebarPane = Any
 typealias Button = Any
 
 external class PanelsNamespace {
+    val onThemeChanged: Event<(themeName: String) -> Unit>
+
     /**
      * Creates an extension panel.
      */

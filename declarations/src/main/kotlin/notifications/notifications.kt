@@ -1,5 +1,6 @@
 package notifications
 
+import browser.Event
 import kotlin.js.Promise
 
 typealias TemplateType = String
@@ -159,6 +160,14 @@ external class Buttons2 {
 typealias Notifications = Any
 
 external class NotificationsNamespace {
+    val onClosed: Event<(notificationId: String, byUser: Boolean) -> Unit>
+
+    val onClicked: Event<(notificationId: String) -> Unit>
+
+    val onButtonClicked: Event<(notificationId: String, buttonIndex: Int) -> Unit>
+
+    val onShown: Event<(notificationId: String) -> Unit>
+
     /**
      * Creates and displays a notification.
      */

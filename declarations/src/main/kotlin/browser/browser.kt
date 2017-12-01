@@ -1,3 +1,5 @@
+package browser
+
 import alarms.AlarmsNamespace
 import bookmarks.BookmarksNamespace
 import browserAction.BrowserActionNamespace
@@ -134,6 +136,14 @@ external class Browser {
     val webRequest: WebRequestNamespace
 
     val windows: WindowsNamespace
+}
+
+external class Event<in T> {
+    fun addListener(listener: T)
+
+    fun removeListener(listener: T)
+
+    fun hasListener(listener: T): Boolean
 }
 
 external val browser: Browser

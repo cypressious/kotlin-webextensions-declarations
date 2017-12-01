@@ -1,6 +1,8 @@
 package pageAction
 
+import browser.Event
 import kotlin.js.Promise
+import tabs.Tab
 
 /**
  * Pixel data for an image. Must be an ImageData object (for example, from a <code>canvas</code> element). */
@@ -56,6 +58,8 @@ class Details5(/**
 val tabId: Int)
 
 external class PageActionNamespace {
+    val onClicked: Event<(tab: Tab) -> Unit>
+
     /**
      * Shows the page action. The page action is shown whenever the tab is selected.
      */

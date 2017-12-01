@@ -1,5 +1,6 @@
 package commands
 
+import browser.Event
 import kotlin.js.Promise
 
 external class Command {
@@ -20,6 +21,8 @@ external class Command {
 }
 
 external class CommandsNamespace {
+    val onCommand: Event<(command: String) -> Unit>
+
     /**
      * Returns all the registered extension commands for this extension and their shortcut (if active).
      */

@@ -13,12 +13,15 @@ class Generator(val dir: File) {
                 .map { it.toFile() }
                 .filter { it.extension == "kt" }
                 .forEach {
-                    it.writeText(it.readText().replace("expect class", "external class"))
+                    it.writeText(it.readText()
+                            .replace("expect class", "external class")
+                            .replace("expect val", "external val")
+                    )
                 }
     }
 
     private fun generateBrowser(list: List<Namespace>) {
-        FileSpec.builder("", "browser")
+        FileSpec.builder("browser", "browser")
                 .addType(TypeSpec.expectClassBuilder("Browser")
                         .addProperties(list
                                 .map { it.namespace }
@@ -30,9 +33,27 @@ class Generator(val dir: File) {
                                             .build()
                                 })
                         .build())
+                .addType(TypeSpec.expectClassBuilder("Event")
+                        .addTypeVariable(TypeVariableName("T", variance = KModifier.IN))
+                        .addFunction(FunSpec
+                                .builder("addListener")
+                                .addParameter(ParameterSpec.builder("listener", TypeVariableName("T")).build())
+                                .build())
+                        .addFunction(FunSpec
+                                .builder("removeListener")
+                                .addParameter(ParameterSpec.builder("listener", TypeVariableName("T")).build())
+                                .build())
+                        .addFunction(FunSpec
+                                .builder("hasListener")
+                                .addParameter(ParameterSpec.builder("listener", TypeVariableName("T")).build())
+                                .returns(ClassName.bestGuess("Boolean"))
+                                .build())
+                        .build())
+                .addProperty(PropertySpec
+                        .builder("browser", ClassName.bestGuess("Browser"))
+                        .addModifiers(KModifier.EXPECT)
+                        .build())
                 .build().writeTo(dir)
-
-        dir.resolve("browser.kt").appendText("\nexternal val browser: Browser")
     }
 
     private fun generateMainNamespace(group: Map.Entry<String, List<Namespace>>) {
@@ -40,13 +61,13 @@ class Generator(val dir: File) {
 
         val fileBuilder = FileSpec.builder(group.key, group.key)
 
-        val mainTypeBuilder = generateNamespace(mains, fileBuilder)
+        val mainTypeBuilder = generateNamespace(merge(mains), fileBuilder)
 
         group.value.filter { it.namespace != group.key }.forEach {
             val name = it.namespace.substringAfter(".")
             mainTypeBuilder.addProperty(PropertySpec.builder(name, ClassName.bestGuess(name.nameSpaceName())).build())
 
-            fileBuilder.addType(generateNamespace(listOf(it), fileBuilder).build())
+            fileBuilder.addType(generateNamespace(merge(listOf(it)), fileBuilder).build())
         }
 
         fileBuilder.addType(mainTypeBuilder.build())
@@ -56,24 +77,30 @@ class Generator(val dir: File) {
                 .writeTo(dir)
     }
 
-    private fun generateNamespace(namespaceParts: List<Namespace>, fileBuilder: FileSpec.Builder): TypeSpec.Builder {
-        val ns = merge(namespaceParts)
-
-        val name = ns.namespace.substringAfter(".").nameSpaceName()
-
-        val functions = ns.functions?.filter { !it.unsupported } ?: emptyList()
-
-        val builder = TypeSpec.expectClassBuilder(ClassName.bestGuess(name)).addModifiers(KModifier.EXPECT)
-        builder.addFunctions(functions.flatMap { generateFunctionWithOverloads(it) })
-
+    private fun generateNamespace(ns: Namespace, fileBuilder: FileSpec.Builder): TypeSpec.Builder {
         ns.types?.forEach { generateType(it, fileBuilder) }
 
-        return builder
+        val name = ns.namespace.substringAfter(".").nameSpaceName()
+        val functions = ns.functions?.filterNot { it.unsupported } ?: emptyList()
+        val events = ns.events?.filterNot { it.unsupported } ?: emptyList()
 
+        return TypeSpec.expectClassBuilder(ClassName.bestGuess(name))
+                .addModifiers(KModifier.EXPECT)
+                .addFunctions(functions.flatMap { generateFunctionWithOverloads(it) })
+                .addProperties(events.map { generateEvent(it) })
     }
 
-    private fun String.nameSpaceName() = capitalize() + "Namespace"
+    private fun generateEvent(event: Event): PropertySpec {
+        val type = ParameterizedTypeName.get(
+                ClassName.bestGuess("browser.Event"),
+                LambdaTypeName.get(
+                        returnType = ClassName.bestGuess("Unit"),
+                        parameters = event.parameters?.map { generateParameter(it.name!!, it).build() } ?: emptyList()
+                )
+        )
 
+        return PropertySpec.builder(event.name, type).build()
+    }
 
     private fun generateType(type: Type, fileBuilder: FileSpec.Builder) {
         val name = type.id!!
@@ -88,7 +115,7 @@ class Generator(val dir: File) {
             }
             "array" -> {
                 fileBuilder.addTypeAlias(TypeAliasSpec
-                        .builder(name, ClassName.bestGuess("Array<${parameterTypeName(ParameterContext("", type.items!!))}>"))
+                        .builder(name, ClassName.bestGuess("Array<${parameterTypeName(type.items!!)}>"))
                         .apply { type.description?.let { addKdoc(it.replace("%", "%%")) } }
                         .build())
                 return
@@ -121,7 +148,7 @@ class Generator(val dir: File) {
         typeBuilder
                 .addProperties(props.map {
                     PropertySpec
-                            .builder(it.key.escapeIfKeyword(), parameterType(ParameterContext(it.key, it.value)))
+                            .builder(it.key.escapeIfKeyword(), parameterType(it.key, it.value))
                             .apply { if (!external) initializer(it.key.escapeIfKeyword()) }
                             .apply { it.value.description?.let { addKdoc(it.replace("%", "%%") + "\n") } }
                             .build()
@@ -131,7 +158,7 @@ class Generator(val dir: File) {
             typeBuilder.primaryConstructor(FunSpec.constructorBuilder()
                     .addParameters(
                             props.map {
-                                generateParameter(ParameterContext(it.key, it.value)).build()
+                                generateParameter(it.key, it.value).build()
                             }
                     )
                     .build())
@@ -156,7 +183,7 @@ class Generator(val dir: File) {
         f.description?.let { builder.addKdoc(it + "\n") }
 
         parameters.forEach {
-            builder.addParameter(generateParameter(ParameterContext(it.name!!, it)).build())
+            builder.addParameter(generateParameter(it.name!!, it).build())
         }
 
         f.deprecated?.let {
@@ -169,26 +196,24 @@ class Generator(val dir: File) {
         return builder.build()
     }
 
-    private fun generateParameter(context: ParameterContext): ParameterSpec.Builder {
-        return ParameterSpec.builder(context.name.escapeIfKeyword(), parameterType(context))
+    private fun generateParameter(name: String, parameter: Parameter): ParameterSpec.Builder {
+        return ParameterSpec.builder(name.escapeIfKeyword(), parameterType(name, parameter))
     }
 
-    private fun parameterType(context: ParameterContext): TypeName {
-        if (context.parameter.type == "function") {
+    private fun parameterType(name: String, parameter: Parameter): TypeName {
+        if (parameter.type == "function") {
             //special case for Post.postMessage
 
-            if (context.name == "postMessage") {
+            if (name == "postMessage") {
                 return LambdaTypeName.get(parameters = *arrayOf(ClassName.bestGuess("Any")), returnType = ClassName.bestGuess("Unit"))
             }
 
             return LambdaTypeName.get(returnType = ClassName.bestGuess("Unit"))
         }
-        return ClassName.bestGuess(parameterTypeName(context))
+        return ClassName.bestGuess(parameterTypeName(parameter))
     }
 
-    private fun parameterTypeName(context: ParameterContext): String {
-        val p = context.parameter
-
+    private fun parameterTypeName(p: Parameter): String {
         p.`$ref`?.let {
             return if (it == "Promise") "Promise<Any?>" else it
         }
@@ -196,7 +221,7 @@ class Generator(val dir: File) {
         val suffix = if (p.optional) "?" else ""
 
         return when (p.type) {
-            "array" -> "Array<${parameterTypeName(context.copy(parameter = p.items!!))}>"
+            "array" -> "Array<${parameterTypeName(p.items!!)}>"
             "integer" -> "Int"
             "number" -> "Int"
             "string" -> "String"
@@ -212,18 +237,13 @@ class Generator(val dir: File) {
             is String -> {
                 val asyncParam = f.parameters!!.first { it.name == f.async }.parameters?.firstOrNull()
                 asyncParam?.let {
-                    parameterTypeName(ParameterContext(it.name!!, it))
+                    parameterTypeName(it)
                 } ?: "Any"
             }
             else -> null
         }
     }
 }
-
-data class ParameterContext(
-        val name: String,
-        val parameter: Parameter
-)
 
 private fun String.asPromiseType(): ParameterizedTypeName {
     return ParameterizedTypeName.get(
@@ -253,3 +273,4 @@ private fun List<Parameter>.getResolvedChoices(): List<List<Parameter>> {
     }
 }
 
+private fun String.nameSpaceName() = capitalize() + "Namespace"

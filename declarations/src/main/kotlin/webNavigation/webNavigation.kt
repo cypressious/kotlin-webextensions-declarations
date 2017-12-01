@@ -1,5 +1,6 @@
 package webNavigation
 
+import browser.Event
 import kotlin.js.Promise
 
 /**
@@ -95,7 +96,212 @@ external class Details4 {
     val url: String
 }
 
+external class Details5 {
+    /**
+     * The ID of the tab in which the navigation is about to occur.
+     */
+    val tabId: Int
+
+    val url: String
+
+    /**
+     * 0 indicates the navigation happens in the tab content window; a positive value indicates navigation in a subframe. Frame IDs are unique for a given tab and process.
+     */
+    val frameId: Int
+
+    /**
+     * ID of frame that wraps the frame. Set to -1 of no parent frame exists.
+     */
+    val parentFrameId: Int
+
+    /**
+     * The time when the browser was about to start the navigation, in milliseconds since the epoch.
+     */
+    val timeStamp: Int
+}
+
+external class Details6 {
+    /**
+     * The ID of the tab in which the navigation occurs.
+     */
+    val tabId: Int
+
+    val url: String
+
+    /**
+     * 0 indicates the navigation happens in the tab content window; a positive value indicates navigation in a subframe. Frame IDs are unique within a tab.
+     */
+    val frameId: Int
+
+    /**
+     * The time when the navigation was committed, in milliseconds since the epoch.
+     */
+    val timeStamp: Int
+}
+
+external class Details7 {
+    /**
+     * The ID of the tab in which the navigation occurs.
+     */
+    val tabId: Int
+
+    val url: String
+
+    /**
+     * 0 indicates the navigation happens in the tab content window; a positive value indicates navigation in a subframe. Frame IDs are unique within a tab.
+     */
+    val frameId: Int
+
+    /**
+     * The time when the page's DOM was fully constructed, in milliseconds since the epoch.
+     */
+    val timeStamp: Int
+}
+
+external class Details8 {
+    /**
+     * The ID of the tab in which the navigation occurs.
+     */
+    val tabId: Int
+
+    val url: String
+
+    /**
+     * 0 indicates the navigation happens in the tab content window; a positive value indicates navigation in a subframe. Frame IDs are unique within a tab.
+     */
+    val frameId: Int
+
+    /**
+     * The time when the document finished loading, in milliseconds since the epoch.
+     */
+    val timeStamp: Int
+}
+
+external class Details9 {
+    /**
+     * The ID of the tab in which the navigation occurs.
+     */
+    val tabId: Int
+
+    val url: String
+
+    /**
+     * 0 indicates the navigation happens in the tab content window; a positive value indicates navigation in a subframe. Frame IDs are unique within a tab.
+     */
+    val frameId: Int
+
+    /**
+     * The time when the error occurred, in milliseconds since the epoch.
+     */
+    val timeStamp: Int
+}
+
+external class Details10 {
+    /**
+     * The ID of the tab in which the navigation is triggered.
+     */
+    val sourceTabId: Int
+
+    /**
+     * The ID of the process runs the renderer for the source tab.
+     */
+    val sourceProcessId: Int
+
+    /**
+     * The ID of the frame with sourceTabId in which the navigation is triggered. 0 indicates the main frame.
+     */
+    val sourceFrameId: Int
+
+    /**
+     * The URL to be opened in the new window.
+     */
+    val url: String
+
+    /**
+     * The ID of the tab in which the url is opened
+     */
+    val tabId: Int
+
+    /**
+     * The time when the browser was about to create a new view, in milliseconds since the epoch.
+     */
+    val timeStamp: Int
+}
+
+external class Details11 {
+    /**
+     * The ID of the tab in which the navigation occurs.
+     */
+    val tabId: Int
+
+    val url: String
+
+    /**
+     * 0 indicates the navigation happens in the tab content window; a positive value indicates navigation in a subframe. Frame IDs are unique within a tab.
+     */
+    val frameId: Int
+
+    /**
+     * The time when the navigation was committed, in milliseconds since the epoch.
+     */
+    val timeStamp: Int
+}
+
+external class Details12 {
+    /**
+     * The ID of the tab that was replaced.
+     */
+    val replacedTabId: Int
+
+    /**
+     * The ID of the tab that replaced the old tab.
+     */
+    val tabId: Int
+
+    /**
+     * The time when the replacement happened, in milliseconds since the epoch.
+     */
+    val timeStamp: Int
+}
+
+external class Details13 {
+    /**
+     * The ID of the tab in which the navigation occurs.
+     */
+    val tabId: Int
+
+    val url: String
+
+    /**
+     * 0 indicates the navigation happens in the tab content window; a positive value indicates navigation in a subframe. Frame IDs are unique within a tab.
+     */
+    val frameId: Int
+
+    /**
+     * The time when the navigation was committed, in milliseconds since the epoch.
+     */
+    val timeStamp: Int
+}
+
 external class WebNavigationNamespace {
+    val onBeforeNavigate: Event<(details: Details5) -> Unit>
+
+    val onCommitted: Event<(details: Details6) -> Unit>
+
+    val onDOMContentLoaded: Event<(details: Details7) -> Unit>
+
+    val onCompleted: Event<(details: Details8) -> Unit>
+
+    val onErrorOccurred: Event<(details: Details9) -> Unit>
+
+    val onCreatedNavigationTarget: Event<(details: Details10) -> Unit>
+
+    val onReferenceFragmentUpdated: Event<(details: Details11) -> Unit>
+
+    val onTabReplaced: Event<(details: Details12) -> Unit>
+
+    val onHistoryStateUpdated: Event<(details: Details13) -> Unit>
+
     /**
      * Retrieves information about the given frame. A frame refers to an &lt;iframe&gt; or a &lt;frame&gt; of a web page and is identified by a tab ID and a frame ID.
      */

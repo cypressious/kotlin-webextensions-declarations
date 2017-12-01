@@ -1,5 +1,6 @@
 package contextualIdentities
 
+import browser.Event
 import kotlin.js.Promise
 
 /**
@@ -81,7 +82,34 @@ class Details3(
         val icon: String?
 )
 
+external class ChangeInfo {
+    /**
+     * Contextual identity that has been updated
+     */
+    val contextualIdentity: ContextualIdentity
+}
+
+external class ChangeInfo2 {
+    /**
+     * Contextual identity that has been created
+     */
+    val contextualIdentity: ContextualIdentity
+}
+
+external class ChangeInfo3 {
+    /**
+     * Contextual identity that has been removed
+     */
+    val contextualIdentity: ContextualIdentity
+}
+
 external class ContextualIdentitiesNamespace {
+    val onUpdated: Event<(changeInfo: ChangeInfo) -> Unit>
+
+    val onCreated: Event<(changeInfo: ChangeInfo2) -> Unit>
+
+    val onRemoved: Event<(changeInfo: ChangeInfo3) -> Unit>
+
     /**
      * Retrieves information about a single contextual identity.
      */

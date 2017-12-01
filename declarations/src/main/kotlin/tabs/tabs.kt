@@ -1,5 +1,6 @@
 package tabs
 
+import browser.Event
 import extensionTypes.ImageDetails
 import extensionTypes.InjectDetails
 import kotlin.js.Promise
@@ -460,7 +461,163 @@ typealias TabIds2 = Any
  * The tab or list of tabs to discard. */
 typealias TabIds3 = Any
 
+/**
+ * Lists the changes to the state of the tab that was updated.
+ */
+external class ChangeInfo {
+    /**
+     * The status of the tab. Can be either <em>loading</em> or <em>complete</em>.
+     */
+    val status: String?
+
+    /**
+     * True while the tab is not loaded with content.
+     */
+    val discarded: Boolean?
+
+    /**
+     * The tab's URL if it has changed.
+     */
+    val url: String?
+
+    /**
+     * The tab's new pinned state.
+     */
+    val pinned: Boolean?
+
+    /**
+     * The tab's new audible state.
+     */
+    val audible: Boolean?
+
+    /**
+     * The tab's new muted state and the reason for the change.
+     */
+    val mutedInfo: MutedInfo
+
+    /**
+     * The tab's new favicon URL.
+     */
+    val favIconUrl: String?
+}
+
+external class MoveInfo {
+    val windowId: Int
+
+    val fromIndex: Int
+
+    val toIndex: Int
+}
+
+external class SelectInfo {
+    /**
+     * The ID of the window the selected tab changed inside of.
+     */
+    val windowId: Int
+}
+
+external class SelectInfo2 {
+    /**
+     * The ID of the window the selected tab changed inside of.
+     */
+    val windowId: Int
+}
+
+external class ActiveInfo {
+    /**
+     * The ID of the tab that has become active.
+     */
+    val tabId: Int
+
+    /**
+     * The ID of the window the active tab changed inside of.
+     */
+    val windowId: Int
+}
+
+external class SelectInfo3 {
+    /**
+     * The window whose tabs changed.
+     */
+    val windowId: Int
+
+    /**
+     * All highlighted tabs in the window.
+     */
+    val tabIds: Array<Int>
+}
+
+external class HighlightInfo2 {
+    /**
+     * The window whose tabs changed.
+     */
+    val windowId: Int
+
+    /**
+     * All highlighted tabs in the window.
+     */
+    val tabIds: Array<Int>
+}
+
+external class DetachInfo {
+    val oldWindowId: Int
+
+    val oldPosition: Int
+}
+
+external class AttachInfo {
+    val newWindowId: Int
+
+    val newPosition: Int
+}
+
+external class RemoveInfo {
+    /**
+     * The window whose tab is closed.
+     */
+    val windowId: Int
+
+    /**
+     * True when the tab is being closed because its window is being closed.
+     */
+    val isWindowClosing: Boolean
+}
+
+external class ZoomChangeInfo {
+    val tabId: Int
+
+    val oldZoomFactor: Int
+
+    val newZoomFactor: Int
+
+    val zoomSettings: ZoomSettings
+}
+
 external class TabsNamespace {
+    val onCreated: Event<(tab: Tab) -> Unit>
+
+    val onUpdated: Event<(
+            tabId: Int,
+            changeInfo: ChangeInfo,
+            tab: Tab
+    ) -> Unit>
+
+    val onMoved: Event<(tabId: Int, moveInfo: MoveInfo) -> Unit>
+
+    val onActivated: Event<(activeInfo: ActiveInfo) -> Unit>
+
+    val onHighlighted: Event<(highlightInfo: HighlightInfo2) -> Unit>
+
+    val onDetached: Event<(tabId: Int, detachInfo: DetachInfo) -> Unit>
+
+    val onAttached: Event<(tabId: Int, attachInfo: AttachInfo) -> Unit>
+
+    val onRemoved: Event<(tabId: Int, removeInfo: RemoveInfo) -> Unit>
+
+    val onReplaced: Event<(addedTabId: Int, removedTabId: Int) -> Unit>
+
+    val onZoomChange: Event<(ZoomChangeInfo: ZoomChangeInfo) -> Unit>
+
     /**
      * Retrieves details about the specified tab.
      */

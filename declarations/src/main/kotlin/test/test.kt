@@ -1,5 +1,6 @@
 package test
 
+import browser.Event
 import kotlin.js.Promise
 
 typealias ExpectedError = Any
@@ -9,6 +10,8 @@ typealias Promise = Any
 typealias Test = Any
 
 external class TestNamespace {
+    val onMessage: Event<(message: String, argument: Any) -> Unit>
+
     /**
      * Notifies the browser process that test code running in the extension failed.  This is only used for internal unit testing.
      */

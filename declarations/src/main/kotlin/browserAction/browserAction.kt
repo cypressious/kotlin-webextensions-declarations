@@ -1,6 +1,8 @@
 package browserAction
 
+import browser.Event
 import kotlin.js.Promise
+import tabs.Tab
 
 typealias ColorArray = Array<Int>
 
@@ -88,6 +90,8 @@ class Details9(/**
 val tabId: Int?)
 
 external class BrowserActionNamespace {
+    val onClicked: Event<(tab: Tab) -> Unit>
+
     /**
      * Sets the title of the browser action. This shows up in the tooltip.
      */
