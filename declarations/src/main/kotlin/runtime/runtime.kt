@@ -1,8 +1,8 @@
 package runtime
 
 import events.Event
-import tabs.Tab
 import kotlin.js.Promise
+import tabs.Tab
 
 /**
  * An object which allows two way communication with other pages.
@@ -198,13 +198,13 @@ external class RuntimeNamespace {
     val onConnectExternal: browser.Event<(port: Port) -> Unit>
 
     val onMessage: browser.Event<(
-            message: Any?,
+            message: dynamic,
             sender: MessageSender,
             sendResponse: () -> Unit
     ) -> Unit>
 
     val onMessageExternal: browser.Event<(
-            message: Any?,
+            message: dynamic,
             sender: MessageSender,
             sendResponse: () -> Unit
     ) -> Unit>
@@ -254,14 +254,14 @@ external class RuntimeNamespace {
      */
     fun sendMessage(
             extensionId: String? = definedExternally,
-            message: Any,
+            message: dynamic,
             options: Options? = definedExternally
-    ): Promise<Any>
+    ): Promise<dynamic>
 
     /**
      * Send a single message to a native application.
      */
-    fun sendNativeMessage(application: String, message: Any): Promise<Any>
+    fun sendNativeMessage(application: String, message: dynamic): Promise<dynamic>
 
     /**
      * Returns information about the current browser.

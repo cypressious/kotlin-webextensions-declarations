@@ -6,12 +6,12 @@ external class StorageChange {
     /**
      * The old value of the item, if there was an old value.
      */
-    var oldValue: Any?
+    var oldValue: dynamic
 
     /**
      * The new value of the item, if there is a new value.
      */
-    var newValue: Any?
+    var newValue: dynamic
 }
 
 typealias StorageArea = Any

@@ -10,7 +10,7 @@ typealias Promise = Any
 typealias Test = Any
 
 external class TestNamespace {
-    val onMessage: Event<(message: String, argument: Any) -> Unit>
+    val onMessage: Event<(message: String, argument: dynamic) -> Unit>
 
     /**
      * Notifies the browser process that test code running in the extension failed.  This is only used for internal unit testing.
@@ -30,19 +30,19 @@ external class TestNamespace {
     /**
      * Sends a string message to the browser process, generating a Notification that C++ test code can wait for.
      */
-    fun sendMessage(arg1: Any? = definedExternally, arg2: Any? = definedExternally)
+    fun sendMessage(arg1: dynamic = definedExternally, arg2: dynamic = definedExternally)
 
-    fun fail(message: Any? = definedExternally)
+    fun fail(message: dynamic = definedExternally)
 
-    fun succeed(message: Any? = definedExternally)
+    fun succeed(message: dynamic = definedExternally)
 
-    fun assertTrue(test: Any? = definedExternally, message: String? = definedExternally)
+    fun assertTrue(test: dynamic = definedExternally, message: String? = definedExternally)
 
-    fun assertFalse(test: Any? = definedExternally, message: String? = definedExternally)
+    fun assertFalse(test: dynamic = definedExternally, message: String? = definedExternally)
 
     fun assertEq(
-            expected: Any? = definedExternally,
-            actual: Any? = definedExternally,
+            expected: dynamic = definedExternally,
+            actual: dynamic = definedExternally,
             message: String? = definedExternally
     )
 

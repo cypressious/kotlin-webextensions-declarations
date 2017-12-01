@@ -231,32 +231,34 @@ class Generator(val dir: File) {
     }
 
 
-    private fun parameterType(name: String, parameter: Parameter): TypeName {
-        if (parameter.type == "function") {
-            //special case for Post.postMessage
+    private fun parameterType(name: String, parameter: Parameter): TypeName =
+            when (parameter.type) {
+                "function" -> {
+                    //special case for Post.postMessage
+                    if (name == "postMessage") {
+                        LambdaTypeName.get(parameters = *arrayOf(ClassName.bestGuess("Any")), returnType = ClassName.bestGuess("Unit"))
+                    } else {
+                        LambdaTypeName.get(returnType = ClassName.bestGuess("Unit"))
+                    }
+                }
 
-            if (name == "postMessage") {
-                return LambdaTypeName.get(parameters = *arrayOf(ClassName.bestGuess("Any")), returnType = ClassName.bestGuess("Unit"))
+                "array" -> ParameterizedTypeName.get(
+                        ClassName.bestGuess("Array"),
+                        parameterType("", parameter.items!!)
+                )
+
+                "any" -> ClassName("", "dynamic")
+
+                else -> {
+                    val type = ClassName.bestGuess(parameterTypeName(parameter))
+
+                    if (parameter.optional) {
+                         type.asNullable()
+                    } else {
+                        type
+                    }
+                }
             }
-
-            return LambdaTypeName.get(returnType = ClassName.bestGuess("Unit"))
-        }
-
-        if (parameter.type == "array") {
-            return ParameterizedTypeName.get(
-                    ClassName.bestGuess("Array"),
-                    parameterType("", parameter.items!!)
-            )
-        }
-
-        var type = ClassName.bestGuess(parameterTypeName(parameter))
-
-        if (parameter.optional) {
-            type = type.asNullable()
-        }
-
-        return type
-    }
 
     private fun parameterTypeName(p: Parameter): String {
         p.`$ref`?.let {
@@ -268,7 +270,7 @@ class Generator(val dir: File) {
             "number" -> "Int"
             "string" -> "String"
             "boolean" -> "Boolean"
-            "any" -> "Any"
+            "any" -> "dynamic"
             else -> throw IllegalArgumentException("Connot decide name for $p")
         }
     }

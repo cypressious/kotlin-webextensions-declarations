@@ -40,7 +40,7 @@ external class ExceptionInfo {
     /**
      * Set if the error occurred on the DevTools side before the expression is evaluated, contains the array of the values that may be substituted into the description string to provide more information about the cause of the error.
      */
-    var details: Array<Any>
+    var details: Array<dynamic>
 
     /**
      * Set if the evaluated code produces an unhandled exception.
@@ -74,7 +74,7 @@ external class InspectedWindowNamespace {
     /**
      * Evaluates a JavaScript expression in the context of the main frame of the inspected page. The expression must evaluate to a JSON-compliant object, otherwise an exception is thrown. The eval function can report either a DevTools-side error or a JavaScript exception that occurs during evaluation. In either case, the <code>result</code> parameter of the callback is <code>undefined</code>. In the case of a DevTools-side error, the <code>isException</code> parameter is non-null and has <code>isError</code> set to true and <code>code</code> set to an error code. In the case of a JavaScript error, <code>isException</code> is set to true and <code>value</code> is set to the string value of thrown object.
      */
-    fun eval(expression: String, options: Options? = definedExternally): Promise<Any>
+    fun eval(expression: String, options: Options? = definedExternally): Promise<dynamic>
 
     /**
      * Reloads the inspected page.

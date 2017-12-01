@@ -72,7 +72,7 @@ external class SessionsNamespace {
     fun setTabValue(
             tabId: Int,
             key: String,
-            value: Any
+            value: dynamic
     ): Promise<Any>
 
     /**
@@ -91,7 +91,7 @@ external class SessionsNamespace {
     fun setWindowValue(
             windowId: Int,
             key: String,
-            value: Any
+            value: dynamic
     ): Promise<Any>
 
     /**

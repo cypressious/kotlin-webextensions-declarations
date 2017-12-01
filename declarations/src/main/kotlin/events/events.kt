@@ -17,12 +17,12 @@ external class Rule {
     /**
      * List of conditions that can trigger the actions.
      */
-    var conditions: Array<Any>
+    var conditions: Array<dynamic>
 
     /**
      * List of actions that are triggered if one of the condtions is fulfilled.
      */
-    var actions: Array<Any>
+    var actions: Array<dynamic>
 
     /**
      * Optional priority of this rule. Defaults to 100.

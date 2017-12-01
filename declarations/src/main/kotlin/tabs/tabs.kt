@@ -3,8 +3,8 @@ package tabs
 import browser.Event
 import extensionTypes.ImageDetails
 import extensionTypes.InjectDetails
-import kotlin.js.Promise
 import runtime.Port
+import kotlin.js.Promise
 
 /**
  * An event that caused a muted state change. */
@@ -682,9 +682,9 @@ external class TabsNamespace {
      */
     fun sendMessage(
             tabId: Int,
-            message: Any,
+            message: dynamic,
             options: Options? = definedExternally
-    ): Promise<Any>
+    ): Promise<dynamic>
 
     /**
      * Creates a new tab.
@@ -759,7 +759,7 @@ external class TabsNamespace {
     /**
      * Injects JavaScript code into a page. For details, see the $(topic:content_scripts)[programmatic injection] section of the content scripts doc.
      */
-    fun executeScript(tabId: Int? = definedExternally, details: InjectDetails): Promise<Array<Any>>
+    fun executeScript(tabId: Int? = definedExternally, details: InjectDetails): Promise<Array<dynamic>>
 
     /**
      * Injects CSS into a page. For details, see the $(topic:content_scripts)[programmatic injection] section of the content scripts doc.
