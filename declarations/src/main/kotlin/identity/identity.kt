@@ -12,11 +12,13 @@ external class AccountInfo {
     var id: String
 }
 
-class Details(
-        var interactive: Boolean?,
-        var account: AccountInfo,
-        var scopes: Array<String>?
-)
+external class Details {
+    var interactive: Boolean?
+
+    var account: AccountInfo?
+
+    var scopes: Array<String>
+}
 
 external class Userinfo {
     var email: String
@@ -24,7 +26,9 @@ external class Userinfo {
     var id: String
 }
 
-class Details2(var token: String)
+external class Details2 {
+    var token: String
+}
 
 external class Userinfo2 {
     var email: String
@@ -32,7 +36,11 @@ external class Userinfo2 {
     var id: String
 }
 
-class Details3(var url: String, var interactive: Boolean?)
+external class Details3 {
+    var url: String
+
+    var interactive: Boolean?
+}
 
 external class IdentityNamespace {
     /**
@@ -43,5 +51,5 @@ external class IdentityNamespace {
     /**
      * Generates a redirect URL to be used in |launchWebAuthFlow|.
      */
-    fun getRedirectURL( path: String?)
+    fun getRedirectURL( path: String? = definedExternally)
 }

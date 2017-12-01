@@ -21,12 +21,12 @@ external class Session {
     /**
      * The $(ref:tabs.Tab), if this entry describes a tab. Either this or $(ref:sessions.Session.window) will be set.
      */
-    var tab: Tab
+    var tab: Tab?
 
     /**
      * The $(ref:windows.Window), if this entry describes a window. Either this or $(ref:sessions.Session.tab) will be set.
      */
-    var window: Window
+    var window: Window?
 }
 
 external class Device {
@@ -59,12 +59,12 @@ external class SessionsNamespace {
     /**
      * Gets the list of recently closed tabs and/or windows.
      */
-    fun getRecentlyClosed(filter: Filter): Promise<Array<Session>>
+    fun getRecentlyClosed(filter: Filter? = definedExternally): Promise<Array<Session>>
 
     /**
      * Reopens a $(ref:windows.Window) or $(ref:tabs.Tab), with an optional callback to run when the entry has been restored.
      */
-    fun restore(sessionId: String?): Promise<Session>
+    fun restore(sessionId: String? = definedExternally): Promise<Session>
 
     /**
      * Set a key/value pair on a given tab.

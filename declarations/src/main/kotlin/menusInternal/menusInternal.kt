@@ -12,7 +12,7 @@ external class OnClickData {
     /**
      * The parent ID, if any, for the item clicked.
      */
-    var parentMenuItemId: ParentMenuItemId
+    var parentMenuItemId: ParentMenuItemId?
 
     /**
      * One of 'image', 'video', or 'audio' if the context menu was activated on one of these types of elements.

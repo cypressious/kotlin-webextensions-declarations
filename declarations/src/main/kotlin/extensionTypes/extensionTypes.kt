@@ -11,7 +11,7 @@ external class ImageDetails {
     /**
      * The format of the resulting image.  Default is <code>"jpeg"</code>.
      */
-    var format: ImageFormat
+    var format: ImageFormat?
 
     /**
      * When format is <code>"jpeg"</code>, controls the quality of the resulting image.  This value is ignored for PNG images.  As quality is decreased, the resulting image will have more visual artifacts, and the number of bytes needed to store it will decrease.
@@ -59,12 +59,12 @@ external class InjectDetails {
     /**
      * The soonest that the JavaScript or CSS will be injected into the tab. Defaults to "document_idle".
      */
-    var runAt: RunAt
+    var runAt: RunAt?
 
     /**
      * The css origin of the stylesheet to inject. Defaults to "author".
      */
-    var cssOrigin: CSSOrigin
+    var cssOrigin: CSSOrigin?
 }
 
 typealias Date = Any

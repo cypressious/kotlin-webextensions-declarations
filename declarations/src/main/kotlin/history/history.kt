@@ -73,61 +73,75 @@ external class VisitItem {
     var transition: TransitionType
 }
 
-class Query(
-        /**
-         * A free-text query to the history service.  Leave empty to retrieve all pages.
-         */
-        var text: String,
-        /**
-         * Limit results to those visited after this date. If not specified, this defaults to 24 hours in the past.
-         */
-        var startTime: Date,
-        /**
-         * Limit results to those visited before this date.
-         */
-        var endTime: Date,
-        /**
-         * The maximum number of results to retrieve.  Defaults to 100.
-         */
-        var maxResults: Int?
-)
+external class Query {
+    /**
+     * A free-text query to the history service.  Leave empty to retrieve all pages.
+     */
+    var text: String
 
-class Details(/**
- * The URL for which to retrieve visit information.  It must be in the format as returned from a call to history.search.
- */
-var url: String)
+    /**
+     * Limit results to those visited after this date. If not specified, this defaults to 24 hours in the past.
+     */
+    var startTime: Date?
 
-class Details2(
-        /**
-         * The URL to add. Must be a valid URL that can be added to history.
-         */
-        var url: String,
-        /**
-         * The title of the page.
-         */
-        var title: String?,
-        /**
-         * The $(topic:transition-types)[transition type] for this visit from its referrer.
-         */
-        var transition: TransitionType,
-        /**
-         * The date when this visit occurred.
-         */
-        var visitTime: Date
-)
+    /**
+     * Limit results to those visited before this date.
+     */
+    var endTime: Date?
 
-class Details3(/**
- * The URL to remove.
- */
-var url: String)
+    /**
+     * The maximum number of results to retrieve.  Defaults to 100.
+     */
+    var maxResults: Int?
+}
 
-class Range(/**
- * Items added to history after this date.
- */
-var startTime: Date, /**
- * Items added to history before this date.
- */
-var endTime: Date)
+external class Details {
+    /**
+     * The URL for which to retrieve visit information.  It must be in the format as returned from a call to history.search.
+     */
+    var url: String
+}
+
+external class Details2 {
+    /**
+     * The URL to add. Must be a valid URL that can be added to history.
+     */
+    var url: String
+
+    /**
+     * The title of the page.
+     */
+    var title: String?
+
+    /**
+     * The $(topic:transition-types)[transition type] for this visit from its referrer.
+     */
+    var transition: TransitionType?
+
+    /**
+     * The date when this visit occurred.
+     */
+    var visitTime: Date?
+}
+
+external class Details3 {
+    /**
+     * The URL to remove.
+     */
+    var url: String
+}
+
+external class Range {
+    /**
+     * Items added to history after this date.
+     */
+    var startTime: Date
+
+    /**
+     * Items added to history before this date.
+     */
+    var endTime: Date
+}
 
 external class Removed {
     /**

@@ -95,7 +95,7 @@ class Generator(val dir: File) {
                 ClassName.bestGuess("browser.Event"),
                 LambdaTypeName.get(
                         returnType = ClassName.bestGuess("Unit"),
-                        parameters = event.parameters?.map { generateParameter(it.name!!, it).build() } ?: emptyList()
+                        parameters = event.parameters?.map { generateParameter(it.name!!, it, false).build() } ?: emptyList()
                 )
         )
 
@@ -115,7 +115,10 @@ class Generator(val dir: File) {
             }
             "array" -> {
                 fileBuilder.addTypeAlias(TypeAliasSpec
-                        .builder(name, ClassName.bestGuess("Array<${parameterTypeName(type.items!!)}>"))
+                        .builder(name, ParameterizedTypeName.get(
+                                ClassName.bestGuess("Array"),
+                                parameterType("", type.items!!)
+                        ))
                         .apply { type.description?.let { addKdoc(it.replace("%", "%%")) } }
                         .build())
                 return
@@ -134,7 +137,7 @@ class Generator(val dir: File) {
             return
         }
 
-        val typeBuilder = generateType(name, type.properties, !type.actual)
+        val typeBuilder = generateType(name, type.properties, true)
         type.description?.let { typeBuilder.addKdoc(it + "\n") }
 
         fileBuilder.addType(typeBuilder.build())
@@ -190,15 +193,39 @@ class Generator(val dir: File) {
             builder.addAnnotation(AnnotationSpec.builder(Deprecated::class).addMember("\"$it\"").build())
         }
 
-        val returnType = returnTypeName(f)
-        returnType?.let { builder.returns(returnType.asPromiseType()) }
+        returnType(f)?.let { builder.returns(it) }
 
         return builder.build()
     }
 
-    private fun generateParameter(name: String, parameter: Parameter): ParameterSpec.Builder {
+    private fun generateParameter(name: String, parameter: Parameter, allowDefault: Boolean = true): ParameterSpec.Builder {
         return ParameterSpec.builder(name.escapeIfKeyword(), parameterType(name, parameter))
+                .apply {
+                    if (allowDefault && parameter.optional) {
+                        defaultValue("definedExternally")
+                    }
+                }
     }
+
+    private fun returnType(f: Function): ParameterizedTypeName? {
+        val returnTypeName = when (f.async) {
+            true -> ClassName.bestGuess("Any")
+            is String -> {
+                val asyncParam = f.parameters!!.first { it.name == f.async }.parameters?.firstOrNull()
+                asyncParam?.let {
+                    parameterType("", it)
+                } ?: ClassName.bestGuess("Any")
+            }
+            else -> null
+        }
+
+        return returnTypeName?.let {
+            ParameterizedTypeName.get(
+                    ClassName.bestGuess("kotlin.js.Promise"),
+                    it)
+        }
+    }
+
 
     private fun parameterType(name: String, parameter: Parameter): TypeName {
         if (parameter.type == "function") {
@@ -210,7 +237,21 @@ class Generator(val dir: File) {
 
             return LambdaTypeName.get(returnType = ClassName.bestGuess("Unit"))
         }
-        return ClassName.bestGuess(parameterTypeName(parameter))
+
+        if (parameter.type == "array") {
+            return ParameterizedTypeName.get(
+                    ClassName.bestGuess("Array"),
+                    parameterType("", parameter.items!!)
+            )
+        }
+
+        var type = ClassName.bestGuess(parameterTypeName(parameter))
+
+        if (parameter.optional) {
+            type = type.asNullable()
+        }
+
+        return type
     }
 
     private fun parameterTypeName(p: Parameter): String {
@@ -218,37 +259,16 @@ class Generator(val dir: File) {
             return if (it == "Promise") "Promise<Any?>" else it
         }
 
-        val suffix = if (p.optional) "?" else ""
-
         return when (p.type) {
-            "array" -> "Array<${parameterTypeName(p.items!!)}>"
             "integer" -> "Int"
             "number" -> "Int"
             "string" -> "String"
             "boolean" -> "Boolean"
             "any" -> "Any"
             else -> throw IllegalArgumentException("Connot decide name for $p")
-        } + suffix
-    }
-
-    private fun returnTypeName(f: Function): String? {
-        return when (f.async) {
-            true -> "Any"
-            is String -> {
-                val asyncParam = f.parameters!!.first { it.name == f.async }.parameters?.firstOrNull()
-                asyncParam?.let {
-                    parameterTypeName(it)
-                } ?: "Any"
-            }
-            else -> null
         }
     }
-}
 
-private fun String.asPromiseType(): ParameterizedTypeName {
-    return ParameterizedTypeName.get(
-            ClassName.bestGuess("kotlin.js.Promise"),
-            ClassName.bestGuess(this))
 }
 
 private fun List<Parameter>.getResolvedChoices(): List<List<Parameter>> {

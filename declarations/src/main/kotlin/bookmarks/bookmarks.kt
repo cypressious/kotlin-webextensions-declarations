@@ -53,17 +53,17 @@ external class BookmarkTreeNode {
     /**
      * Indicates the reason why this node is unmodifiable. The <var>managed</var> value indicates that this node was configured by the system administrator or by the custodian of a supervised user. Omitted if the node can be modified by the user and the extension (default).
      */
-    var unmodifiable: BookmarkTreeNodeUnmodifiable
+    var unmodifiable: BookmarkTreeNodeUnmodifiable?
 
     /**
      * Indicates the type of the BookmarkTreeNode, which can be one of bookmark, folder or separator.
      */
-    var type: BookmarkTreeNodeType
+    var type: BookmarkTreeNodeType?
 
     /**
      * An ordered list of children of this node.
      */
-    var children: Array<BookmarkTreeNode>?
+    var children: Array<BookmarkTreeNode>
 }
 
 /**
@@ -84,7 +84,7 @@ external class CreateDetails {
     /**
      * Indicates the type of BookmarkTreeNode to create, which can be one of bookmark, folder or separator.
      */
-    var type: BookmarkTreeNodeType
+    var type: BookmarkTreeNodeType?
 }
 
 /**
@@ -95,9 +95,17 @@ typealias IdOrIdList = Any
  * Either a string of words and quoted phrases that are matched against bookmark URLs and titles, or an object. If an object, the properties <code>query</code>, <code>url</code>, and <code>title</code> may be specified and bookmarks matching all specified properties will be produced. */
 typealias Query = Any
 
-class Destination(var parentId: String?, var index: Int?)
+external class Destination {
+    var parentId: String?
 
-class Changes(var title: String?, var url: String?)
+    var index: Int?
+}
+
+external class Changes {
+    var title: String?
+
+    var url: String?
+}
 
 external class RemoveInfo {
     var parentId: String

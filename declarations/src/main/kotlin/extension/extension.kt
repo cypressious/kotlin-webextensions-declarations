@@ -16,20 +16,22 @@ external class LastError {
     var message: String
 }
 
-class FetchProperties(
-        /**
-         * The type of view to get. If omitted, returns all views (including background pages and tabs). Valid values: 'tab', 'popup', 'sidebar'.
-         */
-        var type: ViewType,
-        /**
-         * The window to restrict the search to. If omitted, returns all views.
-         */
-        var windowId: Int?,
-        /**
-         * Find a view according to a tab id. If this field is omitted, returns all views.
-         */
-        var tabId: Int?
-)
+external class FetchProperties {
+    /**
+     * The type of view to get. If omitted, returns all views (including background pages and tabs). Valid values: 'tab', 'popup', 'sidebar'.
+     */
+    var type: ViewType?
+
+    /**
+     * The window to restrict the search to. If omitted, returns all views.
+     */
+    var windowId: Int?
+
+    /**
+     * Find a view according to a tab id. If this field is omitted, returns all views.
+     */
+    var tabId: Int?
+}
 
 external class ExtensionNamespace {
     /**
@@ -40,7 +42,7 @@ external class ExtensionNamespace {
     /**
      * Returns an array of the JavaScript 'window' objects for each of the pages running inside the current extension.
      */
-    fun getViews(fetchProperties: FetchProperties)
+    fun getViews(fetchProperties: FetchProperties? = definedExternally)
 
     /**
      * Returns the JavaScript 'window' object for the background page running inside the current extension. Returns null if the extension has no background page.

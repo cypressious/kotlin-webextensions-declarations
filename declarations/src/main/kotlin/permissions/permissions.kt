@@ -1,17 +1,21 @@
 package permissions
 
 import kotlin.js.Promise
+import manifest.MatchPattern
+import manifest.MatchPatternInternal
+import manifest.OptionalPermission
+import manifest.Permission
 
 external class Permissions {
-    var permissions: Array<manifest.OptionalPermission>?
+    var permissions: Array<OptionalPermission>
 
-    var origins: Array<manifest.MatchPattern>?
+    var origins: Array<MatchPattern>
 }
 
 external class AnyPermissions {
-    var permissions: Array<manifest.Permission>?
+    var permissions: Array<Permission>
 
-    var origins: Array<manifest.MatchPatternInternal>?
+    var origins: Array<MatchPatternInternal>
 }
 
 external class PermissionsNamespace {

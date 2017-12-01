@@ -29,15 +29,15 @@ external class ThemeNamespace {
     /**
      * Returns the current theme for the specified window or the last focused window.
      */
-    fun getCurrent(windowId: Int?): Promise<Any>
+    fun getCurrent(windowId: Int? = definedExternally): Promise<Any>
 
     /**
      * Make complete updates to the theme. Resolves when the update has completed.
      */
-    fun update(windowId: Int?, details: ThemeType): Promise<Any>
+    fun update(windowId: Int? = definedExternally, details: ThemeType): Promise<Any>
 
     /**
      * Removes the updates made to the theme.
      */
-    fun reset(windowId: Int?): Promise<Any>
+    fun reset(windowId: Int? = definedExternally): Promise<Any>
 }

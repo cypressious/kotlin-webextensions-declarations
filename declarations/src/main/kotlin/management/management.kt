@@ -78,7 +78,7 @@ external class ExtensionInfo {
     /**
      * A reason the item is disabled.
      */
-    var disabledReason: ExtensionDisabledReason
+    var disabledReason: ExtensionDisabledReason?
 
     /**
      * The type of this extension. Will always return 'extension'.
@@ -103,17 +103,17 @@ external class ExtensionInfo {
     /**
      * A list of icon information. Note that this just reflects what was declared in the manifest, and the actual image at that url may be larger or smaller than what was declared, so you might consider using explicit width and height attributes on img tags referencing these images. See the <a href='manifest/icons'>manifest documentation on icons</a> for more details.
      */
-    var icons: Array<IconInfo>?
+    var icons: Array<IconInfo>
 
     /**
      * Returns a list of API based permissions.
      */
-    var permissions: Array<String>?
+    var permissions: Array<String>
 
     /**
      * Returns a list of host based permissions.
      */
-    var hostPermissions: Array<String>?
+    var hostPermissions: Array<String>
 
     /**
      * How the extension was installed.
@@ -121,13 +121,17 @@ external class ExtensionInfo {
     var installType: ExtensionInstallType
 }
 
-class Options(/**
- * Whether or not a confirm-uninstall dialog should prompt the user. Defaults to false.
- */
-var showConfirmDialog: Boolean?, /**
- * The message to display to a user when being asked to confirm removal of the extension.
- */
-var dialogMessage: String?)
+external class Options {
+    /**
+     * Whether or not a confirm-uninstall dialog should prompt the user. Defaults to false.
+     */
+    var showConfirmDialog: Boolean?
+
+    /**
+     * The message to display to a user when being asked to confirm removal of the extension.
+     */
+    var dialogMessage: String?
+}
 
 external class ManagementNamespace {
     val onDisabled: Event<(info: ExtensionInfo) -> Unit>
@@ -156,7 +160,7 @@ external class ManagementNamespace {
     /**
      * Uninstalls the calling extension. Note: This function can be used without requesting the 'management' permission in the manifest.
      */
-    fun uninstallSelf(options: Options): Promise<Any>
+    fun uninstallSelf(options: Options? = definedExternally): Promise<Any>
 
     /**
      * Enables or disables the given add-on.

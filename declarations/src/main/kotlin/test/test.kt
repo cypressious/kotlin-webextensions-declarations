@@ -20,7 +20,7 @@ external class TestNamespace {
     /**
      * Notifies the browser process that test code running in the extension passed.  This is only used for internal unit testing.
      */
-    fun notifyPass(message: String?)
+    fun notifyPass(message: String? = definedExternally)
 
     /**
      * Logs a message during internal unit testing.
@@ -30,31 +30,31 @@ external class TestNamespace {
     /**
      * Sends a string message to the browser process, generating a Notification that C++ test code can wait for.
      */
-    fun sendMessage(arg1: Any?, arg2: Any?)
+    fun sendMessage(arg1: Any? = definedExternally, arg2: Any? = definedExternally)
 
-    fun fail(message: Any?)
+    fun fail(message: Any? = definedExternally)
 
-    fun succeed(message: Any?)
+    fun succeed(message: Any? = definedExternally)
 
-    fun assertTrue(test: Any?, message: String?)
+    fun assertTrue(test: Any? = definedExternally, message: String? = definedExternally)
 
-    fun assertFalse(test: Any?, message: String?)
+    fun assertFalse(test: Any? = definedExternally, message: String? = definedExternally)
 
     fun assertEq(
-            expected: Any?,
-            actual: Any?,
-            message: String?
+            expected: Any? = definedExternally,
+            actual: Any? = definedExternally,
+            message: String? = definedExternally
     )
 
     fun assertRejects(
             promise: Promise<Any?>,
-            expectedError: ExpectedError,
-            message: String?
+            expectedError: ExpectedError? = definedExternally,
+            message: String? = definedExternally
     ): Promise<Any>
 
     fun assertThrows(
             func: () -> Unit,
-            expectedError: ExpectedError,
-            message: String?
+            expectedError: ExpectedError? = definedExternally,
+            message: String? = definedExternally
     )
 }

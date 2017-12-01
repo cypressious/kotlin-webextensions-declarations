@@ -11,7 +11,7 @@ external class Pkcs11Namespace {
     /**
      * Install a PKCS#11 module with a given name
      */
-    fun installModule(name: String, flags: Int?): Promise<Any>
+    fun installModule(name: String, flags: Int? = definedExternally): Promise<Any>
 
     /**
      * Remove an installed PKCS#11 module from firefox

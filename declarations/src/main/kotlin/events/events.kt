@@ -12,7 +12,7 @@ external class Rule {
     /**
      * Tags can be used to annotate rules and perform operations on sets of rules.
      */
-    var tags: Array<String>?
+    var tags: Array<String>
 
     /**
      * List of conditions that can trigger the actions.
@@ -131,12 +131,12 @@ external class UrlFilter {
     /**
      * Matches if the scheme of the URL is equal to any of the schemes specified in the array.
      */
-    var schemes: Array<String>?
+    var schemes: Array<String>
 
     /**
      * Matches if the port of the URL is contained in any of the specified port lists. For example <code>[80, 443, [1000, 1200]]</code> matches all requests on port 80, 443 and in the range 1000-1200.
      */
-    var ports: Array<Ports>?
+    var ports: Array<Ports>
 }
 
 typealias Ports = Any

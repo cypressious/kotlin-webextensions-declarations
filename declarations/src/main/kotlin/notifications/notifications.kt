@@ -68,7 +68,7 @@ external class CreateNotificationOptions {
     /**
      * Items for multi-item notifications.
      */
-    var items: Array<NotificationItem>?
+    var items: Array<NotificationItem>
 
     /**
      * Current progress ranges from 0 to 100.
@@ -85,7 +85,7 @@ external class UpdateNotificationOptions {
     /**
      * Which type of notification to display.
      */
-    var type: TemplateType
+    var type: TemplateType?
 
     /**
      * A URL to the sender's avatar, app icon, or a thumbnail for image notifications.
@@ -130,7 +130,7 @@ external class UpdateNotificationOptions {
     /**
      * Items for multi-item notifications.
      */
-    var items: Array<NotificationItem>?
+    var items: Array<NotificationItem>
 
     /**
      * Current progress ranges from 0 to 100.
@@ -171,7 +171,7 @@ external class NotificationsNamespace {
     /**
      * Creates and displays a notification.
      */
-    fun create(notificationId: String?, options: CreateNotificationOptions): Promise<String>
+    fun create(notificationId: String? = definedExternally, options: CreateNotificationOptions): Promise<String>
 
     /**
      * Clears an existing notification.

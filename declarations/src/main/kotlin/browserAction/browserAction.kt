@@ -10,18 +10,24 @@ typealias ColorArray = Array<Int>
  * Pixel data for an image. Must be an ImageData object (for example, from a <code>canvas</code> element). */
 typealias ImageDataType = Any
 
-class Details(/**
- * The string the browser action should display when moused over.
- */
-var title: String, /**
- * Limits the change to when a particular tab is selected. Automatically resets when the tab is closed.
- */
-var tabId: Int?)
+external class Details {
+    /**
+     * The string the browser action should display when moused over.
+     */
+    var title: String
 
-class Details2(/**
- * Specify the tab to get the title from. If no tab is specified, the non-tab-specific title is returned.
- */
-var tabId: Int?)
+    /**
+     * Limits the change to when a particular tab is selected. Automatically resets when the tab is closed.
+     */
+    var tabId: Int?
+}
+
+external class Details2 {
+    /**
+     * Specify the tab to get the title from. If no tab is specified, the non-tab-specific title is returned.
+     */
+    var tabId: Int?
+}
 
 /**
  * Either an ImageData object or a dictionary {size -> ImageData} representing icon to be set. If the icon is specified as a dictionary, the actual image to be used is chosen depending on screen's pixel density. If the number of image pixels that fit into one screen space unit equals <code>scale</code>, then image with size <code>scale</code> * 19 will be selected. Initially only scales 1 and 2 will be supported. At least one image must be specified. Note that 'details.imageData = foo' is equivalent to 'details.imageData = {'19': foo}' */
@@ -31,63 +37,83 @@ typealias ImageData = Any
  * Either a relative image path or a dictionary {size -> relative image path} pointing to icon to be set. If the icon is specified as a dictionary, the actual image to be used is chosen depending on screen's pixel density. If the number of image pixels that fit into one screen space unit equals <code>scale</code>, then image with size <code>scale</code> * 19 will be selected. Initially only scales 1 and 2 will be supported. At least one image must be specified. Note that 'details.path = foo' is equivalent to 'details.imageData = {'19': foo}' */
 typealias Path = Any
 
-class Details3(
-        /**
-         * Either an ImageData object or a dictionary {size -> ImageData} representing icon to be set. If the icon is specified as a dictionary, the actual image to be used is chosen depending on screen's pixel density. If the number of image pixels that fit into one screen space unit equals <code>scale</code>, then image with size <code>scale</code> * 19 will be selected. Initially only scales 1 and 2 will be supported. At least one image must be specified. Note that 'details.imageData = foo' is equivalent to 'details.imageData = {'19': foo}'
-         */
-        var imageData: ImageData,
-        /**
-         * Either a relative image path or a dictionary {size -> relative image path} pointing to icon to be set. If the icon is specified as a dictionary, the actual image to be used is chosen depending on screen's pixel density. If the number of image pixels that fit into one screen space unit equals <code>scale</code>, then image with size <code>scale</code> * 19 will be selected. Initially only scales 1 and 2 will be supported. At least one image must be specified. Note that 'details.path = foo' is equivalent to 'details.imageData = {'19': foo}'
-         */
-        var path: Path,
-        /**
-         * Limits the change to when a particular tab is selected. Automatically resets when the tab is closed.
-         */
-        var tabId: Int?
-)
+external class Details3 {
+    /**
+     * Either an ImageData object or a dictionary {size -> ImageData} representing icon to be set. If the icon is specified as a dictionary, the actual image to be used is chosen depending on screen's pixel density. If the number of image pixels that fit into one screen space unit equals <code>scale</code>, then image with size <code>scale</code> * 19 will be selected. Initially only scales 1 and 2 will be supported. At least one image must be specified. Note that 'details.imageData = foo' is equivalent to 'details.imageData = {'19': foo}'
+     */
+    var imageData: ImageData?
 
-class Details4(/**
- * Limits the change to when a particular tab is selected. Automatically resets when the tab is closed.
- */
-var tabId: Int?, /**
- * The html file to show in a popup.  If set to the empty string (''), no popup is shown.
- */
-var popup: String)
+    /**
+     * Either a relative image path or a dictionary {size -> relative image path} pointing to icon to be set. If the icon is specified as a dictionary, the actual image to be used is chosen depending on screen's pixel density. If the number of image pixels that fit into one screen space unit equals <code>scale</code>, then image with size <code>scale</code> * 19 will be selected. Initially only scales 1 and 2 will be supported. At least one image must be specified. Note that 'details.path = foo' is equivalent to 'details.imageData = {'19': foo}'
+     */
+    var path: Path?
 
-class Details5(/**
- * Specify the tab to get the popup from. If no tab is specified, the non-tab-specific popup is returned.
- */
-var tabId: Int?)
+    /**
+     * Limits the change to when a particular tab is selected. Automatically resets when the tab is closed.
+     */
+    var tabId: Int?
+}
 
-class Details6(/**
- * Any number of characters can be passed, but only about four can fit in the space.
- */
-var text: String, /**
- * Limits the change to when a particular tab is selected. Automatically resets when the tab is closed.
- */
-var tabId: Int?)
+external class Details4 {
+    /**
+     * Limits the change to when a particular tab is selected. Automatically resets when the tab is closed.
+     */
+    var tabId: Int?
 
-class Details7(/**
- * Specify the tab to get the badge text from. If no tab is specified, the non-tab-specific badge text is returned.
- */
-var tabId: Int?)
+    /**
+     * The html file to show in a popup.  If set to the empty string (''), no popup is shown.
+     */
+    var popup: String
+}
+
+external class Details5 {
+    /**
+     * Specify the tab to get the popup from. If no tab is specified, the non-tab-specific popup is returned.
+     */
+    var tabId: Int?
+}
+
+external class Details6 {
+    /**
+     * Any number of characters can be passed, but only about four can fit in the space.
+     */
+    var text: String
+
+    /**
+     * Limits the change to when a particular tab is selected. Automatically resets when the tab is closed.
+     */
+    var tabId: Int?
+}
+
+external class Details7 {
+    /**
+     * Specify the tab to get the badge text from. If no tab is specified, the non-tab-specific badge text is returned.
+     */
+    var tabId: Int?
+}
 
 /**
  * An array of four integers in the range [0,255] that make up the RGBA color of the badge. For example, opaque red is <code>[255, 0, 0, 255]</code>. Can also be a string with a CSS value, with opaque red being <code>#FF0000</code> or <code>#F00</code>. */
 typealias Color = Any
 
-class Details8(/**
- * An array of four integers in the range [0,255] that make up the RGBA color of the badge. For example, opaque red is <code>[255, 0, 0, 255]</code>. Can also be a string with a CSS value, with opaque red being <code>#FF0000</code> or <code>#F00</code>.
- */
-var color: Color, /**
- * Limits the change to when a particular tab is selected. Automatically resets when the tab is closed.
- */
-var tabId: Int?)
+external class Details8 {
+    /**
+     * An array of four integers in the range [0,255] that make up the RGBA color of the badge. For example, opaque red is <code>[255, 0, 0, 255]</code>. Can also be a string with a CSS value, with opaque red being <code>#FF0000</code> or <code>#F00</code>.
+     */
+    var color: Color
 
-class Details9(/**
- * Specify the tab to get the badge background color from. If no tab is specified, the non-tab-specific badge background color is returned.
- */
-var tabId: Int?)
+    /**
+     * Limits the change to when a particular tab is selected. Automatically resets when the tab is closed.
+     */
+    var tabId: Int?
+}
+
+external class Details9 {
+    /**
+     * Specify the tab to get the badge background color from. If no tab is specified, the non-tab-specific badge background color is returned.
+     */
+    var tabId: Int?
+}
 
 external class BrowserActionNamespace {
     val onClicked: Event<(tab: Tab) -> Unit>
@@ -140,12 +166,12 @@ external class BrowserActionNamespace {
     /**
      * Enables the browser action for a tab. By default, browser actions are enabled.
      */
-    fun enable(tabId: Int?): Promise<Any>
+    fun enable(tabId: Int? = definedExternally): Promise<Any>
 
     /**
      * Disables the browser action for a tab.
      */
-    fun disable(tabId: Int?): Promise<Any>
+    fun disable(tabId: Int? = definedExternally): Promise<Any>
 
     /**
      * Opens the extension popup window in the active window.

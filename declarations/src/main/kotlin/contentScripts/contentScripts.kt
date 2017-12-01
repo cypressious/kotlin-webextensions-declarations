@@ -2,6 +2,7 @@ package contentScripts
 
 import extensionTypes.RunAt
 import kotlin.js.Promise
+import manifest.MatchPattern
 
 typealias ExtensionFileOrCode = Any
 
@@ -9,23 +10,23 @@ typealias ExtensionFileOrCode = Any
  * Details of a content script registered programmatically
  */
 external class RegisteredContentScriptOptions {
-    var matches: Array<manifest.MatchPattern>
+    var matches: Array<MatchPattern>
 
-    var excludeMatches: Array<manifest.MatchPattern>?
+    var excludeMatches: Array<MatchPattern>
 
-    var includeGlobs: Array<String>?
+    var includeGlobs: Array<String>
 
-    var excludeGlobs: Array<String>?
+    var excludeGlobs: Array<String>
 
     /**
      * The list of CSS files to inject
      */
-    var css: Array<ExtensionFileOrCode>?
+    var css: Array<ExtensionFileOrCode>
 
     /**
      * The list of JS files to inject
      */
-    var js: Array<ExtensionFileOrCode>?
+    var js: Array<ExtensionFileOrCode>
 
     /**
      * If allFrames is <code>true</code>, implies that the JavaScript or CSS should be injected into all frames of current page. By default, it's <code>false</code> and is only injected into the top frame.
@@ -40,7 +41,7 @@ external class RegisteredContentScriptOptions {
     /**
      * The soonest that the JavaScript or CSS will be injected into the tab. Defaults to "document_idle".
      */
-    var runAt: RunAt
+    var runAt: RunAt?
 }
 
 /**

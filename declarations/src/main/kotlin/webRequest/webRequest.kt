@@ -33,7 +33,7 @@ external class RequestFilter {
     /**
      * A list of request types. Requests that cannot match any of the types will be filtered out.
      */
-    var types: Array<ResourceType>?
+    var types: Array<ResourceType>
 
     var tabId: Int?
 
@@ -61,17 +61,17 @@ external class BlockingResponse {
     /**
      * Only used as a response to the onBeforeSendHeaders event. If set, the request is made with these request headers instead.
      */
-    var requestHeaders: HttpHeaders
+    var requestHeaders: HttpHeaders?
 
     /**
      * Only used as a response to the onHeadersReceived event. If set, the server is assumed to have responded with these response headers instead. Only return <code>responseHeaders</code> if you really want to modify the headers in order to limit the number of conflicts (only one extension may modify <code>responseHeaders</code> for each request).
      */
-    var responseHeaders: HttpHeaders
+    var responseHeaders: HttpHeaders?
 
     /**
      * Only used as a response to the onAuthRequired event. If set, the request is made using the supplied credentials.
      */
-    var authCredentials: AuthCredentials
+    var authCredentials: AuthCredentials?
 }
 
 /**
@@ -103,7 +103,7 @@ external class HttpHeaders2 {
     /**
      * Value of the HTTP header if it cannot be represented by UTF-8, stored as individual byte values (0..255).
      */
-    var binaryValue: Array<Int>?
+    var binaryValue: Array<Int>
 }
 
 /**
@@ -132,12 +132,12 @@ external class RequestBody {
     /**
      * If the request method is POST and the body is a sequence of key-value pairs encoded in UTF8, encoded as either multipart/form-data, or application/x-www-form-urlencoded, this dictionary is present and for each key contains the list of all values for that key. If the data is of another media type, or if it is malformed, the dictionary is not present. An example value of this dictionary is {'key': ['value1', 'value2']}.
      */
-    var formData: FormData
+    var formData: FormData?
 
     /**
      * If the request method is PUT or POST, and the body is not already parsed in formData, then the unparsed request body elements are contained in this array.
      */
-    var raw: Array<UploadData>?
+    var raw: Array<UploadData>
 }
 
 external class Details {
@@ -176,7 +176,7 @@ external class Details {
     /**
      * Contains the HTTP request body data. Only provided if extraInfoSpec contains 'requestBody'.
      */
-    var requestBody: RequestBody
+    var requestBody: RequestBody?
 
     /**
      * The ID of the tab in which the request takes place. Set to -1 if the request isn't related to a tab.
@@ -245,7 +245,7 @@ external class Details2 {
     /**
      * The HTTP request headers that are going to be sent out with this request.
      */
-    var requestHeaders: HttpHeaders
+    var requestHeaders: HttpHeaders?
 }
 
 external class Details3 {
@@ -299,7 +299,7 @@ external class Details3 {
     /**
      * The HTTP request headers that have been sent out with this request.
      */
-    var requestHeaders: HttpHeaders
+    var requestHeaders: HttpHeaders?
 }
 
 external class Details4 {
@@ -358,7 +358,7 @@ external class Details4 {
     /**
      * The HTTP response headers that have been received with this response.
      */
-    var responseHeaders: HttpHeaders
+    var responseHeaders: HttpHeaders?
 
     /**
      * Standard HTTP status code returned by the server.
@@ -446,7 +446,7 @@ external class Details5 {
     /**
      * The HTTP response headers that were received along with this response.
      */
-    var responseHeaders: HttpHeaders
+    var responseHeaders: HttpHeaders?
 
     /**
      * HTTP status line of the response or the 'HTTP/0.9 200 OK' string for HTTP/0.9 responses (i.e., responses that lack a status line) or an empty string if there are no headers.
@@ -527,7 +527,7 @@ external class Details6 {
     /**
      * The HTTP response headers that were received along with this response.
      */
-    var responseHeaders: HttpHeaders
+    var responseHeaders: HttpHeaders?
 
     /**
      * HTTP status line of the response or the 'HTTP/0.9 200 OK' string for HTTP/0.9 responses (i.e., responses that lack a status line) or an empty string if there are no headers.
@@ -606,7 +606,7 @@ external class Details7 {
     /**
      * The HTTP response headers that were received along with this redirect.
      */
-    var responseHeaders: HttpHeaders
+    var responseHeaders: HttpHeaders?
 
     /**
      * HTTP status line of the response or the 'HTTP/0.9 200 OK' string for HTTP/0.9 responses (i.e., responses that lack a status line) or an empty string if there are no headers.
@@ -680,7 +680,7 @@ external class Details8 {
     /**
      * The HTTP response headers that were received along with this response.
      */
-    var responseHeaders: HttpHeaders
+    var responseHeaders: HttpHeaders?
 
     /**
      * HTTP status line of the response or the 'HTTP/0.9 200 OK' string for HTTP/0.9 responses (i.e., responses that lack a status line) or an empty string if there are no headers.
@@ -761,7 +761,7 @@ external class WebRequestNamespace {
 
     val onHeadersReceived: Event<(details: Details4) -> Unit>
 
-    val onAuthRequired: Event<(details: Details5, callback: Callback) -> Unit>
+    val onAuthRequired: Event<(details: Details5, callback: Callback?) -> Unit>
 
     val onResponseStarted: Event<(details: Details6) -> Unit>
 

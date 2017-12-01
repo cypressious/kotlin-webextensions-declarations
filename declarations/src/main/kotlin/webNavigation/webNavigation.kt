@@ -1,6 +1,7 @@
 package webNavigation
 
 import browser.Event
+import events.UrlFilter
 import kotlin.js.Promise
 
 /**
@@ -10,26 +11,28 @@ typealias TransitionType = String
 typealias TransitionQualifier = String
 
 external class EventUrlFilters {
-    var url: Array<events.UrlFilter>
+    var url: Array<UrlFilter>
 }
 
 /**
  * Information about the frame to retrieve information about.
  */
-class Details(
-        /**
-         * The ID of the tab in which the frame is.
-         */
-        var tabId: Int,
-        /**
-         * The ID of the process runs the renderer for this tab.
-         */
-        var processId: Int?,
-        /**
-         * The ID of the frame in the given tab.
-         */
-        var frameId: Int
-)
+external class Details {
+    /**
+     * The ID of the tab in which the frame is.
+     */
+    var tabId: Int
+
+    /**
+     * The ID of the process runs the renderer for this tab.
+     */
+    var processId: Int?
+
+    /**
+     * The ID of the frame in the given tab.
+     */
+    var frameId: Int
+}
 
 /**
  * Information about the requested frame, null if the specified frame ID and/or tab ID are invalid.
@@ -64,10 +67,12 @@ external class Details2 {
 /**
  * Information about the tab to retrieve all frames from.
  */
-class Details3(/**
- * The ID of the tab.
- */
-var tabId: Int)
+external class Details3 {
+    /**
+     * The ID of the tab.
+     */
+    var tabId: Int
+}
 
 external class Details4 {
     /**
@@ -305,10 +310,10 @@ external class WebNavigationNamespace {
     /**
      * Retrieves information about the given frame. A frame refers to an &lt;iframe&gt; or a &lt;frame&gt; of a web page and is identified by a tab ID and a frame ID.
      */
-    fun getFrame(details: Details): Promise<Details2>
+    fun getFrame(details: Details): Promise<Details2?>
 
     /**
      * Retrieves information about all frames of a given tab.
      */
-    fun getAllFrames(details: Details3): Promise<Array<Details4>?>
+    fun getAllFrames(details: Details3): Promise<Array<Details4>>
 }

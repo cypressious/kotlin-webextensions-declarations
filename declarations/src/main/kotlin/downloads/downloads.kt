@@ -75,7 +75,7 @@ external class DownloadItem {
     /**
      * Number indicating why a download was interrupted.
      */
-    var error: InterruptReason
+    var error: InterruptReason?
 
     /**
      * Number of bytes received so far from the host, without considering file compression.
@@ -128,27 +128,27 @@ external class DownloadQuery {
     /**
      * This array of search terms limits results to <a href='#type-DownloadItem'>DownloadItems</a> whose <code>filename</code> or <code>url</code> contain all of the search terms that do not begin with a dash '-' and none of the search terms that do begin with a dash.
      */
-    var query: Array<String>?
+    var query: Array<String>
 
     /**
      * Limits results to downloads that started before the given ms since the epoch.
      */
-    var startedBefore: DownloadTime
+    var startedBefore: DownloadTime?
 
     /**
      * Limits results to downloads that started after the given ms since the epoch.
      */
-    var startedAfter: DownloadTime
+    var startedAfter: DownloadTime?
 
     /**
      * Limits results to downloads that ended before the given ms since the epoch.
      */
-    var endedBefore: DownloadTime
+    var endedBefore: DownloadTime?
 
     /**
      * Limits results to downloads that ended after the given ms since the epoch.
      */
-    var endedAfter: DownloadTime
+    var endedAfter: DownloadTime?
 
     /**
      * Limits results to downloads whose totalBytes is greater than the given integer.
@@ -178,7 +178,7 @@ external class DownloadQuery {
     /**
      * Setting elements of this array to <a href='#type-DownloadItem'>DownloadItem</a> properties in order to sort the search results. For example, setting <code>orderBy='startTime'</code> sorts the <a href='#type-DownloadItem'>DownloadItems</a> by their start time in ascending order. To specify descending order, prefix <code>orderBy</code> with a hyphen: '-startTime'.
      */
-    var orderBy: Array<String>?
+    var orderBy: Array<String>
 
     var id: Int?
 
@@ -195,7 +195,7 @@ external class DownloadQuery {
     /**
      * Indication of whether this download is thought to be safe or known to be suspicious.
      */
-    var danger: DangerType
+    var danger: DangerType?
 
     /**
      * The file's MIME type.
@@ -209,7 +209,7 @@ external class DownloadQuery {
     /**
      * Indicates whether the download is progressing, interrupted, or complete.
      */
-    var state: State
+    var state: State?
 
     /**
      * True if the download has stopped reading data from the host, but kept the connection open.
@@ -219,7 +219,7 @@ external class DownloadQuery {
     /**
      * Why a download was interrupted.
      */
-    var error: InterruptReason
+    var error: InterruptReason?
 
     /**
      * Number of bytes received so far from the host, without considering file compression.
@@ -239,53 +239,66 @@ external class DownloadQuery {
     var exists: Boolean?
 }
 
-class Headers(/**
- * Name of the HTTP header.
- */
-var name: String, /**
- * Value of the HTTP header.
- */
-var value: String)
+external class Headers {
+    /**
+     * Name of the HTTP header.
+     */
+    var name: String
+
+    /**
+     * Value of the HTTP header.
+     */
+    var value: String
+}
 
 /**
  * What to download and how.
  */
-class Options(
-        /**
-         * The URL to download.
-         */
-        var url: String,
-        /**
-         * A file path relative to the Downloads directory to contain the downloaded file.
-         */
-        var filename: String?,
-        /**
-         * Whether to associate the download with a private browsing session.
-         */
-        var incognito: Boolean?,
-        var conflictAction: FilenameConflictAction,
-        /**
-         * Use a file-chooser to allow the user to select a filename. If the option is not specified, the file chooser will be shown only if the Firefox "Always ask you where to save files" option is enabled (i.e. the pref <code>browser.download.useDownloadDir</code> is set to <code>false</code>).
-         */
-        var saveAs: Boolean?,
-        /**
-         * The HTTP method to use if the URL uses the HTTP[S] protocol.
-         */
-        var method: String?,
-        /**
-         * Extra HTTP headers to send with the request if the URL uses the HTTP[s] protocol. Each header is represented as a dictionary containing the keys <code>name</code> and either <code>value</code> or <code>binaryValue</code>, restricted to those allowed by XMLHttpRequest.
-         */
-        var headers: Array<Headers>?,
-        /**
-         * Post body.
-         */
-        var body: String?
-)
+external class Options {
+    /**
+     * The URL to download.
+     */
+    var url: String
 
-class Options2(/**
- * The size of the icon.  The returned icon will be square with dimensions size * size pixels.  The default size for the icon is 32x32 pixels.
- */
-var size: Int?)
+    /**
+     * A file path relative to the Downloads directory to contain the downloaded file.
+     */
+    var filename: String?
+
+    /**
+     * Whether to associate the download with a private browsing session.
+     */
+    var incognito: Boolean?
+
+    var conflictAction: FilenameConflictAction?
+
+    /**
+     * Use a file-chooser to allow the user to select a filename. If the option is not specified, the file chooser will be shown only if the Firefox "Always ask you where to save files" option is enabled (i.e. the pref <code>browser.download.useDownloadDir</code> is set to <code>false</code>).
+     */
+    var saveAs: Boolean?
+
+    /**
+     * The HTTP method to use if the URL uses the HTTP[S] protocol.
+     */
+    var method: String?
+
+    /**
+     * Extra HTTP headers to send with the request if the URL uses the HTTP[s] protocol. Each header is represented as a dictionary containing the keys <code>name</code> and either <code>value</code> or <code>binaryValue</code>, restricted to those allowed by XMLHttpRequest.
+     */
+    var headers: Array<Headers>
+
+    /**
+     * Post body.
+     */
+    var body: String?
+}
+
+external class Options2 {
+    /**
+     * The size of the icon.  The returned icon will be square with dimensions size * size pixels.  The default size for the icon is 32x32 pixels.
+     */
+    var size: Int?
+}
 
 typealias Callback = Any
 
@@ -298,61 +311,61 @@ external class DownloadDelta {
     /**
      * Describes a change in a <a href='#type-DownloadItem'>DownloadItem</a>'s <code>url</code>.
      */
-    var url: StringDelta
+    var url: StringDelta?
 
     /**
      * Describes a change in a <a href='#type-DownloadItem'>DownloadItem</a>'s <code>filename</code>.
      */
-    var filename: StringDelta
+    var filename: StringDelta?
 
     /**
      * Describes a change in a <a href='#type-DownloadItem'>DownloadItem</a>'s <code>danger</code>.
      */
-    var danger: StringDelta
+    var danger: StringDelta?
 
     /**
      * Describes a change in a <a href='#type-DownloadItem'>DownloadItem</a>'s <code>mime</code>.
      */
-    var mime: StringDelta
+    var mime: StringDelta?
 
     /**
      * Describes a change in a <a href='#type-DownloadItem'>DownloadItem</a>'s <code>startTime</code>.
      */
-    var startTime: StringDelta
+    var startTime: StringDelta?
 
     /**
      * Describes a change in a <a href='#type-DownloadItem'>DownloadItem</a>'s <code>endTime</code>.
      */
-    var endTime: StringDelta
+    var endTime: StringDelta?
 
     /**
      * Describes a change in a <a href='#type-DownloadItem'>DownloadItem</a>'s <code>state</code>.
      */
-    var state: StringDelta
+    var state: StringDelta?
 
-    var canResume: BooleanDelta
+    var canResume: BooleanDelta?
 
     /**
      * Describes a change in a <a href='#type-DownloadItem'>DownloadItem</a>'s <code>paused</code>.
      */
-    var paused: BooleanDelta
+    var paused: BooleanDelta?
 
     /**
      * Describes a change in a <a href='#type-DownloadItem'>DownloadItem</a>'s <code>error</code>.
      */
-    var error: StringDelta
+    var error: StringDelta?
 
     /**
      * Describes a change in a <a href='#type-DownloadItem'>DownloadItem</a>'s <code>totalBytes</code>.
      */
-    var totalBytes: DoubleDelta
+    var totalBytes: DoubleDelta?
 
     /**
      * Describes a change in a <a href='#type-DownloadItem'>DownloadItem</a>'s <code>fileSize</code>.
      */
-    var fileSize: DoubleDelta
+    var fileSize: DoubleDelta?
 
-    var exists: BooleanDelta
+    var exists: BooleanDelta?
 }
 
 external class DownloadsNamespace {
@@ -390,7 +403,7 @@ external class DownloadsNamespace {
     /**
      * Retrieve an icon for the specified download. For new downloads, file icons are available after the <a href='#event-onCreated'>onCreated</a> event has been received. The image returned by this function while a download is in progress may be different from the image returned after the download is complete. Icon retrieval is done by querying the underlying operating system or toolkit depending on the platform. The icon that is returned will therefore depend on a number of factors including state of the download, platform, registered file types and visual theme. If a file icon cannot be determined, <a href='extension.html#property-lastError'>chrome.extension.lastError</a> will contain an error message.
      */
-    fun getFileIcon(downloadId: Int, options: Options2): Promise<String?>
+    fun getFileIcon(downloadId: Int, options: Options2? = definedExternally): Promise<String?>
 
     /**
      * Open the downloaded file.

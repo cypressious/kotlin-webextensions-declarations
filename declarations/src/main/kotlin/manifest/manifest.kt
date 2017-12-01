@@ -8,18 +8,18 @@ external class OptionalPermission
  * Represents a WebExtension manifest.json file
  */
 external class WebExtensionManifest {
-    var browser_action: Browser_action
+    var browser_action: Browser_action?
 
-    var chrome_settings_overrides: Chrome_settings_overrides
+    var chrome_settings_overrides: Chrome_settings_overrides?
 
-    var commands: Commands
+    var commands: Commands?
 
-    var devtools_page: ExtensionURL
+    var devtools_page: ExtensionURL?
 
     /**
      * A list of protocol handler definitions.
      */
-    var protocol_handlers: Array<ProtocolHandler>?
+    var protocol_handlers: Array<ProtocolHandler>
 
     var default_locale: String?
 
@@ -29,9 +29,9 @@ external class WebExtensionManifest {
 
     var minimum_opera_version: String?
 
-    var applications: Applications
+    var applications: Applications?
 
-    var browser_specific_settings: Browser_specific_settings
+    var browser_specific_settings: Browser_specific_settings?
 
     var name: String
 
@@ -45,35 +45,35 @@ external class WebExtensionManifest {
 
     var homepage_url: String?
 
-    var icons: Icons
+    var icons: Icons?
 
     var incognito: String?
 
-    var background: Background
+    var background: Background?
 
-    var options_ui: Options_ui
+    var options_ui: Options_ui?
 
-    var content_scripts: Array<ContentScript>?
+    var content_scripts: Array<ContentScript>
 
     var content_security_policy: String?
 
-    var permissions: Array<PermissionOrOrigin>?
+    var permissions: Array<PermissionOrOrigin>
 
-    var optional_permissions: Array<OptionalPermissionOrOrigin>?
+    var optional_permissions: Array<OptionalPermissionOrOrigin>
 
-    var web_accessible_resources: Array<String>?
+    var web_accessible_resources: Array<String>
 
-    var developer: Developer
+    var developer: Developer?
 
-    var omnibox: Omnibox
+    var omnibox: Omnibox?
 
-    var page_action: Page_action
+    var page_action: Page_action?
 
-    var sidebar_action: Sidebar_action
+    var sidebar_action: Sidebar_action?
 
-    var theme: ThemeType
+    var theme: ThemeType?
 
-    var chrome_url_overrides: Chrome_url_overrides
+    var chrome_url_overrides: Chrome_url_overrides?
 }
 
 external class Permission
@@ -106,9 +106,9 @@ external class ProtocolHandler {
 external class WebExtensionLangpackManifest {
     var manifest_version: Int
 
-    var applications: Applications2
+    var applications: Applications2?
 
-    var browser_specific_settings: Browser_specific_settings2
+    var browser_specific_settings: Browser_specific_settings2?
 
     var name: String
 
@@ -126,7 +126,7 @@ external class WebExtensionLangpackManifest {
 
     var languages: Languages
 
-    var sources: Sources
+    var sources: Sources?
 }
 
 external class ThemeIcons {
@@ -159,7 +159,7 @@ typealias ImageDataOrExtensionURL = String
 typealias ExtensionID = Any
 
 external class FirefoxSpecificProperties {
-    var id: ExtensionID
+    var id: ExtensionID?
 
     var update_url: String?
 
@@ -180,21 +180,21 @@ typealias MatchPatternInternal = Any
 external class ContentScript {
     var matches: Array<MatchPattern>
 
-    var exclude_matches: Array<MatchPattern>?
+    var exclude_matches: Array<MatchPattern>
 
-    var include_globs: Array<String>?
+    var include_globs: Array<String>
 
-    var exclude_globs: Array<String>?
+    var exclude_globs: Array<String>
 
     /**
      * The list of CSS files to inject
      */
-    var css: Array<ExtensionURL>?
+    var css: Array<ExtensionURL>
 
     /**
      * The list of JS files to inject
      */
-    var js: Array<ExtensionURL>?
+    var js: Array<ExtensionURL>
 
     /**
      * If allFrames is <code>true</code>, implies that the JavaScript or CSS should be injected into all frames of current page. By default, it's <code>false</code> and is only injected into the top frame.
@@ -209,7 +209,7 @@ external class ContentScript {
     /**
      * The soonest that the JavaScript or CSS will be injected into the tab. Defaults to "document_idle".
      */
-    var run_at: RunAt
+    var run_at: RunAt?
 }
 
 typealias IconPath = Any
@@ -229,24 +229,24 @@ typealias NativeManifest = Any
 typealias ThemeColor = Any
 
 external class ThemeType {
-    var images: Images
+    var images: Images?
 
-    var colors: Colors
+    var colors: Colors?
 
-    var icons: Icons2
+    var icons: Icons2?
 
-    var properties: Properties
+    var properties: Properties?
 }
 
 external class Browser_action {
     var default_title: String?
 
-    var default_icon: IconPath
+    var default_icon: IconPath?
 
     /**
      * Specifies icons to use for dark and light themes
      */
-    var theme_icons: Array<ThemeIcons>?
+    var theme_icons: Array<ThemeIcons>
 
     var default_popup: String?
 
@@ -279,7 +279,7 @@ external class Search_provider {
 
     var image_url_post_params: String?
 
-    var alternate_urls: Array<String>?
+    var alternate_urls: Array<String>
 
     var prepopulated_id: Int?
 
@@ -292,17 +292,17 @@ external class Search_provider {
 external class Chrome_settings_overrides {
     var homepage: String?
 
-    var search_provider: Search_provider
+    var search_provider: Search_provider?
 }
 
 typealias Commands = Any
 
 external class Applications {
-    var gecko: FirefoxSpecificProperties
+    var gecko: FirefoxSpecificProperties?
 }
 
 external class Browser_specific_settings {
-    var gecko: FirefoxSpecificProperties
+    var gecko: FirefoxSpecificProperties?
 }
 
 typealias Icons = Any
@@ -312,7 +312,7 @@ typealias Background = Any
 external class Background2 {
     var scripts: Array<ExtensionURL>
 
-    var persistent: PersistentBackgroundProperty
+    var persistent: PersistentBackgroundProperty?
 }
 
 external class Options_ui {
@@ -338,7 +338,7 @@ external class Omnibox {
 external class Page_action {
     var default_title: String?
 
-    var default_icon: IconPath
+    var default_icon: IconPath?
 
     var default_popup: String?
 
@@ -348,7 +348,7 @@ external class Page_action {
 external class Sidebar_action {
     var default_title: String?
 
-    var default_icon: IconPath
+    var default_icon: IconPath?
 
     var browser_style: Boolean?
 
@@ -356,7 +356,7 @@ external class Sidebar_action {
 }
 
 external class Chrome_url_overrides {
-    var newtab: ExtensionURL
+    var newtab: ExtensionURL?
 }
 
 /**
@@ -368,11 +368,11 @@ typealias Protocol = Any
 typealias UriTemplate = Any
 
 external class Applications2 {
-    var gecko: FirefoxSpecificProperties
+    var gecko: FirefoxSpecificProperties?
 }
 
 external class Browser_specific_settings2 {
-    var gecko: FirefoxSpecificProperties
+    var gecko: FirefoxSpecificProperties?
 }
 
 typealias Languages = Any
@@ -380,209 +380,209 @@ typealias Languages = Any
 typealias Sources = Any
 
 external class Images {
-    var additional_backgrounds: Array<ImageDataOrExtensionURL>?
+    var additional_backgrounds: Array<ImageDataOrExtensionURL>
 
-    var headerURL: ImageDataOrExtensionURL
+    var headerURL: ImageDataOrExtensionURL?
 
-    var theme_frame: ImageDataOrExtensionURL
+    var theme_frame: ImageDataOrExtensionURL?
 }
 
 external class Colors {
-    var accentcolor: ThemeColor
+    var accentcolor: ThemeColor?
 
-    var frame: ThemeColor
+    var frame: ThemeColor?
 
-    var textcolor: ThemeColor
+    var textcolor: ThemeColor?
 
-    var background_tab_text: ThemeColor
+    var background_tab_text: ThemeColor?
 
-    var tab_text: ThemeColor
+    var tab_text: ThemeColor?
 
-    var toolbar: ThemeColor
+    var toolbar: ThemeColor?
 
-    var toolbar_text: ThemeColor
+    var toolbar_text: ThemeColor?
 
-    var bookmark_text: ThemeColor
+    var bookmark_text: ThemeColor?
 
-    var toolbar_field: ThemeColor
+    var toolbar_field: ThemeColor?
 
-    var toolbar_field_text: ThemeColor
+    var toolbar_field_text: ThemeColor?
 
-    var toolbar_field_border: ThemeColor
+    var toolbar_field_border: ThemeColor?
 
-    var toolbar_top_separator: ThemeColor
+    var toolbar_top_separator: ThemeColor?
 
-    var toolbar_bottom_separator: ThemeColor
+    var toolbar_bottom_separator: ThemeColor?
 
-    var toolbar_vertical_separator: ThemeColor
+    var toolbar_vertical_separator: ThemeColor?
 }
 
 external class Icons2 {
-    var back: ExtensionURL
+    var back: ExtensionURL?
 
-    var forward: ExtensionURL
+    var forward: ExtensionURL?
 
-    var reload: ExtensionURL
+    var reload: ExtensionURL?
 
-    var stop: ExtensionURL
+    var stop: ExtensionURL?
 
-    var bookmark_star: ExtensionURL
+    var bookmark_star: ExtensionURL?
 
-    var bookmark_menu: ExtensionURL
+    var bookmark_menu: ExtensionURL?
 
-    var downloads: ExtensionURL
+    var downloads: ExtensionURL?
 
-    var home: ExtensionURL
+    var home: ExtensionURL?
 
-    var app_menu: ExtensionURL
+    var app_menu: ExtensionURL?
 
-    var cut: ExtensionURL
+    var cut: ExtensionURL?
 
-    var copy: ExtensionURL
+    var copy: ExtensionURL?
 
-    var paste: ExtensionURL
+    var paste: ExtensionURL?
 
-    var new_window: ExtensionURL
+    var new_window: ExtensionURL?
 
-    var new_private_window: ExtensionURL
+    var new_private_window: ExtensionURL?
 
-    var save_page: ExtensionURL
+    var save_page: ExtensionURL?
 
-    var print: ExtensionURL
+    var print: ExtensionURL?
 
-    var history: ExtensionURL
+    var history: ExtensionURL?
 
-    var full_screen: ExtensionURL
+    var full_screen: ExtensionURL?
 
-    var find: ExtensionURL
+    var find: ExtensionURL?
 
-    var options: ExtensionURL
+    var options: ExtensionURL?
 
-    var addons: ExtensionURL
+    var addons: ExtensionURL?
 
-    var developer: ExtensionURL
+    var developer: ExtensionURL?
 
-    var synced_tabs: ExtensionURL
+    var synced_tabs: ExtensionURL?
 
-    var open_file: ExtensionURL
+    var open_file: ExtensionURL?
 
-    var sidebars: ExtensionURL
+    var sidebars: ExtensionURL?
 
-    var subscribe: ExtensionURL
+    var subscribe: ExtensionURL?
 
-    var text_encoding: ExtensionURL
+    var text_encoding: ExtensionURL?
 
-    var email_link: ExtensionURL
+    var email_link: ExtensionURL?
 
-    var forget: ExtensionURL
+    var forget: ExtensionURL?
 
-    var pocket: ExtensionURL
+    var pocket: ExtensionURL?
 
-    var getmsg: ExtensionURL
+    var getmsg: ExtensionURL?
 
-    var newmsg: ExtensionURL
+    var newmsg: ExtensionURL?
 
-    var address: ExtensionURL
+    var address: ExtensionURL?
 
-    var reply: ExtensionURL
+    var reply: ExtensionURL?
 
-    var replyall: ExtensionURL
+    var replyall: ExtensionURL?
 
-    var replylist: ExtensionURL
+    var replylist: ExtensionURL?
 
-    var forwarding: ExtensionURL
+    var forwarding: ExtensionURL?
 
-    var delete: ExtensionURL
+    var delete: ExtensionURL?
 
-    var junk: ExtensionURL
+    var junk: ExtensionURL?
 
-    var file: ExtensionURL
+    var file: ExtensionURL?
 
-    var nextUnread: ExtensionURL
+    var nextUnread: ExtensionURL?
 
-    var prevUnread: ExtensionURL
+    var prevUnread: ExtensionURL?
 
-    var mark: ExtensionURL
+    var mark: ExtensionURL?
 
-    var tag: ExtensionURL
+    var tag: ExtensionURL?
 
-    var compact: ExtensionURL
+    var compact: ExtensionURL?
 
-    var archive: ExtensionURL
+    var archive: ExtensionURL?
 
-    var chat: ExtensionURL
+    var chat: ExtensionURL?
 
-    var nextMsg: ExtensionURL
+    var nextMsg: ExtensionURL?
 
-    var prevMsg: ExtensionURL
+    var prevMsg: ExtensionURL?
 
-    var QFB: ExtensionURL
+    var QFB: ExtensionURL?
 
-    var conversation: ExtensionURL
+    var conversation: ExtensionURL?
 
-    var newcard: ExtensionURL
+    var newcard: ExtensionURL?
 
-    var newlist: ExtensionURL
+    var newlist: ExtensionURL?
 
-    var editcard: ExtensionURL
+    var editcard: ExtensionURL?
 
-    var newim: ExtensionURL
+    var newim: ExtensionURL?
 
-    var send: ExtensionURL
+    var send: ExtensionURL?
 
-    var spelling: ExtensionURL
+    var spelling: ExtensionURL?
 
-    var attach: ExtensionURL
+    var attach: ExtensionURL?
 
-    var security: ExtensionURL
+    var security: ExtensionURL?
 
-    var save: ExtensionURL
+    var save: ExtensionURL?
 
-    var quote: ExtensionURL
+    var quote: ExtensionURL?
 
-    var buddy: ExtensionURL
+    var buddy: ExtensionURL?
 
-    var join_chat: ExtensionURL
+    var join_chat: ExtensionURL?
 
-    var chat_accounts: ExtensionURL
+    var chat_accounts: ExtensionURL?
 
-    var calendar: ExtensionURL
+    var calendar: ExtensionURL?
 
-    var tasks: ExtensionURL
+    var tasks: ExtensionURL?
 
-    var synchronize: ExtensionURL
+    var synchronize: ExtensionURL?
 
-    var newevent: ExtensionURL
+    var newevent: ExtensionURL?
 
-    var newtask: ExtensionURL
+    var newtask: ExtensionURL?
 
-    var editevent: ExtensionURL
+    var editevent: ExtensionURL?
 
-    var today: ExtensionURL
+    var today: ExtensionURL?
 
-    var category: ExtensionURL
+    var category: ExtensionURL?
 
-    var complete: ExtensionURL
+    var complete: ExtensionURL?
 
-    var priority: ExtensionURL
+    var priority: ExtensionURL?
 
-    var saveandclose: ExtensionURL
+    var saveandclose: ExtensionURL?
 
-    var attendees: ExtensionURL
+    var attendees: ExtensionURL?
 
-    var privacy: ExtensionURL
+    var privacy: ExtensionURL?
 
-    var status: ExtensionURL
+    var status: ExtensionURL?
 
-    var freebusy: ExtensionURL
+    var freebusy: ExtensionURL?
 
-    var timezones: ExtensionURL
+    var timezones: ExtensionURL?
 }
 
 external class Properties {
-    var additional_backgrounds_alignment: Array<String>?
+    var additional_backgrounds_alignment: Array<String>
 
-    var additional_backgrounds_tiling: Array<String>?
+    var additional_backgrounds_tiling: Array<String>
 }
 
 external class ManifestNamespace

@@ -17,14 +17,16 @@ external class MostVisitedURL {
     var title: String?
 }
 
-class Options(/**
- * Which providers to get top sites from. Possible values are "places" and "activityStream".
- */
-var providers: Array<String>?)
+external class Options {
+    /**
+     * Which providers to get top sites from. Possible values are "places" and "activityStream".
+     */
+    var providers: Array<String>
+}
 
 external class TopSitesNamespace {
     /**
      * Gets a list of top sites.
      */
-    fun get(options: Options): Promise<Array<MostVisitedURL>>
+    fun get(options: Options? = definedExternally): Promise<Array<MostVisitedURL>>
 }

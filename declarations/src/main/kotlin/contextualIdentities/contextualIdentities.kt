@@ -41,46 +41,52 @@ external class ContextualIdentity {
 /**
  * Information to filter the contextual identities being retrieved.
  */
-class Details(/**
- * Filters the contextual identity by name.
- */
-var name: String?)
+external class Details {
+    /**
+     * Filters the contextual identity by name.
+     */
+    var name: String?
+}
 
 /**
  * Details about the contextual identity being created.
  */
-class Details2(
-        /**
-         * The name of the contextual identity.
-         */
-        var name: String,
-        /**
-         * The color of the contextual identity.
-         */
-        var color: String,
-        /**
-         * The icon of the contextual identity.
-         */
-        var icon: String
-)
+external class Details2 {
+    /**
+     * The name of the contextual identity.
+     */
+    var name: String
+
+    /**
+     * The color of the contextual identity.
+     */
+    var color: String
+
+    /**
+     * The icon of the contextual identity.
+     */
+    var icon: String
+}
 
 /**
  * Details about the contextual identity being created.
  */
-class Details3(
-        /**
-         * The name of the contextual identity.
-         */
-        var name: String?,
-        /**
-         * The color of the contextual identity.
-         */
-        var color: String?,
-        /**
-         * The icon of the contextual identity.
-         */
-        var icon: String?
-)
+external class Details3 {
+    /**
+     * The name of the contextual identity.
+     */
+    var name: String?
+
+    /**
+     * The color of the contextual identity.
+     */
+    var color: String?
+
+    /**
+     * The icon of the contextual identity.
+     */
+    var icon: String?
+}
 
 external class ChangeInfo {
     /**
