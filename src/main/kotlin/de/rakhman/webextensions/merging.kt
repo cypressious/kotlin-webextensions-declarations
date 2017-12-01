@@ -35,14 +35,18 @@ private fun mergeTypes(types: List<Type>): MutableMap<String?, Type> {
                         properties = left.properties.orEmpty() + right.properties.orEmpty(),
                         choices = left.choices.orEmpty() + right.choices.orEmpty(),
                         `$extend` = null,
-                        actual = false
+                        actual = false,
+                        items = left.items ?: right.items
                 )
             }
 
     for ((key, value) in result.toMap()) {
         if (key == null) continue
 
-        result[key] = value.copy(properties = value.properties?.entries?.associate { it.key to it.value.resolve(it.key, result, false) })
+        result[key] = value.copy(
+                properties = value.properties?.entries?.associate { it.key to it.value.resolve(it.key, result, false) },
+                items = value.items?.resolve(key, result, false)
+        )
     }
 
     return result
@@ -71,7 +75,8 @@ private fun Parameter.resolve(name: String, types: MutableMap<String?, Type>, ac
                 description = description,
                 `$extend` = null,
                 choices = null,
-                actual = actual
+                actual = actual,
+                items = null
         )
     }
 

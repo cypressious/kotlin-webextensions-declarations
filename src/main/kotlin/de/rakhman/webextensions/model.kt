@@ -16,7 +16,8 @@ data class Type(
         val description: String?,
         val `$extend`: String?,
         val choices: List<Any>?,
-        val actual: Boolean
+        val actual: Boolean,
+        val items: Parameter?
 )
 
 data class Function(

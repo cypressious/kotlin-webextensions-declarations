@@ -41,7 +41,7 @@ external class RequestFilter {
 
 /**
  * An array of HTTP headers. Each header is represented as a dictionary containing the keys <code>name</code> and either <code>value</code> or <code>binaryValue</code>. */
-typealias HttpHeaders = Any
+typealias HttpHeaders = Array<HttpHeaders2>
 
 /**
  * Returns value for event handlers that have the 'blocking' extraInfoSpec applied. Allows the event handler to modify network requests.
@@ -86,6 +86,23 @@ external class UploadData {
      * A string with the file's path and name.
      */
     val file: String?
+}
+
+external class HttpHeaders2 {
+    /**
+     * Name of the HTTP header.
+     */
+    val name: String
+
+    /**
+     * Value of the HTTP header if it can be represented by UTF-8.
+     */
+    val value: String?
+
+    /**
+     * Value of the HTTP header if it cannot be represented by UTF-8, stored as individual byte values (0..255).
+     */
+    val binaryValue: Array<Int>?
 }
 
 /**

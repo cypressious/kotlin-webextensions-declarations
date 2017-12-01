@@ -78,15 +78,28 @@ class Generator(val dir: File) {
     private fun generateType(type: Type, fileBuilder: FileSpec.Builder) {
         val name = type.id!!
 
-        if (type.type in primitiveTypes) {
-            fileBuilder.addTypeAlias(TypeAliasSpec
-                    .builder(name, ClassName.bestGuess(type.type!!.capitalize()))
-                    .apply { type.description?.let { addKdoc(it.replace("%", "%%")) } }
-                    .build())
-            return
+        when (type.type) {
+            "string", "int", "boolean", "any" -> {
+                fileBuilder.addTypeAlias(TypeAliasSpec
+                        .builder(name, ClassName.bestGuess(type.type.capitalize()))
+                        .apply { type.description?.let { addKdoc(it.replace("%", "%%")) } }
+                        .build())
+                return
+            }
+            "array" -> {
+                fileBuilder.addTypeAlias(TypeAliasSpec
+                        .builder(name, ClassName.bestGuess("Array<${parameterTypeName(ParameterContext("", type.items!!))}>"))
+                        .apply { type.description?.let { addKdoc(it.replace("%", "%%")) } }
+                        .build())
+                return
+            }
         }
 
         if (type.properties == null) {
+            require(type.type == "object" || type.type == null) {
+                "Unxpected type $type"
+            }
+
             fileBuilder.addTypeAlias(TypeAliasSpec
                     .builder(name, ClassName.bestGuess("Any"))
                     .apply { type.description?.let { addKdoc(it.replace("%", "%%")) } }
@@ -240,4 +253,3 @@ private fun List<Parameter>.getResolvedChoices(): List<List<Parameter>> {
     }
 }
 
-private val primitiveTypes = setOf("string", "int", "boolean")

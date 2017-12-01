@@ -2,7 +2,7 @@ package browserAction
 
 import kotlin.js.Promise
 
-typealias ColorArray = Any
+typealias ColorArray = Array<Int>
 
 /**
  * Pixel data for an image. Must be an ImageData object (for example, from a <code>canvas</code> element). */
