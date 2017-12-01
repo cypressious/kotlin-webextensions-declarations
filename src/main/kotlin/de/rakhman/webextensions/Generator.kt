@@ -79,14 +79,18 @@ class Generator(val dir: File) {
         val name = type.id!!
 
         if (type.type in primitiveTypes) {
-            fileBuilder.addTypeAlias(
-                    TypeAliasSpec.builder(name, ClassName.bestGuess(type.type!!.capitalize())).build())
+            fileBuilder.addTypeAlias(TypeAliasSpec
+                    .builder(name, ClassName.bestGuess(type.type!!.capitalize()))
+                    .apply { type.description?.let { addKdoc(it.replace("%", "%%")) } }
+                    .build())
             return
         }
 
         if (type.properties == null) {
-            fileBuilder.addTypeAlias(
-                    TypeAliasSpec.builder(name, ClassName.bestGuess("Any")).build())
+            fileBuilder.addTypeAlias(TypeAliasSpec
+                    .builder(name, ClassName.bestGuess("Any"))
+                    .apply { type.description?.let { addKdoc(it.replace("%", "%%")) } }
+                    .build())
             return
         }
 

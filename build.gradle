@@ -1,5 +1,5 @@
 buildscript {
-    ext.kotlin_version = '1.1.61'
+    ext.kotlin_version = '1.2.0'
 
     repositories {
         jcenter()
@@ -18,11 +18,12 @@ sourceCompatibility = 1.8
 
 repositories {
     jcenter()
+    maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
 }
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlin_version"
-    implementation 'com.squareup:kotlinpoet:0.6.0'
+    implementation 'com.squareup:kotlinpoet:0.7.0-SNAPSHOT'
     implementation 'org.eclipse.mylyn.github:org.eclipse.egit.github.core:2.1.5'
     implementation 'com.google.code.gson:gson:2.8.2'
     implementation 'com.beust:jcommander:1.72'

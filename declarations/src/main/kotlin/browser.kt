@@ -45,95 +45,95 @@ import webRequest.WebRequestNamespace
 import windows.WindowsNamespace
 
 external class Browser {
-  val alarms: AlarmsNamespace
+    val alarms: AlarmsNamespace
 
-  val manifest: ManifestNamespace
+    val manifest: ManifestNamespace
 
-  val bookmarks: BookmarksNamespace
+    val bookmarks: BookmarksNamespace
 
-  val browserAction: BrowserActionNamespace
+    val browserAction: BrowserActionNamespace
 
-  val browserSettings: BrowserSettingsNamespace
+    val browserSettings: BrowserSettingsNamespace
 
-  val browsingData: BrowsingDataNamespace
+    val browsingData: BrowsingDataNamespace
 
-  val clipboard: ClipboardNamespace
+    val clipboard: ClipboardNamespace
 
-  val commands: CommandsNamespace
+    val commands: CommandsNamespace
 
-  val contentScripts: ContentScriptsNamespace
+    val contentScripts: ContentScriptsNamespace
 
-  val contextualIdentities: ContextualIdentitiesNamespace
+    val contextualIdentities: ContextualIdentitiesNamespace
 
-  val cookies: CookiesNamespace
+    val cookies: CookiesNamespace
 
-  val devtools: DevtoolsNamespace
+    val devtools: DevtoolsNamespace
 
-  val downloads: DownloadsNamespace
+    val downloads: DownloadsNamespace
 
-  val events: EventsNamespace
+    val events: EventsNamespace
 
-  val extension: ExtensionNamespace
+    val extension: ExtensionNamespace
 
-  val extensionTypes: ExtensionTypesNamespace
+    val extensionTypes: ExtensionTypesNamespace
 
-  val find: FindNamespace
+    val find: FindNamespace
 
-  val geckoProfiler: GeckoProfilerNamespace
+    val geckoProfiler: GeckoProfilerNamespace
 
-  val history: HistoryNamespace
+    val history: HistoryNamespace
 
-  val i18n: I18nNamespace
+    val i18n: I18nNamespace
 
-  val identity: IdentityNamespace
+    val identity: IdentityNamespace
 
-  val idle: IdleNamespace
+    val idle: IdleNamespace
 
-  val management: ManagementNamespace
+    val management: ManagementNamespace
 
-  val contextMenus: ContextMenusNamespace
+    val contextMenus: ContextMenusNamespace
 
-  val menus: MenusNamespace
+    val menus: MenusNamespace
 
-  val menusInternal: MenusInternalNamespace
+    val menusInternal: MenusInternalNamespace
 
-  val notifications: NotificationsNamespace
+    val notifications: NotificationsNamespace
 
-  val omnibox: OmniboxNamespace
+    val omnibox: OmniboxNamespace
 
-  val pageAction: PageActionNamespace
+    val pageAction: PageActionNamespace
 
-  val permissions: PermissionsNamespace
+    val permissions: PermissionsNamespace
 
-  val pkcs11: Pkcs11Namespace
+    val pkcs11: Pkcs11Namespace
 
-  val privacy: PrivacyNamespace
+    val privacy: PrivacyNamespace
 
-  val proxy: ProxyNamespace
+    val proxy: ProxyNamespace
 
-  val runtime: RuntimeNamespace
+    val runtime: RuntimeNamespace
 
-  val sessions: SessionsNamespace
+    val sessions: SessionsNamespace
 
-  val sidebarAction: SidebarActionNamespace
+    val sidebarAction: SidebarActionNamespace
 
-  val storage: StorageNamespace
+    val storage: StorageNamespace
 
-  val tabs: TabsNamespace
+    val tabs: TabsNamespace
 
-  val test: TestNamespace
+    val test: TestNamespace
 
-  val theme: ThemeNamespace
+    val theme: ThemeNamespace
 
-  val topSites: TopSitesNamespace
+    val topSites: TopSitesNamespace
 
-  val types: TypesNamespace
+    val types: TypesNamespace
 
-  val webNavigation: WebNavigationNamespace
+    val webNavigation: WebNavigationNamespace
 
-  val webRequest: WebRequestNamespace
+    val webRequest: WebRequestNamespace
 
-  val windows: WindowsNamespace
+    val windows: WindowsNamespace
 }
 
 external val browser: Browser

@@ -7,111 +7,117 @@ import manifest.ExtensionID
  * Information about an icon belonging to an extension.
  */
 external class IconInfo {
-  /**
-   * A number representing the width and height of the icon. Likely values include (but are not limited to) 128, 48, 24, and 16.
-   */
-  val size: Int
+    /**
+     * A number representing the width and height of the icon. Likely values include (but are not limited to) 128, 48, 24, and 16.
+     */
+    val size: Int
 
-  /**
-   * The URL for this icon image. To display a grayscale version of the icon (to indicate that an extension is disabled, for example), append <code>?grayscale=true</code> to the URL.
-   */
-  val url: String
+    /**
+     * The URL for this icon image. To display a grayscale version of the icon (to indicate that an extension is disabled, for example), append <code>?grayscale=true</code> to the URL.
+     */
+    val url: String
 }
 
+/**
+ * A reason the item is disabled. */
 typealias ExtensionDisabledReason = String
 
+/**
+ * The type of this extension. Will always be 'extension'. */
 typealias ExtensionType = String
 
+/**
+ * How the extension was installed. One of<br><var>development</var>: The extension was loaded unpacked in developer mode,<br><var>normal</var>: The extension was installed normally via an .xpi file,<br><var>sideload</var>: The extension was installed by other software on the machine,<br><var>other</var>: The extension was installed by other means. */
 typealias ExtensionInstallType = String
 
 /**
  * Information about an installed extension.
  */
 external class ExtensionInfo {
-  /**
-   * The extension's unique identifier.
-   */
-  val id: String
+    /**
+     * The extension's unique identifier.
+     */
+    val id: String
 
-  /**
-   * The name of this extension.
-   */
-  val name: String
+    /**
+     * The name of this extension.
+     */
+    val name: String
 
-  /**
-   * A short version of the name of this extension.
-   */
-  val shortName: String?
+    /**
+     * A short version of the name of this extension.
+     */
+    val shortName: String?
 
-  /**
-   * The description of this extension.
-   */
-  val description: String
+    /**
+     * The description of this extension.
+     */
+    val description: String
 
-  /**
-   * The <a href='manifest/version'>version</a> of this extension.
-   */
-  val version: String
+    /**
+     * The <a href='manifest/version'>version</a> of this extension.
+     */
+    val version: String
 
-  /**
-   * The <a href='manifest/version#version_name'>version name</a> of this extension if the manifest specified one.
-   */
-  val versionName: String?
+    /**
+     * The <a href='manifest/version#version_name'>version name</a> of this extension if the manifest specified one.
+     */
+    val versionName: String?
 
-  /**
-   * Whether this extension can be disabled or uninstalled by the user.
-   */
-  val mayDisable: Boolean
+    /**
+     * Whether this extension can be disabled or uninstalled by the user.
+     */
+    val mayDisable: Boolean
 
-  /**
-   * Whether it is currently enabled or disabled.
-   */
-  val enabled: Boolean
+    /**
+     * Whether it is currently enabled or disabled.
+     */
+    val enabled: Boolean
 
-  /**
-   * A reason the item is disabled.
-   */
-  val disabledReason: ExtensionDisabledReason
+    /**
+     * A reason the item is disabled.
+     */
+    val disabledReason: ExtensionDisabledReason
 
-  /**
-   * The type of this extension. Will always return 'extension'.
-   */
-  val type: ExtensionType
+    /**
+     * The type of this extension. Will always return 'extension'.
+     */
+    val type: ExtensionType
 
-  /**
-   * The URL of the homepage of this extension.
-   */
-  val homepageUrl: String?
+    /**
+     * The URL of the homepage of this extension.
+     */
+    val homepageUrl: String?
 
-  /**
-   * The update URL of this extension.
-   */
-  val updateUrl: String?
+    /**
+     * The update URL of this extension.
+     */
+    val updateUrl: String?
 
-  /**
-   * The url for the item's options page, if it has one.
-   */
-  val optionsUrl: String
+    /**
+     * The url for the item's options page, if it has one.
+     */
+    val optionsUrl: String
 
-  /**
-   * A list of icon information. Note that this just reflects what was declared in the manifest, and the actual image at that url may be larger or smaller than what was declared, so you might consider using explicit width and height attributes on img tags referencing these images. See the <a href='manifest/icons'>manifest documentation on icons</a> for more details.
-   */
-  val icons: Array<IconInfo>?
+    /**
+     * A list of icon information. Note that this just reflects what was declared in the manifest, and the actual image at that url may be larger or smaller than what was declared, so you might consider using explicit width and height attributes on img tags referencing these images. See the <a href='manifest/icons'>manifest documentation on icons</a> for more details.
+     */
+    val icons: Array<IconInfo>?
 
-  /**
-   * Returns a list of API based permissions.
-   */
-  val permissions: Array<String>?
+    /**
+     * Returns a list of API based permissions.
+     */
+    val permissions: Array<String>?
 
-  /**
-   * Returns a list of host based permissions.
-   */
-  val hostPermissions: Array<String>?
+    /**
+     * Returns a list of host based permissions.
+     */
+    val hostPermissions: Array<String>?
 
-  /**
-   * How the extension was installed.
-   */
-  val installType: ExtensionInstallType
+    /**
+     * How the extension was installed.
+     */
+    val installType: ExtensionInstallType
 }
 
 class Options(/**
@@ -123,28 +129,28 @@ val showConfirmDialog: Boolean?, /**
 val dialogMessage: String?)
 
 external class ManagementNamespace {
-  /**
-   * Returns a list of information about installed extensions.
-   */
-  fun getAll(): Promise<Array<ExtensionInfo>>
+    /**
+     * Returns a list of information about installed extensions.
+     */
+    fun getAll(): Promise<Array<ExtensionInfo>>
 
-  /**
-   * Returns information about the installed extension that has the given ID.
-   */
-  fun get(id: ExtensionID): Promise<ExtensionInfo>
+    /**
+     * Returns information about the installed extension that has the given ID.
+     */
+    fun get(id: ExtensionID): Promise<ExtensionInfo>
 
-  /**
-   * Returns information about the calling extension. Note: This function can be used without requesting the 'management' permission in the manifest.
-   */
-  fun getSelf(): Promise<ExtensionInfo>
+    /**
+     * Returns information about the calling extension. Note: This function can be used without requesting the 'management' permission in the manifest.
+     */
+    fun getSelf(): Promise<ExtensionInfo>
 
-  /**
-   * Uninstalls the calling extension. Note: This function can be used without requesting the 'management' permission in the manifest.
-   */
-  fun uninstallSelf(options: Options): Promise<Any>
+    /**
+     * Uninstalls the calling extension. Note: This function can be used without requesting the 'management' permission in the manifest.
+     */
+    fun uninstallSelf(options: Options): Promise<Any>
 
-  /**
-   * Enables or disables the given add-on.
-   */
-  fun setEnabled(id: String, enabled: Boolean): Promise<Any>
+    /**
+     * Enables or disables the given add-on.
+     */
+    fun setEnabled(id: String, enabled: Boolean): Promise<Any>
 }
