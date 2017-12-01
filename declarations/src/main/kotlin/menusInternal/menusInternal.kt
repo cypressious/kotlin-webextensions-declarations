@@ -1,5 +1,7 @@
 package menusInternal
 
+import kotlin.Any
+
 /**
  * Information sent when a context menu item is clicked.
  */
@@ -7,12 +9,12 @@ external class OnClickData {
   /**
    * The ID of the menu item that was clicked.
    */
-  val menuItemId: Any
+  val menuItemId: MenuItemId
 
   /**
    * The parent ID, if any, for the item clicked.
    */
-  val parentMenuItemId: Any?
+  val parentMenuItemId: ParentMenuItemId
 
   /**
    * One of 'image', 'video', or 'audio' if the context menu was activated on one of these types of elements.
@@ -59,5 +61,9 @@ external class OnClickData {
    */
   val checked: Boolean?
 }
+
+typealias MenuItemId = Any
+
+typealias ParentMenuItemId = Any
 
 external class MenusInternalNamespace

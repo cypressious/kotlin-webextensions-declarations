@@ -1,11 +1,8 @@
 package runtime
 
 import events.Event
-import kotlin.Any
-import kotlin.js.Promise
 import tabs.Tab
-
-typealias GetBackgroundPageBackgroundPage = Any
+import kotlin.js.Promise
 
 /**
  * An object which allows two way communication with other pages.
@@ -13,13 +10,13 @@ typealias GetBackgroundPageBackgroundPage = Any
 external class Port {
   val name: String
 
-  val disconnect: Any
+  val disconnect: () -> Unit
 
   val onDisconnect: Event
 
   val onMessage: Event
 
-  val postMessage: Any
+  val postMessage: (Any) -> Unit
 
   /**
    * This property will <b>only</b> be present on ports passed to onConnect/onConnectExternal listeners.
@@ -112,6 +109,18 @@ external class LastError {
   val message: String?
 }
 
+typealias BackgroundPage = Any
+
+/**
+ * If an update is available, this contains more information about the available update.
+ */
+external class Details {
+  /**
+   * The version of the available update.
+   */
+  val version: String
+}
+
 class ConnectInfo(/**
  * Will be passed into onConnect for processes that are listening for the connection event.
  */
@@ -125,11 +134,13 @@ class Options(/**
  */
 val toProxyScript: Boolean?)
 
+typealias DirectoryEntry = Any
+
 external class RuntimeNamespace {
   /**
    * Retrieves the JavaScript 'window' object for the background page running inside the current extension/app. If the background page is an event page, the system will ensure it is loaded before calling the callback. If there is no background page, an error is set.
    */
-  fun getBackgroundPage(): Promise<GetBackgroundPageBackgroundPage?>
+  fun getBackgroundPage(): Promise<BackgroundPage>
 
   /**
    * <p>Open your Extension's options page, if possible.</p><p>The precise behavior may depend on your manifest's <code>$(topic:optionsV2)[options_ui]</code> or <code>$(topic:options)[options_page]</code> key, or what the browser happens to support at the time.</p><p>If your Extension does not declare an options page, or the browser failed to create one for some other reason, the callback will set $(ref:lastError).</p>

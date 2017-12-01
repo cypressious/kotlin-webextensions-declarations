@@ -49,12 +49,12 @@ private fun mergeTypes(types: List<Type>): MutableMap<String?, Type> {
 }
 
 private fun Function.resolve(types: MutableMap<String?, Type>): Function {
-    return copy(parameters = parameters?.map { it.resolve(it.name!!, types, it.name != async) })
+    return copy(parameters = parameters?.map { it.resolve(it.name!!, types, it.name != async, it.name == async) })
 }
 
-private fun Parameter.resolve(name: String, types: MutableMap<String?, Type>, actual: Boolean): Parameter {
+private fun Parameter.resolve(name: String, types: MutableMap<String?, Type>, actual: Boolean, isReturn: Boolean = false): Parameter {
     if (type == "array") return copy(items = items?.resolve(name, types, actual))
-    if (type != "object") return this
+    if (type != "object" && choices == null && parameters == null) return this
 
     var typeName = name.capitalize()
     var counter = 1
@@ -63,15 +63,17 @@ private fun Parameter.resolve(name: String, types: MutableMap<String?, Type>, ac
 
     val choices = choices?.map { it.resolve(name, types, actual) }
 
-    types[typeName] = Type(
-            id = typeName,
-            type = null,
-            properties = properties?.map { it.key to it.value.resolve(it.key, types, actual) }?.toMap(),
-            description = description,
-            `$extend` = null,
-            choices = choices,
-            actual = actual
-    )
+    if (!isReturn) {
+        types[typeName] = Type(
+                id = typeName,
+                type = null,
+                properties = properties?.map { it.key to it.value.resolve(it.key, types, actual) }?.toMap(),
+                description = description,
+                `$extend` = null,
+                choices = null,
+                actual = actual
+        )
+    }
 
     return copy(
             type = null,

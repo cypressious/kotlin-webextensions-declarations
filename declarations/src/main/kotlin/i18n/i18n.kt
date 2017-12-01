@@ -2,12 +2,24 @@ package i18n
 
 import kotlin.js.Promise
 
-class Languages(val language: LanguageCode, /**
- * The percentage of the detected language
- */
-val percentage: Int)
+typealias LanguageCode = String
 
-external class DetectLanguageResult {
+/**
+ * DetectedLanguage object that holds detected ISO language code and its percentage in the input string
+ */
+external class Languages {
+  val language: LanguageCode
+
+  /**
+   * The percentage of the detected language
+   */
+  val percentage: Int
+}
+
+/**
+ * LanguageDetectionResult object that holds detected langugae reliability and array of DetectedLanguage
+ */
+external class Result {
   /**
    * CLD detected language reliability
    */
@@ -18,8 +30,6 @@ external class DetectLanguageResult {
    */
   val languages: Array<Languages>
 }
-
-typealias LanguageCode = String
 
 external class I18nNamespace {
   /**
@@ -40,5 +50,5 @@ external class I18nNamespace {
   /**
    * Detects the language of the provided text using CLD.
    */
-  fun detectLanguage(text: String): Promise<DetectLanguageResult>
+  fun detectLanguage(text: String): Promise<Result>
 }

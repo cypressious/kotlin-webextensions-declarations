@@ -1,5 +1,6 @@
 package windows
 
+import kotlin.Any
 import kotlin.js.Promise
 
 typealias WindowType = String
@@ -119,11 +120,13 @@ val populate: Boolean?, /**
  */
 val windowTypes: Array<WindowType>?)
 
+typealias Url = Any
+
 class CreateData(
     /**
      * A URL or array of URLs to open as tabs in the window. Fully-qualified URLs must include a scheme (i.e. 'http://www.google.com', not 'www.google.com'). Relative URLs will be relative to the current page within the extension. Defaults to the New Tab Page.
      */
-    val url: Any?,
+    val url: Url,
     /**
      * The id of the tab for which you want to adopt to the new window.
      */

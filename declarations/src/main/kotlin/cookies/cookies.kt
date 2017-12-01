@@ -2,23 +2,6 @@ package cookies
 
 import kotlin.js.Promise
 
-external class RemoveDetailsResult {
-  /**
-   * The URL associated with the cookie that's been removed.
-   */
-  val url: String
-
-  /**
-   * The name of the cookie that's been removed.
-   */
-  val name: String
-
-  /**
-   * The ID of the cookie store from which the cookie was removed.
-   */
-  val storeId: String
-}
-
 /**
  * Represents information about an HTTP cookie.
  */
@@ -66,7 +49,7 @@ external class Cookie {
   /**
    * The expiration date of the cookie as the number of seconds since the UNIX epoch. Not provided for session cookies.
    */
-  val expirationDate: Any?
+  val expirationDate: Int?
 
   /**
    * The ID of the cookie store containing this cookie, as provided in getAllCookieStores().
@@ -183,7 +166,7 @@ class Details3(
     /**
      * The expiration date of the cookie as the number of seconds since the UNIX epoch. If omitted, the cookie becomes a session cookie.
      */
-    val expirationDate: Any?,
+    val expirationDate: Int?,
     /**
      * The ID of the cookie store in which to set the cookie. By default, the cookie is set in the current execution context's cookie store.
      */
@@ -208,6 +191,26 @@ class Details4(
     val storeId: String?
 )
 
+/**
+ * Contains details about the cookie that's been removed.  If removal failed for any reason, this will be "null", and $(ref:runtime.lastError) will be set.
+ */
+external class Details5 {
+  /**
+   * The URL associated with the cookie that's been removed.
+   */
+  val url: String
+
+  /**
+   * The name of the cookie that's been removed.
+   */
+  val name: String
+
+  /**
+   * The ID of the cookie store from which the cookie was removed.
+   */
+  val storeId: String
+}
+
 external class CookiesNamespace {
   /**
    * Retrieves information about a single cookie. If more than one cookie of the same name exists for the given URL, the one with the longest path will be returned. For cookies with the same path length, the cookie with the earliest creation time will be returned.
@@ -227,7 +230,7 @@ external class CookiesNamespace {
   /**
    * Deletes a cookie by name.
    */
-  fun remove(details: Details4): Promise<RemoveDetailsResult?>
+  fun remove(details: Details4): Promise<Details5>
 
   /**
    * Lists all existing cookie stores.

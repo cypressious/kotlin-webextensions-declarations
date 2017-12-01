@@ -64,7 +64,7 @@ class Generator(val dir: File) {
         val functions = ns.functions?.filter { !it.unsupported } ?: emptyList()
 
         val builder = TypeSpec.expectClassBuilder(ClassName.bestGuess(name)).addModifiers(KModifier.EXPECT)
-        builder.addFunctions(functions.flatMap { generateFunctionWithOverloads(it, fileBuilder) })
+        builder.addFunctions(functions.flatMap { generateFunctionWithOverloads(it) })
 
         ns.types?.forEach { generateType(it, fileBuilder) }
 
@@ -90,13 +90,13 @@ class Generator(val dir: File) {
             return
         }
 
-        val typeBuilder = generateType(name, type.properties, fileBuilder, !type.actual)
+        val typeBuilder = generateType(name, type.properties, !type.actual)
         type.description?.let { typeBuilder.addKdoc(it + "\n") }
 
         fileBuilder.addType(typeBuilder.build())
     }
 
-    private fun generateType(name: String, properties: Map<String, Parameter>, fileBuilder: FileSpec.Builder, external: Boolean): TypeSpec.Builder {
+    private fun generateType(name: String, properties: Map<String, Parameter>, external: Boolean): TypeSpec.Builder {
         val typeBuilder = if (external) TypeSpec.expectClassBuilder(name) else TypeSpec.classBuilder(name)
 
         val props = properties.entries.filter { !it.value.unsupported }
@@ -104,7 +104,7 @@ class Generator(val dir: File) {
         typeBuilder
                 .addProperties(props.map {
                     PropertySpec
-                            .builder(it.key.escapeIfKeyword(), ClassName.bestGuess(parameterTypeName(ParameterContext(it.key, it.value, null, fileBuilder))))
+                            .builder(it.key.escapeIfKeyword(), parameterType(ParameterContext(it.key, it.value)))
                             .apply { if (!external) initializer(it.key.escapeIfKeyword()) }
                             .apply { it.value.description?.let { addKdoc(it.replace("%", "%%") + "\n") } }
                             .build()
@@ -114,7 +114,7 @@ class Generator(val dir: File) {
             typeBuilder.primaryConstructor(FunSpec.constructorBuilder()
                     .addParameters(
                             props.map {
-                                generateParameter(ParameterContext(it.key, it.value, null, null)).build()
+                                generateParameter(ParameterContext(it.key, it.value)).build()
                             }
                     )
                     .build())
@@ -123,16 +123,12 @@ class Generator(val dir: File) {
         return typeBuilder
     }
 
-    private fun generateFunctionWithOverloads(f: Function, fileBuilder: FileSpec.Builder): List<FunSpec> {
+    private fun generateFunctionWithOverloads(f: Function): List<FunSpec> {
         val parameters = f.parameters
                 ?.filter { it.name != f.async }
                 ?.takeIf { it.isNotEmpty() }
 
         val choices = parameters?.getResolvedChoices() ?: listOf(emptyList())
-
-        // generate all object types once to prevent duplicates
-        choices.flatMap { it }.distinct().forEach { parameterTypeName(ParameterContext(it.name!!, it, f.name, fileBuilder)) }
-        returnTypeName(f, fileBuilder)
 
         return choices.map { list -> generateFunction(f, list) }
     }
@@ -143,21 +139,34 @@ class Generator(val dir: File) {
         f.description?.let { builder.addKdoc(it + "\n") }
 
         parameters.forEach {
-            builder.addParameter(generateParameter(ParameterContext(it.name!!, it, f.name)).build())
+            builder.addParameter(generateParameter(ParameterContext(it.name!!, it)).build())
         }
 
         f.deprecated?.let {
             builder.addAnnotation(AnnotationSpec.builder(Deprecated::class).addMember("\"$it\"").build())
         }
 
-        val returnType = returnTypeName(f, null)
+        val returnType = returnTypeName(f)
         returnType?.let { builder.returns(returnType.asPromiseType()) }
 
         return builder.build()
     }
 
     private fun generateParameter(context: ParameterContext): ParameterSpec.Builder {
-        return ParameterSpec.builder(context.name.escapeIfKeyword(), ClassName.bestGuess(parameterTypeName(context)))
+        return ParameterSpec.builder(context.name.escapeIfKeyword(), parameterType(context))
+    }
+
+    private fun parameterType(context: ParameterContext): TypeName {
+        if (context.parameter.type == "function") {
+            //special case for Post.postMessage
+
+            if (context.name == "postMessage") {
+                return LambdaTypeName.get(parameters = *arrayOf(ClassName.bestGuess("Any")), returnType = ClassName.bestGuess("Unit"))
+            }
+
+            return LambdaTypeName.get(returnType = ClassName.bestGuess("Unit"))
+        }
+        return ClassName.bestGuess(parameterTypeName(context))
     }
 
     private fun parameterTypeName(context: ParameterContext): String {
@@ -172,37 +181,21 @@ class Generator(val dir: File) {
         return when (p.type) {
             "array" -> "Array<${parameterTypeName(context.copy(parameter = p.items!!))}>"
             "integer" -> "Int"
+            "number" -> "Int"
             "string" -> "String"
             "boolean" -> "Boolean"
-            "object" -> {
-                val prefix = context.functionName?.capitalize() ?: ""
-                val typeName = prefix + context.name.capitalize()
-
-                if (context.fileBuilder != null) {
-                    if (p.properties != null) {
-                        val typeBuilder = generateType(typeName, p.properties, context.fileBuilder, context.external)
-                        context.fileBuilder.addType(typeBuilder.build())
-                    } else {
-                        context.fileBuilder.addTypeAlias(TypeAliasSpec.builder(typeName, Any::class).build())
-                    }
-                }
-
-                typeName
-            }
-            else -> "Any"
+            "any" -> "Any"
+            else -> throw IllegalArgumentException("Connot decide name for $p")
         } + suffix
     }
 
-    private fun returnTypeName(f: Function, fileBuilder: FileSpec.Builder?): String? {
+    private fun returnTypeName(f: Function): String? {
         return when (f.async) {
             true -> "Any"
             is String -> {
                 val asyncParam = f.parameters!!.first { it.name == f.async }.parameters?.firstOrNull()
                 asyncParam?.let {
-                    var name = it.name!!
-                    if (f.parameters.any { it.name == name }) name += "Result"
-
-                    parameterTypeName(ParameterContext(name, it, f.name, fileBuilder, true))
+                    parameterTypeName(ParameterContext(it.name!!, it))
                 } ?: "Any"
             }
             else -> null
@@ -212,10 +205,7 @@ class Generator(val dir: File) {
 
 data class ParameterContext(
         val name: String,
-        val parameter: Parameter,
-        val functionName: String?,
-        val fileBuilder: FileSpec.Builder? = null,
-        val external: Boolean = false
+        val parameter: Parameter
 )
 
 private fun String.asPromiseType(): ParameterizedTypeName {

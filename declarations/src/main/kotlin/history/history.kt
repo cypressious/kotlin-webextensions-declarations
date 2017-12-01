@@ -27,7 +27,7 @@ external class HistoryItem {
   /**
    * When this page was last loaded, represented in milliseconds since the epoch.
    */
-  val lastVisitTime: Any?
+  val lastVisitTime: Int?
 
   /**
    * The number of times the user has navigated to this page.
@@ -57,7 +57,7 @@ external class VisitItem {
   /**
    * When this visit occurred, represented in milliseconds since the epoch.
    */
-  val visitTime: Any?
+  val visitTime: Int?
 
   /**
    * The visit ID of the referrer.

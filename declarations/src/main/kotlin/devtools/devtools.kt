@@ -18,6 +18,41 @@ external class Resource {
  */
 class Options()
 
+/**
+ * An object providing details if an exception occurred while evaluating the expression.
+ */
+external class ExceptionInfo {
+  /**
+   * Set if the error occurred on the DevTools side before the expression is evaluated.
+   */
+  val isError: Boolean
+
+  /**
+   * Set if the error occurred on the DevTools side before the expression is evaluated.
+   */
+  val code: String
+
+  /**
+   * Set if the error occurred on the DevTools side before the expression is evaluated.
+   */
+  val description: String
+
+  /**
+   * Set if the error occurred on the DevTools side before the expression is evaluated, contains the array of the values that may be substituted into the description string to provide more information about the cause of the error.
+   */
+  val details: Array<Any>
+
+  /**
+   * Set if the evaluated code produces an unhandled exception.
+   */
+  val isException: Boolean
+
+  /**
+   * Set if the evaluated code produces an unhandled exception.
+   */
+  val value: String
+}
+
 class ReloadOptions(
     /**
      * When true, the loader will bypass the cache for all inspected page resources loaded before the <code>load</code> event is fired. The effect is similar to pressing Ctrl+Shift+R in the inspected window or within the Developer Tools window.
@@ -46,6 +81,8 @@ external class InspectedWindowNamespace {
 }
 
 typealias Request = Any
+
+typealias HarLog = Any
 
 external class NetworkNamespace
 

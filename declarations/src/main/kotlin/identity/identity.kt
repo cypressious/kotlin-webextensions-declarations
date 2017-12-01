@@ -18,7 +18,19 @@ class Details(
     val scopes: Array<String>?
 )
 
+external class Userinfo {
+  val email: String
+
+  val id: String
+}
+
 class Details2(val token: String)
+
+external class Userinfo2 {
+  val email: String
+
+  val id: String
+}
 
 class Details3(val url: String, val interactive: Boolean?)
 

@@ -1,21 +1,7 @@
 package bookmarks
 
+import kotlin.Any
 import kotlin.js.Promise
-
-class SearchQuery(
-    /**
-     * A string of words and quoted phrases that are matched against bookmark URLs and titles.
-     */
-    val query: String?,
-    /**
-     * The URL of the bookmark; matches verbatim. Note that folders have no URL.
-     */
-    val url: String?,
-    /**
-     * The title of the bookmark; matches verbatim.
-     */
-    val title: String?
-)
 
 typealias BookmarkTreeNodeUnmodifiable = String
 
@@ -53,12 +39,12 @@ external class BookmarkTreeNode {
   /**
    * When this node was created, in milliseconds since the epoch (<code>new Date(dateAdded)</code>).
    */
-  val dateAdded: Any?
+  val dateAdded: Int?
 
   /**
    * When the contents of this folder last changed, in milliseconds since the epoch.
    */
-  val dateGroupModified: Any?
+  val dateGroupModified: Int?
 
   /**
    * Indicates the reason why this node is unmodifiable. The <var>managed</var> value indicates that this node was configured by the system administrator or by the custodian of a supervised user. Omitted if the node can be modified by the user and the extension (default).
@@ -96,6 +82,10 @@ external class CreateDetails {
    */
   val type: BookmarkTreeNodeType
 }
+
+typealias IdOrIdList = Any
+
+typealias Query = Any
 
 class Destination(val parentId: String?, val index: Int?)
 
@@ -140,7 +130,7 @@ external class BookmarksNamespace {
   /**
    * Searches for BookmarkTreeNodes matching the given query. Queries specified with an object produce BookmarkTreeNodes matching all specified properties.
    */
-  fun search(query: SearchQuery): Promise<Array<BookmarkTreeNode>>
+  fun search(query: Query): Promise<Array<BookmarkTreeNode>>
 
   /**
    * Creates a bookmark or folder under the specified parentId.  If url is NULL or missing, it will be a folder.

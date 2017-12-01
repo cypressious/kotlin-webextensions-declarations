@@ -3,8 +3,6 @@ package notifications
 import kotlin.Any
 import kotlin.js.Promise
 
-typealias GetAllNotifications = Any
-
 typealias TemplateType = String
 
 typealias PermissionLevel = String
@@ -60,7 +58,7 @@ external class CreateNotificationOptions {
   /**
    * A timestamp associated with the notification, in milliseconds past the epoch.
    */
-  val eventTime: Any?
+  val eventTime: Int?
 
   /**
    * A URL to the image thumbnail for image-type notifications.
@@ -122,7 +120,7 @@ external class UpdateNotificationOptions {
   /**
    * A timestamp associated with the notification, in milliseconds past the epoch.
    */
-  val eventTime: Any?
+  val eventTime: Int?
 
   /**
    * A URL to the image thumbnail for image-type notifications.
@@ -157,6 +155,8 @@ external class Buttons2 {
   val iconUrl: String?
 }
 
+typealias Notifications = Any
+
 external class NotificationsNamespace {
   /**
    * Creates and displays a notification.
@@ -171,5 +171,5 @@ external class NotificationsNamespace {
   /**
    * Retrieves all the notifications.
    */
-  fun getAll(): Promise<GetAllNotifications>
+  fun getAll(): Promise<Notifications>
 }

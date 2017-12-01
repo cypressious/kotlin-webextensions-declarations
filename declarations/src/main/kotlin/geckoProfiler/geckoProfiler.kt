@@ -12,7 +12,7 @@ class Settings(
     /**
      * Interval in milliseconds between samples of profiling data. A smaller value will increase the detail of the profiles captured.
      */
-    val interval: Any,
+    val interval: Int,
     /**
      * A list of active features for the profiler.
      */

@@ -1,6 +1,7 @@
 package manifest
 
 import extensionTypes.RunAt
+import kotlin.Any
 
 external class OptionalPermission
 
@@ -49,7 +50,7 @@ external class WebExtensionManifest {
 
   val incognito: String?
 
-  val background: Any?
+  val background: Background
 
   val options_ui: Options_ui
 
@@ -92,12 +93,12 @@ external class ProtocolHandler {
   /**
    * The protocol the site wishes to handle, specified as a string. For example, you can register to handle SMS text message links by registering to handle the "sms" scheme.
    */
-  val protocol: Any
+  val protocol: Protocol
 
   /**
    * The URL of the handler, as a string. This string should include "%s" as a placeholder which will be replaced with the escaped URL of the document to be handled. This URL might be a true URL, or it could be a phone number, email address, or so forth.
    */
-  val uriTemplate: Any
+  val uriTemplate: UriTemplate
 }
 
 /**
@@ -303,6 +304,14 @@ external class Browser_specific_settings {
 
 typealias Icons = Any
 
+typealias Background = Any
+
+external class Background2 {
+  val scripts: Array<ExtensionURL>
+
+  val persistent: PersistentBackgroundProperty
+}
+
 external class Options_ui {
   val page: ExtensionURL
 
@@ -346,6 +355,10 @@ external class Sidebar_action {
 external class Chrome_url_overrides {
   val newtab: ExtensionURL
 }
+
+typealias Protocol = Any
+
+typealias UriTemplate = Any
 
 external class Applications2 {
   val gecko: FirefoxSpecificProperties

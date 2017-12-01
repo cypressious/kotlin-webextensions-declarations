@@ -136,7 +136,9 @@ external class UrlFilter {
   /**
    * Matches if the port of the URL is contained in any of the specified port lists. For example <code>[80, 443, [1000, 1200]]</code> matches all requests on port 80, 443 and in the range 1000-1200.
    */
-  val ports: Array<Any>?
+  val ports: Array<Ports>?
 }
+
+typealias Ports = Any
 
 external class EventsNamespace

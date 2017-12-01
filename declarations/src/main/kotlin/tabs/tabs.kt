@@ -2,6 +2,7 @@ package tabs
 
 import extensionTypes.ImageDetails
 import extensionTypes.InjectDetails
+import kotlin.Any
 import kotlin.js.Promise
 
 typealias MutedInfoReason = String
@@ -159,7 +160,7 @@ external class ZoomSettings {
   /**
    * Used to return the default zoom level for the current tab in calls to tabs.getZoomSettings.
    */
-  val defaultZoomFactor: Any?
+  val defaultZoomFactor: Int?
 }
 
 /**
@@ -174,7 +175,7 @@ external class PageSettings {
   /**
    * The page content scaling factor: 1.0 = 100% = normal size. Default: 1.0.
    */
-  val scaling: Any?
+  val scaling: Int?
 
   /**
    * Whether the page content should shrink to fit the page width (overrides scaling). Default: true.
@@ -199,12 +200,12 @@ external class PageSettings {
   /**
    * The paper width in paper size units. Default: 8.5.
    */
-  val paperWidth: Any?
+  val paperWidth: Int?
 
   /**
    * The paper height in paper size units. Default: 11.0.
    */
-  val paperHeight: Any?
+  val paperHeight: Int?
 
   /**
    * The text for the page's left header. Default: '&T'.
@@ -239,22 +240,22 @@ external class PageSettings {
   /**
    * The margin between the page content and the left edge of the paper (inches). Default: 0.5.
    */
-  val marginLeft: Any?
+  val marginLeft: Int?
 
   /**
    * The margin between the page content and the right edge of the paper (inches). Default: 0.5.
    */
-  val marginRight: Any?
+  val marginRight: Int?
 
   /**
    * The margin between the page content and the top edge of the paper (inches). Default: 0.5.
    */
-  val marginTop: Any?
+  val marginTop: Int?
 
   /**
    * The margin between the page content and the bottom edge of the paper (inches). Default: 0.5.
    */
-  val marginBottom: Any?
+  val marginBottom: Int?
 }
 
 typealias TabStatus = String
@@ -268,6 +269,8 @@ val name: String?, /**
  * Open a port to a specific $(topic:frame_ids)[frame] identified by <code>frameId</code> instead of all frames in the tab.
  */
 val frameId: Int?)
+
+typealias ResponseCallback = Any
 
 class Options(/**
  * Send a message to a specific $(topic:frame_ids)[frame] identified by <code>frameId</code> instead of all frames in the tab.
@@ -308,6 +311,8 @@ class CreateProperties(
      */
     val openInReaderMode: Boolean?
 )
+
+typealias Url = Any
 
 class QueryInfo(
     /**
@@ -353,7 +358,7 @@ class QueryInfo(
     /**
      * Match tabs against one or more $(topic:match_patterns)[URL patterns]. Note that fragment identifiers are not matched.
      */
-    val url: Any?,
+    val url: Url,
     /**
      * The ID of the parent window, or $(ref:windows.WINDOW_ID_CURRENT) for the $(topic:current-window)[current window].
      */
@@ -376,13 +381,15 @@ class QueryInfo(
     val openerTabId: Int?
 )
 
+typealias Tabs = Any
+
 class HighlightInfo(/**
  * The window that contains the tabs.
  */
 val windowId: Int?, /**
  * One or more tab indices to highlight.
  */
-val tabs: Any)
+val tabs: Tabs)
 
 class UpdateProperties(
     /**
@@ -411,6 +418,8 @@ class UpdateProperties(
     val loadReplace: Boolean?
 )
 
+typealias TabIds = Any
+
 class MoveProperties(/**
  * Defaults to the window the tab is currently in.
  */
@@ -419,10 +428,16 @@ val windowId: Int?, /**
  */
 val index: Int)
 
+typealias Tabs2 = Any
+
 class ReloadProperties(/**
  * Whether using any local cache. Default is false.
  */
 val bypassCache: Boolean?)
+
+typealias TabIds2 = Any
+
+typealias TabIds3 = Any
 
 external class TabsNamespace {
   /**
@@ -472,12 +487,12 @@ external class TabsNamespace {
   /**
    * Moves one or more tabs to a new position within its window, or to a new window. Note that tabs can only be moved to and from normal (window.type === "normal") windows.
    */
-  fun move(tabIds: Int, moveProperties: MoveProperties): Promise<Any>
+  fun move(tabIds: Int, moveProperties: MoveProperties): Promise<Tabs2>
 
   /**
    * Moves one or more tabs to a new position within its window, or to a new window. Note that tabs can only be moved to and from normal (window.type === "normal") windows.
    */
-  fun move(tabIds: Array<Int>, moveProperties: MoveProperties): Promise<Any>
+  fun move(tabIds: Array<Int>, moveProperties: MoveProperties): Promise<Tabs2>
 
   /**
    * Reload a tab.
@@ -537,12 +552,12 @@ external class TabsNamespace {
   /**
    * Zooms a specified tab.
    */
-  fun setZoom(tabId: Int?, zoomFactor: Any): Promise<Any>
+  fun setZoom(tabId: Int?, zoomFactor: Int): Promise<Any>
 
   /**
    * Gets the current zoom factor of a specified tab.
    */
-  fun getZoom(tabId: Int?): Promise<Any>
+  fun getZoom(tabId: Int?): Promise<Int>
 
   /**
    * Sets the zoom settings for a specified tab, which define how zoom changes are handled. These settings are reset to defaults upon navigating the tab.

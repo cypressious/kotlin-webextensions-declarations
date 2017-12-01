@@ -7,6 +7,8 @@ typealias ExpectedError = Any
 
 typealias Promise = Any
 
+typealias Test = Any
+
 external class TestNamespace {
   /**
    * Notifies the browser process that test code running in the extension failed.  This is only used for internal unit testing.
@@ -49,7 +51,7 @@ external class TestNamespace {
   ): Promise<Any>
 
   fun assertThrows(
-      func: Any,
+      func: () -> Unit,
       expectedError: ExpectedError,
       message: String?
   )

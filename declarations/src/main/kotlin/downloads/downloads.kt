@@ -76,17 +76,17 @@ external class DownloadItem {
   /**
    * Number of bytes received so far from the host, without considering file compression.
    */
-  val bytesReceived: Any
+  val bytesReceived: Int
 
   /**
    * Number of bytes in the whole file, without considering file compression, or -1 if unknown.
    */
-  val totalBytes: Any
+  val totalBytes: Int
 
   /**
    * Number of bytes in the whole file post-decompression, or -1 if unknown.
    */
-  val fileSize: Any
+  val fileSize: Int
 
   val exists: Boolean
 
@@ -102,9 +102,9 @@ external class StringDelta {
 }
 
 external class DoubleDelta {
-  val current: Any?
+  val current: Int?
 
-  val previous: Any?
+  val previous: Int?
 }
 
 external class BooleanDelta {
@@ -147,12 +147,12 @@ external class DownloadQuery {
   /**
    * Limits results to downloads whose totalBytes is greater than the given integer.
    */
-  val totalBytesGreater: Any?
+  val totalBytesGreater: Int?
 
   /**
    * Limits results to downloads whose totalBytes is less than the given integer.
    */
-  val totalBytesLess: Any?
+  val totalBytesLess: Int?
 
   /**
    * Limits results to <a href='#type-DownloadItem'>DownloadItems</a> whose <code>filename</code> matches the given regular expression.
@@ -218,17 +218,17 @@ external class DownloadQuery {
   /**
    * Number of bytes received so far from the host, without considering file compression.
    */
-  val bytesReceived: Any?
+  val bytesReceived: Int?
 
   /**
    * Number of bytes in the whole file, without considering file compression, or -1 if unknown.
    */
-  val totalBytes: Any?
+  val totalBytes: Int?
 
   /**
    * Number of bytes in the whole file post-decompression, or -1 if unknown.
    */
-  val fileSize: Any?
+  val fileSize: Int?
 
   val exists: Boolean?
 }
@@ -280,6 +280,8 @@ class Options2(/**
  * The size of the icon.  The returned icon will be square with dimensions size * size pixels.  The default size for the icon is 32x32 pixels.
  */
 val size: Int?)
+
+typealias Callback = Any
 
 external class DownloadsNamespace {
   /**

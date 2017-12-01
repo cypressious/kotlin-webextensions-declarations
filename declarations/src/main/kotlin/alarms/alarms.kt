@@ -11,12 +11,12 @@ external class Alarm {
   /**
    * Time when the alarm is scheduled to fire, in milliseconds past the epoch.
    */
-  val scheduledTime: Any
+  val scheduledTime: Int
 
   /**
    * When present, signals that the alarm triggers periodically after so many minutes.
    */
-  val periodInMinutes: Any?
+  val periodInMinutes: Int?
 }
 
 /**
@@ -26,15 +26,15 @@ class AlarmInfo(
     /**
      * Time when the alarm is scheduled to first fire, in milliseconds past the epoch.
      */
-    val `when`: Any?,
+    val `when`: Int?,
     /**
      * Number of minutes from the current time after which the alarm should first fire.
      */
-    val delayInMinutes: Any?,
+    val delayInMinutes: Int?,
     /**
      * Number of minutes after which the alarm should recur repeatedly.
      */
-    val periodInMinutes: Any?
+    val periodInMinutes: Int?
 )
 
 external class AlarmsNamespace {

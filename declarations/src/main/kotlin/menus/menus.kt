@@ -14,12 +14,12 @@ external class OnClickData {
   /**
    * The ID of the menu item that was clicked.
    */
-  val menuItemId: Any
+  val menuItemId: MenuItemId
 
   /**
    * The parent ID, if any, for the item clicked.
    */
-  val parentMenuItemId: Any?
+  val parentMenuItemId: ParentMenuItemId
 
   /**
    * One of 'image', 'video', or 'audio' if the context menu was activated on one of these types of elements.
@@ -82,7 +82,15 @@ external class OnClickData {
   val modifiers: Array<String>
 }
 
+typealias MenuItemId = Any
+
+typealias ParentMenuItemId = Any
+
 typealias Icons = Any
+
+typealias Onclick = Any
+
+typealias ParentId = Any
 
 class CreateProperties(
     /**
@@ -109,11 +117,11 @@ class CreateProperties(
     /**
      * A function that will be called back when the menu item is clicked. Event pages cannot use this; instead, they should register a listener for $(ref:contextMenus.onClicked).
      */
-    val onclick: Any?,
+    val onclick: Onclick,
     /**
      * The ID of a parent menu item; this makes the item a child of a previously added item.
      */
-    val parentId: Any?,
+    val parentId: ParentId,
     /**
      * Lets you restrict the item to apply only to documents whose URL matches one of the given patterns. (This applies to frames as well.) For details on the format of a pattern, see $(topic:match_patterns)[Match Patterns].
      */
@@ -132,6 +140,14 @@ class CreateProperties(
     val command: String?
 )
 
+typealias Callback = Any
+
+typealias Id = Any
+
+typealias Onclick2 = Any
+
+typealias ParentId2 = Any
+
 /**
  * The properties to update. Accepts the same values as the create function.
  */
@@ -140,21 +156,23 @@ class UpdateProperties(
     val title: String?,
     val checked: Boolean?,
     val contexts: Array<ContextType>?,
-    val onclick: Any,
+    val onclick: Onclick2,
     /**
      * Note: You cannot change an item to be a child of one of its own descendants.
      */
-    val parentId: Any?,
+    val parentId: ParentId2,
     val documentUrlPatterns: Array<String>?,
     val targetUrlPatterns: Array<String>?,
     val enabled: Boolean?
 )
 
+typealias MenuItemId2 = Any
+
 external class MenusNamespace {
   /**
    * Creates a new context menu item. Note that if an error occurs during creation, you may not find out until the creation callback fires (the details will be in $(ref:runtime.lastError)).
    */
-  fun create(createProperties: CreateProperties, callback: Any?)
+  fun create(createProperties: CreateProperties, callback: Callback)
 
   /**
    * Updates a previously created context menu item.
