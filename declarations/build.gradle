@@ -10,6 +10,7 @@ buildscript {
 }
 
 apply plugin: 'kotlin2js'
+apply plugin: 'maven-publish'
 
 repositories {
     mavenCentral()
@@ -21,4 +22,25 @@ dependencies {
 
 compileKotlin2Js {
     kotlinOptions.sourceMap = true
+}
+
+task sourceJar(type: Jar) {
+    from sourceSets.main.kotlin
+}
+
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            groupId 'de.rakhman.webextensions-declarations'
+            artifactId 'webextensions-declarations'
+            version '1.0'
+
+            from components.java
+
+            artifact sourceJar {
+                classifier "sources"
+            }
+        }
+    }
 }
