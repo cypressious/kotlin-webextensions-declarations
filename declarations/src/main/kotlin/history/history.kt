@@ -15,32 +15,32 @@ external class HistoryItem {
     /**
      * The unique identifier for the item.
      */
-    val id: String
+    var id: String
 
     /**
      * The URL navigated to by a user.
      */
-    val url: String?
+    var url: String?
 
     /**
      * The title of the page when it was last loaded.
      */
-    val title: String?
+    var title: String?
 
     /**
      * When this page was last loaded, represented in milliseconds since the epoch.
      */
-    val lastVisitTime: Int?
+    var lastVisitTime: Int?
 
     /**
      * The number of times the user has navigated to this page.
      */
-    val visitCount: Int?
+    var visitCount: Int?
 
     /**
      * The number of times the user has navigated to this page by typing in the address.
      */
-    val typedCount: Int?
+    var typedCount: Int?
 }
 
 /**
@@ -50,104 +50,104 @@ external class VisitItem {
     /**
      * The unique identifier for the item.
      */
-    val id: String
+    var id: String
 
     /**
      * The unique identifier for this visit.
      */
-    val visitId: String
+    var visitId: String
 
     /**
      * When this visit occurred, represented in milliseconds since the epoch.
      */
-    val visitTime: Int?
+    var visitTime: Int?
 
     /**
      * The visit ID of the referrer.
      */
-    val referringVisitId: String
+    var referringVisitId: String
 
     /**
      * The $(topic:transition-types)[transition type] for this visit from its referrer.
      */
-    val transition: TransitionType
+    var transition: TransitionType
 }
 
 class Query(
         /**
          * A free-text query to the history service.  Leave empty to retrieve all pages.
          */
-        val text: String,
+        var text: String,
         /**
          * Limit results to those visited after this date. If not specified, this defaults to 24 hours in the past.
          */
-        val startTime: Date,
+        var startTime: Date,
         /**
          * Limit results to those visited before this date.
          */
-        val endTime: Date,
+        var endTime: Date,
         /**
          * The maximum number of results to retrieve.  Defaults to 100.
          */
-        val maxResults: Int?
+        var maxResults: Int?
 )
 
 class Details(/**
  * The URL for which to retrieve visit information.  It must be in the format as returned from a call to history.search.
  */
-val url: String)
+var url: String)
 
 class Details2(
         /**
          * The URL to add. Must be a valid URL that can be added to history.
          */
-        val url: String,
+        var url: String,
         /**
          * The title of the page.
          */
-        val title: String?,
+        var title: String?,
         /**
          * The $(topic:transition-types)[transition type] for this visit from its referrer.
          */
-        val transition: TransitionType,
+        var transition: TransitionType,
         /**
          * The date when this visit occurred.
          */
-        val visitTime: Date
+        var visitTime: Date
 )
 
 class Details3(/**
  * The URL to remove.
  */
-val url: String)
+var url: String)
 
 class Range(/**
  * Items added to history after this date.
  */
-val startTime: Date, /**
+var startTime: Date, /**
  * Items added to history before this date.
  */
-val endTime: Date)
+var endTime: Date)
 
 external class Removed {
     /**
      * True if all history was removed.  If true, then urls will be empty.
      */
-    val allHistory: Boolean
+    var allHistory: Boolean
 
-    val urls: Array<String>
+    var urls: Array<String>
 }
 
 external class Changed {
     /**
      * The URL for which the title has changed
      */
-    val url: String
+    var url: String
 
     /**
      * The new title for the URL.
      */
-    val title: String
+    var title: String
 }
 
 external class HistoryNamespace {

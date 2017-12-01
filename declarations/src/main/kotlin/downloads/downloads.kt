@@ -19,102 +19,102 @@ external class DownloadItem {
     /**
      * An identifier that is persistent across browser sessions.
      */
-    val id: Int
+    var id: Int
 
     /**
      * Absolute URL.
      */
-    val url: String
+    var url: String
 
-    val referrer: String?
+    var referrer: String?
 
     /**
      * Absolute local path.
      */
-    val filename: String
+    var filename: String
 
     /**
      * False if this download is recorded in the history, true if it is not recorded.
      */
-    val incognito: Boolean
+    var incognito: Boolean
 
     /**
      * Indication of whether this download is thought to be safe or known to be suspicious.
      */
-    val danger: DangerType
+    var danger: DangerType
 
     /**
      * The file's MIME type.
      */
-    val mime: String
+    var mime: String
 
     /**
      * Number of milliseconds between the unix epoch and when this download began.
      */
-    val startTime: String
+    var startTime: String
 
     /**
      * Number of milliseconds between the unix epoch and when this download ended.
      */
-    val endTime: String?
+    var endTime: String?
 
-    val estimatedEndTime: String?
+    var estimatedEndTime: String?
 
     /**
      * Indicates whether the download is progressing, interrupted, or complete.
      */
-    val state: State
+    var state: State
 
     /**
      * True if the download has stopped reading data from the host, but kept the connection open.
      */
-    val paused: Boolean
+    var paused: Boolean
 
-    val canResume: Boolean
+    var canResume: Boolean
 
     /**
      * Number indicating why a download was interrupted.
      */
-    val error: InterruptReason
+    var error: InterruptReason
 
     /**
      * Number of bytes received so far from the host, without considering file compression.
      */
-    val bytesReceived: Int
+    var bytesReceived: Int
 
     /**
      * Number of bytes in the whole file, without considering file compression, or -1 if unknown.
      */
-    val totalBytes: Int
+    var totalBytes: Int
 
     /**
      * Number of bytes in the whole file post-decompression, or -1 if unknown.
      */
-    val fileSize: Int
+    var fileSize: Int
 
-    val exists: Boolean
+    var exists: Boolean
 
-    val byExtensionId: String?
+    var byExtensionId: String?
 
-    val byExtensionName: String?
+    var byExtensionName: String?
 }
 
 external class StringDelta {
-    val current: String?
+    var current: String?
 
-    val previous: String?
+    var previous: String?
 }
 
 external class DoubleDelta {
-    val current: Int?
+    var current: Int?
 
-    val previous: Int?
+    var previous: Int?
 }
 
 external class BooleanDelta {
-    val current: Boolean?
+    var current: Boolean?
 
-    val previous: Boolean?
+    var previous: Boolean?
 }
 
 /**
@@ -128,124 +128,124 @@ external class DownloadQuery {
     /**
      * This array of search terms limits results to <a href='#type-DownloadItem'>DownloadItems</a> whose <code>filename</code> or <code>url</code> contain all of the search terms that do not begin with a dash '-' and none of the search terms that do begin with a dash.
      */
-    val query: Array<String>?
+    var query: Array<String>?
 
     /**
      * Limits results to downloads that started before the given ms since the epoch.
      */
-    val startedBefore: DownloadTime
+    var startedBefore: DownloadTime
 
     /**
      * Limits results to downloads that started after the given ms since the epoch.
      */
-    val startedAfter: DownloadTime
+    var startedAfter: DownloadTime
 
     /**
      * Limits results to downloads that ended before the given ms since the epoch.
      */
-    val endedBefore: DownloadTime
+    var endedBefore: DownloadTime
 
     /**
      * Limits results to downloads that ended after the given ms since the epoch.
      */
-    val endedAfter: DownloadTime
+    var endedAfter: DownloadTime
 
     /**
      * Limits results to downloads whose totalBytes is greater than the given integer.
      */
-    val totalBytesGreater: Int?
+    var totalBytesGreater: Int?
 
     /**
      * Limits results to downloads whose totalBytes is less than the given integer.
      */
-    val totalBytesLess: Int?
+    var totalBytesLess: Int?
 
     /**
      * Limits results to <a href='#type-DownloadItem'>DownloadItems</a> whose <code>filename</code> matches the given regular expression.
      */
-    val filenameRegex: String?
+    var filenameRegex: String?
 
     /**
      * Limits results to <a href='#type-DownloadItem'>DownloadItems</a> whose <code>url</code> matches the given regular expression.
      */
-    val urlRegex: String?
+    var urlRegex: String?
 
     /**
      * Setting this integer limits the number of results. Otherwise, all matching <a href='#type-DownloadItem'>DownloadItems</a> will be returned.
      */
-    val limit: Int?
+    var limit: Int?
 
     /**
      * Setting elements of this array to <a href='#type-DownloadItem'>DownloadItem</a> properties in order to sort the search results. For example, setting <code>orderBy='startTime'</code> sorts the <a href='#type-DownloadItem'>DownloadItems</a> by their start time in ascending order. To specify descending order, prefix <code>orderBy</code> with a hyphen: '-startTime'.
      */
-    val orderBy: Array<String>?
+    var orderBy: Array<String>?
 
-    val id: Int?
+    var id: Int?
 
     /**
      * Absolute URL.
      */
-    val url: String?
+    var url: String?
 
     /**
      * Absolute local path.
      */
-    val filename: String?
+    var filename: String?
 
     /**
      * Indication of whether this download is thought to be safe or known to be suspicious.
      */
-    val danger: DangerType
+    var danger: DangerType
 
     /**
      * The file's MIME type.
      */
-    val mime: String?
+    var mime: String?
 
-    val startTime: String?
+    var startTime: String?
 
-    val endTime: String?
+    var endTime: String?
 
     /**
      * Indicates whether the download is progressing, interrupted, or complete.
      */
-    val state: State
+    var state: State
 
     /**
      * True if the download has stopped reading data from the host, but kept the connection open.
      */
-    val paused: Boolean?
+    var paused: Boolean?
 
     /**
      * Why a download was interrupted.
      */
-    val error: InterruptReason
+    var error: InterruptReason
 
     /**
      * Number of bytes received so far from the host, without considering file compression.
      */
-    val bytesReceived: Int?
+    var bytesReceived: Int?
 
     /**
      * Number of bytes in the whole file, without considering file compression, or -1 if unknown.
      */
-    val totalBytes: Int?
+    var totalBytes: Int?
 
     /**
      * Number of bytes in the whole file post-decompression, or -1 if unknown.
      */
-    val fileSize: Int?
+    var fileSize: Int?
 
-    val exists: Boolean?
+    var exists: Boolean?
 }
 
 class Headers(/**
  * Name of the HTTP header.
  */
-val name: String, /**
+var name: String, /**
  * Value of the HTTP header.
  */
-val value: String)
+var value: String)
 
 /**
  * What to download and how.
@@ -254,38 +254,38 @@ class Options(
         /**
          * The URL to download.
          */
-        val url: String,
+        var url: String,
         /**
          * A file path relative to the Downloads directory to contain the downloaded file.
          */
-        val filename: String?,
+        var filename: String?,
         /**
          * Whether to associate the download with a private browsing session.
          */
-        val incognito: Boolean?,
-        val conflictAction: FilenameConflictAction,
+        var incognito: Boolean?,
+        var conflictAction: FilenameConflictAction,
         /**
          * Use a file-chooser to allow the user to select a filename. If the option is not specified, the file chooser will be shown only if the Firefox "Always ask you where to save files" option is enabled (i.e. the pref <code>browser.download.useDownloadDir</code> is set to <code>false</code>).
          */
-        val saveAs: Boolean?,
+        var saveAs: Boolean?,
         /**
          * The HTTP method to use if the URL uses the HTTP[S] protocol.
          */
-        val method: String?,
+        var method: String?,
         /**
          * Extra HTTP headers to send with the request if the URL uses the HTTP[s] protocol. Each header is represented as a dictionary containing the keys <code>name</code> and either <code>value</code> or <code>binaryValue</code>, restricted to those allowed by XMLHttpRequest.
          */
-        val headers: Array<Headers>?,
+        var headers: Array<Headers>?,
         /**
          * Post body.
          */
-        val body: String?
+        var body: String?
 )
 
 class Options2(/**
  * The size of the icon.  The returned icon will be square with dimensions size * size pixels.  The default size for the icon is 32x32 pixels.
  */
-val size: Int?)
+var size: Int?)
 
 typealias Callback = Any
 
@@ -293,66 +293,66 @@ external class DownloadDelta {
     /**
      * The <code>id</code> of the <a href='#type-DownloadItem'>DownloadItem</a> that changed.
      */
-    val id: Int
+    var id: Int
 
     /**
      * Describes a change in a <a href='#type-DownloadItem'>DownloadItem</a>'s <code>url</code>.
      */
-    val url: StringDelta
+    var url: StringDelta
 
     /**
      * Describes a change in a <a href='#type-DownloadItem'>DownloadItem</a>'s <code>filename</code>.
      */
-    val filename: StringDelta
+    var filename: StringDelta
 
     /**
      * Describes a change in a <a href='#type-DownloadItem'>DownloadItem</a>'s <code>danger</code>.
      */
-    val danger: StringDelta
+    var danger: StringDelta
 
     /**
      * Describes a change in a <a href='#type-DownloadItem'>DownloadItem</a>'s <code>mime</code>.
      */
-    val mime: StringDelta
+    var mime: StringDelta
 
     /**
      * Describes a change in a <a href='#type-DownloadItem'>DownloadItem</a>'s <code>startTime</code>.
      */
-    val startTime: StringDelta
+    var startTime: StringDelta
 
     /**
      * Describes a change in a <a href='#type-DownloadItem'>DownloadItem</a>'s <code>endTime</code>.
      */
-    val endTime: StringDelta
+    var endTime: StringDelta
 
     /**
      * Describes a change in a <a href='#type-DownloadItem'>DownloadItem</a>'s <code>state</code>.
      */
-    val state: StringDelta
+    var state: StringDelta
 
-    val canResume: BooleanDelta
+    var canResume: BooleanDelta
 
     /**
      * Describes a change in a <a href='#type-DownloadItem'>DownloadItem</a>'s <code>paused</code>.
      */
-    val paused: BooleanDelta
+    var paused: BooleanDelta
 
     /**
      * Describes a change in a <a href='#type-DownloadItem'>DownloadItem</a>'s <code>error</code>.
      */
-    val error: StringDelta
+    var error: StringDelta
 
     /**
      * Describes a change in a <a href='#type-DownloadItem'>DownloadItem</a>'s <code>totalBytes</code>.
      */
-    val totalBytes: DoubleDelta
+    var totalBytes: DoubleDelta
 
     /**
      * Describes a change in a <a href='#type-DownloadItem'>DownloadItem</a>'s <code>fileSize</code>.
      */
-    val fileSize: DoubleDelta
+    var fileSize: DoubleDelta
 
-    val exists: BooleanDelta
+    var exists: BooleanDelta
 }
 
 external class DownloadsNamespace {

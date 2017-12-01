@@ -10,12 +10,12 @@ typealias LanguageCode = String
  * DetectedLanguage object that holds detected ISO language code and its percentage in the input string
  */
 external class Languages {
-    val language: LanguageCode
+    var language: LanguageCode
 
     /**
      * The percentage of the detected language
      */
-    val percentage: Int
+    var percentage: Int
 }
 
 /**
@@ -25,12 +25,12 @@ external class Result {
     /**
      * CLD detected language reliability
      */
-    val isReliable: Boolean
+    var isReliable: Boolean
 
     /**
      * array of detectedLanguage
      */
-    val languages: Array<Languages>
+    var languages: Array<Languages>
 }
 
 external class I18nNamespace {

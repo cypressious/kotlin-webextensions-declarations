@@ -10,7 +10,7 @@ external class Resource {
     /**
      * The URL of the resource.
      */
-    val url: String
+    var url: String
 }
 
 /**
@@ -25,47 +25,47 @@ external class ExceptionInfo {
     /**
      * Set if the error occurred on the DevTools side before the expression is evaluated.
      */
-    val isError: Boolean
+    var isError: Boolean
 
     /**
      * Set if the error occurred on the DevTools side before the expression is evaluated.
      */
-    val code: String
+    var code: String
 
     /**
      * Set if the error occurred on the DevTools side before the expression is evaluated.
      */
-    val description: String
+    var description: String
 
     /**
      * Set if the error occurred on the DevTools side before the expression is evaluated, contains the array of the values that may be substituted into the description string to provide more information about the cause of the error.
      */
-    val details: Array<Any>
+    var details: Array<Any>
 
     /**
      * Set if the evaluated code produces an unhandled exception.
      */
-    val isException: Boolean
+    var isException: Boolean
 
     /**
      * Set if the evaluated code produces an unhandled exception.
      */
-    val value: String
+    var value: String
 }
 
 class ReloadOptions(
         /**
          * When true, the loader will bypass the cache for all inspected page resources loaded before the <code>load</code> event is fired. The effect is similar to pressing Ctrl+Shift+R in the inspected window or within the Developer Tools window.
          */
-        val ignoreCache: Boolean?,
+        var ignoreCache: Boolean?,
         /**
          * If specified, the string will override the value of the <code>User-Agent</code> HTTP header that's sent while loading the resources of the inspected page. The string will also override the value of the <code>navigator.userAgent</code> property that's returned to any scripts that are running within the inspected page.
          */
-        val userAgent: String?,
+        var userAgent: String?,
         /**
          * If specified, the script will be injected into every frame of the inspected page immediately upon load, before any of the frame's scripts. The script will not be injected after subsequent reloads&mdash;for example, if the user presses Ctrl+R.
          */
-        val injectedScript: String?
+        var injectedScript: String?
 )
 
 external class InspectedWindowNamespace {

@@ -8,72 +8,72 @@ external class OptionalPermission
  * Represents a WebExtension manifest.json file
  */
 external class WebExtensionManifest {
-    val browser_action: Browser_action
+    var browser_action: Browser_action
 
-    val chrome_settings_overrides: Chrome_settings_overrides
+    var chrome_settings_overrides: Chrome_settings_overrides
 
-    val commands: Commands
+    var commands: Commands
 
-    val devtools_page: ExtensionURL
+    var devtools_page: ExtensionURL
 
     /**
      * A list of protocol handler definitions.
      */
-    val protocol_handlers: Array<ProtocolHandler>?
+    var protocol_handlers: Array<ProtocolHandler>?
 
-    val default_locale: String?
+    var default_locale: String?
 
-    val manifest_version: Int
+    var manifest_version: Int
 
-    val minimum_chrome_version: String?
+    var minimum_chrome_version: String?
 
-    val minimum_opera_version: String?
+    var minimum_opera_version: String?
 
-    val applications: Applications
+    var applications: Applications
 
-    val browser_specific_settings: Browser_specific_settings
+    var browser_specific_settings: Browser_specific_settings
 
-    val name: String
+    var name: String
 
-    val short_name: String?
+    var short_name: String?
 
-    val description: String?
+    var description: String?
 
-    val author: String?
+    var author: String?
 
-    val version: String
+    var version: String
 
-    val homepage_url: String?
+    var homepage_url: String?
 
-    val icons: Icons
+    var icons: Icons
 
-    val incognito: String?
+    var incognito: String?
 
-    val background: Background
+    var background: Background
 
-    val options_ui: Options_ui
+    var options_ui: Options_ui
 
-    val content_scripts: Array<ContentScript>?
+    var content_scripts: Array<ContentScript>?
 
-    val content_security_policy: String?
+    var content_security_policy: String?
 
-    val permissions: Array<PermissionOrOrigin>?
+    var permissions: Array<PermissionOrOrigin>?
 
-    val optional_permissions: Array<OptionalPermissionOrOrigin>?
+    var optional_permissions: Array<OptionalPermissionOrOrigin>?
 
-    val web_accessible_resources: Array<String>?
+    var web_accessible_resources: Array<String>?
 
-    val developer: Developer
+    var developer: Developer
 
-    val omnibox: Omnibox
+    var omnibox: Omnibox
 
-    val page_action: Page_action
+    var page_action: Page_action
 
-    val sidebar_action: Sidebar_action
+    var sidebar_action: Sidebar_action
 
-    val theme: ThemeType
+    var theme: ThemeType
 
-    val chrome_url_overrides: Chrome_url_overrides
+    var chrome_url_overrides: Chrome_url_overrides
 }
 
 external class Permission
@@ -87,63 +87,63 @@ external class ProtocolHandler {
     /**
      * A user-readable title string for the protocol handler. This will be displayed to the user in interface objects as needed.
      */
-    val name: String
+    var name: String
 
     /**
      * The protocol the site wishes to handle, specified as a string. For example, you can register to handle SMS text message links by registering to handle the "sms" scheme.
      */
-    val protocol: Protocol
+    var protocol: Protocol
 
     /**
      * The URL of the handler, as a string. This string should include "%s" as a placeholder which will be replaced with the escaped URL of the document to be handled. This URL might be a true URL, or it could be a phone number, email address, or so forth.
      */
-    val uriTemplate: UriTemplate
+    var uriTemplate: UriTemplate
 }
 
 /**
  * Represents a WebExtension language pack manifest.json file
  */
 external class WebExtensionLangpackManifest {
-    val manifest_version: Int
+    var manifest_version: Int
 
-    val applications: Applications2
+    var applications: Applications2
 
-    val browser_specific_settings: Browser_specific_settings2
+    var browser_specific_settings: Browser_specific_settings2
 
-    val name: String
+    var name: String
 
-    val short_name: String?
+    var short_name: String?
 
-    val description: String?
+    var description: String?
 
-    val author: String?
+    var author: String?
 
-    val version: String
+    var version: String
 
-    val homepage_url: String?
+    var homepage_url: String?
 
-    val langpack_id: String
+    var langpack_id: String
 
-    val languages: Languages
+    var languages: Languages
 
-    val sources: Sources
+    var sources: Sources
 }
 
 external class ThemeIcons {
     /**
      * A light icon to use for dark themes
      */
-    val light: ExtensionURL
+    var light: ExtensionURL
 
     /**
      * The dark icon to use for light themes
      */
-    val dark: ExtensionURL
+    var dark: ExtensionURL
 
     /**
      * The size of the icons
      */
-    val size: Int
+    var size: Int
 }
 
 typealias OptionalPermissionOrOrigin = Any
@@ -159,13 +159,13 @@ typealias ImageDataOrExtensionURL = String
 typealias ExtensionID = Any
 
 external class FirefoxSpecificProperties {
-    val id: ExtensionID
+    var id: ExtensionID
 
-    val update_url: String?
+    var update_url: String?
 
-    val strict_min_version: String?
+    var strict_min_version: String?
 
-    val strict_max_version: String?
+    var strict_max_version: String?
 }
 
 typealias MatchPattern = Any
@@ -178,38 +178,38 @@ typealias MatchPatternInternal = Any
  * Details of the script or CSS to inject. Either the code or the file property must be set, but both may not be set at the same time. Based on InjectDetails, but using underscore rather than camel case naming conventions.
  */
 external class ContentScript {
-    val matches: Array<MatchPattern>
+    var matches: Array<MatchPattern>
 
-    val exclude_matches: Array<MatchPattern>?
+    var exclude_matches: Array<MatchPattern>?
 
-    val include_globs: Array<String>?
+    var include_globs: Array<String>?
 
-    val exclude_globs: Array<String>?
+    var exclude_globs: Array<String>?
 
     /**
      * The list of CSS files to inject
      */
-    val css: Array<ExtensionURL>?
+    var css: Array<ExtensionURL>?
 
     /**
      * The list of JS files to inject
      */
-    val js: Array<ExtensionURL>?
+    var js: Array<ExtensionURL>?
 
     /**
      * If allFrames is <code>true</code>, implies that the JavaScript or CSS should be injected into all frames of current page. By default, it's <code>false</code> and is only injected into the top frame.
      */
-    val all_frames: Boolean?
+    var all_frames: Boolean?
 
     /**
      * If matchAboutBlank is true, then the code is also injected in about:blank and about:srcdoc frames if your extension has access to its parent document. Code cannot be inserted in top-level about:-frames. By default it is <code>false</code>.
      */
-    val match_about_blank: Boolean?
+    var match_about_blank: Boolean?
 
     /**
      * The soonest that the JavaScript or CSS will be injected into the tab. Defaults to "document_idle".
      */
-    val run_at: RunAt
+    var run_at: RunAt
 }
 
 typealias IconPath = Any
@@ -229,80 +229,80 @@ typealias NativeManifest = Any
 typealias ThemeColor = Any
 
 external class ThemeType {
-    val images: Images
+    var images: Images
 
-    val colors: Colors
+    var colors: Colors
 
-    val icons: Icons2
+    var icons: Icons2
 
-    val properties: Properties
+    var properties: Properties
 }
 
 external class Browser_action {
-    val default_title: String?
+    var default_title: String?
 
-    val default_icon: IconPath
+    var default_icon: IconPath
 
     /**
      * Specifies icons to use for dark and light themes
      */
-    val theme_icons: Array<ThemeIcons>?
+    var theme_icons: Array<ThemeIcons>?
 
-    val default_popup: String?
+    var default_popup: String?
 
-    val browser_style: Boolean?
+    var browser_style: Boolean?
 
     /**
      * Defines the location the browserAction will appear by default.  The default location is navbar.
      */
-    val default_area: String?
+    var default_area: String?
 }
 
 external class Search_provider {
-    val name: String
+    var name: String
 
-    val keyword: String?
+    var keyword: String?
 
-    val search_url: String
+    var search_url: String
 
-    val favicon_url: String?
+    var favicon_url: String?
 
-    val suggest_url: String?
+    var suggest_url: String?
 
-    val instant_url: String?
+    var instant_url: String?
 
-    val image_url: String?
+    var image_url: String?
 
-    val search_url_post_params: String?
+    var search_url_post_params: String?
 
-    val instant_url_post_params: String?
+    var instant_url_post_params: String?
 
-    val image_url_post_params: String?
+    var image_url_post_params: String?
 
-    val alternate_urls: Array<String>?
+    var alternate_urls: Array<String>?
 
-    val prepopulated_id: Int?
+    var prepopulated_id: Int?
 
     /**
      * Sets the default engine to a built-in engine only.
      */
-    val is_default: Boolean?
+    var is_default: Boolean?
 }
 
 external class Chrome_settings_overrides {
-    val homepage: String?
+    var homepage: String?
 
-    val search_provider: Search_provider
+    var search_provider: Search_provider
 }
 
 typealias Commands = Any
 
 external class Applications {
-    val gecko: FirefoxSpecificProperties
+    var gecko: FirefoxSpecificProperties
 }
 
 external class Browser_specific_settings {
-    val gecko: FirefoxSpecificProperties
+    var gecko: FirefoxSpecificProperties
 }
 
 typealias Icons = Any
@@ -310,53 +310,53 @@ typealias Icons = Any
 typealias Background = Any
 
 external class Background2 {
-    val scripts: Array<ExtensionURL>
+    var scripts: Array<ExtensionURL>
 
-    val persistent: PersistentBackgroundProperty
+    var persistent: PersistentBackgroundProperty
 }
 
 external class Options_ui {
-    val page: ExtensionURL
+    var page: ExtensionURL
 
-    val browser_style: Boolean?
+    var browser_style: Boolean?
 
-    val chrome_style: Boolean?
+    var chrome_style: Boolean?
 
-    val open_in_tab: Boolean?
+    var open_in_tab: Boolean?
 }
 
 external class Developer {
-    val name: String?
+    var name: String?
 
-    val url: String?
+    var url: String?
 }
 
 external class Omnibox {
-    val keyword: String
+    var keyword: String
 }
 
 external class Page_action {
-    val default_title: String?
+    var default_title: String?
 
-    val default_icon: IconPath
+    var default_icon: IconPath
 
-    val default_popup: String?
+    var default_popup: String?
 
-    val browser_style: Boolean?
+    var browser_style: Boolean?
 }
 
 external class Sidebar_action {
-    val default_title: String?
+    var default_title: String?
 
-    val default_icon: IconPath
+    var default_icon: IconPath
 
-    val browser_style: Boolean?
+    var browser_style: Boolean?
 
-    val default_panel: String
+    var default_panel: String
 }
 
 external class Chrome_url_overrides {
-    val newtab: ExtensionURL
+    var newtab: ExtensionURL
 }
 
 /**
@@ -368,11 +368,11 @@ typealias Protocol = Any
 typealias UriTemplate = Any
 
 external class Applications2 {
-    val gecko: FirefoxSpecificProperties
+    var gecko: FirefoxSpecificProperties
 }
 
 external class Browser_specific_settings2 {
-    val gecko: FirefoxSpecificProperties
+    var gecko: FirefoxSpecificProperties
 }
 
 typealias Languages = Any
@@ -380,209 +380,209 @@ typealias Languages = Any
 typealias Sources = Any
 
 external class Images {
-    val additional_backgrounds: Array<ImageDataOrExtensionURL>?
+    var additional_backgrounds: Array<ImageDataOrExtensionURL>?
 
-    val headerURL: ImageDataOrExtensionURL
+    var headerURL: ImageDataOrExtensionURL
 
-    val theme_frame: ImageDataOrExtensionURL
+    var theme_frame: ImageDataOrExtensionURL
 }
 
 external class Colors {
-    val accentcolor: ThemeColor
+    var accentcolor: ThemeColor
 
-    val frame: ThemeColor
+    var frame: ThemeColor
 
-    val textcolor: ThemeColor
+    var textcolor: ThemeColor
 
-    val background_tab_text: ThemeColor
+    var background_tab_text: ThemeColor
 
-    val tab_text: ThemeColor
+    var tab_text: ThemeColor
 
-    val toolbar: ThemeColor
+    var toolbar: ThemeColor
 
-    val toolbar_text: ThemeColor
+    var toolbar_text: ThemeColor
 
-    val bookmark_text: ThemeColor
+    var bookmark_text: ThemeColor
 
-    val toolbar_field: ThemeColor
+    var toolbar_field: ThemeColor
 
-    val toolbar_field_text: ThemeColor
+    var toolbar_field_text: ThemeColor
 
-    val toolbar_field_border: ThemeColor
+    var toolbar_field_border: ThemeColor
 
-    val toolbar_top_separator: ThemeColor
+    var toolbar_top_separator: ThemeColor
 
-    val toolbar_bottom_separator: ThemeColor
+    var toolbar_bottom_separator: ThemeColor
 
-    val toolbar_vertical_separator: ThemeColor
+    var toolbar_vertical_separator: ThemeColor
 }
 
 external class Icons2 {
-    val back: ExtensionURL
+    var back: ExtensionURL
 
-    val forward: ExtensionURL
+    var forward: ExtensionURL
 
-    val reload: ExtensionURL
+    var reload: ExtensionURL
 
-    val stop: ExtensionURL
+    var stop: ExtensionURL
 
-    val bookmark_star: ExtensionURL
+    var bookmark_star: ExtensionURL
 
-    val bookmark_menu: ExtensionURL
+    var bookmark_menu: ExtensionURL
 
-    val downloads: ExtensionURL
+    var downloads: ExtensionURL
 
-    val home: ExtensionURL
+    var home: ExtensionURL
 
-    val app_menu: ExtensionURL
+    var app_menu: ExtensionURL
 
-    val cut: ExtensionURL
+    var cut: ExtensionURL
 
-    val copy: ExtensionURL
+    var copy: ExtensionURL
 
-    val paste: ExtensionURL
+    var paste: ExtensionURL
 
-    val new_window: ExtensionURL
+    var new_window: ExtensionURL
 
-    val new_private_window: ExtensionURL
+    var new_private_window: ExtensionURL
 
-    val save_page: ExtensionURL
+    var save_page: ExtensionURL
 
-    val print: ExtensionURL
+    var print: ExtensionURL
 
-    val history: ExtensionURL
+    var history: ExtensionURL
 
-    val full_screen: ExtensionURL
+    var full_screen: ExtensionURL
 
-    val find: ExtensionURL
+    var find: ExtensionURL
 
-    val options: ExtensionURL
+    var options: ExtensionURL
 
-    val addons: ExtensionURL
+    var addons: ExtensionURL
 
-    val developer: ExtensionURL
+    var developer: ExtensionURL
 
-    val synced_tabs: ExtensionURL
+    var synced_tabs: ExtensionURL
 
-    val open_file: ExtensionURL
+    var open_file: ExtensionURL
 
-    val sidebars: ExtensionURL
+    var sidebars: ExtensionURL
 
-    val subscribe: ExtensionURL
+    var subscribe: ExtensionURL
 
-    val text_encoding: ExtensionURL
+    var text_encoding: ExtensionURL
 
-    val email_link: ExtensionURL
+    var email_link: ExtensionURL
 
-    val forget: ExtensionURL
+    var forget: ExtensionURL
 
-    val pocket: ExtensionURL
+    var pocket: ExtensionURL
 
-    val getmsg: ExtensionURL
+    var getmsg: ExtensionURL
 
-    val newmsg: ExtensionURL
+    var newmsg: ExtensionURL
 
-    val address: ExtensionURL
+    var address: ExtensionURL
 
-    val reply: ExtensionURL
+    var reply: ExtensionURL
 
-    val replyall: ExtensionURL
+    var replyall: ExtensionURL
 
-    val replylist: ExtensionURL
+    var replylist: ExtensionURL
 
-    val forwarding: ExtensionURL
+    var forwarding: ExtensionURL
 
-    val delete: ExtensionURL
+    var delete: ExtensionURL
 
-    val junk: ExtensionURL
+    var junk: ExtensionURL
 
-    val file: ExtensionURL
+    var file: ExtensionURL
 
-    val nextUnread: ExtensionURL
+    var nextUnread: ExtensionURL
 
-    val prevUnread: ExtensionURL
+    var prevUnread: ExtensionURL
 
-    val mark: ExtensionURL
+    var mark: ExtensionURL
 
-    val tag: ExtensionURL
+    var tag: ExtensionURL
 
-    val compact: ExtensionURL
+    var compact: ExtensionURL
 
-    val archive: ExtensionURL
+    var archive: ExtensionURL
 
-    val chat: ExtensionURL
+    var chat: ExtensionURL
 
-    val nextMsg: ExtensionURL
+    var nextMsg: ExtensionURL
 
-    val prevMsg: ExtensionURL
+    var prevMsg: ExtensionURL
 
-    val QFB: ExtensionURL
+    var QFB: ExtensionURL
 
-    val conversation: ExtensionURL
+    var conversation: ExtensionURL
 
-    val newcard: ExtensionURL
+    var newcard: ExtensionURL
 
-    val newlist: ExtensionURL
+    var newlist: ExtensionURL
 
-    val editcard: ExtensionURL
+    var editcard: ExtensionURL
 
-    val newim: ExtensionURL
+    var newim: ExtensionURL
 
-    val send: ExtensionURL
+    var send: ExtensionURL
 
-    val spelling: ExtensionURL
+    var spelling: ExtensionURL
 
-    val attach: ExtensionURL
+    var attach: ExtensionURL
 
-    val security: ExtensionURL
+    var security: ExtensionURL
 
-    val save: ExtensionURL
+    var save: ExtensionURL
 
-    val quote: ExtensionURL
+    var quote: ExtensionURL
 
-    val buddy: ExtensionURL
+    var buddy: ExtensionURL
 
-    val join_chat: ExtensionURL
+    var join_chat: ExtensionURL
 
-    val chat_accounts: ExtensionURL
+    var chat_accounts: ExtensionURL
 
-    val calendar: ExtensionURL
+    var calendar: ExtensionURL
 
-    val tasks: ExtensionURL
+    var tasks: ExtensionURL
 
-    val synchronize: ExtensionURL
+    var synchronize: ExtensionURL
 
-    val newevent: ExtensionURL
+    var newevent: ExtensionURL
 
-    val newtask: ExtensionURL
+    var newtask: ExtensionURL
 
-    val editevent: ExtensionURL
+    var editevent: ExtensionURL
 
-    val today: ExtensionURL
+    var today: ExtensionURL
 
-    val category: ExtensionURL
+    var category: ExtensionURL
 
-    val complete: ExtensionURL
+    var complete: ExtensionURL
 
-    val priority: ExtensionURL
+    var priority: ExtensionURL
 
-    val saveandclose: ExtensionURL
+    var saveandclose: ExtensionURL
 
-    val attendees: ExtensionURL
+    var attendees: ExtensionURL
 
-    val privacy: ExtensionURL
+    var privacy: ExtensionURL
 
-    val status: ExtensionURL
+    var status: ExtensionURL
 
-    val freebusy: ExtensionURL
+    var freebusy: ExtensionURL
 
-    val timezones: ExtensionURL
+    var timezones: ExtensionURL
 }
 
 external class Properties {
-    val additional_backgrounds_alignment: Array<String>?
+    var additional_backgrounds_alignment: Array<String>?
 
-    val additional_backgrounds_tiling: Array<String>?
+    var additional_backgrounds_tiling: Array<String>?
 }
 
 external class ManifestNamespace

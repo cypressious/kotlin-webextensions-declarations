@@ -11,12 +11,12 @@ external class IconInfo {
     /**
      * A number representing the width and height of the icon. Likely values include (but are not limited to) 128, 48, 24, and 16.
      */
-    val size: Int
+    var size: Int
 
     /**
      * The URL for this icon image. To display a grayscale version of the icon (to indicate that an extension is disabled, for example), append <code>?grayscale=true</code> to the URL.
      */
-    val url: String
+    var url: String
 }
 
 /**
@@ -38,96 +38,96 @@ external class ExtensionInfo {
     /**
      * The extension's unique identifier.
      */
-    val id: String
+    var id: String
 
     /**
      * The name of this extension.
      */
-    val name: String
+    var name: String
 
     /**
      * A short version of the name of this extension.
      */
-    val shortName: String?
+    var shortName: String?
 
     /**
      * The description of this extension.
      */
-    val description: String
+    var description: String
 
     /**
      * The <a href='manifest/version'>version</a> of this extension.
      */
-    val version: String
+    var version: String
 
     /**
      * The <a href='manifest/version#version_name'>version name</a> of this extension if the manifest specified one.
      */
-    val versionName: String?
+    var versionName: String?
 
     /**
      * Whether this extension can be disabled or uninstalled by the user.
      */
-    val mayDisable: Boolean
+    var mayDisable: Boolean
 
     /**
      * Whether it is currently enabled or disabled.
      */
-    val enabled: Boolean
+    var enabled: Boolean
 
     /**
      * A reason the item is disabled.
      */
-    val disabledReason: ExtensionDisabledReason
+    var disabledReason: ExtensionDisabledReason
 
     /**
      * The type of this extension. Will always return 'extension'.
      */
-    val type: ExtensionType
+    var type: ExtensionType
 
     /**
      * The URL of the homepage of this extension.
      */
-    val homepageUrl: String?
+    var homepageUrl: String?
 
     /**
      * The update URL of this extension.
      */
-    val updateUrl: String?
+    var updateUrl: String?
 
     /**
      * The url for the item's options page, if it has one.
      */
-    val optionsUrl: String
+    var optionsUrl: String
 
     /**
      * A list of icon information. Note that this just reflects what was declared in the manifest, and the actual image at that url may be larger or smaller than what was declared, so you might consider using explicit width and height attributes on img tags referencing these images. See the <a href='manifest/icons'>manifest documentation on icons</a> for more details.
      */
-    val icons: Array<IconInfo>?
+    var icons: Array<IconInfo>?
 
     /**
      * Returns a list of API based permissions.
      */
-    val permissions: Array<String>?
+    var permissions: Array<String>?
 
     /**
      * Returns a list of host based permissions.
      */
-    val hostPermissions: Array<String>?
+    var hostPermissions: Array<String>?
 
     /**
      * How the extension was installed.
      */
-    val installType: ExtensionInstallType
+    var installType: ExtensionInstallType
 }
 
 class Options(/**
  * Whether or not a confirm-uninstall dialog should prompt the user. Defaults to false.
  */
-val showConfirmDialog: Boolean?, /**
+var showConfirmDialog: Boolean?, /**
  * The message to display to a user when being asked to confirm removal of the extension.
  */
-val dialogMessage: String?)
+var dialogMessage: String?)
 
 external class ManagementNamespace {
     val onDisabled: Event<(info: ExtensionInfo) -> Unit>

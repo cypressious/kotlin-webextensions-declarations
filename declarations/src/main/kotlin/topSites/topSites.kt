@@ -9,18 +9,18 @@ external class MostVisitedURL {
     /**
      * The most visited URL.
      */
-    val url: String
+    var url: String
 
     /**
      * The title of the page.
      */
-    val title: String?
+    var title: String?
 }
 
 class Options(/**
  * Which providers to get top sites from. Possible values are "places" and "activityStream".
  */
-val providers: Array<String>?)
+var providers: Array<String>?)
 
 external class TopSitesNamespace {
     /**

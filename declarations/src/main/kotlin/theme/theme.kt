@@ -11,12 +11,12 @@ external class ThemeUpdateInfo {
     /**
      * The new theme after update
      */
-    val theme: Theme
+    var theme: Theme
 
     /**
      * The id of the window the theme has been applied to
      */
-    val windowId: Int?
+    var windowId: Int?
 }
 
 /**

@@ -9,23 +9,23 @@ class Params(
         /**
          * Tab to query. Defaults to the active tab.
          */
-        val tabId: Int?,
+        var tabId: Int?,
         /**
          * Find only ranges with case sensitive match.
          */
-        val caseSensitive: Boolean?,
+        var caseSensitive: Boolean?,
         /**
          * Find only ranges that match entire word.
          */
-        val entireWord: Boolean?,
+        var entireWord: Boolean?,
         /**
          * Return rectangle data which describes visual position of search results.
          */
-        val includeRectData: Boolean?,
+        var includeRectData: Boolean?,
         /**
          * Return range data which provides range data in a serializable form.
          */
-        val includeRangeData: Boolean?
+        var includeRangeData: Boolean?
 )
 
 /**
@@ -35,15 +35,15 @@ class Params2(
         /**
          * Found range to be highlighted. Default highlights all ranges.
          */
-        val rangeIndex: Int?,
+        var rangeIndex: Int?,
         /**
          * Tab to highlight. Defaults to the active tab.
          */
-        val tabId: Int?,
+        var tabId: Int?,
         /**
          * Don't scroll to highlighted item.
          */
-        val noScroll: Boolean?
+        var noScroll: Boolean?
 )
 
 external class FindNamespace {

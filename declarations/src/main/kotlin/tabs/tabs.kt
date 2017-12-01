@@ -16,129 +16,129 @@ external class MutedInfo {
     /**
      * Whether the tab is prevented from playing sound (but hasn't necessarily recently produced sound). Equivalent to whether the muted audio indicator is showing.
      */
-    val muted: Boolean
+    var muted: Boolean
 
     /**
      * The reason the tab was muted or unmuted. Not set if the tab's mute state has never been changed.
      */
-    val reason: MutedInfoReason
+    var reason: MutedInfoReason
 
     /**
      * The ID of the extension that changed the muted state. Not set if an extension was not the reason the muted state last changed.
      */
-    val extensionId: String?
+    var extensionId: String?
 }
 
 external class Tab {
     /**
      * The ID of the tab. Tab IDs are unique within a browser session. Under some circumstances a Tab may not be assigned an ID, for example when querying foreign tabs using the $(ref:sessions) API, in which case a session ID may be present. Tab ID can also be set to $(ref:tabs.TAB_ID_NONE) for apps and devtools windows.
      */
-    val id: Int?
+    var id: Int?
 
     /**
      * The zero-based index of the tab within its window.
      */
-    val index: Int
+    var index: Int
 
     /**
      * The ID of the window the tab is contained within.
      */
-    val windowId: Int?
+    var windowId: Int?
 
     /**
      * The ID of the tab that opened this tab, if any. This property is only present if the opener tab still exists.
      */
-    val openerTabId: Int?
+    var openerTabId: Int?
 
     /**
      * Whether the tab is highlighted. Works as an alias of active
      */
-    val highlighted: Boolean
+    var highlighted: Boolean
 
     /**
      * Whether the tab is active in its window. (Does not necessarily mean the window is focused.)
      */
-    val active: Boolean
+    var active: Boolean
 
     /**
      * Whether the tab is pinned.
      */
-    val pinned: Boolean
+    var pinned: Boolean
 
     /**
      * The last time the tab was accessed as the number of milliseconds since epoch.
      */
-    val lastAccessed: Int?
+    var lastAccessed: Int?
 
     /**
      * Whether the tab has produced sound over the past couple of seconds (but it might not be heard if also muted). Equivalent to whether the speaker audio indicator is showing.
      */
-    val audible: Boolean?
+    var audible: Boolean?
 
     /**
      * Current tab muted state and the reason for the last state change.
      */
-    val mutedInfo: MutedInfo
+    var mutedInfo: MutedInfo
 
     /**
      * The URL the tab is displaying. This property is only present if the extension's manifest includes the <code>"tabs"</code> permission.
      */
-    val url: String?
+    var url: String?
 
     /**
      * The title of the tab. This property is only present if the extension's manifest includes the <code>"tabs"</code> permission.
      */
-    val title: String?
+    var title: String?
 
     /**
      * The URL of the tab's favicon. This property is only present if the extension's manifest includes the <code>"tabs"</code> permission. It may also be an empty string if the tab is loading.
      */
-    val favIconUrl: String?
+    var favIconUrl: String?
 
     /**
      * Either <em>loading</em> or <em>complete</em>.
      */
-    val status: String?
+    var status: String?
 
     /**
      * True while the tab is not loaded with content.
      */
-    val discarded: Boolean?
+    var discarded: Boolean?
 
     /**
      * Whether the tab is in an incognito window.
      */
-    val incognito: Boolean
+    var incognito: Boolean
 
     /**
      * The width of the tab in pixels.
      */
-    val width: Int?
+    var width: Int?
 
     /**
      * The height of the tab in pixels.
      */
-    val height: Int?
+    var height: Int?
 
     /**
      * The session ID used to uniquely identify a Tab obtained from the $(ref:sessions) API.
      */
-    val sessionId: String?
+    var sessionId: String?
 
     /**
      * The CookieStoreId used for the tab.
      */
-    val cookieStoreId: String?
+    var cookieStoreId: String?
 
     /**
      * Whether the document in the tab can be rendered in reader mode.
      */
-    val isArticle: Boolean?
+    var isArticle: Boolean?
 
     /**
      * Whether the document in the tab is being rendered in reader mode.
      */
-    val isInReaderMode: Boolean?
+    var isInReaderMode: Boolean?
 }
 
 /**
@@ -156,17 +156,17 @@ external class ZoomSettings {
     /**
      * Defines how zoom changes are handled, i.e. which entity is responsible for the actual scaling of the page; defaults to <code>automatic</code>.
      */
-    val mode: ZoomSettingsMode
+    var mode: ZoomSettingsMode
 
     /**
      * Defines whether zoom changes will persist for the page's origin, or only take effect in this tab; defaults to <code>per-origin</code> when in <code>automatic</code> mode, and <code>per-tab</code> otherwise.
      */
-    val scope: ZoomSettingsScope
+    var scope: ZoomSettingsScope
 
     /**
      * Used to return the default zoom level for the current tab in calls to tabs.getZoomSettings.
      */
-    val defaultZoomFactor: Int?
+    var defaultZoomFactor: Int?
 }
 
 /**
@@ -176,92 +176,92 @@ external class PageSettings {
     /**
      * The page content orientation: 0 = portrait, 1 = landscape. Default: 0.
      */
-    val orientation: Int?
+    var orientation: Int?
 
     /**
      * The page content scaling factor: 1.0 = 100% = normal size. Default: 1.0.
      */
-    val scaling: Int?
+    var scaling: Int?
 
     /**
      * Whether the page content should shrink to fit the page width (overrides scaling). Default: true.
      */
-    val shrinkToFit: Boolean?
+    var shrinkToFit: Boolean?
 
     /**
      * Whether the page background colors should be shown. Default: false.
      */
-    val showBackgroundColors: Boolean?
+    var showBackgroundColors: Boolean?
 
     /**
      * Whether the page background images should be shown. Default: false.
      */
-    val showBackgroundImages: Boolean?
+    var showBackgroundImages: Boolean?
 
     /**
      * The page size unit: 0 = inches, 1 = millimeters. Default: 0.
      */
-    val paperSizeUnit: Int?
+    var paperSizeUnit: Int?
 
     /**
      * The paper width in paper size units. Default: 8.5.
      */
-    val paperWidth: Int?
+    var paperWidth: Int?
 
     /**
      * The paper height in paper size units. Default: 11.0.
      */
-    val paperHeight: Int?
+    var paperHeight: Int?
 
     /**
      * The text for the page's left header. Default: '&T'.
      */
-    val headerLeft: String?
+    var headerLeft: String?
 
     /**
      * The text for the page's center header. Default: ''.
      */
-    val headerCenter: String?
+    var headerCenter: String?
 
     /**
      * The text for the page's right header. Default: '&U'.
      */
-    val headerRight: String?
+    var headerRight: String?
 
     /**
      * The text for the page's left footer. Default: '&PT'.
      */
-    val footerLeft: String?
+    var footerLeft: String?
 
     /**
      * The text for the page's center footer. Default: ''.
      */
-    val footerCenter: String?
+    var footerCenter: String?
 
     /**
      * The text for the page's right footer. Default: '&D'.
      */
-    val footerRight: String?
+    var footerRight: String?
 
     /**
      * The margin between the page content and the left edge of the paper (inches). Default: 0.5.
      */
-    val marginLeft: Int?
+    var marginLeft: Int?
 
     /**
      * The margin between the page content and the right edge of the paper (inches). Default: 0.5.
      */
-    val marginRight: Int?
+    var marginRight: Int?
 
     /**
      * The margin between the page content and the top edge of the paper (inches). Default: 0.5.
      */
-    val marginTop: Int?
+    var marginTop: Int?
 
     /**
      * The margin between the page content and the bottom edge of the paper (inches). Default: 0.5.
      */
-    val marginBottom: Int?
+    var marginBottom: Int?
 }
 
 /**
@@ -275,51 +275,51 @@ typealias WindowType = String
 class ConnectInfo(/**
  * Will be passed into onConnect for content scripts that are listening for the connection event.
  */
-val name: String?, /**
+var name: String?, /**
  * Open a port to a specific $(topic:frame_ids)[frame] identified by <code>frameId</code> instead of all frames in the tab.
  */
-val frameId: Int?)
+var frameId: Int?)
 
 typealias ResponseCallback = Any
 
 class Options(/**
  * Send a message to a specific $(topic:frame_ids)[frame] identified by <code>frameId</code> instead of all frames in the tab.
  */
-val frameId: Int?)
+var frameId: Int?)
 
 class CreateProperties(
         /**
          * The window to create the new tab in. Defaults to the $(topic:current-window)[current window].
          */
-        val windowId: Int?,
+        var windowId: Int?,
         /**
          * The position the tab should take in the window. The provided value will be clamped to between zero and the number of tabs in the window.
          */
-        val index: Int?,
+        var index: Int?,
         /**
          * The URL to navigate the tab to initially. Fully-qualified URLs must include a scheme (i.e. 'http://www.google.com', not 'www.google.com'). Relative URLs will be relative to the current page within the extension. Defaults to the New Tab Page.
          */
-        val url: String?,
+        var url: String?,
         /**
          * Whether the tab should become the active tab in the window. Does not affect whether the window is focused (see $(ref:windows.update)). Defaults to <var>true</var>.
          */
-        val active: Boolean?,
+        var active: Boolean?,
         /**
          * Whether the tab should be pinned. Defaults to <var>false</var>
          */
-        val pinned: Boolean?,
+        var pinned: Boolean?,
         /**
          * The ID of the tab that opened this tab. If specified, the opener tab must be in the same window as the newly created tab.
          */
-        val openerTabId: Int?,
+        var openerTabId: Int?,
         /**
          * The CookieStoreId for the tab that opened this tab.
          */
-        val cookieStoreId: String?,
+        var cookieStoreId: String?,
         /**
          * Whether the document in the tab should be opened in reader mode.
          */
-        val openInReaderMode: Boolean?
+        var openInReaderMode: Boolean?
 )
 
 /**
@@ -330,67 +330,67 @@ class QueryInfo(
         /**
          * Whether the tabs are active in their windows.
          */
-        val active: Boolean?,
+        var active: Boolean?,
         /**
          * Whether the tabs are pinned.
          */
-        val pinned: Boolean?,
+        var pinned: Boolean?,
         /**
          * Whether the tabs are audible.
          */
-        val audible: Boolean?,
+        var audible: Boolean?,
         /**
          * Whether the tabs are muted.
          */
-        val muted: Boolean?,
+        var muted: Boolean?,
         /**
          * Whether the tabs are highlighted.  Works as an alias of active.
          */
-        val highlighted: Boolean?,
+        var highlighted: Boolean?,
         /**
          * Whether the tabs are in the $(topic:current-window)[current window].
          */
-        val currentWindow: Boolean?,
+        var currentWindow: Boolean?,
         /**
          * Whether the tabs are in the last focused window.
          */
-        val lastFocusedWindow: Boolean?,
+        var lastFocusedWindow: Boolean?,
         /**
          * Whether the tabs have completed loading.
          */
-        val status: TabStatus,
+        var status: TabStatus,
         /**
          * True while the tabs are not loaded with content.
          */
-        val discarded: Boolean?,
+        var discarded: Boolean?,
         /**
          * Match page titles against a pattern.
          */
-        val title: String?,
+        var title: String?,
         /**
          * Match tabs against one or more $(topic:match_patterns)[URL patterns]. Note that fragment identifiers are not matched.
          */
-        val url: Url,
+        var url: Url,
         /**
          * The ID of the parent window, or $(ref:windows.WINDOW_ID_CURRENT) for the $(topic:current-window)[current window].
          */
-        val windowId: Int?,
+        var windowId: Int?,
         /**
          * The type of window the tabs are in.
          */
-        val windowType: WindowType,
+        var windowType: WindowType,
         /**
          * The position of the tabs within their windows.
          */
-        val index: Int?,
+        var index: Int?,
         /**
          * The CookieStoreId used for the tab.
          */
-        val cookieStoreId: String?,
+        var cookieStoreId: String?,
         /**
          * The ID of the tab that opened this tab. If specified, the opener tab must be in the same window as this tab.
          */
-        val openerTabId: Int?
+        var openerTabId: Int?
 )
 
 /**
@@ -400,36 +400,36 @@ typealias Tabs = Any
 class HighlightInfo(/**
  * The window that contains the tabs.
  */
-val windowId: Int?, /**
+var windowId: Int?, /**
  * One or more tab indices to highlight.
  */
-val tabs: Tabs)
+var tabs: Tabs)
 
 class UpdateProperties(
         /**
          * A URL to navigate the tab to.
          */
-        val url: String?,
+        var url: String?,
         /**
          * Whether the tab should be active. Does not affect whether the window is focused (see $(ref:windows.update)).
          */
-        val active: Boolean?,
+        var active: Boolean?,
         /**
          * Whether the tab should be pinned.
          */
-        val pinned: Boolean?,
+        var pinned: Boolean?,
         /**
          * Whether the tab should be muted.
          */
-        val muted: Boolean?,
+        var muted: Boolean?,
         /**
          * The ID of the tab that opened this tab. If specified, the opener tab must be in the same window as this tab.
          */
-        val openerTabId: Int?,
+        var openerTabId: Int?,
         /**
          * Whether the load should replace the current history entry for the tab.
          */
-        val loadReplace: Boolean?
+        var loadReplace: Boolean?
 )
 
 /**
@@ -439,10 +439,10 @@ typealias TabIds = Any
 class MoveProperties(/**
  * Defaults to the window the tab is currently in.
  */
-val windowId: Int?, /**
+var windowId: Int?, /**
  * The position to move the window to. -1 will place the tab at the end of the window.
  */
-val index: Int)
+var index: Int)
 
 /**
  * Details about the moved tabs. */
@@ -451,7 +451,7 @@ typealias Tabs2 = Any
 class ReloadProperties(/**
  * Whether using any local cache. Default is false.
  */
-val bypassCache: Boolean?)
+var bypassCache: Boolean?)
 
 /**
  * The tab or list of tabs to close. */
@@ -468,129 +468,129 @@ external class ChangeInfo {
     /**
      * The status of the tab. Can be either <em>loading</em> or <em>complete</em>.
      */
-    val status: String?
+    var status: String?
 
     /**
      * True while the tab is not loaded with content.
      */
-    val discarded: Boolean?
+    var discarded: Boolean?
 
     /**
      * The tab's URL if it has changed.
      */
-    val url: String?
+    var url: String?
 
     /**
      * The tab's new pinned state.
      */
-    val pinned: Boolean?
+    var pinned: Boolean?
 
     /**
      * The tab's new audible state.
      */
-    val audible: Boolean?
+    var audible: Boolean?
 
     /**
      * The tab's new muted state and the reason for the change.
      */
-    val mutedInfo: MutedInfo
+    var mutedInfo: MutedInfo
 
     /**
      * The tab's new favicon URL.
      */
-    val favIconUrl: String?
+    var favIconUrl: String?
 }
 
 external class MoveInfo {
-    val windowId: Int
+    var windowId: Int
 
-    val fromIndex: Int
+    var fromIndex: Int
 
-    val toIndex: Int
+    var toIndex: Int
 }
 
 external class SelectInfo {
     /**
      * The ID of the window the selected tab changed inside of.
      */
-    val windowId: Int
+    var windowId: Int
 }
 
 external class SelectInfo2 {
     /**
      * The ID of the window the selected tab changed inside of.
      */
-    val windowId: Int
+    var windowId: Int
 }
 
 external class ActiveInfo {
     /**
      * The ID of the tab that has become active.
      */
-    val tabId: Int
+    var tabId: Int
 
     /**
      * The ID of the window the active tab changed inside of.
      */
-    val windowId: Int
+    var windowId: Int
 }
 
 external class SelectInfo3 {
     /**
      * The window whose tabs changed.
      */
-    val windowId: Int
+    var windowId: Int
 
     /**
      * All highlighted tabs in the window.
      */
-    val tabIds: Array<Int>
+    var tabIds: Array<Int>
 }
 
 external class HighlightInfo2 {
     /**
      * The window whose tabs changed.
      */
-    val windowId: Int
+    var windowId: Int
 
     /**
      * All highlighted tabs in the window.
      */
-    val tabIds: Array<Int>
+    var tabIds: Array<Int>
 }
 
 external class DetachInfo {
-    val oldWindowId: Int
+    var oldWindowId: Int
 
-    val oldPosition: Int
+    var oldPosition: Int
 }
 
 external class AttachInfo {
-    val newWindowId: Int
+    var newWindowId: Int
 
-    val newPosition: Int
+    var newPosition: Int
 }
 
 external class RemoveInfo {
     /**
      * The window whose tab is closed.
      */
-    val windowId: Int
+    var windowId: Int
 
     /**
      * True when the tab is being closed because its window is being closed.
      */
-    val isWindowClosing: Boolean
+    var isWindowClosing: Boolean
 }
 
 external class ZoomChangeInfo {
-    val tabId: Int
+    var tabId: Int
 
-    val oldZoomFactor: Int
+    var oldZoomFactor: Int
 
-    val newZoomFactor: Int
+    var newZoomFactor: Int
 
-    val zoomSettings: ZoomSettings
+    var zoomSettings: ZoomSettings
 }
 
 external class TabsNamespace {

@@ -11,148 +11,148 @@ external class NotificationItem {
     /**
      * Title of one item of a list notification.
      */
-    val title: String
+    var title: String
 
     /**
      * Additional details about this item.
      */
-    val message: String
+    var message: String
 }
 
 external class CreateNotificationOptions {
     /**
      * Which type of notification to display.
      */
-    val type: TemplateType
+    var type: TemplateType
 
     /**
      * A URL to the sender's avatar, app icon, or a thumbnail for image notifications.
      */
-    val iconUrl: String?
+    var iconUrl: String?
 
     /**
      * A URL to the app icon mask.
      */
-    val appIconMaskUrl: String?
+    var appIconMaskUrl: String?
 
     /**
      * Title of the notification (e.g. sender name for email).
      */
-    val title: String
+    var title: String
 
     /**
      * Main notification content.
      */
-    val message: String
+    var message: String
 
     /**
      * Alternate notification content with a lower-weight font.
      */
-    val contextMessage: String?
+    var contextMessage: String?
 
     /**
      * Priority ranges from -2 to 2. -2 is lowest priority. 2 is highest. Zero is default.
      */
-    val priority: Int?
+    var priority: Int?
 
     /**
      * A timestamp associated with the notification, in milliseconds past the epoch.
      */
-    val eventTime: Int?
+    var eventTime: Int?
 
     /**
      * A URL to the image thumbnail for image-type notifications.
      */
-    val imageUrl: String?
+    var imageUrl: String?
 
     /**
      * Items for multi-item notifications.
      */
-    val items: Array<NotificationItem>?
+    var items: Array<NotificationItem>?
 
     /**
      * Current progress ranges from 0 to 100.
      */
-    val progress: Int?
+    var progress: Int?
 
     /**
      * Whether to show UI indicating that the app will visibly respond to clicks on the body of a notification.
      */
-    val isClickable: Boolean?
+    var isClickable: Boolean?
 }
 
 external class UpdateNotificationOptions {
     /**
      * Which type of notification to display.
      */
-    val type: TemplateType
+    var type: TemplateType
 
     /**
      * A URL to the sender's avatar, app icon, or a thumbnail for image notifications.
      */
-    val iconUrl: String?
+    var iconUrl: String?
 
     /**
      * A URL to the app icon mask.
      */
-    val appIconMaskUrl: String?
+    var appIconMaskUrl: String?
 
     /**
      * Title of the notification (e.g. sender name for email).
      */
-    val title: String?
+    var title: String?
 
     /**
      * Main notification content.
      */
-    val message: String?
+    var message: String?
 
     /**
      * Alternate notification content with a lower-weight font.
      */
-    val contextMessage: String?
+    var contextMessage: String?
 
     /**
      * Priority ranges from -2 to 2. -2 is lowest priority. 2 is highest. Zero is default.
      */
-    val priority: Int?
+    var priority: Int?
 
     /**
      * A timestamp associated with the notification, in milliseconds past the epoch.
      */
-    val eventTime: Int?
+    var eventTime: Int?
 
     /**
      * A URL to the image thumbnail for image-type notifications.
      */
-    val imageUrl: String?
+    var imageUrl: String?
 
     /**
      * Items for multi-item notifications.
      */
-    val items: Array<NotificationItem>?
+    var items: Array<NotificationItem>?
 
     /**
      * Current progress ranges from 0 to 100.
      */
-    val progress: Int?
+    var progress: Int?
 
     /**
      * Whether to show UI indicating that the app will visibly respond to clicks on the body of a notification.
      */
-    val isClickable: Boolean?
+    var isClickable: Boolean?
 }
 
 external class Buttons {
-    val title: String
+    var title: String
 
-    val iconUrl: String?
+    var iconUrl: String?
 }
 
 external class Buttons2 {
-    val title: String
+    var title: String
 
-    val iconUrl: String?
+    var iconUrl: String?
 }
 
 /**

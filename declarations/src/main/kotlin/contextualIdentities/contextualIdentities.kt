@@ -10,32 +10,32 @@ external class ContextualIdentity {
     /**
      * The name of the contextual identity.
      */
-    val name: String
+    var name: String
 
     /**
      * The icon name of the contextual identity.
      */
-    val icon: String
+    var icon: String
 
     /**
      * The icon url of the contextual identity.
      */
-    val iconUrl: String
+    var iconUrl: String
 
     /**
      * The color name of the contextual identity.
      */
-    val color: String
+    var color: String
 
     /**
      * The color hash of the contextual identity.
      */
-    val colorCode: String
+    var colorCode: String
 
     /**
      * The cookie store ID of the contextual identity.
      */
-    val cookieStoreId: String
+    var cookieStoreId: String
 }
 
 /**
@@ -44,7 +44,7 @@ external class ContextualIdentity {
 class Details(/**
  * Filters the contextual identity by name.
  */
-val name: String?)
+var name: String?)
 
 /**
  * Details about the contextual identity being created.
@@ -53,15 +53,15 @@ class Details2(
         /**
          * The name of the contextual identity.
          */
-        val name: String,
+        var name: String,
         /**
          * The color of the contextual identity.
          */
-        val color: String,
+        var color: String,
         /**
          * The icon of the contextual identity.
          */
-        val icon: String
+        var icon: String
 )
 
 /**
@@ -71,36 +71,36 @@ class Details3(
         /**
          * The name of the contextual identity.
          */
-        val name: String?,
+        var name: String?,
         /**
          * The color of the contextual identity.
          */
-        val color: String?,
+        var color: String?,
         /**
          * The icon of the contextual identity.
          */
-        val icon: String?
+        var icon: String?
 )
 
 external class ChangeInfo {
     /**
      * Contextual identity that has been updated
      */
-    val contextualIdentity: ContextualIdentity
+    var contextualIdentity: ContextualIdentity
 }
 
 external class ChangeInfo2 {
     /**
      * Contextual identity that has been created
      */
-    val contextualIdentity: ContextualIdentity
+    var contextualIdentity: ContextualIdentity
 }
 
 external class ChangeInfo3 {
     /**
      * Contextual identity that has been removed
      */
-    val contextualIdentity: ContextualIdentity
+    var contextualIdentity: ContextualIdentity
 }
 
 external class ContextualIdentitiesNamespace {

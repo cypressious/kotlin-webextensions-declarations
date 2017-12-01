@@ -10,17 +10,17 @@ external class RemovalOptions {
     /**
      * Remove data accumulated on or after this date, represented in milliseconds since the epoch (accessible via the <code>getTime</code> method of the JavaScript <code>Date</code> object). If absent, defaults to 0 (which would remove all browsing data).
      */
-    val since: Date
+    var since: Date
 
     /**
      * Only remove data associated with these hostnames (only applies to cookies and localStorage).
      */
-    val hostnames: Array<String>?
+    var hostnames: Array<String>?
 
     /**
      * An object whose properties specify which origin types ought to be cleared. If this object isn't specified, it defaults to clearing only "unprotected" origins. Please ensure that you <em>really</em> want to remove application data before adding 'protectedWeb' or 'extensions'.
      */
-    val originTypes: OriginTypes
+    var originTypes: OriginTypes
 }
 
 /**
@@ -30,57 +30,57 @@ external class DataTypeSet {
     /**
      * The browser's cache. Note: when removing data, this clears the <em>entire</em> cache: it is not limited to the range you specify.
      */
-    val cache: Boolean?
+    var cache: Boolean?
 
     /**
      * The browser's cookies.
      */
-    val cookies: Boolean?
+    var cookies: Boolean?
 
     /**
      * The browser's download list.
      */
-    val downloads: Boolean?
+    var downloads: Boolean?
 
     /**
      * The browser's stored form data.
      */
-    val formData: Boolean?
+    var formData: Boolean?
 
     /**
      * The browser's history.
      */
-    val history: Boolean?
+    var history: Boolean?
 
     /**
      * Websites' IndexedDB data.
      */
-    val indexedDB: Boolean?
+    var indexedDB: Boolean?
 
     /**
      * Websites' local storage data.
      */
-    val localStorage: Boolean?
+    var localStorage: Boolean?
 
     /**
      * Server-bound certificates.
      */
-    val serverBoundCertificates: Boolean?
+    var serverBoundCertificates: Boolean?
 
     /**
      * Stored passwords.
      */
-    val passwords: Boolean?
+    var passwords: Boolean?
 
     /**
      * Plugins' data.
      */
-    val pluginData: Boolean?
+    var pluginData: Boolean?
 
     /**
      * Service Workers.
      */
-    val serviceWorkers: Boolean?
+    var serviceWorkers: Boolean?
 }
 
 /**
@@ -90,31 +90,31 @@ external class OriginTypes {
     /**
      * Normal websites.
      */
-    val unprotectedWeb: Boolean?
+    var unprotectedWeb: Boolean?
 
     /**
      * Websites that have been installed as hosted applications (be careful!).
      */
-    val protectedWeb: Boolean?
+    var protectedWeb: Boolean?
 
     /**
      * Extensions and packaged applications a user has installed (be _really_ careful!).
      */
-    val extension: Boolean?
+    var extension: Boolean?
 }
 
 external class Result {
-    val options: RemovalOptions
+    var options: RemovalOptions
 
     /**
      * All of the types will be present in the result, with values of <code>true</code> if they are both selected to be removed and permitted to be removed, otherwise <code>false</code>.
      */
-    val dataToRemove: DataTypeSet
+    var dataToRemove: DataTypeSet
 
     /**
      * All of the types will be present in the result, with values of <code>true</code> if they are permitted to be removed (e.g., by enterprise policy) and <code>false</code> if not.
      */
-    val dataRemovalPermitted: DataTypeSet
+    var dataRemovalPermitted: DataTypeSet
 }
 
 external class BrowsingDataNamespace {

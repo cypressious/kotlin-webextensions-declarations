@@ -148,7 +148,7 @@ class Generator(val dir: File) {
         typeBuilder
                 .addProperties(props.map {
                     PropertySpec
-                            .builder(it.key.escapeIfKeyword(), parameterType(it.key, it.value))
+                            .varBuilder(it.key.escapeIfKeyword(), parameterType(it.key, it.value))
                             .apply { if (!external) initializer(it.key.escapeIfKeyword()) }
                             .apply { it.value.description?.let { addKdoc(it.replace("%", "%%") + "\n") } }
                             .build()

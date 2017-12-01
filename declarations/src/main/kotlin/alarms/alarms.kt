@@ -7,17 +7,17 @@ external class Alarm {
     /**
      * Name of this alarm.
      */
-    val name: String
+    var name: String
 
     /**
      * Time when the alarm is scheduled to fire, in milliseconds past the epoch.
      */
-    val scheduledTime: Int
+    var scheduledTime: Int
 
     /**
      * When present, signals that the alarm triggers periodically after so many minutes.
      */
-    val periodInMinutes: Int?
+    var periodInMinutes: Int?
 }
 
 /**
@@ -27,15 +27,15 @@ class AlarmInfo(
         /**
          * Time when the alarm is scheduled to first fire, in milliseconds past the epoch.
          */
-        val `when`: Int?,
+        var `when`: Int?,
         /**
          * Number of minutes from the current time after which the alarm should first fire.
          */
-        val delayInMinutes: Int?,
+        var delayInMinutes: Int?,
         /**
          * Number of minutes after which the alarm should recur repeatedly.
          */
-        val periodInMinutes: Int?
+        var periodInMinutes: Int?
 )
 
 external class AlarmsNamespace {

@@ -18,52 +18,52 @@ external class BookmarkTreeNode {
     /**
      * The unique identifier for the node. IDs are unique within the current profile, and they remain valid even after the browser is restarted.
      */
-    val id: String
+    var id: String
 
     /**
      * The <code>id</code> of the parent folder.  Omitted for the root node.
      */
-    val parentId: String?
+    var parentId: String?
 
     /**
      * The 0-based position of this node within its parent folder.
      */
-    val index: Int?
+    var index: Int?
 
     /**
      * The URL navigated to when a user clicks the bookmark. Omitted for folders.
      */
-    val url: String?
+    var url: String?
 
     /**
      * The text displayed for the node.
      */
-    val title: String
+    var title: String
 
     /**
      * When this node was created, in milliseconds since the epoch (<code>new Date(dateAdded)</code>).
      */
-    val dateAdded: Int?
+    var dateAdded: Int?
 
     /**
      * When the contents of this folder last changed, in milliseconds since the epoch.
      */
-    val dateGroupModified: Int?
+    var dateGroupModified: Int?
 
     /**
      * Indicates the reason why this node is unmodifiable. The <var>managed</var> value indicates that this node was configured by the system administrator or by the custodian of a supervised user. Omitted if the node can be modified by the user and the extension (default).
      */
-    val unmodifiable: BookmarkTreeNodeUnmodifiable
+    var unmodifiable: BookmarkTreeNodeUnmodifiable
 
     /**
      * Indicates the type of the BookmarkTreeNode, which can be one of bookmark, folder or separator.
      */
-    val type: BookmarkTreeNodeType
+    var type: BookmarkTreeNodeType
 
     /**
      * An ordered list of children of this node.
      */
-    val children: Array<BookmarkTreeNode>?
+    var children: Array<BookmarkTreeNode>?
 }
 
 /**
@@ -73,18 +73,18 @@ external class CreateDetails {
     /**
      * Defaults to the Other Bookmarks folder.
      */
-    val parentId: String?
+    var parentId: String?
 
-    val index: Int?
+    var index: Int?
 
-    val title: String?
+    var title: String?
 
-    val url: String?
+    var url: String?
 
     /**
      * Indicates the type of BookmarkTreeNode to create, which can be one of bookmark, folder or separator.
      */
-    val type: BookmarkTreeNodeType
+    var type: BookmarkTreeNodeType
 }
 
 /**
@@ -95,36 +95,36 @@ typealias IdOrIdList = Any
  * Either a string of words and quoted phrases that are matched against bookmark URLs and titles, or an object. If an object, the properties <code>query</code>, <code>url</code>, and <code>title</code> may be specified and bookmarks matching all specified properties will be produced. */
 typealias Query = Any
 
-class Destination(val parentId: String?, val index: Int?)
+class Destination(var parentId: String?, var index: Int?)
 
-class Changes(val title: String?, val url: String?)
+class Changes(var title: String?, var url: String?)
 
 external class RemoveInfo {
-    val parentId: String
+    var parentId: String
 
-    val index: Int
+    var index: Int
 
-    val node: BookmarkTreeNode
+    var node: BookmarkTreeNode
 }
 
 external class ChangeInfo {
-    val title: String
+    var title: String
 
-    val url: String?
+    var url: String?
 }
 
 external class MoveInfo {
-    val parentId: String
+    var parentId: String
 
-    val index: Int
+    var index: Int
 
-    val oldParentId: String
+    var oldParentId: String
 
-    val oldIndex: Int
+    var oldIndex: Int
 }
 
 external class ReorderInfo {
-    val childIds: Array<String>
+    var childIds: Array<String>
 }
 
 external class BookmarksNamespace {

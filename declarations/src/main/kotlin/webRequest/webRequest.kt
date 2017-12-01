@@ -28,16 +28,16 @@ external class RequestFilter {
     /**
      * A list of URLs or URL patterns. Requests that cannot match any of the URLs will be filtered out.
      */
-    val urls: Array<String>
+    var urls: Array<String>
 
     /**
      * A list of request types. Requests that cannot match any of the types will be filtered out.
      */
-    val types: Array<ResourceType>?
+    var types: Array<ResourceType>?
 
-    val tabId: Int?
+    var tabId: Int?
 
-    val windowId: Int?
+    var windowId: Int?
 }
 
 /**
@@ -51,27 +51,27 @@ external class BlockingResponse {
     /**
      * If true, the request is cancelled. Used in onBeforeRequest, this prevents the request from being sent.
      */
-    val cancel: Boolean?
+    var cancel: Boolean?
 
     /**
      * Only used as a response to the onBeforeRequest and onHeadersReceived events. If set, the original request is prevented from being sent/completed and is instead redirected to the given URL. Redirections to non-HTTP schemes such as data: are allowed. Redirects initiated by a redirect action use the original request method for the redirect, with one exception: If the redirect is initiated at the onHeadersReceived stage, then the redirect will be issued using the GET method.
      */
-    val redirectUrl: String?
+    var redirectUrl: String?
 
     /**
      * Only used as a response to the onBeforeSendHeaders event. If set, the request is made with these request headers instead.
      */
-    val requestHeaders: HttpHeaders
+    var requestHeaders: HttpHeaders
 
     /**
      * Only used as a response to the onHeadersReceived event. If set, the server is assumed to have responded with these response headers instead. Only return <code>responseHeaders</code> if you really want to modify the headers in order to limit the number of conflicts (only one extension may modify <code>responseHeaders</code> for each request).
      */
-    val responseHeaders: HttpHeaders
+    var responseHeaders: HttpHeaders
 
     /**
      * Only used as a response to the onAuthRequired event. If set, the request is made using the supplied credentials.
      */
-    val authCredentials: AuthCredentials
+    var authCredentials: AuthCredentials
 }
 
 /**
@@ -81,38 +81,38 @@ external class UploadData {
     /**
      * An ArrayBuffer with a copy of the data.
      */
-    val bytes: Any?
+    var bytes: Any?
 
     /**
      * A string with the file's path and name.
      */
-    val file: String?
+    var file: String?
 }
 
 external class HttpHeaders2 {
     /**
      * Name of the HTTP header.
      */
-    val name: String
+    var name: String
 
     /**
      * Value of the HTTP header if it can be represented by UTF-8.
      */
-    val value: String?
+    var value: String?
 
     /**
      * Value of the HTTP header if it cannot be represented by UTF-8, stored as individual byte values (0..255).
      */
-    val binaryValue: Array<Int>?
+    var binaryValue: Array<Int>?
 }
 
 /**
  * Only used as a response to the onAuthRequired event. If set, the request is made using the supplied credentials.
  */
 external class AuthCredentials {
-    val username: String
+    var username: String
 
-    val password: String
+    var password: String
 }
 
 /**
@@ -127,336 +127,336 @@ external class RequestBody {
     /**
      * Errors when obtaining request body data.
      */
-    val error: String?
+    var error: String?
 
     /**
      * If the request method is POST and the body is a sequence of key-value pairs encoded in UTF8, encoded as either multipart/form-data, or application/x-www-form-urlencoded, this dictionary is present and for each key contains the list of all values for that key. If the data is of another media type, or if it is malformed, the dictionary is not present. An example value of this dictionary is {'key': ['value1', 'value2']}.
      */
-    val formData: FormData
+    var formData: FormData
 
     /**
      * If the request method is PUT or POST, and the body is not already parsed in formData, then the unparsed request body elements are contained in this array.
      */
-    val raw: Array<UploadData>?
+    var raw: Array<UploadData>?
 }
 
 external class Details {
     /**
      * The ID of the request. Request IDs are unique within a browser session. As a result, they could be used to relate different events of the same request.
      */
-    val requestId: String
+    var requestId: String
 
-    val url: String
+    var url: String
 
     /**
      * Standard HTTP method.
      */
-    val method: String
+    var method: String
 
     /**
      * The value 0 indicates that the request happens in the main frame; a positive value indicates the ID of a subframe in which the request happens. If the document of a (sub-)frame is loaded (<code>type</code> is <code>main_frame</code> or <code>sub_frame</code>), <code>frameId</code> indicates the ID of this frame, not the ID of the outer frame. Frame IDs are unique within a tab.
      */
-    val frameId: Int
+    var frameId: Int
 
     /**
      * ID of frame that wraps the frame which sent the request. Set to -1 if no parent frame exists.
      */
-    val parentFrameId: Int
+    var parentFrameId: Int
 
     /**
      * URL of the resource that triggered this request.
      */
-    val originUrl: String?
+    var originUrl: String?
 
     /**
      * URL of the page into which the requested resource will be loaded.
      */
-    val documentUrl: String?
+    var documentUrl: String?
 
     /**
      * Contains the HTTP request body data. Only provided if extraInfoSpec contains 'requestBody'.
      */
-    val requestBody: RequestBody
+    var requestBody: RequestBody
 
     /**
      * The ID of the tab in which the request takes place. Set to -1 if the request isn't related to a tab.
      */
-    val tabId: Int
+    var tabId: Int
 
     /**
      * How the requested resource will be used.
      */
-    val type: ResourceType
+    var type: ResourceType
 
     /**
      * The time when this signal is triggered, in milliseconds since the epoch.
      */
-    val timeStamp: Int
+    var timeStamp: Int
 }
 
 external class Details2 {
     /**
      * The ID of the request. Request IDs are unique within a browser session. As a result, they could be used to relate different events of the same request.
      */
-    val requestId: String
+    var requestId: String
 
-    val url: String
+    var url: String
 
     /**
      * Standard HTTP method.
      */
-    val method: String
+    var method: String
 
     /**
      * The value 0 indicates that the request happens in the main frame; a positive value indicates the ID of a subframe in which the request happens. If the document of a (sub-)frame is loaded (<code>type</code> is <code>main_frame</code> or <code>sub_frame</code>), <code>frameId</code> indicates the ID of this frame, not the ID of the outer frame. Frame IDs are unique within a tab.
      */
-    val frameId: Int
+    var frameId: Int
 
     /**
      * ID of frame that wraps the frame which sent the request. Set to -1 if no parent frame exists.
      */
-    val parentFrameId: Int
+    var parentFrameId: Int
 
     /**
      * URL of the resource that triggered this request.
      */
-    val originUrl: String?
+    var originUrl: String?
 
     /**
      * URL of the page into which the requested resource will be loaded.
      */
-    val documentUrl: String?
+    var documentUrl: String?
 
     /**
      * The ID of the tab in which the request takes place. Set to -1 if the request isn't related to a tab.
      */
-    val tabId: Int
+    var tabId: Int
 
     /**
      * How the requested resource will be used.
      */
-    val type: ResourceType
+    var type: ResourceType
 
     /**
      * The time when this signal is triggered, in milliseconds since the epoch.
      */
-    val timeStamp: Int
+    var timeStamp: Int
 
     /**
      * The HTTP request headers that are going to be sent out with this request.
      */
-    val requestHeaders: HttpHeaders
+    var requestHeaders: HttpHeaders
 }
 
 external class Details3 {
     /**
      * The ID of the request. Request IDs are unique within a browser session. As a result, they could be used to relate different events of the same request.
      */
-    val requestId: String
+    var requestId: String
 
-    val url: String
+    var url: String
 
     /**
      * Standard HTTP method.
      */
-    val method: String
+    var method: String
 
     /**
      * The value 0 indicates that the request happens in the main frame; a positive value indicates the ID of a subframe in which the request happens. If the document of a (sub-)frame is loaded (<code>type</code> is <code>main_frame</code> or <code>sub_frame</code>), <code>frameId</code> indicates the ID of this frame, not the ID of the outer frame. Frame IDs are unique within a tab.
      */
-    val frameId: Int
+    var frameId: Int
 
     /**
      * ID of frame that wraps the frame which sent the request. Set to -1 if no parent frame exists.
      */
-    val parentFrameId: Int
+    var parentFrameId: Int
 
     /**
      * URL of the resource that triggered this request.
      */
-    val originUrl: String?
+    var originUrl: String?
 
     /**
      * URL of the page into which the requested resource will be loaded.
      */
-    val documentUrl: String?
+    var documentUrl: String?
 
     /**
      * The ID of the tab in which the request takes place. Set to -1 if the request isn't related to a tab.
      */
-    val tabId: Int
+    var tabId: Int
 
     /**
      * How the requested resource will be used.
      */
-    val type: ResourceType
+    var type: ResourceType
 
     /**
      * The time when this signal is triggered, in milliseconds since the epoch.
      */
-    val timeStamp: Int
+    var timeStamp: Int
 
     /**
      * The HTTP request headers that have been sent out with this request.
      */
-    val requestHeaders: HttpHeaders
+    var requestHeaders: HttpHeaders
 }
 
 external class Details4 {
     /**
      * The ID of the request. Request IDs are unique within a browser session. As a result, they could be used to relate different events of the same request.
      */
-    val requestId: String
+    var requestId: String
 
-    val url: String
+    var url: String
 
     /**
      * Standard HTTP method.
      */
-    val method: String
+    var method: String
 
     /**
      * The value 0 indicates that the request happens in the main frame; a positive value indicates the ID of a subframe in which the request happens. If the document of a (sub-)frame is loaded (<code>type</code> is <code>main_frame</code> or <code>sub_frame</code>), <code>frameId</code> indicates the ID of this frame, not the ID of the outer frame. Frame IDs are unique within a tab.
      */
-    val frameId: Int
+    var frameId: Int
 
     /**
      * ID of frame that wraps the frame which sent the request. Set to -1 if no parent frame exists.
      */
-    val parentFrameId: Int
+    var parentFrameId: Int
 
     /**
      * URL of the resource that triggered this request.
      */
-    val originUrl: String?
+    var originUrl: String?
 
     /**
      * URL of the page into which the requested resource will be loaded.
      */
-    val documentUrl: String?
+    var documentUrl: String?
 
     /**
      * The ID of the tab in which the request takes place. Set to -1 if the request isn't related to a tab.
      */
-    val tabId: Int
+    var tabId: Int
 
     /**
      * How the requested resource will be used.
      */
-    val type: ResourceType
+    var type: ResourceType
 
     /**
      * The time when this signal is triggered, in milliseconds since the epoch.
      */
-    val timeStamp: Int
+    var timeStamp: Int
 
     /**
      * HTTP status line of the response or the 'HTTP/0.9 200 OK' string for HTTP/0.9 responses (i.e., responses that lack a status line).
      */
-    val statusLine: String
+    var statusLine: String
 
     /**
      * The HTTP response headers that have been received with this response.
      */
-    val responseHeaders: HttpHeaders
+    var responseHeaders: HttpHeaders
 
     /**
      * Standard HTTP status code returned by the server.
      */
-    val statusCode: Int
+    var statusCode: Int
 }
 
 /**
  * The server requesting authentication.
  */
 external class Challenger {
-    val host: String
+    var host: String
 
-    val port: Int
+    var port: Int
 }
 
 external class Details5 {
     /**
      * The ID of the request. Request IDs are unique within a browser session. As a result, they could be used to relate different events of the same request.
      */
-    val requestId: String
+    var requestId: String
 
-    val url: String
+    var url: String
 
     /**
      * Standard HTTP method.
      */
-    val method: String
+    var method: String
 
     /**
      * The value 0 indicates that the request happens in the main frame; a positive value indicates the ID of a subframe in which the request happens. If the document of a (sub-)frame is loaded (<code>type</code> is <code>main_frame</code> or <code>sub_frame</code>), <code>frameId</code> indicates the ID of this frame, not the ID of the outer frame. Frame IDs are unique within a tab.
      */
-    val frameId: Int
+    var frameId: Int
 
     /**
      * ID of frame that wraps the frame which sent the request. Set to -1 if no parent frame exists.
      */
-    val parentFrameId: Int
+    var parentFrameId: Int
 
     /**
      * URL of the resource that triggered this request.
      */
-    val originUrl: String?
+    var originUrl: String?
 
     /**
      * URL of the page into which the requested resource will be loaded.
      */
-    val documentUrl: String?
+    var documentUrl: String?
 
     /**
      * The ID of the tab in which the request takes place. Set to -1 if the request isn't related to a tab.
      */
-    val tabId: Int
+    var tabId: Int
 
     /**
      * How the requested resource will be used.
      */
-    val type: ResourceType
+    var type: ResourceType
 
     /**
      * The time when this signal is triggered, in milliseconds since the epoch.
      */
-    val timeStamp: Int
+    var timeStamp: Int
 
     /**
      * The authentication scheme, e.g. Basic or Digest.
      */
-    val scheme: String
+    var scheme: String
 
     /**
      * The authentication realm provided by the server, if there is one.
      */
-    val realm: String?
+    var realm: String?
 
     /**
      * The server requesting authentication.
      */
-    val challenger: Challenger
+    var challenger: Challenger
 
     /**
      * True for Proxy-Authenticate, false for WWW-Authenticate.
      */
-    val isProxy: Boolean
+    var isProxy: Boolean
 
     /**
      * The HTTP response headers that were received along with this response.
      */
-    val responseHeaders: HttpHeaders
+    var responseHeaders: HttpHeaders
 
     /**
      * HTTP status line of the response or the 'HTTP/0.9 200 OK' string for HTTP/0.9 responses (i.e., responses that lack a status line) or an empty string if there are no headers.
      */
-    val statusLine: String
+    var statusLine: String
 
     /**
      * Standard HTTP status code returned by the server.
      */
-    val statusCode: Int
+    var statusCode: Int
 }
 
 typealias Callback = Any
@@ -465,291 +465,291 @@ external class Details6 {
     /**
      * The ID of the request. Request IDs are unique within a browser session. As a result, they could be used to relate different events of the same request.
      */
-    val requestId: String
+    var requestId: String
 
-    val url: String
+    var url: String
 
     /**
      * Standard HTTP method.
      */
-    val method: String
+    var method: String
 
     /**
      * The value 0 indicates that the request happens in the main frame; a positive value indicates the ID of a subframe in which the request happens. If the document of a (sub-)frame is loaded (<code>type</code> is <code>main_frame</code> or <code>sub_frame</code>), <code>frameId</code> indicates the ID of this frame, not the ID of the outer frame. Frame IDs are unique within a tab.
      */
-    val frameId: Int
+    var frameId: Int
 
     /**
      * ID of frame that wraps the frame which sent the request. Set to -1 if no parent frame exists.
      */
-    val parentFrameId: Int
+    var parentFrameId: Int
 
     /**
      * URL of the resource that triggered this request.
      */
-    val originUrl: String?
+    var originUrl: String?
 
     /**
      * URL of the page into which the requested resource will be loaded.
      */
-    val documentUrl: String?
+    var documentUrl: String?
 
     /**
      * The ID of the tab in which the request takes place. Set to -1 if the request isn't related to a tab.
      */
-    val tabId: Int
+    var tabId: Int
 
     /**
      * How the requested resource will be used.
      */
-    val type: ResourceType
+    var type: ResourceType
 
     /**
      * The time when this signal is triggered, in milliseconds since the epoch.
      */
-    val timeStamp: Int
+    var timeStamp: Int
 
     /**
      * The server IP address that the request was actually sent to. Note that it may be a literal IPv6 address.
      */
-    val ip: String?
+    var ip: String?
 
     /**
      * Indicates if this response was fetched from disk cache.
      */
-    val fromCache: Boolean
+    var fromCache: Boolean
 
     /**
      * Standard HTTP status code returned by the server.
      */
-    val statusCode: Int
+    var statusCode: Int
 
     /**
      * The HTTP response headers that were received along with this response.
      */
-    val responseHeaders: HttpHeaders
+    var responseHeaders: HttpHeaders
 
     /**
      * HTTP status line of the response or the 'HTTP/0.9 200 OK' string for HTTP/0.9 responses (i.e., responses that lack a status line) or an empty string if there are no headers.
      */
-    val statusLine: String
+    var statusLine: String
 }
 
 external class Details7 {
     /**
      * The ID of the request. Request IDs are unique within a browser session. As a result, they could be used to relate different events of the same request.
      */
-    val requestId: String
+    var requestId: String
 
-    val url: String
+    var url: String
 
     /**
      * Standard HTTP method.
      */
-    val method: String
+    var method: String
 
     /**
      * The value 0 indicates that the request happens in the main frame; a positive value indicates the ID of a subframe in which the request happens. If the document of a (sub-)frame is loaded (<code>type</code> is <code>main_frame</code> or <code>sub_frame</code>), <code>frameId</code> indicates the ID of this frame, not the ID of the outer frame. Frame IDs are unique within a tab.
      */
-    val frameId: Int
+    var frameId: Int
 
     /**
      * ID of frame that wraps the frame which sent the request. Set to -1 if no parent frame exists.
      */
-    val parentFrameId: Int
+    var parentFrameId: Int
 
     /**
      * URL of the resource that triggered this request.
      */
-    val originUrl: String?
+    var originUrl: String?
 
     /**
      * URL of the page into which the requested resource will be loaded.
      */
-    val documentUrl: String?
+    var documentUrl: String?
 
     /**
      * The ID of the tab in which the request takes place. Set to -1 if the request isn't related to a tab.
      */
-    val tabId: Int
+    var tabId: Int
 
     /**
      * How the requested resource will be used.
      */
-    val type: ResourceType
+    var type: ResourceType
 
     /**
      * The time when this signal is triggered, in milliseconds since the epoch.
      */
-    val timeStamp: Int
+    var timeStamp: Int
 
     /**
      * The server IP address that the request was actually sent to. Note that it may be a literal IPv6 address.
      */
-    val ip: String?
+    var ip: String?
 
     /**
      * Indicates if this response was fetched from disk cache.
      */
-    val fromCache: Boolean
+    var fromCache: Boolean
 
     /**
      * Standard HTTP status code returned by the server.
      */
-    val statusCode: Int
+    var statusCode: Int
 
     /**
      * The new URL.
      */
-    val redirectUrl: String
+    var redirectUrl: String
 
     /**
      * The HTTP response headers that were received along with this redirect.
      */
-    val responseHeaders: HttpHeaders
+    var responseHeaders: HttpHeaders
 
     /**
      * HTTP status line of the response or the 'HTTP/0.9 200 OK' string for HTTP/0.9 responses (i.e., responses that lack a status line) or an empty string if there are no headers.
      */
-    val statusLine: String
+    var statusLine: String
 }
 
 external class Details8 {
     /**
      * The ID of the request. Request IDs are unique within a browser session. As a result, they could be used to relate different events of the same request.
      */
-    val requestId: String
+    var requestId: String
 
-    val url: String
+    var url: String
 
     /**
      * Standard HTTP method.
      */
-    val method: String
+    var method: String
 
     /**
      * The value 0 indicates that the request happens in the main frame; a positive value indicates the ID of a subframe in which the request happens. If the document of a (sub-)frame is loaded (<code>type</code> is <code>main_frame</code> or <code>sub_frame</code>), <code>frameId</code> indicates the ID of this frame, not the ID of the outer frame. Frame IDs are unique within a tab.
      */
-    val frameId: Int
+    var frameId: Int
 
     /**
      * ID of frame that wraps the frame which sent the request. Set to -1 if no parent frame exists.
      */
-    val parentFrameId: Int
+    var parentFrameId: Int
 
     /**
      * URL of the resource that triggered this request.
      */
-    val originUrl: String?
+    var originUrl: String?
 
     /**
      * URL of the page into which the requested resource will be loaded.
      */
-    val documentUrl: String?
+    var documentUrl: String?
 
     /**
      * The ID of the tab in which the request takes place. Set to -1 if the request isn't related to a tab.
      */
-    val tabId: Int
+    var tabId: Int
 
     /**
      * How the requested resource will be used.
      */
-    val type: ResourceType
+    var type: ResourceType
 
     /**
      * The time when this signal is triggered, in milliseconds since the epoch.
      */
-    val timeStamp: Int
+    var timeStamp: Int
 
     /**
      * The server IP address that the request was actually sent to. Note that it may be a literal IPv6 address.
      */
-    val ip: String?
+    var ip: String?
 
     /**
      * Indicates if this response was fetched from disk cache.
      */
-    val fromCache: Boolean
+    var fromCache: Boolean
 
     /**
      * Standard HTTP status code returned by the server.
      */
-    val statusCode: Int
+    var statusCode: Int
 
     /**
      * The HTTP response headers that were received along with this response.
      */
-    val responseHeaders: HttpHeaders
+    var responseHeaders: HttpHeaders
 
     /**
      * HTTP status line of the response or the 'HTTP/0.9 200 OK' string for HTTP/0.9 responses (i.e., responses that lack a status line) or an empty string if there are no headers.
      */
-    val statusLine: String
+    var statusLine: String
 }
 
 external class Details9 {
     /**
      * The ID of the request. Request IDs are unique within a browser session. As a result, they could be used to relate different events of the same request.
      */
-    val requestId: String
+    var requestId: String
 
-    val url: String
+    var url: String
 
     /**
      * Standard HTTP method.
      */
-    val method: String
+    var method: String
 
     /**
      * The value 0 indicates that the request happens in the main frame; a positive value indicates the ID of a subframe in which the request happens. If the document of a (sub-)frame is loaded (<code>type</code> is <code>main_frame</code> or <code>sub_frame</code>), <code>frameId</code> indicates the ID of this frame, not the ID of the outer frame. Frame IDs are unique within a tab.
      */
-    val frameId: Int
+    var frameId: Int
 
     /**
      * ID of frame that wraps the frame which sent the request. Set to -1 if no parent frame exists.
      */
-    val parentFrameId: Int
+    var parentFrameId: Int
 
     /**
      * URL of the resource that triggered this request.
      */
-    val originUrl: String?
+    var originUrl: String?
 
     /**
      * URL of the page into which the requested resource will be loaded.
      */
-    val documentUrl: String?
+    var documentUrl: String?
 
     /**
      * The ID of the tab in which the request takes place. Set to -1 if the request isn't related to a tab.
      */
-    val tabId: Int
+    var tabId: Int
 
     /**
      * How the requested resource will be used.
      */
-    val type: ResourceType
+    var type: ResourceType
 
     /**
      * The time when this signal is triggered, in milliseconds since the epoch.
      */
-    val timeStamp: Int
+    var timeStamp: Int
 
     /**
      * The server IP address that the request was actually sent to. Note that it may be a literal IPv6 address.
      */
-    val ip: String?
+    var ip: String?
 
     /**
      * Indicates if this response was fetched from disk cache.
      */
-    val fromCache: Boolean
+    var fromCache: Boolean
 
     /**
      * The error description. This string is <em>not</em> guaranteed to remain backwards compatible between releases. You must not parse and act based upon its content.
      */
-    val error: String
+    var error: String
 }
 
 external class WebRequestNamespace {

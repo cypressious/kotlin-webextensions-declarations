@@ -9,38 +9,38 @@ external class Filter {
     /**
      * The maximum number of entries to be fetched in the requested list. Omit this parameter to fetch the maximum number of entries ($(ref:sessions.MAX_SESSION_RESULTS)).
      */
-    val maxResults: Int?
+    var maxResults: Int?
 }
 
 external class Session {
     /**
      * The time when the window or tab was closed or modified, represented in milliseconds since the epoch.
      */
-    val lastModified: Int
+    var lastModified: Int
 
     /**
      * The $(ref:tabs.Tab), if this entry describes a tab. Either this or $(ref:sessions.Session.window) will be set.
      */
-    val tab: Tab
+    var tab: Tab
 
     /**
      * The $(ref:windows.Window), if this entry describes a window. Either this or $(ref:sessions.Session.tab) will be set.
      */
-    val window: Window
+    var window: Window
 }
 
 external class Device {
-    val info: String
+    var info: String
 
     /**
      * The name of the foreign device.
      */
-    val deviceName: String
+    var deviceName: String
 
     /**
      * A list of open window sessions for the foreign device, sorted from most recently to least recently modified session.
      */
-    val sessions: Array<Session>
+    var sessions: Array<Session>
 }
 
 external class SessionsNamespace {

@@ -10,52 +10,52 @@ external class Cookie {
     /**
      * The name of the cookie.
      */
-    val name: String
+    var name: String
 
     /**
      * The value of the cookie.
      */
-    val value: String
+    var value: String
 
     /**
      * The domain of the cookie (e.g. "www.google.com", "example.com").
      */
-    val domain: String
+    var domain: String
 
     /**
      * True if the cookie is a host-only cookie (i.e. a request's host must exactly match the domain of the cookie).
      */
-    val hostOnly: Boolean
+    var hostOnly: Boolean
 
     /**
      * The path of the cookie.
      */
-    val path: String
+    var path: String
 
     /**
      * True if the cookie is marked as Secure (i.e. its scope is limited to secure channels, typically HTTPS).
      */
-    val secure: Boolean
+    var secure: Boolean
 
     /**
      * True if the cookie is marked as HttpOnly (i.e. the cookie is inaccessible to client-side scripts).
      */
-    val httpOnly: Boolean
+    var httpOnly: Boolean
 
     /**
      * True if the cookie is a session cookie, as opposed to a persistent cookie with an expiration date.
      */
-    val session: Boolean
+    var session: Boolean
 
     /**
      * The expiration date of the cookie as the number of seconds since the UNIX epoch. Not provided for session cookies.
      */
-    val expirationDate: Int?
+    var expirationDate: Int?
 
     /**
      * The ID of the cookie store containing this cookie, as provided in getAllCookieStores().
      */
-    val storeId: String
+    var storeId: String
 }
 
 /**
@@ -65,17 +65,17 @@ external class CookieStore {
     /**
      * The unique identifier for the cookie store.
      */
-    val id: String
+    var id: String
 
     /**
      * Identifiers of all the browser tabs that share this cookie store.
      */
-    val tabIds: Array<Int>
+    var tabIds: Array<Int>
 
     /**
      * Indicates if this is an incognito cookie store
      */
-    val incognito: Boolean
+    var incognito: Boolean
 }
 
 /**
@@ -89,15 +89,15 @@ class Details(
         /**
          * The URL with which the cookie to retrieve is associated. This argument may be a full URL, in which case any data following the URL path (e.g. the query string) is simply ignored. If host permissions for this URL are not specified in the manifest file, the API call will fail.
          */
-        val url: String,
+        var url: String,
         /**
          * The name of the cookie to retrieve.
          */
-        val name: String,
+        var name: String,
         /**
          * The ID of the cookie store in which to look for the cookie. By default, the current execution context's cookie store will be used.
          */
-        val storeId: String?
+        var storeId: String?
 )
 
 /**
@@ -107,31 +107,31 @@ class Details2(
         /**
          * Restricts the retrieved cookies to those that would match the given URL.
          */
-        val url: String?,
+        var url: String?,
         /**
          * Filters the cookies by name.
          */
-        val name: String?,
+        var name: String?,
         /**
          * Restricts the retrieved cookies to those whose domains match or are subdomains of this one.
          */
-        val domain: String?,
+        var domain: String?,
         /**
          * Restricts the retrieved cookies to those whose path exactly matches this string.
          */
-        val path: String?,
+        var path: String?,
         /**
          * Filters the cookies by their Secure property.
          */
-        val secure: Boolean?,
+        var secure: Boolean?,
         /**
          * Filters out session vs. persistent cookies.
          */
-        val session: Boolean?,
+        var session: Boolean?,
         /**
          * The cookie store to retrieve cookies from. If omitted, the current execution context's cookie store will be used.
          */
-        val storeId: String?
+        var storeId: String?
 )
 
 /**
@@ -141,39 +141,39 @@ class Details3(
         /**
          * The request-URI to associate with the setting of the cookie. This value can affect the default domain and path values of the created cookie. If host permissions for this URL are not specified in the manifest file, the API call will fail.
          */
-        val url: String,
+        var url: String,
         /**
          * The name of the cookie. Empty by default if omitted.
          */
-        val name: String?,
+        var name: String?,
         /**
          * The value of the cookie. Empty by default if omitted.
          */
-        val value: String?,
+        var value: String?,
         /**
          * The domain of the cookie. If omitted, the cookie becomes a host-only cookie.
          */
-        val domain: String?,
+        var domain: String?,
         /**
          * The path of the cookie. Defaults to the path portion of the url parameter.
          */
-        val path: String?,
+        var path: String?,
         /**
          * Whether the cookie should be marked as Secure. Defaults to false.
          */
-        val secure: Boolean?,
+        var secure: Boolean?,
         /**
          * Whether the cookie should be marked as HttpOnly. Defaults to false.
          */
-        val httpOnly: Boolean?,
+        var httpOnly: Boolean?,
         /**
          * The expiration date of the cookie as the number of seconds since the UNIX epoch. If omitted, the cookie becomes a session cookie.
          */
-        val expirationDate: Int?,
+        var expirationDate: Int?,
         /**
          * The ID of the cookie store in which to set the cookie. By default, the cookie is set in the current execution context's cookie store.
          */
-        val storeId: String?
+        var storeId: String?
 )
 
 /**
@@ -183,15 +183,15 @@ class Details4(
         /**
          * The URL associated with the cookie. If host permissions for this URL are not specified in the manifest file, the API call will fail.
          */
-        val url: String,
+        var url: String,
         /**
          * The name of the cookie to remove.
          */
-        val name: String,
+        var name: String,
         /**
          * The ID of the cookie store to look in for the cookie. If unspecified, the cookie is looked for by default in the current execution context's cookie store.
          */
-        val storeId: String?
+        var storeId: String?
 )
 
 /**
@@ -201,34 +201,34 @@ external class Details5 {
     /**
      * The URL associated with the cookie that's been removed.
      */
-    val url: String
+    var url: String
 
     /**
      * The name of the cookie that's been removed.
      */
-    val name: String
+    var name: String
 
     /**
      * The ID of the cookie store from which the cookie was removed.
      */
-    val storeId: String
+    var storeId: String
 }
 
 external class ChangeInfo {
     /**
      * True if a cookie was removed.
      */
-    val removed: Boolean
+    var removed: Boolean
 
     /**
      * Information about the cookie that was set or removed.
      */
-    val cookie: Cookie
+    var cookie: Cookie
 
     /**
      * The underlying reason behind the cookie's change.
      */
-    val cause: OnChangedCause
+    var cause: OnChangedCause
 }
 
 external class CookiesNamespace {

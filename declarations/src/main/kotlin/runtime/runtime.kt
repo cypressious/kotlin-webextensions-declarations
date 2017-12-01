@@ -8,20 +8,20 @@ import tabs.Tab
  * An object which allows two way communication with other pages.
  */
 external class Port {
-    val name: String
+    var name: String
 
-    val disconnect: () -> Unit
+    var disconnect: () -> Unit
 
-    val onDisconnect: Event
+    var onDisconnect: Event
 
-    val onMessage: Event
+    var onMessage: Event
 
-    val postMessage: (Any) -> Unit
+    var postMessage: (Any) -> Unit
 
     /**
      * This property will <b>only</b> be present on ports passed to onConnect/onConnectExternal listeners.
      */
-    val sender: MessageSender
+    var sender: MessageSender
 }
 
 /**
@@ -31,22 +31,22 @@ external class MessageSender {
     /**
      * The $(ref:tabs.Tab) which opened the connection, if any. This property will <strong>only</strong> be present when the connection was opened from a tab (including content scripts), and <strong>only</strong> if the receiver is an extension, not an app.
      */
-    val tab: Tab
+    var tab: Tab
 
     /**
      * The $(topic:frame_ids)[frame] that opened the connection. 0 for top-level frames, positive for child frames. This will only be set when <code>tab</code> is set.
      */
-    val frameId: Int?
+    var frameId: Int?
 
     /**
      * The ID of the extension or app that opened the connection, if any.
      */
-    val id: String?
+    var id: String?
 
     /**
      * The URL of the page or frame that opened the connection. If the sender is in an iframe, it will be iframe's URL not the URL of the page which hosts it.
      */
-    val url: String?
+    var url: String?
 }
 
 /**
@@ -64,12 +64,12 @@ external class PlatformInfo {
     /**
      * The operating system the browser is running on.
      */
-    val os: PlatformOs
+    var os: PlatformOs
 
     /**
      * The machine's processor architecture.
      */
-    val arch: PlatformArch
+    var arch: PlatformArch
 }
 
 /**
@@ -79,22 +79,22 @@ external class BrowserInfo {
     /**
      * The name of the browser, for example 'Firefox'.
      */
-    val name: String
+    var name: String
 
     /**
      * The name of the browser vendor, for example 'Mozilla'.
      */
-    val vendor: String
+    var vendor: String
 
     /**
      * The browser's version, for example '42.0.0' or '0.8.1pre'.
      */
-    val version: String
+    var version: String
 
     /**
      * The browser's build ID/date, for example '20160101'.
      */
-    val buildID: String
+    var buildID: String
 }
 
 /**
@@ -116,7 +116,7 @@ external class LastError {
     /**
      * Details about the error which occurred.
      */
-    val message: String?
+    var message: String?
 }
 
 /**
@@ -130,21 +130,21 @@ external class Details {
     /**
      * The version of the available update.
      */
-    val version: String
+    var version: String
 }
 
 class ConnectInfo(/**
  * Will be passed into onConnect for processes that are listening for the connection event.
  */
-val name: String?, /**
+var name: String?, /**
  * Whether the TLS channel ID will be passed into onConnectExternal for processes that are listening for the connection event.
  */
-val includeTlsChannelId: Boolean?)
+var includeTlsChannelId: Boolean?)
 
 class Options(/**
  * If true, the message will be directed to the extension's proxy sandbox.
  */
-val toProxyScript: Boolean?)
+var toProxyScript: Boolean?)
 
 typealias DirectoryEntry = Any
 
@@ -152,17 +152,17 @@ external class Details2 {
     /**
      * The reason that this event is being dispatched.
      */
-    val reason: OnInstalledReason
+    var reason: OnInstalledReason
 
     /**
      * Indicates the previous version of the extension, which has just been updated. This is present only if 'reason' is 'update'.
      */
-    val previousVersion: String?
+    var previousVersion: String?
 
     /**
      * Indicates whether the addon is installed as a temporary extension.
      */
-    val temporary: Boolean
+    var temporary: Boolean
 }
 
 /**
@@ -172,7 +172,7 @@ external class Details3 {
     /**
      * The version number of the available update.
      */
-    val version: String
+    var version: String
 }
 
 external class RuntimeNamespace {

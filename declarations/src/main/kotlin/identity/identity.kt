@@ -9,30 +9,30 @@ external class AccountInfo {
     /**
      * A unique identifier for the account. This ID will not change for the lifetime of the account. 
      */
-    val id: String
+    var id: String
 }
 
 class Details(
-        val interactive: Boolean?,
-        val account: AccountInfo,
-        val scopes: Array<String>?
+        var interactive: Boolean?,
+        var account: AccountInfo,
+        var scopes: Array<String>?
 )
 
 external class Userinfo {
-    val email: String
+    var email: String
 
-    val id: String
+    var id: String
 }
 
-class Details2(val token: String)
+class Details2(var token: String)
 
 external class Userinfo2 {
-    val email: String
+    var email: String
 
-    val id: String
+    var id: String
 }
 
-class Details3(val url: String, val interactive: Boolean?)
+class Details3(var url: String, var interactive: Boolean?)
 
 external class IdentityNamespace {
     /**
