@@ -1,8 +1,8 @@
 package runtime
 
 import events.Event
-import kotlin.js.Promise
 import tabs.Tab
+import kotlin.js.Promise
 
 /**
  * An object which allows two way communication with other pages.
@@ -124,6 +124,11 @@ external class LastError {
 typealias BackgroundPage = Any
 
 /**
+ * The manifest details.
+ */
+external class GetManifestResult
+
+/**
  * If an update is available, this contains more information about the available update.
  */
 external class Details {
@@ -217,12 +222,12 @@ external class RuntimeNamespace {
     /**
      * Returns details about the app or extension from the manifest. The object returned is a serialization of the full $(topic:manifest)[manifest file].
      */
-    fun getManifest()
+    fun getManifest(): GetManifestResult
 
     /**
      * Converts a relative path within an app/extension install directory to a fully-qualified URL.
      */
-    fun getURL(path: String)
+    fun getURL(path: String): String
 
     /**
      * Sets the URL to be visited upon uninstallation. This may be used to clean up server-side data, do analytics, and implement surveys. Maximum 255 characters.
@@ -237,12 +242,12 @@ external class RuntimeNamespace {
     /**
      * Attempts to connect to connect listeners within an extension/app (such as the background page), or other extensions/apps. This is useful for content scripts connecting to their extension processes, inter-app/extension communication, and $(topic:manifest/externally_connectable)[web messaging]. Note that this does not connect to any listeners in a content script. Extensions may connect to content scripts embedded in tabs via $(ref:tabs.connect).
      */
-    fun connect(extensionId: String? = definedExternally, connectInfo: ConnectInfo? = definedExternally)
+    fun connect(extensionId: String? = definedExternally, connectInfo: ConnectInfo? = definedExternally): Port
 
     /**
      * Connects to a native application in the host machine.
      */
-    fun connectNative(application: String)
+    fun connectNative(application: String): Port
 
     /**
      * Sends a single message to event listeners within your extension/app or a different extension/app. Similar to $(ref:runtime.connect) but only sends a single message, with an optional response. If sending to your extension, the $(ref:runtime.onMessage) event will be fired in each page, or $(ref:runtime.onMessageExternal), if a different extension. Note that extensions cannot send messages to content scripts using this method. To send messages to content scripts, use $(ref:tabs.sendMessage).

@@ -51,5 +51,5 @@ external class IdentityNamespace {
     /**
      * Generates a redirect URL to be used in |launchWebAuthFlow|.
      */
-    fun getRedirectURL( path: String? = definedExternally)
+    fun getRedirectURL( path: String? = definedExternally): String
 }

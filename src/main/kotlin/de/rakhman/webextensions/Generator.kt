@@ -207,7 +207,11 @@ class Generator(val dir: File) {
                 }
     }
 
-    private fun returnType(f: Function): ParameterizedTypeName? {
+    private fun returnType(f: Function): TypeName? {
+        f.returns?.let {
+            return parameterType("", it)
+        }
+
         val returnTypeName = when (f.async) {
             true -> ClassName.bestGuess("Any")
             is String -> {

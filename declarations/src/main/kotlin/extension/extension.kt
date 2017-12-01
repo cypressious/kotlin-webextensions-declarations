@@ -33,21 +33,25 @@ external class FetchProperties {
     var tabId: Int?
 }
 
+typealias GetViewsResult = Any
+
+typealias GetBackgroundPageResult = Any
+
 external class ExtensionNamespace {
     /**
      * Converts a relative path within an extension install directory to a fully-qualified URL.
      */
-    fun getURL(path: String)
+    fun getURL(path: String): String
 
     /**
      * Returns an array of the JavaScript 'window' objects for each of the pages running inside the current extension.
      */
-    fun getViews(fetchProperties: FetchProperties? = definedExternally)
+    fun getViews(fetchProperties: FetchProperties? = definedExternally): Array<GetViewsResult>
 
     /**
      * Returns the JavaScript 'window' object for the background page running inside the current extension. Returns null if the extension has no background page.
      */
-    fun getBackgroundPage()
+    fun getBackgroundPage(): GetBackgroundPageResult?
 
     /**
      * Retrieves the state of the extension's access to Incognito-mode (as determined by the user-controlled 'Allowed in Incognito' checkbox.

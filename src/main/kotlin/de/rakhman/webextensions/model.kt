@@ -27,7 +27,8 @@ data class Function(
         val async: Any?,
         val parameters: List<Parameter>?,
         val deprecated: String?,
-        val unsupported: Boolean
+        val unsupported: Boolean,
+        val returns: Parameter?
 )
 
 data class Parameter(

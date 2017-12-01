@@ -169,6 +169,10 @@ external class CreateProperties {
 typealias Callback = Any
 
 /**
+ * The ID of the newly created item. */
+typealias CreateResult = Any
+
+/**
  * The ID of the item to update. */
 typealias Id = Any
 
@@ -214,7 +218,7 @@ external class MenusNamespace {
     /**
      * Creates a new context menu item. Note that if an error occurs during creation, you may not find out until the creation callback fires (the details will be in $(ref:runtime.lastError)).
      */
-    fun create(createProperties: CreateProperties, callback: Callback? = definedExternally)
+    fun create(createProperties: CreateProperties, callback: Callback? = definedExternally): CreateResult
 
     /**
      * Updates a previously created context menu item.

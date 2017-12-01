@@ -64,7 +64,8 @@ private fun Event.resolve(types: MutableMap<String?, Type>): Event {
 
 private fun Function.resolve(types: MutableMap<String?, Type>): Function {
     return copy(
-            parameters = parameters?.map { it.resolve(it.name!!, types, it.name != async, it.name == async) }
+            parameters = parameters?.map { it.resolve(it.name!!, types, it.name != async, it.name == async) },
+            returns = returns?.resolve(name + "Result", types)
     )
 }
 

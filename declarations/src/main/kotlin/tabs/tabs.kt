@@ -4,6 +4,7 @@ import browser.Event
 import extensionTypes.ImageDetails
 import extensionTypes.InjectDetails
 import kotlin.js.Promise
+import runtime.Port
 
 /**
  * An event that caused a muted state change. */
@@ -674,7 +675,7 @@ external class TabsNamespace {
     /**
      * Connects to the content script(s) in the specified tab. The $(ref:runtime.onConnect) event is fired in each content script running in the specified tab for the current extension. For more details, see $(topic:messaging)[Content Script Messaging].
      */
-    fun connect(tabId: Int, connectInfo: ConnectInfo? = definedExternally)
+    fun connect(tabId: Int, connectInfo: ConnectInfo? = definedExternally): Port
 
     /**
      * Sends a single message to the content script(s) in the specified tab, with an optional callback to run when a response is sent back.  The $(ref:runtime.onMessage) event is fired in each content script running in the specified tab for the current extension.
