@@ -1,7 +1,6 @@
 package manifest
 
 import extensionTypes.RunAt
-import kotlin.Any
 
 external class OptionalPermission
 

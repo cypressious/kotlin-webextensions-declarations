@@ -1,6 +1,5 @@
 package bookmarks
 
-import kotlin.Any
 import kotlin.js.Promise
 
 typealias BookmarkTreeNodeUnmodifiable = String

@@ -1,6 +1,5 @@
 package clipboard
 
-import kotlin.Any
 import kotlin.js.Promise
 
 typealias ImageData = Any

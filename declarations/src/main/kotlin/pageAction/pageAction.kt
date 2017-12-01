@@ -1,6 +1,5 @@
 package pageAction
 
-import kotlin.Any
 import kotlin.js.Promise
 
 typealias ImageDataType = Any

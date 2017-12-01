@@ -1,6 +1,5 @@
 package devtools
 
-import kotlin.Any
 import kotlin.js.Promise
 
 /**

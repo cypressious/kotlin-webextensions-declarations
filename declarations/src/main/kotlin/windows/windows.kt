@@ -1,6 +1,5 @@
 package windows
 
-import kotlin.Any
 import kotlin.js.Promise
 
 typealias WindowType = String

@@ -1,6 +1,5 @@
 package webRequest
 
-import kotlin.Any
 import kotlin.js.Promise
 
 typealias ResourceType = String

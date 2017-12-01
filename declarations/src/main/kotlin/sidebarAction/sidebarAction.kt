@@ -1,6 +1,5 @@
 package sidebarAction
 
-import kotlin.Any
 import kotlin.js.Promise
 
 typealias ImageDataType = Any

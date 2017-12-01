@@ -86,7 +86,7 @@ class Generator(val dir: File) {
 
         if (type.properties == null) {
             fileBuilder.addTypeAlias(
-                    TypeAliasSpec.builder(name, Any::class).build())
+                    TypeAliasSpec.builder(name, ClassName.bestGuess("Any")).build())
             return
         }
 

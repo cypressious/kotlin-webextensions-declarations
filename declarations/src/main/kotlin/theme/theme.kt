@@ -1,6 +1,5 @@
 package theme
 
-import kotlin.Any
 import kotlin.js.Promise
 import manifest.ThemeType
 

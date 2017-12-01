@@ -1,7 +1,5 @@
 package events
 
-import kotlin.Any
-
 /**
  * Description of a declarative rule for handling events.
  */

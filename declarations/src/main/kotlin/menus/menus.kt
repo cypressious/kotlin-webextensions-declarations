@@ -1,6 +1,5 @@
 package menus
 
-import kotlin.Any
 import kotlin.js.Promise
 
 typealias ContextType = String

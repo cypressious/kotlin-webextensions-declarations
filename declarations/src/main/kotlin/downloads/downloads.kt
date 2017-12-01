@@ -1,6 +1,5 @@
 package downloads
 
-import kotlin.Any
 import kotlin.js.Promise
 
 typealias FilenameConflictAction = String

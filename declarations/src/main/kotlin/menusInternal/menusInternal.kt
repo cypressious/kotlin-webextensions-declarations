@@ -1,7 +1,5 @@
 package menusInternal
 
-import kotlin.Any
-
 /**
  * Information sent when a context menu item is clicked.
  */

@@ -1,6 +1,5 @@
 package notifications
 
-import kotlin.Any
 import kotlin.js.Promise
 
 typealias TemplateType = String

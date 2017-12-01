@@ -2,7 +2,6 @@ package tabs
 
 import extensionTypes.ImageDetails
 import extensionTypes.InjectDetails
-import kotlin.Any
 import kotlin.js.Promise
 
 typealias MutedInfoReason = String

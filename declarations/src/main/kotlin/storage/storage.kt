@@ -1,7 +1,5 @@
 package storage
 
-import kotlin.Any
-
 external class StorageChange {
   /**
    * The old value of the item, if there was an old value.

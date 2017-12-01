@@ -1,6 +1,5 @@
 package browserAction
 
-import kotlin.Any
 import kotlin.js.Promise
 
 typealias ColorArray = Any

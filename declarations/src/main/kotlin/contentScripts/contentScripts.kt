@@ -1,7 +1,6 @@
 package contentScripts
 
 import extensionTypes.RunAt
-import kotlin.Any
 import kotlin.js.Promise
 
 typealias ExtensionFileOrCode = Any

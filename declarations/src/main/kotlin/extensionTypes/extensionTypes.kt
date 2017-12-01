@@ -1,7 +1,5 @@
 package extensionTypes
 
-import kotlin.Any
-
 typealias ImageFormat = String
 
 /**
