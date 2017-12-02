@@ -1,9 +1,9 @@
 package pageAction
 
-import browser.Event
 import kotlin.Suppress
 import kotlin.js.Promise
 import tabs.Tab
+import webextensions.Event
 
 /**
  * Pixel data for an image. Must be an ImageData object (for example, from a <code>canvas</code> element).

@@ -1,7 +1,7 @@
 package commands
 
-import browser.Event
 import kotlin.js.Promise
+import webextensions.Event
 
 class Command(
         /**

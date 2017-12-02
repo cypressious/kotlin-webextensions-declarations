@@ -1,7 +1,7 @@
 package idle
 
-import browser.Event
 import kotlin.js.Promise
+import webextensions.Event
 
 typealias IdleState = String
 

@@ -1,7 +1,7 @@
 package storage
 
-import browser.Event
 import kotlin.Suppress
+import webextensions.Event
 
 class StorageChange(/**
  * The old value of the item, if there was an old value.

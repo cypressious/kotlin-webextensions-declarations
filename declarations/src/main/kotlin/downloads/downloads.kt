@@ -1,7 +1,7 @@
 package downloads
 
-import browser.Event
 import kotlin.js.Promise
+import webextensions.Event
 
 typealias FilenameConflictAction = String
 

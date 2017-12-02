@@ -1,4 +1,4 @@
-package browser
+package webextensions
 
 import alarms.AlarmsNamespace
 import bookmarks.BookmarksNamespace

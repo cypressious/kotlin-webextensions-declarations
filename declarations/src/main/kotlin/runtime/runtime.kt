@@ -196,23 +196,23 @@ var version: String) {
 }
 
 external class RuntimeNamespace {
-    val onStartup: browser.Event<() -> Unit>
+    val onStartup: webextensions.Event<() -> Unit>
 
-    val onInstalled: browser.Event<(details: Details2) -> Unit>
+    val onInstalled: webextensions.Event<(details: Details2) -> Unit>
 
-    val onUpdateAvailable: browser.Event<(details: Details3) -> Unit>
+    val onUpdateAvailable: webextensions.Event<(details: Details3) -> Unit>
 
-    val onConnect: browser.Event<(port: Port) -> Unit>
+    val onConnect: webextensions.Event<(port: Port) -> Unit>
 
-    val onConnectExternal: browser.Event<(port: Port) -> Unit>
+    val onConnectExternal: webextensions.Event<(port: Port) -> Unit>
 
-    val onMessage: browser.Event<(
+    val onMessage: webextensions.Event<(
             message: dynamic,
             sender: MessageSender,
             sendResponse: () -> Unit
     ) -> Unit>
 
-    val onMessageExternal: browser.Event<(
+    val onMessageExternal: webextensions.Event<(
             message: dynamic,
             sender: MessageSender,
             sendResponse: () -> Unit

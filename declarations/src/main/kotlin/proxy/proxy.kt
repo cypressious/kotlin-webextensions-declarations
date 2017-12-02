@@ -1,8 +1,8 @@
 package proxy
 
-import browser.Event
 import kotlin.Deprecated
 import kotlin.js.Promise
+import webextensions.Event
 
 typealias Error = Any
 

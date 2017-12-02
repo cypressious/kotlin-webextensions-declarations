@@ -1,7 +1,7 @@
 package geckoProfiler
 
-import browser.Event
 import kotlin.js.Promise
+import webextensions.Event
 
 typealias ProfilerFeature = String
 

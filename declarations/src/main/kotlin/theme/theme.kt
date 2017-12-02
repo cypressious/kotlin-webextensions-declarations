@@ -1,8 +1,8 @@
 package theme
 
-import browser.Event
 import kotlin.js.Promise
 import manifest.ThemeType
+import webextensions.Event
 
 /**
  * Info provided in the onUpdated listener.

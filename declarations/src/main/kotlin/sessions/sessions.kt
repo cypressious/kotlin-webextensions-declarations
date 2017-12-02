@@ -1,8 +1,8 @@
 package sessions
 
-import browser.Event
 import kotlin.js.Promise
 import tabs.Tab
+import webextensions.Event
 import windows.Window
 
 class Filter(/**

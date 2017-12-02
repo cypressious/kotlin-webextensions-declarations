@@ -1,8 +1,8 @@
 package management
 
-import browser.Event
 import kotlin.js.Promise
 import manifest.ExtensionID
+import webextensions.Event
 
 /**
  * Information about an icon belonging to an extension.

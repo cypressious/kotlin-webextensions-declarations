@@ -1,8 +1,8 @@
 package devtools
 
-import browser.Event
 import kotlin.Suppress
 import kotlin.js.Promise
+import webextensions.Event
 
 /**
  * A resource within the inspected page, such as a document, a script, or an image.

@@ -1,10 +1,10 @@
 package tabs
 
-import browser.Event
 import extensionTypes.ImageDetails
 import extensionTypes.InjectDetails
 import kotlin.js.Promise
 import runtime.Port
+import webextensions.Event
 
 /**
  * An event that caused a muted state change. */

@@ -1,8 +1,8 @@
 package history
 
-import browser.Event
 import extensionTypes.Date
 import kotlin.js.Promise
+import webextensions.Event
 
 /**
  * The $(topic:transition-types)[transition type] for this visit from its referrer. */

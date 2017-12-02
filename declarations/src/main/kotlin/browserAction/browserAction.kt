@@ -1,8 +1,9 @@
 package browserAction
 
-import browser.Event
-import tabs.Tab
+import kotlin.Suppress
 import kotlin.js.Promise
+import tabs.Tab
+import webextensions.Event
 
 typealias ColorArray = Array<Int>
 

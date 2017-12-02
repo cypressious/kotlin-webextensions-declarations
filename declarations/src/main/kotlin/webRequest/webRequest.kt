@@ -1,8 +1,8 @@
 package webRequest
 
-import browser.Event
 import kotlin.Suppress
 import kotlin.js.Promise
+import webextensions.Event
 
 typealias ResourceType = String
 

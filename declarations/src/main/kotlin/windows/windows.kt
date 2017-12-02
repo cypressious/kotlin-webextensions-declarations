@@ -1,8 +1,8 @@
 package windows
 
-import browser.Event
 import kotlin.js.Promise
 import tabs.Tab
+import webextensions.Event
 
 /**
  * The type of browser window this is. Under some circumstances a Window may not be assigned type property, for example when querying closed windows from the $(ref:sessions) API. */

@@ -1,7 +1,7 @@
 package cookies
 
-import browser.Event
 import kotlin.js.Promise
+import webextensions.Event
 
 /**
  * Represents information about an HTTP cookie.

@@ -1,9 +1,9 @@
 package menus
 
-import browser.Event
 import kotlin.Suppress
 import kotlin.js.Promise
 import tabs.Tab
+import webextensions.Event
 
 /**
  * The different contexts a menu can appear in. Specifying 'all' is equivalent to the combination of all other contexts except for 'tab' and 'tools_menu'. */

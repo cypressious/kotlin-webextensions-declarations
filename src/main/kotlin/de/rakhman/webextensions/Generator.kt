@@ -21,7 +21,7 @@ class Generator(val dir: File) {
     }
 
     private fun generateBrowser(list: List<Namespace>) {
-        FileSpec.builder("browser", "browser")
+        FileSpec.builder("webextensions", "browser")
                 .addType(TypeSpec.expectClassBuilder("Browser")
                         .addProperties(list
                                 .map { it.namespace }
@@ -92,7 +92,7 @@ class Generator(val dir: File) {
 
     private fun generateEvent(event: Event): PropertySpec {
         val type = ParameterizedTypeName.get(
-                ClassName.bestGuess("browser.Event"),
+                ClassName.bestGuess("webextensions.Event"),
                 LambdaTypeName.get(
                         returnType = ClassName.bestGuess("Unit"),
                         parameters = event.parameters?.map { generateParameter(it.name!!, it, false).build() } ?: emptyList()

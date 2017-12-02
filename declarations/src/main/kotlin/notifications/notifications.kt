@@ -1,8 +1,8 @@
 package notifications
 
-import browser.Event
 import kotlin.Suppress
 import kotlin.js.Promise
+import webextensions.Event
 
 typealias TemplateType = String
 

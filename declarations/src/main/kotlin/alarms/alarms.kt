@@ -1,6 +1,6 @@
 package alarms
 
-import browser.Event
+import webextensions.Event
 import kotlin.js.Promise
 
 class Alarm(

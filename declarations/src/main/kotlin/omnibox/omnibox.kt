@@ -1,6 +1,6 @@
 package omnibox
 
-import browser.Event
+import webextensions.Event
 
 /**
  * The style type. */
