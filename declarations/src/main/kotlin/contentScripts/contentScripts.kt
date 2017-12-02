@@ -3,6 +3,7 @@ package contentScripts
 import extensionTypes.RunAt
 import kotlin.js.Promise
 import manifest.MatchPattern
+import manifest.UnrecognizedProperty
 
 typealias ExtensionFileOrCode = Any
 
@@ -42,6 +43,10 @@ external class RegisteredContentScriptOptions {
      * The soonest that the JavaScript or CSS will be injected into the tab. Defaults to "document_idle".
      */
     var runAt: RunAt?
+
+    operator fun get(key: String): UnrecognizedProperty
+
+    operator fun set(key: String, value: UnrecognizedProperty)
 }
 
 /**

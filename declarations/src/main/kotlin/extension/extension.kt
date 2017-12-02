@@ -14,6 +14,10 @@ external class LastError {
      * Description of the error that has taken place.
      */
     var message: String
+
+    operator fun get(key: String): dynamic
+
+    operator fun set(key: String, value: dynamic)
 }
 
 external class FetchProperties {
@@ -33,9 +37,17 @@ external class FetchProperties {
     var tabId: Int?
 }
 
-typealias GetViewsResult = Any
+external class GetViewsResult {
+    operator fun get(key: String): dynamic
 
-typealias GetBackgroundPageResult = Any
+    operator fun set(key: String, value: dynamic)
+}
+
+external class GetBackgroundPageResult {
+    operator fun get(key: String): dynamic
+
+    operator fun set(key: String, value: dynamic)
+}
 
 external class ExtensionNamespace {
     /**

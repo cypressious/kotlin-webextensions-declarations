@@ -7,8 +7,13 @@ import tabs.Tab
 typealias ColorArray = Array<Int>
 
 /**
- * Pixel data for an image. Must be an ImageData object (for example, from a <code>canvas</code> element). */
-typealias ImageDataType = Any
+ * Pixel data for an image. Must be an ImageData object (for example, from a <code>canvas</code> element).
+ */
+external class ImageDataType {
+    operator fun get(key: String): dynamic
+
+    operator fun set(key: String, value: dynamic)
+}
 
 external class Details {
     /**
@@ -29,24 +34,36 @@ external class Details2 {
     var tabId: Int?
 }
 
+external class ImageData {
+    operator fun get(key: String): ImageDataType
+
+    operator fun set(key: String, value: ImageDataType)
+}
+
 /**
  * Either an ImageData object or a dictionary {size -> ImageData} representing icon to be set. If the icon is specified as a dictionary, the actual image to be used is chosen depending on screen's pixel density. If the number of image pixels that fit into one screen space unit equals <code>scale</code>, then image with size <code>scale</code> * 19 will be selected. Initially only scales 1 and 2 will be supported. At least one image must be specified. Note that 'details.imageData = foo' is equivalent to 'details.imageData = {'19': foo}' */
-typealias ImageData = Any
+typealias ImageData2 = Any
+
+external class Path {
+    operator fun get(key: String): String
+
+    operator fun set(key: String, value: String)
+}
 
 /**
  * Either a relative image path or a dictionary {size -> relative image path} pointing to icon to be set. If the icon is specified as a dictionary, the actual image to be used is chosen depending on screen's pixel density. If the number of image pixels that fit into one screen space unit equals <code>scale</code>, then image with size <code>scale</code> * 19 will be selected. Initially only scales 1 and 2 will be supported. At least one image must be specified. Note that 'details.path = foo' is equivalent to 'details.imageData = {'19': foo}' */
-typealias Path = Any
+typealias Path2 = Any
 
 external class Details3 {
     /**
      * Either an ImageData object or a dictionary {size -> ImageData} representing icon to be set. If the icon is specified as a dictionary, the actual image to be used is chosen depending on screen's pixel density. If the number of image pixels that fit into one screen space unit equals <code>scale</code>, then image with size <code>scale</code> * 19 will be selected. Initially only scales 1 and 2 will be supported. At least one image must be specified. Note that 'details.imageData = foo' is equivalent to 'details.imageData = {'19': foo}'
      */
-    var imageData: ImageData?
+    var imageData: ImageData2?
 
     /**
      * Either a relative image path or a dictionary {size -> relative image path} pointing to icon to be set. If the icon is specified as a dictionary, the actual image to be used is chosen depending on screen's pixel density. If the number of image pixels that fit into one screen space unit equals <code>scale</code>, then image with size <code>scale</code> * 19 will be selected. Initially only scales 1 and 2 will be supported. At least one image must be specified. Note that 'details.path = foo' is equivalent to 'details.imageData = {'19': foo}'
      */
-    var path: Path?
+    var path: Path2?
 
     /**
      * Limits the change to when a particular tab is selected. Automatically resets when the tab is closed.

@@ -2,8 +2,9 @@ package de.rakhman.webextensions
 
 import com.beust.jcommander.JCommander
 import com.beust.jcommander.Parameter
-import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
+import de.rakhman.webextensions.serialization.ParameterAdapterFactory
 import org.eclipse.egit.github.core.client.GitHubClient
 import org.eclipse.egit.github.core.service.ContentsService
 import org.eclipse.egit.github.core.service.RepositoryService
@@ -29,7 +30,10 @@ fun main(args: Array<String>) {
         SourceArg.File -> getFromFiles(File(arguments.filePath))
     }
 
-    val gson = Gson()
+    val gson = GsonBuilder()
+            .registerTypeAdapterFactory(ParameterAdapterFactory())
+            .create()
+
     val type = object : TypeToken<List<Namespace>>() {}.type
 
     val list = streams
@@ -98,4 +102,3 @@ private fun getFromGithub(token: String?): Sequence<InputStream> {
             .flatMap { contentsService.getContents(repository, it.path).asSequence() }
             .map { ByteArrayInputStream(EncodingUtils.fromBase64(it.content)) }
 }
-

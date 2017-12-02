@@ -156,8 +156,13 @@ external class Buttons2 {
 }
 
 /**
- * The set of notifications currently in the system. */
-typealias Notifications = Any
+ * The set of notifications currently in the system.
+ */
+external class Notifications {
+    operator fun get(key: String): CreateNotificationOptions
+
+    operator fun set(key: String, value: CreateNotificationOptions)
+}
 
 external class NotificationsNamespace {
     val onClosed: Event<(notificationId: String, byUser: Boolean) -> Unit>

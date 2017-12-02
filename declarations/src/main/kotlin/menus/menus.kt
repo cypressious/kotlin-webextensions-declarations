@@ -95,7 +95,11 @@ typealias MenuItemId = Any
  * The parent ID, if any, for the item clicked. */
 typealias ParentMenuItemId = Any
 
-typealias Icons = Any
+external class Icons {
+    operator fun get(key: String): String
+
+    operator fun set(key: String, value: String)
+}
 
 /**
  * A function that will be called back when the menu item is clicked. Event pages cannot use this; instead, they should register a listener for $(ref:contextMenus.onClicked). */

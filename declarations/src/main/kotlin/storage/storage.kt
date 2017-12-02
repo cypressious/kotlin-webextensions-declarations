@@ -17,8 +17,13 @@ external class StorageChange {
 typealias StorageArea = Any
 
 /**
- * Object mapping each key that changed to its corresponding $(ref:storage.StorageChange) for that item. */
-typealias Changes = Any
+ * Object mapping each key that changed to its corresponding $(ref:storage.StorageChange) for that item.
+ */
+external class Changes {
+    operator fun get(key: String): StorageChange
+
+    operator fun set(key: String, value: StorageChange)
+}
 
 external class StorageNamespace {
     val onChanged: Event<(changes: Changes, areaName: String) -> Unit>

@@ -36,11 +36,13 @@ private fun mergeTypes(types: List<Type>): MutableMap<String?, Type> {
                         id = key,
                         description = left.description ?: right.description,
                         type = left.type ?: right.type,
-                        properties = left.properties.orEmpty() + right.properties.orEmpty(),
-                        choices = left.choices.orEmpty() + right.choices.orEmpty(),
+                        properties = (left.properties.orEmpty() + right.properties.orEmpty()).takeUnless { it.isEmpty() },
+                        choices = (left.choices.orEmpty() + right.choices.orEmpty()).takeUnless { it.isEmpty() },
                         `$extend` = null,
                         actual = false,
-                        items = left.items ?: right.items
+                        items = left.items ?: right.items,
+                        additionalProperties = left.additionalProperties ?: right.additionalProperties,
+                        patternProperties = (left.patternProperties.orEmpty() + right.patternProperties.orEmpty()).takeUnless { it.isEmpty() }
                 )
             }
 
@@ -76,17 +78,26 @@ private fun Parameter.resolve(
         isReturn: Boolean = false
 ): Parameter {
     if (type == "array") return copy(items = items?.resolve(name, types, actual))
-    if (type != "object" && choices == null && parameters == null) return this
+    if (type != "object" &&
+            choices == null &&
+            parameters == null &&
+            additionalProperties == null &&
+            patternProperties == null) {
+        return this
+    }
+
+    val parameters = parameters?.map { it.resolve(it.name!!, types, actual) }
+    val choices = choices?.map { it.resolve(name, types, actual) }
+    val additionalProperties = additionalProperties?.resolve(name, types)
+    val patternProperties = patternProperties?.mapValues { it.value.resolve(name, types) }
 
     var typeName = name.capitalize()
     var counter = 1
 
     while (types.containsKey(typeName)) typeName = name.capitalize() + ++counter
 
-    val choices = choices?.map { it.resolve(name, types, actual) }
-
     if (!isReturn) {
-        types[typeName] = Type(
+        val previous = types.put(typeName, Type(
                 id = typeName,
                 type = null,
                 properties = properties?.map { it.key to it.value.resolve(it.key, types, actual) }?.toMap(),
@@ -94,15 +105,23 @@ private fun Parameter.resolve(
                 `$extend` = null,
                 choices = null,
                 actual = actual,
-                items = null
-        )
+                items = null,
+                additionalProperties = additionalProperties,
+                patternProperties = patternProperties
+        ))
+
+        require(previous == null) {
+            "A type with the name $typeName already existed"
+        }
     }
 
     return copy(
             type = null,
             properties = null,
             `$ref` = typeName,
-            parameters = parameters?.map { it.resolve(it.name!!, types, actual) },
-            choices = choices
+            parameters = parameters,
+            choices = choices,
+            additionalProperties = null,
+            patternProperties = null
     )
 }

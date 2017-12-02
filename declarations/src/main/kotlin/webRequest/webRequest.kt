@@ -115,12 +115,20 @@ external class AuthCredentials {
     var password: String
 }
 
-typealias FilterResponseDataResult = Any
+external class FilterResponseDataResult {
+    operator fun get(key: String): dynamic
+
+    operator fun set(key: String, value: dynamic)
+}
 
 /**
  * If the request method is POST and the body is a sequence of key-value pairs encoded in UTF8, encoded as either multipart/form-data, or application/x-www-form-urlencoded, this dictionary is present and for each key contains the list of all values for that key. If the data is of another media type, or if it is malformed, the dictionary is not present. An example value of this dictionary is {'key': ['value1', 'value2']}.
  */
-external class FormData
+external class FormData {
+    operator fun get(key: String): Array<String>
+
+    operator fun set(key: String, value: Array<String>)
+}
 
 /**
  * Contains the HTTP request body data. Only provided if extraInfoSpec contains 'requestBody'.

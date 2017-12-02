@@ -22,6 +22,10 @@ external class Port {
      * This property will <b>only</b> be present on ports passed to onConnect/onConnectExternal listeners.
      */
     var sender: MessageSender?
+
+    operator fun get(key: String): dynamic
+
+    operator fun set(key: String, value: dynamic)
 }
 
 /**
@@ -117,16 +121,29 @@ external class LastError {
      * Details about the error which occurred.
      */
     var message: String?
+
+    operator fun get(key: String): dynamic
+
+    operator fun set(key: String, value: dynamic)
 }
 
 /**
- * The JavaScript 'window' object for the background page. */
-typealias BackgroundPage = Any
+ * The JavaScript 'window' object for the background page.
+ */
+external class BackgroundPage {
+    operator fun get(key: String): dynamic
+
+    operator fun set(key: String, value: dynamic)
+}
 
 /**
  * The manifest details.
  */
-external class GetManifestResult
+external class GetManifestResult {
+    operator fun get(key: String): dynamic
+
+    operator fun set(key: String, value: dynamic)
+}
 
 /**
  * If an update is available, this contains more information about the available update.
@@ -157,7 +174,11 @@ external class Options {
     var toProxyScript: Boolean?
 }
 
-typealias DirectoryEntry = Any
+external class DirectoryEntry {
+    operator fun get(key: String): dynamic
+
+    operator fun set(key: String, value: dynamic)
+}
 
 external class Details2 {
     /**
@@ -184,6 +205,10 @@ external class Details3 {
      * The version number of the available update.
      */
     var version: String
+
+    operator fun get(key: String): dynamic
+
+    operator fun set(key: String, value: dynamic)
 }
 
 external class RuntimeNamespace {

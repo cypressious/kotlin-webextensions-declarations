@@ -17,7 +17,9 @@ data class Type(
         val `$extend`: String?,
         val choices: List<Any>?,
         val actual: Boolean,
-        val items: Parameter?
+        val items: Parameter?,
+        val additionalProperties: Parameter?,
+        val patternProperties: Map<String, Parameter>?
 )
 
 data class Function(
@@ -28,28 +30,31 @@ data class Function(
         val parameters: List<Parameter>?,
         val deprecated: String?,
         val unsupported: Boolean,
-        val returns: Parameter?
+        val returns: Parameter?,
+        val patternProperties: Map<String, Parameter>?
 )
 
 data class Parameter(
-        val type: String?,
-        val name: String?,
-        val description: String?,
-        val optional: Boolean,
-        val properties: Map<String, Parameter>?,
-        val deprecated: String?,
-        val `$ref`: String?,
-        val parameters: List<Parameter>?,
-        val items: Parameter?,
-        val choices: List<Parameter>?,
-        val unsupported: Boolean
+        val type: String? = null,
+        val name: String? = null,
+        val description: String? = null,
+        val optional: Boolean = false,
+        val properties: Map<String, Parameter>? = null,
+        val deprecated: String? = null,
+        val `$ref`: String? = null,
+        val parameters: List<Parameter>? = null,
+        val items: Parameter? = null,
+        val choices: List<Parameter>? = null,
+        val unsupported: Boolean = false,
+        val additionalProperties: Parameter? = null,
+        val patternProperties: Map<String, Parameter>? = null
 )
 
 data class Event(
-       val name: String,
-       val unsupported: Boolean,
-       val deprecated: String?,
-       val type: String?,
-       val description: String?,
-       val parameters: List<Parameter>?
+        val name: String,
+        val unsupported: Boolean,
+        val deprecated: String?,
+        val type: String?,
+        val description: String?,
+        val parameters: List<Parameter>?
 )

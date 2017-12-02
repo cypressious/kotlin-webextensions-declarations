@@ -125,7 +125,10 @@ class Generator(val dir: File) {
             }
         }
 
-        if (type.properties == null) {
+        val additionalProperties = type.additionalProperties
+        val patternProperties = type.patternProperties
+
+        if (type.properties == null && additionalProperties == null && patternProperties == null) {
             require(type.type == "object" || type.type == null) {
                 "Unxpected type $type"
             }
@@ -137,37 +140,71 @@ class Generator(val dir: File) {
             return
         }
 
-        val typeBuilder = generateType(name, type.properties, true)
+        val typeBuilder = TypeSpec.expectClassBuilder(name)
+                .addProperties((type.properties ?: emptyMap()).entries.filter { !it.value.unsupported }.map {
+                    PropertySpec
+                            .varBuilder(it.key.escapeIfKeyword(), parameterType(it.key, it.value))
+                            .apply { it.value.description?.let { addKdoc(it.replace("%", "%%") + "\n") } }
+                            .build()
+                })
+
+        generateIndexers(additionalProperties, patternProperties, typeBuilder)
+
         type.description?.let { typeBuilder.addKdoc(it + "\n") }
 
         fileBuilder.addType(typeBuilder.build())
     }
 
-    private fun generateType(name: String, properties: Map<String, Parameter>, external: Boolean): TypeSpec.Builder {
-        val typeBuilder = if (external) TypeSpec.expectClassBuilder(name) else TypeSpec.classBuilder(name)
+    private fun generateIndexers(
+            additionalProperties: Parameter?,
+            patternProperties: Map<String, Parameter>?,
+            typeBuilder: TypeSpec.Builder
+    ) {
+        val types = mutableListOf<Parameter>()
 
-        val props = properties.entries.filter { !it.value.unsupported }
+        additionalProperties?.flattenTypeTo(types)
+        patternProperties?.forEach { _, value -> value.flattenTypeTo(types) }
 
-        typeBuilder
-                .addProperties(props.map {
-                    PropertySpec
-                            .varBuilder(it.key.escapeIfKeyword(), parameterType(it.key, it.value))
-                            .apply { if (!external) initializer(it.key.escapeIfKeyword()) }
-                            .apply { it.value.description?.let { addKdoc(it.replace("%", "%%") + "\n") } }
-                            .build()
-                })
+        val count = types.size
+        when (count) {
+            0 -> return
+            1 -> {
+                val type = types.single()
 
-        if (!external) {
-            typeBuilder.primaryConstructor(FunSpec.constructorBuilder()
-                    .addParameters(
-                            props.map {
-                                generateParameter(it.key, it.value).build()
-                            }
-                    )
-                    .build())
+                generateGetter(type, typeBuilder)
+                generateSetter(type, typeBuilder)
+            }
+
+            else -> {
+                types.forEach { generateSetter(it, typeBuilder) }
+                generateGetter(Parameter(type = "any"), typeBuilder)
+            }
         }
+    }
 
-        return typeBuilder
+    private fun Parameter.flattenTypeTo(types: MutableList<Parameter>) {
+        if (choices != null) {
+            choices.forEach { it.flattenTypeTo(types) }
+        } else {
+            types += this
+        }
+    }
+
+
+    private fun generateSetter(type: Parameter, typeBuilder: TypeSpec.Builder) {
+        typeBuilder.addFunction(FunSpec.builder("set")
+                .addModifiers(KModifier.OPERATOR)
+                .addParameter("key", ClassName.bestGuess("String"))
+                .addParameter("value", parameterType("", type))
+                .build())
+    }
+
+    private fun generateGetter(type: Parameter, typeBuilder: TypeSpec.Builder) {
+        typeBuilder.addFunction(FunSpec.builder("get")
+                .addModifiers(KModifier.OPERATOR)
+                .addParameter("key", ClassName.bestGuess("String"))
+                .returns(parameterType("", type))
+                .build())
     }
 
     private fun generateFunctionWithOverloads(f: Function): List<FunSpec> {
@@ -253,7 +290,7 @@ class Generator(val dir: File) {
                     val type = ClassName.bestGuess(parameterTypeName(parameter))
 
                     if (parameter.optional) {
-                         type.asNullable()
+                        type.asNullable()
                     } else {
                         type
                     }
@@ -262,7 +299,11 @@ class Generator(val dir: File) {
 
     private fun parameterTypeName(p: Parameter): String {
         p.`$ref`?.let {
-            return if (it == "Promise") "Promise<Any?>" else it
+            return when (it) {
+                "Promise" -> "Promise<Any?>"
+                "UnrecognizedProperty" -> "manifest.UnrecognizedProperty"
+                else -> it
+            }
         }
 
         return when (p.type) {

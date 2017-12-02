@@ -2,7 +2,7 @@ package manifest
 
 import extensionTypes.RunAt
 
-external class OptionalPermission
+typealias OptionalPermission = Any
 
 /**
  * Represents a WebExtension manifest.json file
@@ -12,7 +12,7 @@ external class WebExtensionManifest {
 
     var chrome_settings_overrides: Chrome_settings_overrides?
 
-    var commands: Commands?
+    var commands: Commands2?
 
     var devtools_page: ExtensionURL?
 
@@ -49,7 +49,7 @@ external class WebExtensionManifest {
 
     var incognito: String?
 
-    var background: Background?
+    var background: Background3?
 
     var options_ui: Options_ui?
 
@@ -74,9 +74,13 @@ external class WebExtensionManifest {
     var theme: ThemeType?
 
     var chrome_url_overrides: Chrome_url_overrides?
+
+    operator fun get(key: String): UnrecognizedProperty
+
+    operator fun set(key: String, value: UnrecognizedProperty)
 }
 
-external class Permission
+typealias Permission = Any
 
 typealias KeyName = Any
 
@@ -124,9 +128,9 @@ external class WebExtensionLangpackManifest {
 
     var langpack_id: String
 
-    var languages: Languages
+    var languages: Languages2
 
-    var sources: Sources?
+    var sources: Sources2?
 }
 
 external class ThemeIcons {
@@ -144,6 +148,10 @@ external class ThemeIcons {
      * The size of the icons
      */
     var size: Int
+
+    operator fun get(key: String): UnrecognizedProperty
+
+    operator fun set(key: String, value: UnrecognizedProperty)
 }
 
 typealias OptionalPermissionOrOrigin = Any
@@ -210,6 +218,10 @@ external class ContentScript {
      * The soonest that the JavaScript or CSS will be injected into the tab. Defaults to "document_idle".
      */
     var run_at: RunAt?
+
+    operator fun get(key: String): UnrecognizedProperty
+
+    operator fun set(key: String, value: UnrecognizedProperty)
 }
 
 typealias IconPath = Any
@@ -236,6 +248,10 @@ external class ThemeType {
     var icons: Icons2?
 
     var properties: Properties?
+
+    operator fun get(key: String): UnrecognizedProperty
+
+    operator fun set(key: String, value: UnrecognizedProperty)
 }
 
 external class Browser_action {
@@ -256,6 +272,10 @@ external class Browser_action {
      * Defines the location the browserAction will appear by default.  The default location is navbar.
      */
     var default_area: String?
+
+    operator fun get(key: String): UnrecognizedProperty
+
+    operator fun set(key: String, value: UnrecognizedProperty)
 }
 
 external class Search_provider {
@@ -287,15 +307,55 @@ external class Search_provider {
      * Sets the default engine to a built-in engine only.
      */
     var is_default: Boolean?
+
+    operator fun get(key: String): UnrecognizedProperty
+
+    operator fun set(key: String, value: UnrecognizedProperty)
 }
 
 external class Chrome_settings_overrides {
     var homepage: String?
 
     var search_provider: Search_provider?
+
+    operator fun get(key: String): UnrecognizedProperty
+
+    operator fun set(key: String, value: UnrecognizedProperty)
 }
 
-typealias Commands = Any
+external class Suggested_key {
+    var default: KeyName?
+
+    var mac: KeyName?
+
+    var linux: KeyName?
+
+    var windows: KeyName?
+
+    var chromeos: String?
+
+    var android: String?
+
+    var ios: String?
+
+    var additionalProperties: String?
+}
+
+external class Commands {
+    var suggested_key: Suggested_key?
+
+    var description: String?
+
+    operator fun get(key: String): UnrecognizedProperty
+
+    operator fun set(key: String, value: UnrecognizedProperty)
+}
+
+external class Commands2 {
+    operator fun get(key: String): Commands
+
+    operator fun set(key: String, value: Commands)
+}
 
 external class Applications {
     var gecko: FirefoxSpecificProperties?
@@ -305,15 +365,33 @@ external class Browser_specific_settings {
     var gecko: FirefoxSpecificProperties?
 }
 
-typealias Icons = Any
+external class Icons {
+    operator fun get(key: String): String
 
-typealias Background = Any
+    operator fun set(key: String, value: String)
+}
+
+external class Background {
+    var page: ExtensionURL
+
+    var persistent: PersistentBackgroundProperty?
+
+    operator fun get(key: String): UnrecognizedProperty
+
+    operator fun set(key: String, value: UnrecognizedProperty)
+}
 
 external class Background2 {
     var scripts: Array<ExtensionURL>
 
     var persistent: PersistentBackgroundProperty?
+
+    operator fun get(key: String): UnrecognizedProperty
+
+    operator fun set(key: String, value: UnrecognizedProperty)
 }
+
+typealias Background3 = Any
 
 external class Options_ui {
     var page: ExtensionURL
@@ -323,6 +401,10 @@ external class Options_ui {
     var chrome_style: Boolean?
 
     var open_in_tab: Boolean?
+
+    operator fun get(key: String): dynamic
+
+    operator fun set(key: String, value: dynamic)
 }
 
 external class Developer {
@@ -333,6 +415,10 @@ external class Developer {
 
 external class Omnibox {
     var keyword: String
+
+    operator fun get(key: String): UnrecognizedProperty
+
+    operator fun set(key: String, value: UnrecognizedProperty)
 }
 
 external class Page_action {
@@ -343,6 +429,10 @@ external class Page_action {
     var default_popup: String?
 
     var browser_style: Boolean?
+
+    operator fun get(key: String): UnrecognizedProperty
+
+    operator fun set(key: String, value: UnrecognizedProperty)
 }
 
 external class Sidebar_action {
@@ -353,6 +443,10 @@ external class Sidebar_action {
     var browser_style: Boolean?
 
     var default_panel: String
+
+    operator fun get(key: String): UnrecognizedProperty
+
+    operator fun set(key: String, value: UnrecognizedProperty)
 }
 
 external class Chrome_url_overrides {
@@ -375,9 +469,45 @@ external class Browser_specific_settings2 {
     var gecko: FirefoxSpecificProperties?
 }
 
-typealias Languages = Any
+external class Chrome_resources {
+    operator fun get(key: String): ExtensionURL
 
-typealias Sources = Any
+    operator fun set(key: String, value: ExtensionURL)
+}
+
+typealias Chrome_resources2 = Any
+
+external class Chrome_resources3 {
+    operator fun set(key: String, value: ExtensionURL)
+
+    operator fun set(key: String, value: Chrome_resources)
+
+    operator fun get(key: String): dynamic
+}
+
+external class Languages {
+    var chrome_resources: Chrome_resources3
+
+    var version: String
+}
+
+external class Languages2 {
+    operator fun get(key: String): Languages
+
+    operator fun set(key: String, value: Languages)
+}
+
+external class Sources {
+    var base_path: ExtensionURL
+
+    var paths: Array<String>
+}
+
+external class Sources2 {
+    operator fun get(key: String): Sources
+
+    operator fun set(key: String, value: Sources)
+}
 
 external class Images {
     var additional_backgrounds: Array<ImageDataOrExtensionURL>
@@ -385,6 +515,10 @@ external class Images {
     var headerURL: ImageDataOrExtensionURL?
 
     var theme_frame: ImageDataOrExtensionURL?
+
+    operator fun get(key: String): UnrecognizedProperty
+
+    operator fun set(key: String, value: UnrecognizedProperty)
 }
 
 external class Colors {
@@ -415,6 +549,10 @@ external class Colors {
     var toolbar_bottom_separator: ThemeColor?
 
     var toolbar_vertical_separator: ThemeColor?
+
+    operator fun get(key: String): UnrecognizedProperty
+
+    operator fun set(key: String, value: UnrecognizedProperty)
 }
 
 external class Icons2 {
@@ -577,12 +715,20 @@ external class Icons2 {
     var freebusy: ExtensionURL?
 
     var timezones: ExtensionURL?
+
+    operator fun get(key: String): UnrecognizedProperty
+
+    operator fun set(key: String, value: UnrecognizedProperty)
 }
 
 external class Properties {
     var additional_backgrounds_alignment: Array<String>
 
     var additional_backgrounds_tiling: Array<String>
+
+    operator fun get(key: String): UnrecognizedProperty
+
+    operator fun set(key: String, value: UnrecognizedProperty)
 }
 
 external class ManifestNamespace

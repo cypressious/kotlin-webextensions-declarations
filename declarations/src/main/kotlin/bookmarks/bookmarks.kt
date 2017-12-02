@@ -92,8 +92,28 @@ external class CreateDetails {
 typealias IdOrIdList = Any
 
 /**
+ * An object specifying properties and values to match when searching. Produces bookmarks matching all properties.
+ */
+external class Query {
+    /**
+     * A string of words and quoted phrases that are matched against bookmark URLs and titles.
+     */
+    var query: String?
+
+    /**
+     * The URL of the bookmark; matches verbatim. Note that folders have no URL.
+     */
+    var url: String?
+
+    /**
+     * The title of the bookmark; matches verbatim.
+     */
+    var title: String?
+}
+
+/**
  * Either a string of words and quoted phrases that are matched against bookmark URLs and titles, or an object. If an object, the properties <code>query</code>, <code>url</code>, and <code>title</code> may be specified and bookmarks matching all specified properties will be produced. */
-typealias Query = Any
+typealias Query2 = Any
 
 external class Destination {
     var parentId: String?

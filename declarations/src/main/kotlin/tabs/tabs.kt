@@ -3,8 +3,8 @@ package tabs
 import browser.Event
 import extensionTypes.ImageDetails
 import extensionTypes.InjectDetails
-import runtime.Port
 import kotlin.js.Promise
+import runtime.Port
 
 /**
  * An event that caused a muted state change. */

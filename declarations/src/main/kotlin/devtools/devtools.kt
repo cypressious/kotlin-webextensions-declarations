@@ -87,8 +87,13 @@ external class InspectedWindowNamespace {
 typealias Request = Any
 
 /**
- * A HAR log. See HAR specification for details. */
-typealias HarLog = Any
+ * A HAR log. See HAR specification for details.
+ */
+external class HarLog {
+    operator fun get(key: String): dynamic
+
+    operator fun set(key: String, value: dynamic)
+}
 
 external class NetworkNamespace {
     val onNavigated: Event<(url: String) -> Unit>
