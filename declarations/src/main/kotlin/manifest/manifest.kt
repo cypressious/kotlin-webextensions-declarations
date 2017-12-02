@@ -1,83 +1,55 @@
 package manifest
 
 import extensionTypes.RunAt
+import kotlin.Suppress
 
 typealias OptionalPermission = Any
 
 /**
  * Represents a WebExtension manifest.json file
  */
-external class WebExtensionManifest {
-    var browser_action: Browser_action?
-
-    var chrome_settings_overrides: Chrome_settings_overrides?
-
-    var commands: Commands2?
-
-    var devtools_page: ExtensionURL?
-
-    /**
-     * A list of protocol handler definitions.
-     */
-    var protocol_handlers: Array<ProtocolHandler>
-
-    var default_locale: String?
-
-    var manifest_version: Int
-
-    var minimum_chrome_version: String?
-
-    var minimum_opera_version: String?
-
-    var applications: Applications?
-
-    var browser_specific_settings: Browser_specific_settings?
-
-    var name: String
-
-    var short_name: String?
-
-    var description: String?
-
-    var author: String?
-
-    var version: String
-
-    var homepage_url: String?
-
-    var icons: Icons?
-
-    var incognito: String?
-
-    var background: Background3?
-
-    var options_ui: Options_ui?
-
-    var content_scripts: Array<ContentScript>
-
-    var content_security_policy: String?
-
-    var permissions: Array<PermissionOrOrigin>
-
-    var optional_permissions: Array<OptionalPermissionOrOrigin>
-
-    var web_accessible_resources: Array<String>
-
-    var developer: Developer?
-
-    var omnibox: Omnibox?
-
-    var page_action: Page_action?
-
-    var sidebar_action: Sidebar_action?
-
-    var theme: ThemeType?
-
-    var chrome_url_overrides: Chrome_url_overrides?
-
-    operator fun get(key: String): UnrecognizedProperty
-
-    operator fun set(key: String, value: UnrecognizedProperty)
+@Suppress("NOTHING_TO_INLINE", "UnsafeCastFromDynamic")
+class WebExtensionManifest(
+        var browser_action: Browser_action? = null,
+        var chrome_settings_overrides: Chrome_settings_overrides? = null,
+        var commands: Commands2? = null,
+        var devtools_page: ExtensionURL? = null,
+        /**
+         * A list of protocol handler definitions.
+         */
+        var protocol_handlers: Array<ProtocolHandler>? = null,
+        var default_locale: String? = null,
+        var manifest_version: Int,
+        var minimum_chrome_version: String? = null,
+        var minimum_opera_version: String? = null,
+        var applications: Applications? = null,
+        var browser_specific_settings: Browser_specific_settings? = null,
+        var name: String,
+        var short_name: String? = null,
+        var description: String? = null,
+        var author: String? = null,
+        var version: String,
+        var homepage_url: String? = null,
+        var icons: Icons? = null,
+        var incognito: String? = null,
+        var background: Background3? = null,
+        var options_ui: Options_ui? = null,
+        var content_scripts: Array<ContentScript>? = null,
+        var content_security_policy: String? = null,
+        var permissions: Array<PermissionOrOrigin>? = null,
+        var optional_permissions: Array<OptionalPermissionOrOrigin>? = null,
+        var web_accessible_resources: Array<String>? = null,
+        var developer: Developer? = null,
+        var omnibox: Omnibox? = null,
+        var page_action: Page_action? = null,
+        var sidebar_action: Sidebar_action? = null,
+        var theme: ThemeType? = null,
+        var chrome_url_overrides: Chrome_url_overrides? = null
+) {
+    inline operator fun get(key: String): UnrecognizedProperty = asDynamic()[key]
+    inline operator fun set(key: String, value: UnrecognizedProperty) {
+        asDynamic()[key] = value
+    }
 }
 
 typealias Permission = Any
@@ -87,71 +59,58 @@ typealias KeyName = Any
 /**
  * Represents a protocol handler definition.
  */
-external class ProtocolHandler {
-    /**
-     * A user-readable title string for the protocol handler. This will be displayed to the user in interface objects as needed.
-     */
-    var name: String
-
-    /**
-     * The protocol the site wishes to handle, specified as a string. For example, you can register to handle SMS text message links by registering to handle the "sms" scheme.
-     */
-    var protocol: Protocol
-
-    /**
-     * The URL of the handler, as a string. This string should include "%s" as a placeholder which will be replaced with the escaped URL of the document to be handled. This URL might be a true URL, or it could be a phone number, email address, or so forth.
-     */
-    var uriTemplate: UriTemplate
-}
+class ProtocolHandler(
+        /**
+         * A user-readable title string for the protocol handler. This will be displayed to the user in interface objects as needed.
+         */
+        var name: String,
+        /**
+         * The protocol the site wishes to handle, specified as a string. For example, you can register to handle SMS text message links by registering to handle the "sms" scheme.
+         */
+        var protocol: Protocol,
+        /**
+         * The URL of the handler, as a string. This string should include "%s" as a placeholder which will be replaced with the escaped URL of the document to be handled. This URL might be a true URL, or it could be a phone number, email address, or so forth.
+         */
+        var uriTemplate: UriTemplate
+)
 
 /**
  * Represents a WebExtension language pack manifest.json file
  */
-external class WebExtensionLangpackManifest {
-    var manifest_version: Int
+class WebExtensionLangpackManifest(
+        var manifest_version: Int,
+        var applications: Applications2? = null,
+        var browser_specific_settings: Browser_specific_settings2? = null,
+        var name: String,
+        var short_name: String? = null,
+        var description: String? = null,
+        var author: String? = null,
+        var version: String,
+        var homepage_url: String? = null,
+        var langpack_id: String,
+        var languages: Languages2,
+        var sources: Sources2? = null
+)
 
-    var applications: Applications2?
-
-    var browser_specific_settings: Browser_specific_settings2?
-
-    var name: String
-
-    var short_name: String?
-
-    var description: String?
-
-    var author: String?
-
-    var version: String
-
-    var homepage_url: String?
-
-    var langpack_id: String
-
-    var languages: Languages2
-
-    var sources: Sources2?
-}
-
-external class ThemeIcons {
-    /**
-     * A light icon to use for dark themes
-     */
-    var light: ExtensionURL
-
-    /**
-     * The dark icon to use for light themes
-     */
-    var dark: ExtensionURL
-
-    /**
-     * The size of the icons
-     */
-    var size: Int
-
-    operator fun get(key: String): UnrecognizedProperty
-
-    operator fun set(key: String, value: UnrecognizedProperty)
+@Suppress("NOTHING_TO_INLINE", "UnsafeCastFromDynamic")
+class ThemeIcons(
+        /**
+         * A light icon to use for dark themes
+         */
+        var light: ExtensionURL,
+        /**
+         * The dark icon to use for light themes
+         */
+        var dark: ExtensionURL,
+        /**
+         * The size of the icons
+         */
+        var size: Int
+) {
+    inline operator fun get(key: String): UnrecognizedProperty = asDynamic()[key]
+    inline operator fun set(key: String, value: UnrecognizedProperty) {
+        asDynamic()[key] = value
+    }
 }
 
 typealias OptionalPermissionOrOrigin = Any
@@ -166,15 +125,12 @@ typealias ImageDataOrExtensionURL = String
 
 typealias ExtensionID = Any
 
-external class FirefoxSpecificProperties {
-    var id: ExtensionID?
-
-    var update_url: String?
-
-    var strict_min_version: String?
-
-    var strict_max_version: String?
-}
+class FirefoxSpecificProperties(
+        var id: ExtensionID? = null,
+        var update_url: String? = null,
+        var strict_min_version: String? = null,
+        var strict_max_version: String? = null
+)
 
 typealias MatchPattern = Any
 
@@ -185,43 +141,37 @@ typealias MatchPatternInternal = Any
 /**
  * Details of the script or CSS to inject. Either the code or the file property must be set, but both may not be set at the same time. Based on InjectDetails, but using underscore rather than camel case naming conventions.
  */
-external class ContentScript {
-    var matches: Array<MatchPattern>
-
-    var exclude_matches: Array<MatchPattern>
-
-    var include_globs: Array<String>
-
-    var exclude_globs: Array<String>
-
-    /**
-     * The list of CSS files to inject
-     */
-    var css: Array<ExtensionURL>
-
-    /**
-     * The list of JS files to inject
-     */
-    var js: Array<ExtensionURL>
-
-    /**
-     * If allFrames is <code>true</code>, implies that the JavaScript or CSS should be injected into all frames of current page. By default, it's <code>false</code> and is only injected into the top frame.
-     */
-    var all_frames: Boolean?
-
-    /**
-     * If matchAboutBlank is true, then the code is also injected in about:blank and about:srcdoc frames if your extension has access to its parent document. Code cannot be inserted in top-level about:-frames. By default it is <code>false</code>.
-     */
-    var match_about_blank: Boolean?
-
-    /**
-     * The soonest that the JavaScript or CSS will be injected into the tab. Defaults to "document_idle".
-     */
-    var run_at: RunAt?
-
-    operator fun get(key: String): UnrecognizedProperty
-
-    operator fun set(key: String, value: UnrecognizedProperty)
+@Suppress("NOTHING_TO_INLINE", "UnsafeCastFromDynamic")
+class ContentScript(
+        var matches: Array<MatchPattern>,
+        var exclude_matches: Array<MatchPattern>? = null,
+        var include_globs: Array<String>? = null,
+        var exclude_globs: Array<String>? = null,
+        /**
+         * The list of CSS files to inject
+         */
+        var css: Array<ExtensionURL>? = null,
+        /**
+         * The list of JS files to inject
+         */
+        var js: Array<ExtensionURL>? = null,
+        /**
+         * If allFrames is <code>true</code>, implies that the JavaScript or CSS should be injected into all frames of current page. By default, it's <code>false</code> and is only injected into the top frame.
+         */
+        var all_frames: Boolean? = null,
+        /**
+         * If matchAboutBlank is true, then the code is also injected in about:blank and about:srcdoc frames if your extension has access to its parent document. Code cannot be inserted in top-level about:-frames. By default it is <code>false</code>.
+         */
+        var match_about_blank: Boolean? = null,
+        /**
+         * The soonest that the JavaScript or CSS will be injected into the tab. Defaults to "document_idle".
+         */
+        var run_at: RunAt? = null
+) {
+    inline operator fun get(key: String): UnrecognizedProperty = asDynamic()[key]
+    inline operator fun set(key: String, value: UnrecognizedProperty) {
+        asDynamic()[key] = value
+    }
 }
 
 typealias IconPath = Any
@@ -240,218 +190,180 @@ typealias NativeManifest = Any
 
 typealias ThemeColor = Any
 
-external class ThemeType {
-    var images: Images?
-
-    var colors: Colors?
-
-    var icons: Icons2?
-
-    var properties: Properties?
-
-    operator fun get(key: String): UnrecognizedProperty
-
-    operator fun set(key: String, value: UnrecognizedProperty)
+@Suppress("NOTHING_TO_INLINE", "UnsafeCastFromDynamic")
+class ThemeType(
+        var images: Images? = null,
+        var colors: Colors? = null,
+        var icons: Icons2? = null,
+        var properties: Properties? = null
+) {
+    inline operator fun get(key: String): UnrecognizedProperty = asDynamic()[key]
+    inline operator fun set(key: String, value: UnrecognizedProperty) {
+        asDynamic()[key] = value
+    }
 }
 
-external class Browser_action {
-    var default_title: String?
-
-    var default_icon: IconPath?
-
-    /**
-     * Specifies icons to use for dark and light themes
-     */
-    var theme_icons: Array<ThemeIcons>
-
-    var default_popup: String?
-
-    var browser_style: Boolean?
-
-    /**
-     * Defines the location the browserAction will appear by default.  The default location is navbar.
-     */
-    var default_area: String?
-
-    operator fun get(key: String): UnrecognizedProperty
-
-    operator fun set(key: String, value: UnrecognizedProperty)
+@Suppress("NOTHING_TO_INLINE", "UnsafeCastFromDynamic")
+class Browser_action(
+        var default_title: String? = null,
+        var default_icon: IconPath? = null,
+        /**
+         * Specifies icons to use for dark and light themes
+         */
+        var theme_icons: Array<ThemeIcons>? = null,
+        var default_popup: String? = null,
+        var browser_style: Boolean? = null,
+        /**
+         * Defines the location the browserAction will appear by default.  The default location is navbar.
+         */
+        var default_area: String? = null
+) {
+    inline operator fun get(key: String): UnrecognizedProperty = asDynamic()[key]
+    inline operator fun set(key: String, value: UnrecognizedProperty) {
+        asDynamic()[key] = value
+    }
 }
 
-external class Search_provider {
-    var name: String
-
-    var keyword: String?
-
-    var search_url: String
-
-    var favicon_url: String?
-
-    var suggest_url: String?
-
-    var instant_url: String?
-
-    var image_url: String?
-
-    var search_url_post_params: String?
-
-    var instant_url_post_params: String?
-
-    var image_url_post_params: String?
-
-    var alternate_urls: Array<String>
-
-    var prepopulated_id: Int?
-
-    /**
-     * Sets the default engine to a built-in engine only.
-     */
-    var is_default: Boolean?
-
-    operator fun get(key: String): UnrecognizedProperty
-
-    operator fun set(key: String, value: UnrecognizedProperty)
+@Suppress("NOTHING_TO_INLINE", "UnsafeCastFromDynamic")
+class Search_provider(
+        var name: String,
+        var keyword: String? = null,
+        var search_url: String,
+        var favicon_url: String? = null,
+        var suggest_url: String? = null,
+        var instant_url: String? = null,
+        var image_url: String? = null,
+        var search_url_post_params: String? = null,
+        var instant_url_post_params: String? = null,
+        var image_url_post_params: String? = null,
+        var alternate_urls: Array<String>? = null,
+        var prepopulated_id: Int? = null,
+        /**
+         * Sets the default engine to a built-in engine only.
+         */
+        var is_default: Boolean? = null
+) {
+    inline operator fun get(key: String): UnrecognizedProperty = asDynamic()[key]
+    inline operator fun set(key: String, value: UnrecognizedProperty) {
+        asDynamic()[key] = value
+    }
 }
 
-external class Chrome_settings_overrides {
-    var homepage: String?
-
-    var search_provider: Search_provider?
-
-    operator fun get(key: String): UnrecognizedProperty
-
-    operator fun set(key: String, value: UnrecognizedProperty)
+@Suppress("NOTHING_TO_INLINE", "UnsafeCastFromDynamic")
+class Chrome_settings_overrides(var homepage: String? = null, var search_provider: Search_provider? = null) {
+    inline operator fun get(key: String): UnrecognizedProperty = asDynamic()[key]
+    inline operator fun set(key: String, value: UnrecognizedProperty) {
+        asDynamic()[key] = value
+    }
 }
 
-external class Suggested_key {
-    var default: KeyName?
+class Suggested_key(
+        var default: KeyName? = null,
+        var mac: KeyName? = null,
+        var linux: KeyName? = null,
+        var windows: KeyName? = null,
+        var chromeos: String? = null,
+        var android: String? = null,
+        var ios: String? = null,
+        var additionalProperties: String? = null
+)
 
-    var mac: KeyName?
-
-    var linux: KeyName?
-
-    var windows: KeyName?
-
-    var chromeos: String?
-
-    var android: String?
-
-    var ios: String?
-
-    var additionalProperties: String?
+@Suppress("NOTHING_TO_INLINE", "UnsafeCastFromDynamic")
+class Commands(var suggested_key: Suggested_key? = null, var description: String? = null) {
+    inline operator fun get(key: String): UnrecognizedProperty = asDynamic()[key]
+    inline operator fun set(key: String, value: UnrecognizedProperty) {
+        asDynamic()[key] = value
+    }
 }
 
-external class Commands {
-    var suggested_key: Suggested_key?
-
-    var description: String?
-
-    operator fun get(key: String): UnrecognizedProperty
-
-    operator fun set(key: String, value: UnrecognizedProperty)
+@Suppress("NOTHING_TO_INLINE", "UnsafeCastFromDynamic")
+class Commands2() {
+    inline operator fun get(key: String): Commands = asDynamic()[key]
+    inline operator fun set(key: String, value: Commands) {
+        asDynamic()[key] = value
+    }
 }
 
-external class Commands2 {
-    operator fun get(key: String): Commands
+class Applications(var gecko: FirefoxSpecificProperties? = null)
 
-    operator fun set(key: String, value: Commands)
+class Browser_specific_settings(var gecko: FirefoxSpecificProperties? = null)
+
+@Suppress("NOTHING_TO_INLINE", "UnsafeCastFromDynamic")
+class Icons() {
+    inline operator fun get(key: String): String = asDynamic()[key]
+    inline operator fun set(key: String, value: String) {
+        asDynamic()[key] = value
+    }
 }
 
-external class Applications {
-    var gecko: FirefoxSpecificProperties?
+@Suppress("NOTHING_TO_INLINE", "UnsafeCastFromDynamic")
+class Background(var page: ExtensionURL, var persistent: PersistentBackgroundProperty? = null) {
+    inline operator fun get(key: String): UnrecognizedProperty = asDynamic()[key]
+    inline operator fun set(key: String, value: UnrecognizedProperty) {
+        asDynamic()[key] = value
+    }
 }
 
-external class Browser_specific_settings {
-    var gecko: FirefoxSpecificProperties?
-}
-
-external class Icons {
-    operator fun get(key: String): String
-
-    operator fun set(key: String, value: String)
-}
-
-external class Background {
-    var page: ExtensionURL
-
-    var persistent: PersistentBackgroundProperty?
-
-    operator fun get(key: String): UnrecognizedProperty
-
-    operator fun set(key: String, value: UnrecognizedProperty)
-}
-
-external class Background2 {
-    var scripts: Array<ExtensionURL>
-
-    var persistent: PersistentBackgroundProperty?
-
-    operator fun get(key: String): UnrecognizedProperty
-
-    operator fun set(key: String, value: UnrecognizedProperty)
+@Suppress("NOTHING_TO_INLINE", "UnsafeCastFromDynamic")
+class Background2(var scripts: Array<ExtensionURL>, var persistent: PersistentBackgroundProperty? = null) {
+    inline operator fun get(key: String): UnrecognizedProperty = asDynamic()[key]
+    inline operator fun set(key: String, value: UnrecognizedProperty) {
+        asDynamic()[key] = value
+    }
 }
 
 typealias Background3 = Any
 
-external class Options_ui {
-    var page: ExtensionURL
-
-    var browser_style: Boolean?
-
-    var chrome_style: Boolean?
-
-    var open_in_tab: Boolean?
-
-    operator fun get(key: String): dynamic
-
-    operator fun set(key: String, value: dynamic)
+@Suppress("NOTHING_TO_INLINE", "UnsafeCastFromDynamic")
+class Options_ui(
+        var page: ExtensionURL,
+        var browser_style: Boolean? = null,
+        var chrome_style: Boolean? = null,
+        var open_in_tab: Boolean? = null
+) {
+    inline operator fun get(key: String): dynamic = asDynamic()[key]
+    inline operator fun set(key: String, value: dynamic) {
+        asDynamic()[key] = value
+    }
 }
 
-external class Developer {
-    var name: String?
+class Developer(var name: String? = null, var url: String? = null)
 
-    var url: String?
+@Suppress("NOTHING_TO_INLINE", "UnsafeCastFromDynamic")
+class Omnibox(var keyword: String) {
+    inline operator fun get(key: String): UnrecognizedProperty = asDynamic()[key]
+    inline operator fun set(key: String, value: UnrecognizedProperty) {
+        asDynamic()[key] = value
+    }
 }
 
-external class Omnibox {
-    var keyword: String
-
-    operator fun get(key: String): UnrecognizedProperty
-
-    operator fun set(key: String, value: UnrecognizedProperty)
+@Suppress("NOTHING_TO_INLINE", "UnsafeCastFromDynamic")
+class Page_action(
+        var default_title: String? = null,
+        var default_icon: IconPath? = null,
+        var default_popup: String? = null,
+        var browser_style: Boolean? = null
+) {
+    inline operator fun get(key: String): UnrecognizedProperty = asDynamic()[key]
+    inline operator fun set(key: String, value: UnrecognizedProperty) {
+        asDynamic()[key] = value
+    }
 }
 
-external class Page_action {
-    var default_title: String?
-
-    var default_icon: IconPath?
-
-    var default_popup: String?
-
-    var browser_style: Boolean?
-
-    operator fun get(key: String): UnrecognizedProperty
-
-    operator fun set(key: String, value: UnrecognizedProperty)
+@Suppress("NOTHING_TO_INLINE", "UnsafeCastFromDynamic")
+class Sidebar_action(
+        var default_title: String? = null,
+        var default_icon: IconPath? = null,
+        var browser_style: Boolean? = null,
+        var default_panel: String
+) {
+    inline operator fun get(key: String): UnrecognizedProperty = asDynamic()[key]
+    inline operator fun set(key: String, value: UnrecognizedProperty) {
+        asDynamic()[key] = value
+    }
 }
 
-external class Sidebar_action {
-    var default_title: String?
-
-    var default_icon: IconPath?
-
-    var browser_style: Boolean?
-
-    var default_panel: String
-
-    operator fun get(key: String): UnrecognizedProperty
-
-    operator fun set(key: String, value: UnrecognizedProperty)
-}
-
-external class Chrome_url_overrides {
-    var newtab: ExtensionURL?
-}
+class Chrome_url_overrides(var newtab: ExtensionURL? = null)
 
 /**
  * The protocol the site wishes to handle, specified as a string. For example, you can register to handle SMS text message links by registering to handle the "sms" scheme. */
@@ -461,274 +373,182 @@ typealias Protocol = Any
  * The URL of the handler, as a string. This string should include "%s" as a placeholder which will be replaced with the escaped URL of the document to be handled. This URL might be a true URL, or it could be a phone number, email address, or so forth. */
 typealias UriTemplate = Any
 
-external class Applications2 {
-    var gecko: FirefoxSpecificProperties?
-}
+class Applications2(var gecko: FirefoxSpecificProperties? = null)
 
-external class Browser_specific_settings2 {
-    var gecko: FirefoxSpecificProperties?
-}
+class Browser_specific_settings2(var gecko: FirefoxSpecificProperties? = null)
 
-external class Chrome_resources {
-    operator fun get(key: String): ExtensionURL
-
-    operator fun set(key: String, value: ExtensionURL)
+@Suppress("NOTHING_TO_INLINE", "UnsafeCastFromDynamic")
+class Chrome_resources() {
+    inline operator fun get(key: String): ExtensionURL = asDynamic()[key]
+    inline operator fun set(key: String, value: ExtensionURL) {
+        asDynamic()[key] = value
+    }
 }
 
 typealias Chrome_resources2 = Any
 
-external class Chrome_resources3 {
-    operator fun set(key: String, value: ExtensionURL)
+@Suppress("NOTHING_TO_INLINE", "UnsafeCastFromDynamic")
+class Chrome_resources3() {
+    inline operator fun set(key: String, value: ExtensionURL) {
+        asDynamic()[key] = value
+    }
 
-    operator fun set(key: String, value: Chrome_resources)
+    inline operator fun set(key: String, value: Chrome_resources) {
+        asDynamic()[key] = value
+    }
 
-    operator fun get(key: String): dynamic
+    inline operator fun get(key: String): dynamic = asDynamic()[key]}
+
+class Languages(var chrome_resources: Chrome_resources3, var version: String)
+
+@Suppress("NOTHING_TO_INLINE", "UnsafeCastFromDynamic")
+class Languages2() {
+    inline operator fun get(key: String): Languages = asDynamic()[key]
+    inline operator fun set(key: String, value: Languages) {
+        asDynamic()[key] = value
+    }
 }
 
-external class Languages {
-    var chrome_resources: Chrome_resources3
+class Sources(var base_path: ExtensionURL, var paths: Array<String>? = null)
 
-    var version: String
+@Suppress("NOTHING_TO_INLINE", "UnsafeCastFromDynamic")
+class Sources2() {
+    inline operator fun get(key: String): Sources = asDynamic()[key]
+    inline operator fun set(key: String, value: Sources) {
+        asDynamic()[key] = value
+    }
 }
 
-external class Languages2 {
-    operator fun get(key: String): Languages
-
-    operator fun set(key: String, value: Languages)
+@Suppress("NOTHING_TO_INLINE", "UnsafeCastFromDynamic")
+class Images(
+        var additional_backgrounds: Array<ImageDataOrExtensionURL>? = null,
+        var headerURL: ImageDataOrExtensionURL? = null,
+        var theme_frame: ImageDataOrExtensionURL? = null
+) {
+    inline operator fun get(key: String): UnrecognizedProperty = asDynamic()[key]
+    inline operator fun set(key: String, value: UnrecognizedProperty) {
+        asDynamic()[key] = value
+    }
 }
 
-external class Sources {
-    var base_path: ExtensionURL
-
-    var paths: Array<String>
+@Suppress("NOTHING_TO_INLINE", "UnsafeCastFromDynamic")
+class Colors(
+        var accentcolor: ThemeColor? = null,
+        var frame: ThemeColor? = null,
+        var textcolor: ThemeColor? = null,
+        var background_tab_text: ThemeColor? = null,
+        var tab_text: ThemeColor? = null,
+        var toolbar: ThemeColor? = null,
+        var toolbar_text: ThemeColor? = null,
+        var bookmark_text: ThemeColor? = null,
+        var toolbar_field: ThemeColor? = null,
+        var toolbar_field_text: ThemeColor? = null,
+        var toolbar_field_border: ThemeColor? = null,
+        var toolbar_top_separator: ThemeColor? = null,
+        var toolbar_bottom_separator: ThemeColor? = null,
+        var toolbar_vertical_separator: ThemeColor? = null
+) {
+    inline operator fun get(key: String): UnrecognizedProperty = asDynamic()[key]
+    inline operator fun set(key: String, value: UnrecognizedProperty) {
+        asDynamic()[key] = value
+    }
 }
 
-external class Sources2 {
-    operator fun get(key: String): Sources
-
-    operator fun set(key: String, value: Sources)
+@Suppress("NOTHING_TO_INLINE", "UnsafeCastFromDynamic")
+class Icons2(
+        var back: ExtensionURL? = null,
+        var forward: ExtensionURL? = null,
+        var reload: ExtensionURL? = null,
+        var stop: ExtensionURL? = null,
+        var bookmark_star: ExtensionURL? = null,
+        var bookmark_menu: ExtensionURL? = null,
+        var downloads: ExtensionURL? = null,
+        var home: ExtensionURL? = null,
+        var app_menu: ExtensionURL? = null,
+        var cut: ExtensionURL? = null,
+        var copy: ExtensionURL? = null,
+        var paste: ExtensionURL? = null,
+        var new_window: ExtensionURL? = null,
+        var new_private_window: ExtensionURL? = null,
+        var save_page: ExtensionURL? = null,
+        var print: ExtensionURL? = null,
+        var history: ExtensionURL? = null,
+        var full_screen: ExtensionURL? = null,
+        var find: ExtensionURL? = null,
+        var options: ExtensionURL? = null,
+        var addons: ExtensionURL? = null,
+        var developer: ExtensionURL? = null,
+        var synced_tabs: ExtensionURL? = null,
+        var open_file: ExtensionURL? = null,
+        var sidebars: ExtensionURL? = null,
+        var subscribe: ExtensionURL? = null,
+        var text_encoding: ExtensionURL? = null,
+        var email_link: ExtensionURL? = null,
+        var forget: ExtensionURL? = null,
+        var pocket: ExtensionURL? = null,
+        var getmsg: ExtensionURL? = null,
+        var newmsg: ExtensionURL? = null,
+        var address: ExtensionURL? = null,
+        var reply: ExtensionURL? = null,
+        var replyall: ExtensionURL? = null,
+        var replylist: ExtensionURL? = null,
+        var forwarding: ExtensionURL? = null,
+        var delete: ExtensionURL? = null,
+        var junk: ExtensionURL? = null,
+        var file: ExtensionURL? = null,
+        var nextUnread: ExtensionURL? = null,
+        var prevUnread: ExtensionURL? = null,
+        var mark: ExtensionURL? = null,
+        var tag: ExtensionURL? = null,
+        var compact: ExtensionURL? = null,
+        var archive: ExtensionURL? = null,
+        var chat: ExtensionURL? = null,
+        var nextMsg: ExtensionURL? = null,
+        var prevMsg: ExtensionURL? = null,
+        var QFB: ExtensionURL? = null,
+        var conversation: ExtensionURL? = null,
+        var newcard: ExtensionURL? = null,
+        var newlist: ExtensionURL? = null,
+        var editcard: ExtensionURL? = null,
+        var newim: ExtensionURL? = null,
+        var send: ExtensionURL? = null,
+        var spelling: ExtensionURL? = null,
+        var attach: ExtensionURL? = null,
+        var security: ExtensionURL? = null,
+        var save: ExtensionURL? = null,
+        var quote: ExtensionURL? = null,
+        var buddy: ExtensionURL? = null,
+        var join_chat: ExtensionURL? = null,
+        var chat_accounts: ExtensionURL? = null,
+        var calendar: ExtensionURL? = null,
+        var tasks: ExtensionURL? = null,
+        var synchronize: ExtensionURL? = null,
+        var newevent: ExtensionURL? = null,
+        var newtask: ExtensionURL? = null,
+        var editevent: ExtensionURL? = null,
+        var today: ExtensionURL? = null,
+        var category: ExtensionURL? = null,
+        var complete: ExtensionURL? = null,
+        var priority: ExtensionURL? = null,
+        var saveandclose: ExtensionURL? = null,
+        var attendees: ExtensionURL? = null,
+        var privacy: ExtensionURL? = null,
+        var status: ExtensionURL? = null,
+        var freebusy: ExtensionURL? = null,
+        var timezones: ExtensionURL? = null
+) {
+    inline operator fun get(key: String): UnrecognizedProperty = asDynamic()[key]
+    inline operator fun set(key: String, value: UnrecognizedProperty) {
+        asDynamic()[key] = value
+    }
 }
 
-external class Images {
-    var additional_backgrounds: Array<ImageDataOrExtensionURL>
-
-    var headerURL: ImageDataOrExtensionURL?
-
-    var theme_frame: ImageDataOrExtensionURL?
-
-    operator fun get(key: String): UnrecognizedProperty
-
-    operator fun set(key: String, value: UnrecognizedProperty)
-}
-
-external class Colors {
-    var accentcolor: ThemeColor?
-
-    var frame: ThemeColor?
-
-    var textcolor: ThemeColor?
-
-    var background_tab_text: ThemeColor?
-
-    var tab_text: ThemeColor?
-
-    var toolbar: ThemeColor?
-
-    var toolbar_text: ThemeColor?
-
-    var bookmark_text: ThemeColor?
-
-    var toolbar_field: ThemeColor?
-
-    var toolbar_field_text: ThemeColor?
-
-    var toolbar_field_border: ThemeColor?
-
-    var toolbar_top_separator: ThemeColor?
-
-    var toolbar_bottom_separator: ThemeColor?
-
-    var toolbar_vertical_separator: ThemeColor?
-
-    operator fun get(key: String): UnrecognizedProperty
-
-    operator fun set(key: String, value: UnrecognizedProperty)
-}
-
-external class Icons2 {
-    var back: ExtensionURL?
-
-    var forward: ExtensionURL?
-
-    var reload: ExtensionURL?
-
-    var stop: ExtensionURL?
-
-    var bookmark_star: ExtensionURL?
-
-    var bookmark_menu: ExtensionURL?
-
-    var downloads: ExtensionURL?
-
-    var home: ExtensionURL?
-
-    var app_menu: ExtensionURL?
-
-    var cut: ExtensionURL?
-
-    var copy: ExtensionURL?
-
-    var paste: ExtensionURL?
-
-    var new_window: ExtensionURL?
-
-    var new_private_window: ExtensionURL?
-
-    var save_page: ExtensionURL?
-
-    var print: ExtensionURL?
-
-    var history: ExtensionURL?
-
-    var full_screen: ExtensionURL?
-
-    var find: ExtensionURL?
-
-    var options: ExtensionURL?
-
-    var addons: ExtensionURL?
-
-    var developer: ExtensionURL?
-
-    var synced_tabs: ExtensionURL?
-
-    var open_file: ExtensionURL?
-
-    var sidebars: ExtensionURL?
-
-    var subscribe: ExtensionURL?
-
-    var text_encoding: ExtensionURL?
-
-    var email_link: ExtensionURL?
-
-    var forget: ExtensionURL?
-
-    var pocket: ExtensionURL?
-
-    var getmsg: ExtensionURL?
-
-    var newmsg: ExtensionURL?
-
-    var address: ExtensionURL?
-
-    var reply: ExtensionURL?
-
-    var replyall: ExtensionURL?
-
-    var replylist: ExtensionURL?
-
-    var forwarding: ExtensionURL?
-
-    var delete: ExtensionURL?
-
-    var junk: ExtensionURL?
-
-    var file: ExtensionURL?
-
-    var nextUnread: ExtensionURL?
-
-    var prevUnread: ExtensionURL?
-
-    var mark: ExtensionURL?
-
-    var tag: ExtensionURL?
-
-    var compact: ExtensionURL?
-
-    var archive: ExtensionURL?
-
-    var chat: ExtensionURL?
-
-    var nextMsg: ExtensionURL?
-
-    var prevMsg: ExtensionURL?
-
-    var QFB: ExtensionURL?
-
-    var conversation: ExtensionURL?
-
-    var newcard: ExtensionURL?
-
-    var newlist: ExtensionURL?
-
-    var editcard: ExtensionURL?
-
-    var newim: ExtensionURL?
-
-    var send: ExtensionURL?
-
-    var spelling: ExtensionURL?
-
-    var attach: ExtensionURL?
-
-    var security: ExtensionURL?
-
-    var save: ExtensionURL?
-
-    var quote: ExtensionURL?
-
-    var buddy: ExtensionURL?
-
-    var join_chat: ExtensionURL?
-
-    var chat_accounts: ExtensionURL?
-
-    var calendar: ExtensionURL?
-
-    var tasks: ExtensionURL?
-
-    var synchronize: ExtensionURL?
-
-    var newevent: ExtensionURL?
-
-    var newtask: ExtensionURL?
-
-    var editevent: ExtensionURL?
-
-    var today: ExtensionURL?
-
-    var category: ExtensionURL?
-
-    var complete: ExtensionURL?
-
-    var priority: ExtensionURL?
-
-    var saveandclose: ExtensionURL?
-
-    var attendees: ExtensionURL?
-
-    var privacy: ExtensionURL?
-
-    var status: ExtensionURL?
-
-    var freebusy: ExtensionURL?
-
-    var timezones: ExtensionURL?
-
-    operator fun get(key: String): UnrecognizedProperty
-
-    operator fun set(key: String, value: UnrecognizedProperty)
-}
-
-external class Properties {
-    var additional_backgrounds_alignment: Array<String>
-
-    var additional_backgrounds_tiling: Array<String>
-
-    operator fun get(key: String): UnrecognizedProperty
-
-    operator fun set(key: String, value: UnrecognizedProperty)
+@Suppress("NOTHING_TO_INLINE", "UnsafeCastFromDynamic")
+class Properties(var additional_backgrounds_alignment: Array<String>? = null, var additional_backgrounds_tiling: Array<String>? = null) {
+    inline operator fun get(key: String): UnrecognizedProperty = asDynamic()[key]
+    inline operator fun set(key: String, value: UnrecognizedProperty) {
+        asDynamic()[key] = value
+    }
 }
 
 external class ManifestNamespace

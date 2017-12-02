@@ -5,24 +5,18 @@ import kotlin.js.Promise
 /**
  * An object encapsulating a most visited URL, such as the URLs on the new tab page.
  */
-external class MostVisitedURL {
-    /**
-     * The most visited URL.
-     */
-    var url: String
+class MostVisitedURL(/**
+ * The most visited URL.
+ */
+var url: String, /**
+ * The title of the page.
+ */
+var title: String? = null)
 
-    /**
-     * The title of the page.
-     */
-    var title: String?
-}
-
-external class Options {
-    /**
-     * Which providers to get top sites from. Possible values are "places" and "activityStream".
-     */
-    var providers: Array<String>
-}
+class Options(/**
+ * Which providers to get top sites from. Possible values are "places" and "activityStream".
+ */
+var providers: Array<String>? = null)
 
 external class TopSitesNamespace {
     /**

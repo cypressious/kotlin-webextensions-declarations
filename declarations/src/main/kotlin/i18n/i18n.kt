@@ -9,29 +9,21 @@ typealias LanguageCode = String
 /**
  * DetectedLanguage object that holds detected ISO language code and its percentage in the input string
  */
-external class Languages {
-    var language: LanguageCode
-
-    /**
-     * The percentage of the detected language
-     */
-    var percentage: Int
-}
+class Languages(var language: LanguageCode, /**
+ * The percentage of the detected language
+ */
+var percentage: Int)
 
 /**
  * LanguageDetectionResult object that holds detected langugae reliability and array of DetectedLanguage
  */
-external class Result {
-    /**
-     * CLD detected language reliability
-     */
-    var isReliable: Boolean
-
-    /**
-     * array of detectedLanguage
-     */
-    var languages: Array<Languages>
-}
+class Result(/**
+ * CLD detected language reliability
+ */
+var isReliable: Boolean, /**
+ * array of detectedLanguage
+ */
+var languages: Array<Languages>)
 
 external class I18nNamespace {
     /**

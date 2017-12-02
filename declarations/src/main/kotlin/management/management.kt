@@ -7,17 +7,13 @@ import manifest.ExtensionID
 /**
  * Information about an icon belonging to an extension.
  */
-external class IconInfo {
-    /**
-     * A number representing the width and height of the icon. Likely values include (but are not limited to) 128, 48, 24, and 16.
-     */
-    var size: Int
-
-    /**
-     * The URL for this icon image. To display a grayscale version of the icon (to indicate that an extension is disabled, for example), append <code>?grayscale=true</code> to the URL.
-     */
-    var url: String
-}
+class IconInfo(/**
+ * A number representing the width and height of the icon. Likely values include (but are not limited to) 128, 48, 24, and 16.
+ */
+var size: Int, /**
+ * The URL for this icon image. To display a grayscale version of the icon (to indicate that an extension is disabled, for example), append <code>?grayscale=true</code> to the URL.
+ */
+var url: String)
 
 /**
  * A reason the item is disabled. */
@@ -34,104 +30,84 @@ typealias ExtensionInstallType = String
 /**
  * Information about an installed extension.
  */
-external class ExtensionInfo {
-    /**
-     * The extension's unique identifier.
-     */
-    var id: String
+class ExtensionInfo(
+        /**
+         * The extension's unique identifier.
+         */
+        var id: String,
+        /**
+         * The name of this extension.
+         */
+        var name: String,
+        /**
+         * A short version of the name of this extension.
+         */
+        var shortName: String? = null,
+        /**
+         * The description of this extension.
+         */
+        var description: String,
+        /**
+         * The <a href='manifest/version'>version</a> of this extension.
+         */
+        var version: String,
+        /**
+         * The <a href='manifest/version#version_name'>version name</a> of this extension if the manifest specified one.
+         */
+        var versionName: String? = null,
+        /**
+         * Whether this extension can be disabled or uninstalled by the user.
+         */
+        var mayDisable: Boolean,
+        /**
+         * Whether it is currently enabled or disabled.
+         */
+        var enabled: Boolean,
+        /**
+         * A reason the item is disabled.
+         */
+        var disabledReason: ExtensionDisabledReason? = null,
+        /**
+         * The type of this extension. Will always return 'extension'.
+         */
+        var type: ExtensionType,
+        /**
+         * The URL of the homepage of this extension.
+         */
+        var homepageUrl: String? = null,
+        /**
+         * The update URL of this extension.
+         */
+        var updateUrl: String? = null,
+        /**
+         * The url for the item's options page, if it has one.
+         */
+        var optionsUrl: String,
+        /**
+         * A list of icon information. Note that this just reflects what was declared in the manifest, and the actual image at that url may be larger or smaller than what was declared, so you might consider using explicit width and height attributes on img tags referencing these images. See the <a href='manifest/icons'>manifest documentation on icons</a> for more details.
+         */
+        var icons: Array<IconInfo>? = null,
+        /**
+         * Returns a list of API based permissions.
+         */
+        var permissions: Array<String>? = null,
+        /**
+         * Returns a list of host based permissions.
+         */
+        var hostPermissions: Array<String>? = null,
+        /**
+         * How the extension was installed.
+         */
+        var installType: ExtensionInstallType
+)
 
-    /**
-     * The name of this extension.
-     */
-    var name: String
-
-    /**
-     * A short version of the name of this extension.
-     */
-    var shortName: String?
-
-    /**
-     * The description of this extension.
-     */
-    var description: String
-
-    /**
-     * The <a href='manifest/version'>version</a> of this extension.
-     */
-    var version: String
-
-    /**
-     * The <a href='manifest/version#version_name'>version name</a> of this extension if the manifest specified one.
-     */
-    var versionName: String?
-
-    /**
-     * Whether this extension can be disabled or uninstalled by the user.
-     */
-    var mayDisable: Boolean
-
-    /**
-     * Whether it is currently enabled or disabled.
-     */
-    var enabled: Boolean
-
-    /**
-     * A reason the item is disabled.
-     */
-    var disabledReason: ExtensionDisabledReason?
-
-    /**
-     * The type of this extension. Will always return 'extension'.
-     */
-    var type: ExtensionType
-
-    /**
-     * The URL of the homepage of this extension.
-     */
-    var homepageUrl: String?
-
-    /**
-     * The update URL of this extension.
-     */
-    var updateUrl: String?
-
-    /**
-     * The url for the item's options page, if it has one.
-     */
-    var optionsUrl: String
-
-    /**
-     * A list of icon information. Note that this just reflects what was declared in the manifest, and the actual image at that url may be larger or smaller than what was declared, so you might consider using explicit width and height attributes on img tags referencing these images. See the <a href='manifest/icons'>manifest documentation on icons</a> for more details.
-     */
-    var icons: Array<IconInfo>
-
-    /**
-     * Returns a list of API based permissions.
-     */
-    var permissions: Array<String>
-
-    /**
-     * Returns a list of host based permissions.
-     */
-    var hostPermissions: Array<String>
-
-    /**
-     * How the extension was installed.
-     */
-    var installType: ExtensionInstallType
-}
-
-external class Options {
-    /**
-     * Whether or not a confirm-uninstall dialog should prompt the user. Defaults to false.
-     */
-    var showConfirmDialog: Boolean?
-
-    /**
-     * The message to display to a user when being asked to confirm removal of the extension.
-     */
-    var dialogMessage: String?
-}
+class Options(/**
+ * Whether or not a confirm-uninstall dialog should prompt the user. Defaults to false.
+ */
+var showConfirmDialog: Boolean? = null, /**
+ * The message to display to a user when being asked to confirm removal of the extension.
+ */
+var dialogMessage: String? = null)
 
 external class ManagementNamespace {
     val onDisabled: Event<(info: ExtensionInfo) -> Unit>

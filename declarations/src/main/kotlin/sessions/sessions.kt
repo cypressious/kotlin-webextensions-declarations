@@ -5,43 +5,37 @@ import kotlin.js.Promise
 import tabs.Tab
 import windows.Window
 
-external class Filter {
-    /**
-     * The maximum number of entries to be fetched in the requested list. Omit this parameter to fetch the maximum number of entries ($(ref:sessions.MAX_SESSION_RESULTS)).
-     */
-    var maxResults: Int?
-}
+class Filter(/**
+ * The maximum number of entries to be fetched in the requested list. Omit this parameter to fetch the maximum number of entries ($(ref:sessions.MAX_SESSION_RESULTS)).
+ */
+var maxResults: Int? = null)
 
-external class Session {
-    /**
-     * The time when the window or tab was closed or modified, represented in milliseconds since the epoch.
-     */
-    var lastModified: Int
+class Session(
+        /**
+         * The time when the window or tab was closed or modified, represented in milliseconds since the epoch.
+         */
+        var lastModified: Int,
+        /**
+         * The $(ref:tabs.Tab), if this entry describes a tab. Either this or $(ref:sessions.Session.window) will be set.
+         */
+        var tab: Tab? = null,
+        /**
+         * The $(ref:windows.Window), if this entry describes a window. Either this or $(ref:sessions.Session.tab) will be set.
+         */
+        var window: Window? = null
+)
 
-    /**
-     * The $(ref:tabs.Tab), if this entry describes a tab. Either this or $(ref:sessions.Session.window) will be set.
-     */
-    var tab: Tab?
-
-    /**
-     * The $(ref:windows.Window), if this entry describes a window. Either this or $(ref:sessions.Session.tab) will be set.
-     */
-    var window: Window?
-}
-
-external class Device {
-    var info: String
-
-    /**
-     * The name of the foreign device.
-     */
-    var deviceName: String
-
-    /**
-     * A list of open window sessions for the foreign device, sorted from most recently to least recently modified session.
-     */
-    var sessions: Array<Session>
-}
+class Device(
+        var info: String,
+        /**
+         * The name of the foreign device.
+         */
+        var deviceName: String,
+        /**
+         * A list of open window sessions for the foreign device, sorted from most recently to least recently modified session.
+         */
+        var sessions: Array<Session>
+)
 
 external class SessionsNamespace {
     val onChanged: Event<() -> Unit>

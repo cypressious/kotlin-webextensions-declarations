@@ -7,17 +7,13 @@ import manifest.ThemeType
 /**
  * Info provided in the onUpdated listener.
  */
-external class ThemeUpdateInfo {
-    /**
-     * The new theme after update
-     */
-    var theme: Theme
-
-    /**
-     * The id of the window the theme has been applied to
-     */
-    var windowId: Int?
-}
+class ThemeUpdateInfo(/**
+ * The new theme after update
+ */
+var theme: Theme, /**
+ * The id of the window the theme has been applied to
+ */
+var windowId: Int? = null)
 
 /**
  * The new theme after update */

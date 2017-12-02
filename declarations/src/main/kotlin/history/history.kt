@@ -11,158 +11,127 @@ typealias TransitionType = String
 /**
  * An object encapsulating one result of a history query.
  */
-external class HistoryItem {
-    /**
-     * The unique identifier for the item.
-     */
-    var id: String
-
-    /**
-     * The URL navigated to by a user.
-     */
-    var url: String?
-
-    /**
-     * The title of the page when it was last loaded.
-     */
-    var title: String?
-
-    /**
-     * When this page was last loaded, represented in milliseconds since the epoch.
-     */
-    var lastVisitTime: Int?
-
-    /**
-     * The number of times the user has navigated to this page.
-     */
-    var visitCount: Int?
-
-    /**
-     * The number of times the user has navigated to this page by typing in the address.
-     */
-    var typedCount: Int?
-}
+class HistoryItem(
+        /**
+         * The unique identifier for the item.
+         */
+        var id: String,
+        /**
+         * The URL navigated to by a user.
+         */
+        var url: String? = null,
+        /**
+         * The title of the page when it was last loaded.
+         */
+        var title: String? = null,
+        /**
+         * When this page was last loaded, represented in milliseconds since the epoch.
+         */
+        var lastVisitTime: Int? = null,
+        /**
+         * The number of times the user has navigated to this page.
+         */
+        var visitCount: Int? = null,
+        /**
+         * The number of times the user has navigated to this page by typing in the address.
+         */
+        var typedCount: Int? = null
+)
 
 /**
  * An object encapsulating one visit to a URL.
  */
-external class VisitItem {
-    /**
-     * The unique identifier for the item.
-     */
-    var id: String
+class VisitItem(
+        /**
+         * The unique identifier for the item.
+         */
+        var id: String,
+        /**
+         * The unique identifier for this visit.
+         */
+        var visitId: String,
+        /**
+         * When this visit occurred, represented in milliseconds since the epoch.
+         */
+        var visitTime: Int? = null,
+        /**
+         * The visit ID of the referrer.
+         */
+        var referringVisitId: String,
+        /**
+         * The $(topic:transition-types)[transition type] for this visit from its referrer.
+         */
+        var transition: TransitionType
+)
 
-    /**
-     * The unique identifier for this visit.
-     */
-    var visitId: String
+class Query(
+        /**
+         * A free-text query to the history service.  Leave empty to retrieve all pages.
+         */
+        var text: String,
+        /**
+         * Limit results to those visited after this date. If not specified, this defaults to 24 hours in the past.
+         */
+        var startTime: Date? = null,
+        /**
+         * Limit results to those visited before this date.
+         */
+        var endTime: Date? = null,
+        /**
+         * The maximum number of results to retrieve.  Defaults to 100.
+         */
+        var maxResults: Int? = null
+)
 
-    /**
-     * When this visit occurred, represented in milliseconds since the epoch.
-     */
-    var visitTime: Int?
+class Details(/**
+ * The URL for which to retrieve visit information.  It must be in the format as returned from a call to history.search.
+ */
+var url: String)
 
-    /**
-     * The visit ID of the referrer.
-     */
-    var referringVisitId: String
+class Details2(
+        /**
+         * The URL to add. Must be a valid URL that can be added to history.
+         */
+        var url: String,
+        /**
+         * The title of the page.
+         */
+        var title: String? = null,
+        /**
+         * The $(topic:transition-types)[transition type] for this visit from its referrer.
+         */
+        var transition: TransitionType? = null,
+        /**
+         * The date when this visit occurred.
+         */
+        var visitTime: Date? = null
+)
 
-    /**
-     * The $(topic:transition-types)[transition type] for this visit from its referrer.
-     */
-    var transition: TransitionType
-}
+class Details3(/**
+ * The URL to remove.
+ */
+var url: String)
 
-external class Query {
-    /**
-     * A free-text query to the history service.  Leave empty to retrieve all pages.
-     */
-    var text: String
+class Range(/**
+ * Items added to history after this date.
+ */
+var startTime: Date, /**
+ * Items added to history before this date.
+ */
+var endTime: Date)
 
-    /**
-     * Limit results to those visited after this date. If not specified, this defaults to 24 hours in the past.
-     */
-    var startTime: Date?
+class Removed(/**
+ * True if all history was removed.  If true, then urls will be empty.
+ */
+var allHistory: Boolean, var urls: Array<String>)
 
-    /**
-     * Limit results to those visited before this date.
-     */
-    var endTime: Date?
-
-    /**
-     * The maximum number of results to retrieve.  Defaults to 100.
-     */
-    var maxResults: Int?
-}
-
-external class Details {
-    /**
-     * The URL for which to retrieve visit information.  It must be in the format as returned from a call to history.search.
-     */
-    var url: String
-}
-
-external class Details2 {
-    /**
-     * The URL to add. Must be a valid URL that can be added to history.
-     */
-    var url: String
-
-    /**
-     * The title of the page.
-     */
-    var title: String?
-
-    /**
-     * The $(topic:transition-types)[transition type] for this visit from its referrer.
-     */
-    var transition: TransitionType?
-
-    /**
-     * The date when this visit occurred.
-     */
-    var visitTime: Date?
-}
-
-external class Details3 {
-    /**
-     * The URL to remove.
-     */
-    var url: String
-}
-
-external class Range {
-    /**
-     * Items added to history after this date.
-     */
-    var startTime: Date
-
-    /**
-     * Items added to history before this date.
-     */
-    var endTime: Date
-}
-
-external class Removed {
-    /**
-     * True if all history was removed.  If true, then urls will be empty.
-     */
-    var allHistory: Boolean
-
-    var urls: Array<String>
-}
-
-external class Changed {
-    /**
-     * The URL for which the title has changed
-     */
-    var url: String
-
-    /**
-     * The new title for the URL.
-     */
-    var title: String
-}
+class Changed(/**
+ * The URL for which the title has changed
+ */
+var url: String, /**
+ * The new title for the URL.
+ */
+var title: String)
 
 external class HistoryNamespace {
     val onVisited: Event<(result: HistoryItem) -> Unit>

@@ -10,283 +10,240 @@ typealias TransitionType = String
 
 typealias TransitionQualifier = String
 
-external class EventUrlFilters {
-    var url: Array<UrlFilter>
-}
+class EventUrlFilters(var url: Array<UrlFilter>)
 
 /**
  * Information about the frame to retrieve information about.
  */
-external class Details {
-    /**
-     * The ID of the tab in which the frame is.
-     */
-    var tabId: Int
-
-    /**
-     * The ID of the process runs the renderer for this tab.
-     */
-    var processId: Int?
-
-    /**
-     * The ID of the frame in the given tab.
-     */
-    var frameId: Int
-}
+class Details(
+        /**
+         * The ID of the tab in which the frame is.
+         */
+        var tabId: Int,
+        /**
+         * The ID of the process runs the renderer for this tab.
+         */
+        var processId: Int? = null,
+        /**
+         * The ID of the frame in the given tab.
+         */
+        var frameId: Int
+)
 
 /**
  * Information about the requested frame, null if the specified frame ID and/or tab ID are invalid.
  */
-external class Details2 {
-    /**
-     * True if the last navigation in this frame was interrupted by an error, i.e. the onErrorOccurred event fired.
-     */
-    var errorOccurred: Boolean?
-
-    /**
-     * The URL currently associated with this frame, if the frame identified by the frameId existed at one point in the given tab. The fact that an URL is associated with a given frameId does not imply that the corresponding frame still exists.
-     */
-    var url: String
-
-    /**
-     * The ID of the tab in which the frame is.
-     */
-    var tabId: Int
-
-    /**
-     * The ID of the frame. 0 indicates that this is the main frame; a positive value indicates the ID of a subframe.
-     */
-    var frameId: Int
-
-    /**
-     * ID of frame that wraps the frame. Set to -1 of no parent frame exists.
-     */
-    var parentFrameId: Int
-}
+class Details2(
+        /**
+         * True if the last navigation in this frame was interrupted by an error, i.e. the onErrorOccurred event fired.
+         */
+        var errorOccurred: Boolean? = null,
+        /**
+         * The URL currently associated with this frame, if the frame identified by the frameId existed at one point in the given tab. The fact that an URL is associated with a given frameId does not imply that the corresponding frame still exists.
+         */
+        var url: String,
+        /**
+         * The ID of the tab in which the frame is.
+         */
+        var tabId: Int,
+        /**
+         * The ID of the frame. 0 indicates that this is the main frame; a positive value indicates the ID of a subframe.
+         */
+        var frameId: Int,
+        /**
+         * ID of frame that wraps the frame. Set to -1 of no parent frame exists.
+         */
+        var parentFrameId: Int
+)
 
 /**
  * Information about the tab to retrieve all frames from.
  */
-external class Details3 {
-    /**
-     * The ID of the tab.
-     */
-    var tabId: Int
-}
+class Details3(/**
+ * The ID of the tab.
+ */
+var tabId: Int)
 
-external class Details4 {
-    /**
-     * True if the last navigation in this frame was interrupted by an error, i.e. the onErrorOccurred event fired.
-     */
-    var errorOccurred: Boolean?
+class Details4(
+        /**
+         * True if the last navigation in this frame was interrupted by an error, i.e. the onErrorOccurred event fired.
+         */
+        var errorOccurred: Boolean? = null,
+        /**
+         * The ID of the tab in which the frame is.
+         */
+        var tabId: Int,
+        /**
+         * The ID of the frame. 0 indicates that this is the main frame; a positive value indicates the ID of a subframe.
+         */
+        var frameId: Int,
+        /**
+         * ID of frame that wraps the frame. Set to -1 of no parent frame exists.
+         */
+        var parentFrameId: Int,
+        /**
+         * The URL currently associated with this frame.
+         */
+        var url: String
+)
 
-    /**
-     * The ID of the tab in which the frame is.
-     */
-    var tabId: Int
+class Details5(
+        /**
+         * The ID of the tab in which the navigation is about to occur.
+         */
+        var tabId: Int,
+        var url: String,
+        /**
+         * 0 indicates the navigation happens in the tab content window; a positive value indicates navigation in a subframe. Frame IDs are unique for a given tab and process.
+         */
+        var frameId: Int,
+        /**
+         * ID of frame that wraps the frame. Set to -1 of no parent frame exists.
+         */
+        var parentFrameId: Int,
+        /**
+         * The time when the browser was about to start the navigation, in milliseconds since the epoch.
+         */
+        var timeStamp: Int
+)
 
-    /**
-     * The ID of the frame. 0 indicates that this is the main frame; a positive value indicates the ID of a subframe.
-     */
-    var frameId: Int
+class Details6(
+        /**
+         * The ID of the tab in which the navigation occurs.
+         */
+        var tabId: Int,
+        var url: String,
+        /**
+         * 0 indicates the navigation happens in the tab content window; a positive value indicates navigation in a subframe. Frame IDs are unique within a tab.
+         */
+        var frameId: Int,
+        /**
+         * The time when the navigation was committed, in milliseconds since the epoch.
+         */
+        var timeStamp: Int
+)
 
-    /**
-     * ID of frame that wraps the frame. Set to -1 of no parent frame exists.
-     */
-    var parentFrameId: Int
+class Details7(
+        /**
+         * The ID of the tab in which the navigation occurs.
+         */
+        var tabId: Int,
+        var url: String,
+        /**
+         * 0 indicates the navigation happens in the tab content window; a positive value indicates navigation in a subframe. Frame IDs are unique within a tab.
+         */
+        var frameId: Int,
+        /**
+         * The time when the page's DOM was fully constructed, in milliseconds since the epoch.
+         */
+        var timeStamp: Int
+)
 
-    /**
-     * The URL currently associated with this frame.
-     */
-    var url: String
-}
+class Details8(
+        /**
+         * The ID of the tab in which the navigation occurs.
+         */
+        var tabId: Int,
+        var url: String,
+        /**
+         * 0 indicates the navigation happens in the tab content window; a positive value indicates navigation in a subframe. Frame IDs are unique within a tab.
+         */
+        var frameId: Int,
+        /**
+         * The time when the document finished loading, in milliseconds since the epoch.
+         */
+        var timeStamp: Int
+)
 
-external class Details5 {
-    /**
-     * The ID of the tab in which the navigation is about to occur.
-     */
-    var tabId: Int
+class Details9(
+        /**
+         * The ID of the tab in which the navigation occurs.
+         */
+        var tabId: Int,
+        var url: String,
+        /**
+         * 0 indicates the navigation happens in the tab content window; a positive value indicates navigation in a subframe. Frame IDs are unique within a tab.
+         */
+        var frameId: Int,
+        /**
+         * The time when the error occurred, in milliseconds since the epoch.
+         */
+        var timeStamp: Int
+)
 
-    var url: String
+class Details10(
+        /**
+         * The ID of the tab in which the navigation is triggered.
+         */
+        var sourceTabId: Int,
+        /**
+         * The ID of the process runs the renderer for the source tab.
+         */
+        var sourceProcessId: Int,
+        /**
+         * The ID of the frame with sourceTabId in which the navigation is triggered. 0 indicates the main frame.
+         */
+        var sourceFrameId: Int,
+        /**
+         * The URL to be opened in the new window.
+         */
+        var url: String,
+        /**
+         * The ID of the tab in which the url is opened
+         */
+        var tabId: Int,
+        /**
+         * The time when the browser was about to create a new view, in milliseconds since the epoch.
+         */
+        var timeStamp: Int
+)
 
-    /**
-     * 0 indicates the navigation happens in the tab content window; a positive value indicates navigation in a subframe. Frame IDs are unique for a given tab and process.
-     */
-    var frameId: Int
+class Details11(
+        /**
+         * The ID of the tab in which the navigation occurs.
+         */
+        var tabId: Int,
+        var url: String,
+        /**
+         * 0 indicates the navigation happens in the tab content window; a positive value indicates navigation in a subframe. Frame IDs are unique within a tab.
+         */
+        var frameId: Int,
+        /**
+         * The time when the navigation was committed, in milliseconds since the epoch.
+         */
+        var timeStamp: Int
+)
 
-    /**
-     * ID of frame that wraps the frame. Set to -1 of no parent frame exists.
-     */
-    var parentFrameId: Int
+class Details12(
+        /**
+         * The ID of the tab that was replaced.
+         */
+        var replacedTabId: Int,
+        /**
+         * The ID of the tab that replaced the old tab.
+         */
+        var tabId: Int,
+        /**
+         * The time when the replacement happened, in milliseconds since the epoch.
+         */
+        var timeStamp: Int
+)
 
-    /**
-     * The time when the browser was about to start the navigation, in milliseconds since the epoch.
-     */
-    var timeStamp: Int
-}
-
-external class Details6 {
-    /**
-     * The ID of the tab in which the navigation occurs.
-     */
-    var tabId: Int
-
-    var url: String
-
-    /**
-     * 0 indicates the navigation happens in the tab content window; a positive value indicates navigation in a subframe. Frame IDs are unique within a tab.
-     */
-    var frameId: Int
-
-    /**
-     * The time when the navigation was committed, in milliseconds since the epoch.
-     */
-    var timeStamp: Int
-}
-
-external class Details7 {
-    /**
-     * The ID of the tab in which the navigation occurs.
-     */
-    var tabId: Int
-
-    var url: String
-
-    /**
-     * 0 indicates the navigation happens in the tab content window; a positive value indicates navigation in a subframe. Frame IDs are unique within a tab.
-     */
-    var frameId: Int
-
-    /**
-     * The time when the page's DOM was fully constructed, in milliseconds since the epoch.
-     */
-    var timeStamp: Int
-}
-
-external class Details8 {
-    /**
-     * The ID of the tab in which the navigation occurs.
-     */
-    var tabId: Int
-
-    var url: String
-
-    /**
-     * 0 indicates the navigation happens in the tab content window; a positive value indicates navigation in a subframe. Frame IDs are unique within a tab.
-     */
-    var frameId: Int
-
-    /**
-     * The time when the document finished loading, in milliseconds since the epoch.
-     */
-    var timeStamp: Int
-}
-
-external class Details9 {
-    /**
-     * The ID of the tab in which the navigation occurs.
-     */
-    var tabId: Int
-
-    var url: String
-
-    /**
-     * 0 indicates the navigation happens in the tab content window; a positive value indicates navigation in a subframe. Frame IDs are unique within a tab.
-     */
-    var frameId: Int
-
-    /**
-     * The time when the error occurred, in milliseconds since the epoch.
-     */
-    var timeStamp: Int
-}
-
-external class Details10 {
-    /**
-     * The ID of the tab in which the navigation is triggered.
-     */
-    var sourceTabId: Int
-
-    /**
-     * The ID of the process runs the renderer for the source tab.
-     */
-    var sourceProcessId: Int
-
-    /**
-     * The ID of the frame with sourceTabId in which the navigation is triggered. 0 indicates the main frame.
-     */
-    var sourceFrameId: Int
-
-    /**
-     * The URL to be opened in the new window.
-     */
-    var url: String
-
-    /**
-     * The ID of the tab in which the url is opened
-     */
-    var tabId: Int
-
-    /**
-     * The time when the browser was about to create a new view, in milliseconds since the epoch.
-     */
-    var timeStamp: Int
-}
-
-external class Details11 {
-    /**
-     * The ID of the tab in which the navigation occurs.
-     */
-    var tabId: Int
-
-    var url: String
-
-    /**
-     * 0 indicates the navigation happens in the tab content window; a positive value indicates navigation in a subframe. Frame IDs are unique within a tab.
-     */
-    var frameId: Int
-
-    /**
-     * The time when the navigation was committed, in milliseconds since the epoch.
-     */
-    var timeStamp: Int
-}
-
-external class Details12 {
-    /**
-     * The ID of the tab that was replaced.
-     */
-    var replacedTabId: Int
-
-    /**
-     * The ID of the tab that replaced the old tab.
-     */
-    var tabId: Int
-
-    /**
-     * The time when the replacement happened, in milliseconds since the epoch.
-     */
-    var timeStamp: Int
-}
-
-external class Details13 {
-    /**
-     * The ID of the tab in which the navigation occurs.
-     */
-    var tabId: Int
-
-    var url: String
-
-    /**
-     * 0 indicates the navigation happens in the tab content window; a positive value indicates navigation in a subframe. Frame IDs are unique within a tab.
-     */
-    var frameId: Int
-
-    /**
-     * The time when the navigation was committed, in milliseconds since the epoch.
-     */
-    var timeStamp: Int
-}
+class Details13(
+        /**
+         * The ID of the tab in which the navigation occurs.
+         */
+        var tabId: Int,
+        var url: String,
+        /**
+         * 0 indicates the navigation happens in the tab content window; a positive value indicates navigation in a subframe. Frame IDs are unique within a tab.
+         */
+        var frameId: Int,
+        /**
+         * The time when the navigation was committed, in milliseconds since the epoch.
+         */
+        var timeStamp: Int
+)
 
 external class WebNavigationNamespace {
     val onBeforeNavigate: Event<(details: Details5) -> Unit>
@@ -315,5 +272,5 @@ external class WebNavigationNamespace {
     /**
      * Retrieves information about all frames of a given tab.
      */
-    fun getAllFrames(details: Details3): Promise<Array<Details4>>
+    fun getAllFrames(details: Details3): Promise<Array<Details4>?>
 }

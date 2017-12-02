@@ -1,5 +1,6 @@
 package extension
 
+import kotlin.Suppress
 import kotlin.js.Promise
 
 /**
@@ -9,44 +10,46 @@ typealias ViewType = String
 /**
  * Set for the lifetime of a callback if an ansychronous extension api has resulted in an error. If no error has occured lastError will be <var>undefined</var>.
  */
-external class LastError {
-    /**
-     * Description of the error that has taken place.
-     */
-    var message: String
-
-    operator fun get(key: String): dynamic
-
-    operator fun set(key: String, value: dynamic)
+@Suppress("NOTHING_TO_INLINE", "UnsafeCastFromDynamic")
+class LastError(/**
+ * Description of the error that has taken place.
+ */
+var message: String) {
+    inline operator fun get(key: String): dynamic = asDynamic()[key]
+    inline operator fun set(key: String, value: dynamic) {
+        asDynamic()[key] = value
+    }
 }
 
-external class FetchProperties {
-    /**
-     * The type of view to get. If omitted, returns all views (including background pages and tabs). Valid values: 'tab', 'popup', 'sidebar'.
-     */
-    var type: ViewType?
+class FetchProperties(
+        /**
+         * The type of view to get. If omitted, returns all views (including background pages and tabs). Valid values: 'tab', 'popup', 'sidebar'.
+         */
+        var type: ViewType? = null,
+        /**
+         * The window to restrict the search to. If omitted, returns all views.
+         */
+        var windowId: Int? = null,
+        /**
+         * Find a view according to a tab id. If this field is omitted, returns all views.
+         */
+        var tabId: Int? = null
+)
 
-    /**
-     * The window to restrict the search to. If omitted, returns all views.
-     */
-    var windowId: Int?
-
-    /**
-     * Find a view according to a tab id. If this field is omitted, returns all views.
-     */
-    var tabId: Int?
+@Suppress("NOTHING_TO_INLINE", "UnsafeCastFromDynamic")
+class GetViewsResult() {
+    inline operator fun get(key: String): dynamic = asDynamic()[key]
+    inline operator fun set(key: String, value: dynamic) {
+        asDynamic()[key] = value
+    }
 }
 
-external class GetViewsResult {
-    operator fun get(key: String): dynamic
-
-    operator fun set(key: String, value: dynamic)
-}
-
-external class GetBackgroundPageResult {
-    operator fun get(key: String): dynamic
-
-    operator fun set(key: String, value: dynamic)
+@Suppress("NOTHING_TO_INLINE", "UnsafeCastFromDynamic")
+class GetBackgroundPageResult() {
+    inline operator fun get(key: String): dynamic = asDynamic()[key]
+    inline operator fun set(key: String, value: dynamic) {
+        asDynamic()[key] = value
+    }
 }
 
 external class ExtensionNamespace {

@@ -140,13 +140,26 @@ class Generator(val dir: File) {
             return
         }
 
-        val typeBuilder = TypeSpec.expectClassBuilder(name)
-                .addProperties((type.properties ?: emptyMap()).entries.filter { !it.value.unsupported }.map {
+        val properties = (type.properties ?: emptyMap()).entries.filter { !it.value.unsupported }
+
+        val typeBuilder = TypeSpec.classBuilder(name)
+                .addProperties(properties.map {
                     PropertySpec
                             .varBuilder(it.key.escapeIfKeyword(), parameterType(it.key, it.value))
                             .apply { it.value.description?.let { addKdoc(it.replace("%", "%%") + "\n") } }
+                            .initializer(it.key.escapeIfKeyword())
                             .build()
                 })
+                .primaryConstructor(FunSpec.constructorBuilder()
+                        .addParameters(
+                                properties.map {
+                                    ParameterSpec
+                                            .builder(it.key.escapeIfKeyword(), parameterType(it.key, it.value))
+                                            .apply { if (it.value.optional) defaultValue("null") }
+                                            .build()
+                                }
+                        )
+                        .build())
 
         generateIndexers(additionalProperties, patternProperties, typeBuilder)
 
@@ -180,6 +193,10 @@ class Generator(val dir: File) {
                 generateGetter(Parameter(type = "any"), typeBuilder)
             }
         }
+
+        typeBuilder.addAnnotation(AnnotationSpec.builder(Suppress::class)
+                .addMember("\"NOTHING_TO_INLINE\", \"UnsafeCastFromDynamic\"")
+                .build())
     }
 
     private fun Parameter.flattenTypeTo(types: MutableList<Parameter>) {
@@ -191,19 +208,21 @@ class Generator(val dir: File) {
     }
 
 
-    private fun generateSetter(type: Parameter, typeBuilder: TypeSpec.Builder) {
-        typeBuilder.addFunction(FunSpec.builder("set")
-                .addModifiers(KModifier.OPERATOR)
+    private fun generateGetter(type: Parameter, typeBuilder: TypeSpec.Builder) {
+        typeBuilder.addFunction(FunSpec.builder("get")
+                .addModifiers(KModifier.OPERATOR, KModifier.INLINE)
                 .addParameter("key", ClassName.bestGuess("String"))
-                .addParameter("value", parameterType("", type))
+                .addCode("return asDynamic()[key]")
+                .returns(parameterType("", type))
                 .build())
     }
 
-    private fun generateGetter(type: Parameter, typeBuilder: TypeSpec.Builder) {
-        typeBuilder.addFunction(FunSpec.builder("get")
-                .addModifiers(KModifier.OPERATOR)
+    private fun generateSetter(type: Parameter, typeBuilder: TypeSpec.Builder) {
+        typeBuilder.addFunction(FunSpec.builder("set")
+                .addModifiers(KModifier.OPERATOR, KModifier.INLINE)
                 .addParameter("key", ClassName.bestGuess("String"))
-                .returns(parameterType("", type))
+                .addParameter("value", parameterType("", type))
+                .addCode("asDynamic()[key] = value\n")
                 .build())
     }
 
@@ -268,34 +287,37 @@ class Generator(val dir: File) {
     }
 
 
-    private fun parameterType(name: String, parameter: Parameter): TypeName =
-            when (parameter.type) {
-                "function" -> {
-                    //special case for Post.postMessage
-                    if (name == "postMessage") {
-                        LambdaTypeName.get(parameters = *arrayOf(ClassName.bestGuess("Any")), returnType = ClassName.bestGuess("Unit"))
-                    } else {
-                        LambdaTypeName.get(returnType = ClassName.bestGuess("Unit"))
-                    }
-                }
-
-                "array" -> ParameterizedTypeName.get(
-                        ClassName.bestGuess("Array"),
-                        parameterType("", parameter.items!!)
-                )
-
-                "any" -> ClassName("", "dynamic")
-
-                else -> {
-                    val type = ClassName.bestGuess(parameterTypeName(parameter))
-
-                    if (parameter.optional) {
-                        type.asNullable()
-                    } else {
-                        type
-                    }
+    private fun parameterType(name: String, parameter: Parameter): TypeName {
+        val type = when (parameter.type) {
+            "function" -> {
+                //special case for Post.postMessage
+                if (name == "postMessage") {
+                    LambdaTypeName.get(parameters = *arrayOf(ClassName.bestGuess("Any")), returnType = ClassName.bestGuess("Unit"))
+                } else {
+                    LambdaTypeName.get(returnType = ClassName.bestGuess("Unit"))
                 }
             }
+
+            "array" -> ParameterizedTypeName.get(
+                    ClassName.bestGuess("Array"),
+                    parameterType("", parameter.items!!)
+            )
+
+            "any" -> return ClassName("", "dynamic")
+
+            else -> {
+                ClassName.bestGuess(parameterTypeName(parameter))
+
+            }
+        }
+
+        return if (parameter.optional) {
+            type.asNullable()
+        } else {
+            type
+        }
+
+    }
 
     private fun parameterTypeName(p: Parameter): String {
         p.`$ref`?.let {

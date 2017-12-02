@@ -6,17 +6,9 @@ import manifest.MatchPatternInternal
 import manifest.OptionalPermission
 import manifest.Permission
 
-external class Permissions {
-    var permissions: Array<OptionalPermission>
+class Permissions(var permissions: Array<OptionalPermission>? = null, var origins: Array<MatchPattern>? = null)
 
-    var origins: Array<MatchPattern>
-}
-
-external class AnyPermissions {
-    var permissions: Array<Permission>
-
-    var origins: Array<MatchPatternInternal>
-}
+class AnyPermissions(var permissions: Array<Permission>? = null, var origins: Array<MatchPatternInternal>? = null)
 
 external class PermissionsNamespace {
     /**
