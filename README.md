@@ -1,4 +1,4 @@
-# Kotlin WebExtensions API Declarations Generator
+# Kotlin WebExtensions API Declarations
 
 This project contains Kotlin JS declarations for the Firefox WebExtensions API generated from the offical schema files.
 

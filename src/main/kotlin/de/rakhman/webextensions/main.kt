@@ -54,16 +54,16 @@ fun main(args: Array<String>) {
 }
 
 class Args {
-    @Parameter(names = arrayOf("-s", "--source"))
+    @Parameter(names = ["-s", "--source"])
     var source: String = SourceArg.Github.name
 
-    @Parameter(names = arrayOf("--apiToken"), description = "Optional Github OAuth 2 API token. Not using a token can lead to hitting the quota limit quickly.")
+    @Parameter(names = ["--apiToken"], description = "Optional Github OAuth 2 API token. Not using a token can lead to hitting the quota limit quickly.")
     var apiToken: String? = null
 
-    @Parameter(names = arrayOf("--filePath"), description = "Optional path to schema files. Default ist 'schemas'")
+    @Parameter(names = ["--filePath"], description = "Optional path to schema files. Default ist 'schemas'")
     var filePath: String? = "schemas"
 
-    @Parameter(names = arrayOf("-o", "--outputPath"), description = "Optional path for output. Default is 'declarations/src/main/kotlin'")
+    @Parameter(names = ["-o", "--outputPath"], description = "Optional path for output. Default is 'declarations/src/main/kotlin'")
     var outputPath: String? = "declarations/src/main/kotlin"
 }
 
