@@ -1,5 +1,6 @@
 buildscript {
     ext.kotlin_version = '1.2.0'
+    ext.publish_version = 0.1
 
     repositories {
         jcenter()
@@ -9,10 +10,11 @@ buildscript {
     }
 }
 
-version '1.0-SNAPSHOT'
+version publish_version
 
 apply plugin: 'java'
 apply plugin: 'kotlin'
+apply plugin: 'maven-publish'
 
 sourceCompatibility = 1.8
 
@@ -36,4 +38,24 @@ compileKotlin {
 }
 compileTestKotlin {
     kotlinOptions.jvmTarget = "1.8"
+}
+
+task sourceJar(type: Jar) {
+    from sourceSets.main.kotlin
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            groupId 'de.rakhman.webextensions-declarations'
+            artifactId 'webextensions-declarations-generator'
+            version publish_version
+
+            from components.java
+
+            artifact sourceJar {
+                classifier "sources"
+            }
+        }
+    }
 }

@@ -1,4 +1,4 @@
-version '0.1'
+version publish_version
 
 buildscript {
     repositories {
@@ -28,13 +28,12 @@ task sourceJar(type: Jar) {
     from sourceSets.main.kotlin
 }
 
-
 publishing {
     publications {
         maven(MavenPublication) {
             groupId 'de.rakhman.webextensions-declarations'
             artifactId 'webextensions-declarations'
-            version '1.0'
+            version publish_version
 
             from components.java
 
