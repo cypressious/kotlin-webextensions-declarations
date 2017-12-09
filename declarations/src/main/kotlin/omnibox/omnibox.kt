@@ -63,14 +63,10 @@ class DescriptionStyles2(
  */
 class DescriptionStylesRaw2(var offset: Int, var type: Int)
 
-/**
- * A callback passed to the onInputChanged event used for sending suggestions back to the browser. */
-typealias Suggest = Any
-
 external class OmniboxNamespace {
     val onInputStarted: Event<() -> Unit>
 
-    val onInputChanged: Event<(text: String, suggest: Suggest) -> Unit>
+    val onInputChanged: Event<(text: String, suggest: () -> Unit) -> Unit>
 
     val onInputEntered: Event<(text: String, disposition: OnInputEnteredDisposition) -> Unit>
 

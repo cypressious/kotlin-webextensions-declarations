@@ -1,7 +1,7 @@
 package downloads
 
-import kotlin.js.Promise
 import webextensions.Event
+import kotlin.js.Promise
 
 typealias FilenameConflictAction = String
 
@@ -231,8 +231,6 @@ class Options2(/**
  * The size of the icon.  The returned icon will be square with dimensions size * size pixels.  The default size for the icon is 32x32 pixels.
  */
 var size: Int? = null)
-
-typealias Callback = Any
 
 class DownloadDelta(
         /**

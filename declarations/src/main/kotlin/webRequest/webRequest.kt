@@ -393,8 +393,6 @@ class Details5(
         var statusCode: Int
 )
 
-typealias Callback = Any
-
 class Details6(
         /**
          * The ID of the request. Request IDs are unique within a browser session. As a result, they could be used to relate different events of the same request.
@@ -640,7 +638,7 @@ external class WebRequestNamespace {
 
     val onHeadersReceived: Event<(details: Details4) -> Unit>
 
-    val onAuthRequired: Event<(details: Details5, callback: Callback?) -> Unit>
+    val onAuthRequired: Event<(details: Details5, callback: (() -> Unit)?) -> Unit>
 
     val onResponseStarted: Event<(details: Details6) -> Unit>
 

@@ -239,8 +239,6 @@ var name: String? = null, /**
  */
 var frameId: Int? = null)
 
-typealias ResponseCallback = Any
-
 class Options(/**
  * Send a message to a specific $(topic:frame_ids)[frame] identified by <code>frameId</code> instead of all frames in the tab.
  */

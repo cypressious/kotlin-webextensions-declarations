@@ -77,6 +77,7 @@ private fun Parameter.resolve(
         actual: Boolean = false,
         isReturn: Boolean = false
 ): Parameter {
+    if (type == "function") return copy(parameters = parameters?.map { it.resolve(it.name ?: name, types) })
     if (type == "array") return copy(items = items?.resolve(name, types, actual))
     if (type != "object" &&
             choices == null &&

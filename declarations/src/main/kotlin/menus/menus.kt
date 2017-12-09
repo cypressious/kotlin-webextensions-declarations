@@ -92,10 +92,6 @@ class Icons() {
 }
 
 /**
- * A function that will be called back when the menu item is clicked. Event pages cannot use this; instead, they should register a listener for $(ref:contextMenus.onClicked). */
-typealias Onclick = Any
-
-/**
  * The ID of a parent menu item; this makes the item a child of a previously added item. */
 typealias ParentId = Any
 
@@ -124,7 +120,7 @@ class CreateProperties(
         /**
          * A function that will be called back when the menu item is clicked. Event pages cannot use this; instead, they should register a listener for $(ref:contextMenus.onClicked).
          */
-        var onclick: Onclick? = null,
+        var onclick: (() -> Unit)? = null,
         /**
          * The ID of a parent menu item; this makes the item a child of a previously added item.
          */
@@ -148,18 +144,12 @@ class CreateProperties(
 )
 
 /**
- * Called when the item has been created in the browser. If there were any problems creating the item, details will be available in $(ref:runtime.lastError). */
-typealias Callback = Any
-
-/**
  * The ID of the newly created item. */
 typealias CreateResult = Any
 
 /**
  * The ID of the item to update. */
 typealias Id = Any
-
-typealias Onclick2 = Any
 
 /**
  * Note: You cannot change an item to be a child of one of its own descendants. */
@@ -173,7 +163,7 @@ class UpdateProperties(
         var title: String? = null,
         var checked: Boolean? = null,
         var contexts: Array<ContextType>? = null,
-        var onclick: Onclick2,
+        var onclick: () -> Unit,
         /**
          * Note: You cannot change an item to be a child of one of its own descendants.
          */
@@ -193,7 +183,7 @@ external class MenusNamespace {
     /**
      * Creates a new context menu item. Note that if an error occurs during creation, you may not find out until the creation callback fires (the details will be in $(ref:runtime.lastError)).
      */
-    fun create(createProperties: CreateProperties, callback: Callback? = definedExternally): CreateResult
+    fun create(createProperties: CreateProperties, callback: (() -> Unit)? = definedExternally): CreateResult
 
     /**
      * Updates a previously created context menu item.
