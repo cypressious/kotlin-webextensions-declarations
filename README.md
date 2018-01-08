@@ -1,6 +1,6 @@
 # Kotlin WebExtensions API Declarations
 
-This project contains Kotlin JS declarations for the Firefox WebExtensions API generated from the offical schema files.
+A generator for Kotlin JS declarations for the Firefox WebExtensions API from the offical schema files. This repo also contains the ready-made generated declarations.
 
 The schema is taken from https://github.com/mozilla/gecko-dev/tree/master/browser/components/extensions/schemas and https://github.com/mozilla/gecko-dev/tree/master/toolkit/components/extensions/schemas.
 
