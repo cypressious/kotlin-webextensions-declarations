@@ -2,27 +2,17 @@ package de.rakhman.webextensions
 
 import com.squareup.kotlinpoet.*
 import java.io.File
-import java.nio.file.Files
 
 class Generator(val dir: File) {
     fun generate(list: List<Namespace>) {
         generateBrowser(list)
         list.groupBy { it.namespace.substringBefore(".") }.forEach(this::generateMainNamespace)
-
-        Files.walk(dir.toPath())
-                .map { it.toFile() }
-                .filter { it.extension == "kt" }
-                .forEach {
-                    it.writeText(it.readText()
-                            .replace("expect class", "external class")
-                            .replace("expect val", "external val")
-                    )
-                }
     }
 
     private fun generateBrowser(list: List<Namespace>) {
         FileSpec.builder("webextensions", "browser")
-                .addType(TypeSpec.expectClassBuilder("Browser")
+                .addType(TypeSpec.classBuilder("Browser")
+                        .addModifiers(KModifier.EXTERNAL)
                         .addProperties(list
                                 .map { it.namespace }
                                 .filter { "." !in it }
@@ -33,7 +23,8 @@ class Generator(val dir: File) {
                                             .build()
                                 })
                         .build())
-                .addType(TypeSpec.expectClassBuilder("Event")
+                .addType(TypeSpec.classBuilder("Event")
+                        .addModifiers(KModifier.EXTERNAL)
                         .addTypeVariable(TypeVariableName("T", variance = KModifier.IN))
                         .addFunction(FunSpec
                                 .builder("addListener")
@@ -51,7 +42,7 @@ class Generator(val dir: File) {
                         .build())
                 .addProperty(PropertySpec
                         .builder("browser", ClassName.bestGuess("Browser"))
-                        .addModifiers(KModifier.EXPECT)
+                        .addModifiers(KModifier.EXTERNAL)
                         .build())
                 .build().writeTo(dir)
     }
@@ -84,8 +75,8 @@ class Generator(val dir: File) {
         val functions = ns.functions?.filterNot { it.unsupported } ?: emptyList()
         val events = ns.events?.filterNot { it.unsupported } ?: emptyList()
 
-        return TypeSpec.expectClassBuilder(ClassName.bestGuess(name))
-                .addModifiers(KModifier.EXPECT)
+        return TypeSpec.classBuilder(ClassName.bestGuess(name))
+                .addModifiers(KModifier.EXTERNAL)
                 .addFunctions(functions.flatMap { generateFunctionWithOverloads(it) })
                 .addProperties(events.map { generateEvent(it) })
     }
@@ -95,7 +86,8 @@ class Generator(val dir: File) {
                 ClassName.bestGuess("webextensions.Event"),
                 LambdaTypeName.get(
                         returnType = ClassName.bestGuess("Unit"),
-                        parameters = event.parameters?.map { generateParameter(it.name!!, it, false).build() } ?: emptyList()
+                        parameters = event.parameters?.map { generateParameter(it.name!!, it, false).build() }
+                                ?: emptyList()
                 )
         )
 
