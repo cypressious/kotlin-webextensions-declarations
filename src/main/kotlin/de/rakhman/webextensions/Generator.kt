@@ -1,7 +1,9 @@
 package de.rakhman.webextensions
 
 import com.squareup.kotlinpoet.*
+import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
 import java.io.File
+
 
 class Generator(val dir: File) {
     fun generate(list: List<Namespace>) {
@@ -11,40 +13,66 @@ class Generator(val dir: File) {
 
     private fun generateBrowser(list: List<Namespace>) {
         FileSpec.builder("webextensions", "browser")
-                .addType(TypeSpec.classBuilder("Browser")
-                        .addModifiers(KModifier.EXTERNAL)
-                        .addProperties(list
-                                .map { it.namespace }
-                                .filter { "." !in it }
-                                .distinct()
-                                .map {
-                                    PropertySpec
-                                            .builder(it, ClassName(it, it.nameSpaceName()))
-                                            .build()
-                                })
-                        .build())
-                .addType(TypeSpec.classBuilder("Event")
-                        .addModifiers(KModifier.EXTERNAL)
-                        .addTypeVariable(TypeVariableName("T", variance = KModifier.IN))
-                        .addFunction(FunSpec
-                                .builder("addListener")
-                                .addParameter(ParameterSpec.builder("listener", TypeVariableName("T")).build())
-                                .build())
-                        .addFunction(FunSpec
-                                .builder("removeListener")
-                                .addParameter(ParameterSpec.builder("listener", TypeVariableName("T")).build())
-                                .build())
-                        .addFunction(FunSpec
-                                .builder("hasListener")
-                                .addParameter(ParameterSpec.builder("listener", TypeVariableName("T")).build())
-                                .returns(ClassName.bestGuess("Boolean"))
-                                .build())
-                        .build())
-                .addProperty(PropertySpec
-                        .builder("browser", ClassName.bestGuess("Browser"))
-                        .addModifiers(KModifier.EXTERNAL)
-                        .build())
-                .build().writeTo(dir)
+            .addType(TypeSpec.classBuilder("Browser")
+                .addModifiers(KModifier.EXTERNAL)
+                .addProperties(list
+                    .map { it.namespace }
+                    .filter { "." !in it }
+                    .distinct()
+                    .map {
+                        PropertySpec
+                            .builder(it, ClassName(it, it.nameSpaceName()))
+                            .build()
+                    })
+                .build()
+            )
+            .addType(
+                TypeSpec.classBuilder("Event")
+                    .addModifiers(KModifier.EXTERNAL)
+                    .addTypeVariable(TypeVariableName("T", variance = KModifier.IN))
+                    .addFunction(
+                        FunSpec
+                            .builder("addListener")
+                            .addParameter(
+                                ParameterSpec.builder(
+                                    "listener",
+                                    TypeVariableName("T")
+                                ).build()
+                            )
+                            .build()
+                    )
+                    .addFunction(
+                        FunSpec
+                            .builder("removeListener")
+                            .addParameter(
+                                ParameterSpec.builder(
+                                    "listener",
+                                    TypeVariableName("T")
+                                ).build()
+                            )
+                            .build()
+                    )
+                    .addFunction(
+                        FunSpec
+                            .builder("hasListener")
+                            .addParameter(
+                                ParameterSpec.builder(
+                                    "listener",
+                                    TypeVariableName("T")
+                                ).build()
+                            )
+                            .returns(ClassName.bestGuess("Boolean"))
+                            .build()
+                    )
+                    .build()
+            )
+            .addProperty(
+                PropertySpec
+                    .builder("browser", ClassName.bestGuess("Browser"))
+                    .addModifiers(KModifier.EXTERNAL)
+                    .build()
+            )
+            .build().writeTo(dir)
     }
 
     private fun generateMainNamespace(group: Map.Entry<String, List<Namespace>>) {
@@ -56,7 +84,12 @@ class Generator(val dir: File) {
 
         group.value.filter { it.namespace != group.key }.forEach {
             val name = it.namespace.substringAfter(".")
-            mainTypeBuilder.addProperty(PropertySpec.builder(name, ClassName.bestGuess(name.nameSpaceName())).build())
+            mainTypeBuilder.addProperty(
+                PropertySpec.builder(
+                    name,
+                    ClassName.bestGuess(name.nameSpaceName())
+                ).build()
+            )
 
             fileBuilder.addType(generateNamespace(merge(listOf(it)), fileBuilder).build())
         }
@@ -64,8 +97,8 @@ class Generator(val dir: File) {
         fileBuilder.addType(mainTypeBuilder.build())
 
         fileBuilder
-                .build()
-                .writeTo(dir)
+            .build()
+            .writeTo(dir)
     }
 
     private fun generateNamespace(ns: Namespace, fileBuilder: FileSpec.Builder): TypeSpec.Builder {
@@ -76,20 +109,25 @@ class Generator(val dir: File) {
         val events = ns.events?.filterNot { it.unsupported } ?: emptyList()
 
         return TypeSpec.classBuilder(ClassName.bestGuess(name))
-                .addModifiers(KModifier.EXTERNAL)
-                .addFunctions(functions.flatMap { generateFunctionWithOverloads(it) })
-                .addProperties(events.map { generateEvent(it) })
+            .addModifiers(KModifier.EXTERNAL)
+            .addFunctions(functions.flatMap { generateFunctionWithOverloads(it) })
+            .addProperties(events.map { generateEvent(it) })
     }
 
     private fun generateEvent(event: Event): PropertySpec {
-        val type = ParameterizedTypeName.get(
-                ClassName.bestGuess("webextensions.Event"),
+        val type = ClassName.bestGuess("webextensions.Event")
+            .parameterizedBy(
                 LambdaTypeName.get(
-                        returnType = ClassName.bestGuess("Unit"),
-                        parameters = event.parameters?.map { generateParameter(it.name!!, it, false).build() }
-                                ?: emptyList()
+                    returnType = ClassName.bestGuess("Unit"),
+                    parameters = event.parameters?.map {
+                        generateParameter(
+                            it.name!!,
+                            it,
+                            false
+                        ).build()
+                    } ?: emptyList()
                 )
-        )
+            )
 
         return PropertySpec.builder(event.name, type).build()
     }
@@ -100,19 +138,20 @@ class Generator(val dir: File) {
         when (type.type) {
             "string", "int", "boolean", "any" -> {
                 fileBuilder.addTypeAlias(TypeAliasSpec
-                        .builder(name, ClassName.bestGuess(type.type.capitalize()))
-                        .apply { type.description?.let { addKdoc(it.replace("%", "%%")) } }
-                        .build())
+                    .builder(name, ClassName.bestGuess(type.type.capitalize()))
+                    .apply { type.description?.let { addKdoc(it.replace("%", "%%")) } }
+                    .build())
                 return
             }
             "array" -> {
                 fileBuilder.addTypeAlias(TypeAliasSpec
-                        .builder(name, ParameterizedTypeName.get(
-                                ClassName.bestGuess("Array"),
-                                parameterType("", type.items!!)
-                        ))
-                        .apply { type.description?.let { addKdoc(it.replace("%", "%%")) } }
-                        .build())
+                    .builder(
+                        name, ClassName.bestGuess("Array").parameterizedBy(
+                            parameterType("", type.items!!)
+                        )
+                    )
+                    .apply { type.description?.let { addKdoc(it.replace("%", "%%")) } }
+                    .build())
                 return
             }
         }
@@ -126,32 +165,32 @@ class Generator(val dir: File) {
             }
 
             fileBuilder.addTypeAlias(TypeAliasSpec
-                    .builder(name, ClassName.bestGuess("Any"))
-                    .apply { type.description?.let { addKdoc(it.replace("%", "%%")) } }
-                    .build())
+                .builder(name, ClassName.bestGuess("Any"))
+                .apply { type.description?.let { addKdoc(it.replace("%", "%%")) } }
+                .build())
             return
         }
 
         val properties = (type.properties ?: emptyMap()).entries.filter { !it.value.unsupported }
 
         val typeBuilder = TypeSpec.classBuilder(name)
-                .addProperties(properties.map {
-                    PropertySpec
-                            .varBuilder(it.key.escapeIfKeyword(), parameterType(it.key, it.value))
-                            .apply { it.value.description?.let { addKdoc(it.replace("%", "%%") + "\n") } }
-                            .initializer(it.key.escapeIfKeyword())
+            .addProperties(properties.map {
+                PropertySpec
+                    .varBuilder(it.key, parameterType(it.key, it.value))
+                    .apply { it.value.description?.let { addKdoc(it.replace("%", "%%") + "\n") } }
+                    .initializer(it.key)
+                    .build()
+            })
+            .primaryConstructor(FunSpec.constructorBuilder()
+                .addParameters(
+                    properties.map {
+                        ParameterSpec
+                            .builder(it.key, parameterType(it.key, it.value))
+                            .apply { if (it.value.optional) defaultValue("null") }
                             .build()
-                })
-                .primaryConstructor(FunSpec.constructorBuilder()
-                        .addParameters(
-                                properties.map {
-                                    ParameterSpec
-                                            .builder(it.key.escapeIfKeyword(), parameterType(it.key, it.value))
-                                            .apply { if (it.value.optional) defaultValue("null") }
-                                            .build()
-                                }
-                        )
-                        .build())
+                    }
+                )
+                .build())
 
         generateIndexers(additionalProperties, patternProperties, typeBuilder)
 
@@ -161,9 +200,9 @@ class Generator(val dir: File) {
     }
 
     private fun generateIndexers(
-            additionalProperties: Parameter?,
-            patternProperties: Map<String, Parameter>?,
-            typeBuilder: TypeSpec.Builder
+        additionalProperties: Parameter?,
+        patternProperties: Map<String, Parameter>?,
+        typeBuilder: TypeSpec.Builder
     ) {
         val types = mutableListOf<Parameter>()
 
@@ -186,9 +225,11 @@ class Generator(val dir: File) {
             }
         }
 
-        typeBuilder.addAnnotation(AnnotationSpec.builder(Suppress::class)
+        typeBuilder.addAnnotation(
+            AnnotationSpec.builder(Suppress::class)
                 .addMember("\"NOTHING_TO_INLINE\", \"UnsafeCastFromDynamic\"")
-                .build())
+                .build()
+        )
     }
 
     private fun Parameter.flattenTypeTo(types: MutableList<Parameter>) {
@@ -201,27 +242,31 @@ class Generator(val dir: File) {
 
 
     private fun generateGetter(type: Parameter, typeBuilder: TypeSpec.Builder) {
-        typeBuilder.addFunction(FunSpec.builder("get")
+        typeBuilder.addFunction(
+            FunSpec.builder("get")
                 .addModifiers(KModifier.OPERATOR, KModifier.INLINE)
                 .addParameter("key", ClassName.bestGuess("String"))
                 .addCode("return asDynamic()[key]")
                 .returns(parameterType("", type))
-                .build())
+                .build()
+        )
     }
 
     private fun generateSetter(type: Parameter, typeBuilder: TypeSpec.Builder) {
-        typeBuilder.addFunction(FunSpec.builder("set")
+        typeBuilder.addFunction(
+            FunSpec.builder("set")
                 .addModifiers(KModifier.OPERATOR, KModifier.INLINE)
                 .addParameter("key", ClassName.bestGuess("String"))
                 .addParameter("value", parameterType("", type))
                 .addCode("asDynamic()[key] = value\n")
-                .build())
+                .build()
+        )
     }
 
     private fun generateFunctionWithOverloads(f: Function): List<FunSpec> {
         val parameters = f.parameters
-                ?.filter { it.name != f.async }
-                ?.takeIf { it.isNotEmpty() }
+            ?.filter { it.name != f.async }
+            ?.takeIf { it.isNotEmpty() }
 
         val choices = parameters?.getResolvedChoices() ?: listOf(emptyList())
 
@@ -246,13 +291,17 @@ class Generator(val dir: File) {
         return builder.build()
     }
 
-    private fun generateParameter(name: String, parameter: Parameter, allowDefault: Boolean = true): ParameterSpec.Builder {
-        return ParameterSpec.builder(name.escapeIfKeyword(), parameterType(name, parameter))
-                .apply {
-                    if (allowDefault && parameter.optional) {
-                        defaultValue("definedExternally")
-                    }
+    private fun generateParameter(
+        name: String,
+        parameter: Parameter,
+        allowDefault: Boolean = true
+    ): ParameterSpec.Builder {
+        return ParameterSpec.builder(name, parameterType(name, parameter))
+            .apply {
+                if (allowDefault && parameter.optional) {
+                    defaultValue("definedExternally")
                 }
+            }
     }
 
     private fun returnType(f: Function): TypeName? {
@@ -263,7 +312,8 @@ class Generator(val dir: File) {
         val returnTypeName = when (f.async) {
             true -> ClassName.bestGuess("Any")
             is String -> {
-                val asyncParam = f.parameters!!.first { it.name == f.async }.parameters?.firstOrNull()
+                val asyncParam =
+                    f.parameters!!.first { it.name == f.async }.parameters?.firstOrNull()
                 asyncParam?.let {
                     parameterType("", it)
                 } ?: ClassName.bestGuess("Any")
@@ -272,9 +322,7 @@ class Generator(val dir: File) {
         }
 
         return returnTypeName?.let {
-            ParameterizedTypeName.get(
-                    ClassName.bestGuess("kotlin.js.Promise"),
-                    it)
+            ClassName.bestGuess("kotlin.js.Promise").parameterizedBy(it)
         }
     }
 
@@ -284,15 +332,17 @@ class Generator(val dir: File) {
             "function" -> {
                 //special case for Post.postMessage
                 if (name == "postMessage") {
-                    LambdaTypeName.get(parameters = *arrayOf(ClassName.bestGuess("Any")), returnType = ClassName.bestGuess("Unit"))
+                    LambdaTypeName.get(
+                        parameters = *arrayOf(ClassName.bestGuess("Any")),
+                        returnType = ClassName.bestGuess("Unit")
+                    )
                 } else {
                     LambdaTypeName.get(returnType = ClassName.bestGuess("Unit"))
                 }
             }
 
-            "array" -> ParameterizedTypeName.get(
-                    ClassName.bestGuess("Array"),
-                    parameterType("", parameter.items!!)
+            "array" -> ClassName.bestGuess("Array").parameterizedBy(
+                parameterType("", parameter.items!!)
             )
 
             "any" -> return ClassName("", "dynamic")

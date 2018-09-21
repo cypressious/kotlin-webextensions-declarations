@@ -2,7 +2,8 @@ version publish_version
 
 buildscript {
     repositories {
-        mavenCentral()
+        jcenter()
+        maven { url 'https://dl.bintray.com/kotlin/kotlin-eap' }
     }
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
@@ -13,7 +14,8 @@ apply plugin: 'kotlin2js'
 apply plugin: 'maven-publish'
 
 repositories {
-    mavenCentral()
+    jcenter()
+    maven { url 'https://dl.bintray.com/kotlin/kotlin-eap' }
 }
 
 dependencies {
