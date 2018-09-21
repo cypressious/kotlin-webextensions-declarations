@@ -376,7 +376,7 @@ class Generator(val dir: File) {
             "string" -> "String"
             "boolean" -> "Boolean"
             "any" -> "dynamic"
-            else -> throw IllegalArgumentException("Connot decide name for $p")
+            else -> throw IllegalArgumentException("Cannot decide name for $p")
         }
     }
 
