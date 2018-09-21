@@ -372,7 +372,7 @@ class Generator(val dir: File) {
 
         return when (p.type) {
             "integer" -> "Int"
-            "number" -> "Int"
+            "number" -> "Float"
             "string" -> "String"
             "boolean" -> "Boolean"
             "any" -> "dynamic"
