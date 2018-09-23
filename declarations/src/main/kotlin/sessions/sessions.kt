@@ -5,39 +5,38 @@ import tabs.Tab
 import webextensions.Event
 import windows.Window
 
-class Filter(/**
- * The maximum number of entries to be fetched in the requested list. Omit this parameter to fetch the maximum number of entries ($(ref:sessions.MAX_SESSION_RESULTS)).
+/**
+ * @param maxResults The maximum number of entries to be fetched in the requested list. Omit this parameter to fetch the maximum number of entries ($(ref:sessions.MAX_SESSION_RESULTS)).
  */
-var maxResults: Int? = null)
-
-class Session(
-        /**
-         * The time when the window or tab was closed or modified, represented in milliseconds since the epoch.
-         */
-        var lastModified: Int,
-        /**
-         * The $(ref:tabs.Tab), if this entry describes a tab. Either this or $(ref:sessions.Session.window) will be set.
-         */
-        var tab: Tab? = null,
-        /**
-         * The $(ref:windows.Window), if this entry describes a window. Either this or $(ref:sessions.Session.tab) will be set.
-         */
-        var window: Window? = null
+class Filter(
+    var maxResults: Int? = null
 )
 
+/**
+ * @param lastModified The time when the window or tab was closed or modified, represented in milliseconds since the epoch.
+ * @param tab The $(ref:tabs.Tab), if this entry describes a tab. Either this or $(ref:sessions.Session.window) will be set.
+ * @param window The $(ref:windows.Window), if this entry describes a window. Either this or $(ref:sessions.Session.tab) will be set.
+ */
+class Session(
+    var lastModified: Int,
+    var tab: Tab? = null,
+    var window: Window? = null
+)
+
+/**
+ * @param deviceName The name of the foreign device.
+ * @param sessions A list of open window sessions for the foreign device, sorted from most recently to least recently modified session.
+ */
 class Device(
-        var info: String,
-        /**
-         * The name of the foreign device.
-         */
-        var deviceName: String,
-        /**
-         * A list of open window sessions for the foreign device, sorted from most recently to least recently modified session.
-         */
-        var sessions: Array<Session>
+    var info: String,
+    var deviceName: String,
+    var sessions: Array<Session>
 )
 
 external class SessionsNamespace {
+    /**
+     * Fired when recently closed tabs and/or windows are changed. This event does not monitor synced sessions changes.
+     */
     val onChanged: Event<() -> Unit>
 
     /**
@@ -64,9 +63,9 @@ external class SessionsNamespace {
      * Set a key/value pair on a given tab.
      */
     fun setTabValue(
-            tabId: Int,
-            key: String,
-            value: dynamic
+        tabId: Int,
+        key: String,
+        value: dynamic
     ): Promise<Any>
 
     /**
@@ -83,9 +82,9 @@ external class SessionsNamespace {
      * Set a key/value pair on a given window.
      */
     fun setWindowValue(
-            windowId: Int,
-            key: String,
-            value: dynamic
+        windowId: Int,
+        key: String,
+        value: dynamic
     ): Promise<Any>
 
     /**

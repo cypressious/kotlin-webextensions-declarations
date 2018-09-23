@@ -8,22 +8,22 @@ typealias LanguageCode = String
 
 /**
  * DetectedLanguage object that holds detected ISO language code and its percentage in the input string
+ * @param percentage The percentage of the detected language
  */
-class Languages(var language: LanguageCode, /**
- * The percentage of the detected language
- */
-var percentage: Int)
+class Languages(
+    var language: LanguageCode,
+    var percentage: Int
+)
 
 /**
  * LanguageDetectionResult object that holds detected langugae reliability and array of DetectedLanguage
+ * @param isReliable CLD detected language reliability
+ * @param languages array of detectedLanguage
  */
-class Result(/**
- * CLD detected language reliability
- */
-var isReliable: Boolean, /**
- * array of detectedLanguage
- */
-var languages: Array<Languages>)
+class Result(
+    var isReliable: Boolean,
+    var languages: Array<Languages>
+)
 
 external class I18nNamespace {
     /**

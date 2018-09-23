@@ -5,98 +5,92 @@ import webextensions.Event
 
 /**
  * Represents information about a contextual identity.
+ * @param name The name of the contextual identity.
+ * @param icon The icon name of the contextual identity.
+ * @param iconUrl The icon url of the contextual identity.
+ * @param color The color name of the contextual identity.
+ * @param colorCode The color hash of the contextual identity.
+ * @param cookieStoreId The cookie store ID of the contextual identity.
  */
 class ContextualIdentity(
-        /**
-         * The name of the contextual identity.
-         */
-        var name: String,
-        /**
-         * The icon name of the contextual identity.
-         */
-        var icon: String,
-        /**
-         * The icon url of the contextual identity.
-         */
-        var iconUrl: String,
-        /**
-         * The color name of the contextual identity.
-         */
-        var color: String,
-        /**
-         * The color hash of the contextual identity.
-         */
-        var colorCode: String,
-        /**
-         * The cookie store ID of the contextual identity.
-         */
-        var cookieStoreId: String
+    var name: String,
+    var icon: String,
+    var iconUrl: String,
+    var color: String,
+    var colorCode: String,
+    var cookieStoreId: String
 )
 
 /**
  * Information to filter the contextual identities being retrieved.
+ * @param name Filters the contextual identity by name.
  */
-class Details(/**
- * Filters the contextual identity by name.
- */
-var name: String? = null)
+class Details(
+    var name: String? = null
+)
 
 /**
  * Details about the contextual identity being created.
+ * @param name The name of the contextual identity.
+ * @param color The color of the contextual identity.
+ * @param icon The icon of the contextual identity.
  */
 class Details2(
-        /**
-         * The name of the contextual identity.
-         */
-        var name: String,
-        /**
-         * The color of the contextual identity.
-         */
-        var color: String,
-        /**
-         * The icon of the contextual identity.
-         */
-        var icon: String
+    var name: String,
+    var color: String,
+    var icon: String
 )
 
 /**
  * Details about the contextual identity being created.
+ * @param name The name of the contextual identity.
+ * @param color The color of the contextual identity.
+ * @param icon The icon of the contextual identity.
  */
 class Details3(
-        /**
-         * The name of the contextual identity.
-         */
-        var name: String? = null,
-        /**
-         * The color of the contextual identity.
-         */
-        var color: String? = null,
-        /**
-         * The icon of the contextual identity.
-         */
-        var icon: String? = null
+    var name: String? = null,
+    var color: String? = null,
+    var icon: String? = null
 )
 
-class ChangeInfo(/**
- * Contextual identity that has been updated
+/**
+ * @param contextualIdentity Contextual identity that has been updated
  */
-var contextualIdentity: ContextualIdentity)
+class ChangeInfo(
+    var contextualIdentity: ContextualIdentity
+)
 
-class ChangeInfo2(/**
- * Contextual identity that has been created
+/**
+ * @param contextualIdentity Contextual identity that has been created
  */
-var contextualIdentity: ContextualIdentity)
+class ChangeInfo2(
+    var contextualIdentity: ContextualIdentity
+)
 
-class ChangeInfo3(/**
- * Contextual identity that has been removed
+/**
+ * @param contextualIdentity Contextual identity that has been removed
  */
-var contextualIdentity: ContextualIdentity)
+class ChangeInfo3(
+    var contextualIdentity: ContextualIdentity
+)
 
 external class ContextualIdentitiesNamespace {
+    /**
+     * Fired when a container is updated.
+     *
+     * @param changeInfo null */
     val onUpdated: Event<(changeInfo: ChangeInfo) -> Unit>
 
+    /**
+     * Fired when a new container is created.
+     *
+     * @param changeInfo null */
     val onCreated: Event<(changeInfo: ChangeInfo2) -> Unit>
 
+    /**
+     * Fired when a container is removed.
+     *
+     * @param changeInfo null */
     val onRemoved: Event<(changeInfo: ChangeInfo3) -> Unit>
 
     /**

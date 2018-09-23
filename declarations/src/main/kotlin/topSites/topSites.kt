@@ -4,19 +4,29 @@ import kotlin.js.Promise
 
 /**
  * An object encapsulating a most visited URL, such as the URLs on the new tab page.
+ * @param url The most visited URL.
+ * @param title The title of the page.
+ * @param favicon Data URL for the favicon, if available.
  */
-class MostVisitedURL(/**
- * The most visited URL.
- */
-var url: String, /**
- * The title of the page.
- */
-var title: String? = null)
+class MostVisitedURL(
+    var url: String,
+    var title: String? = null,
+    var favicon: String? = null
+)
 
-class Options(/**
- * Which providers to get top sites from. Possible values are "places" and "activityStream".
+/**
+ * @param limit The number of top sites to return, defaults to the value used by Firefox
+ * @param onePerDomain Limit the result to a single top site link per domain
+ * @param includeBlocked Include sites that the user has blocked from appearing on the Firefox new tab.
+ * @param includeFavicon Include sites favicon if available.
  */
-var providers: Array<String>? = null)
+class Options(
+    var providers: Array<String>? = null,
+    var limit: Int? = null,
+    var onePerDomain: Boolean? = null,
+    var includeBlocked: Boolean? = null,
+    var includeFavicon: Boolean? = null
+)
 
 external class TopSitesNamespace {
     /**

@@ -10,6 +10,11 @@ typealias Promise = Any
 typealias Test = Any
 
 external class TestNamespace {
+    /**
+     * Used to test sending messages to extensions.
+     *
+     * @param message null
+     * @param argument null */
     val onMessage: Event<(message: String, argument: dynamic) -> Unit>
 
     /**
@@ -41,20 +46,20 @@ external class TestNamespace {
     fun assertFalse(test: dynamic = definedExternally, message: String? = definedExternally)
 
     fun assertEq(
-            expected: dynamic = definedExternally,
-            actual: dynamic = definedExternally,
-            message: String? = definedExternally
+        expected: dynamic = definedExternally,
+        actual: dynamic = definedExternally,
+        message: String? = definedExternally
     )
 
     fun assertRejects(
-            promise: Promise<Any?>,
-            expectedError: ExpectedError? = definedExternally,
-            message: String? = definedExternally
+        promise: Promise<Any?>,
+        expectedError: ExpectedError? = definedExternally,
+        message: String? = definedExternally
     ): Promise<Any>
 
     fun assertThrows(
-            func: () -> Unit,
-            expectedError: ExpectedError? = definedExternally,
-            message: String? = definedExternally
+        func: () -> Unit,
+        expectedError: ExpectedError? = definedExternally,
+        message: String? = definedExternally
     )
 }

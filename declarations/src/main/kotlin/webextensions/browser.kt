@@ -12,8 +12,10 @@ import contextMenus.ContextMenusNamespace
 import contextualIdentities.ContextualIdentitiesNamespace
 import cookies.CookiesNamespace
 import devtools.DevtoolsNamespace
+import dns.DnsNamespace
 import downloads.DownloadsNamespace
 import events.EventsNamespace
+import experiments.ExperimentsNamespace
 import extension.ExtensionNamespace
 import extensionTypes.ExtensionTypesNamespace
 import find.FindNamespace
@@ -34,14 +36,17 @@ import pkcs11.Pkcs11Namespace
 import privacy.PrivacyNamespace
 import proxy.ProxyNamespace
 import runtime.RuntimeNamespace
+import search.SearchNamespace
 import sessions.SessionsNamespace
 import sidebarAction.SidebarActionNamespace
 import storage.StorageNamespace
 import tabs.TabsNamespace
+import telemetry.TelemetryNamespace
 import test.TestNamespace
 import theme.ThemeNamespace
 import topSites.TopSitesNamespace
 import types.TypesNamespace
+import userScripts.UserScriptsNamespace
 import webNavigation.WebNavigationNamespace
 import webRequest.WebRequestNamespace
 import windows.WindowsNamespace
@@ -71,9 +76,13 @@ external class Browser {
 
     val devtools: DevtoolsNamespace
 
+    val dns: DnsNamespace
+
     val downloads: DownloadsNamespace
 
     val events: EventsNamespace
+
+    val experiments: ExperimentsNamespace
 
     val extension: ExtensionNamespace
 
@@ -115,6 +124,8 @@ external class Browser {
 
     val runtime: RuntimeNamespace
 
+    val search: SearchNamespace
+
     val sessions: SessionsNamespace
 
     val sidebarAction: SidebarActionNamespace
@@ -123,6 +134,8 @@ external class Browser {
 
     val tabs: TabsNamespace
 
+    val telemetry: TelemetryNamespace
+
     val test: TestNamespace
 
     val theme: ThemeNamespace
@@ -130,6 +143,8 @@ external class Browser {
     val topSites: TopSitesNamespace
 
     val types: TypesNamespace
+
+    val userScripts: UserScriptsNamespace
 
     val webNavigation: WebNavigationNamespace
 

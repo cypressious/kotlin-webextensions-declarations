@@ -5,100 +5,64 @@ import kotlin.js.Promise
 
 /**
  * Options that determine exactly what data will be removed.
+ * @param since Remove data accumulated on or after this date, represented in milliseconds since the epoch (accessible via the <code>getTime</code> method of the JavaScript <code>Date</code> object). If absent, defaults to 0 (which would remove all browsing data).
+ * @param hostnames Only remove data associated with these hostnames (only applies to cookies and localStorage).
+ * @param originTypes An object whose properties specify which origin types ought to be cleared. If this object isn't specified, it defaults to clearing only "unprotected" origins. Please ensure that you <em>really</em> want to remove application data before adding 'protectedWeb' or 'extensions'.
  */
 class RemovalOptions(
-        /**
-         * Remove data accumulated on or after this date, represented in milliseconds since the epoch (accessible via the <code>getTime</code> method of the JavaScript <code>Date</code> object). If absent, defaults to 0 (which would remove all browsing data).
-         */
-        var since: Date? = null,
-        /**
-         * Only remove data associated with these hostnames (only applies to cookies and localStorage).
-         */
-        var hostnames: Array<String>? = null,
-        /**
-         * An object whose properties specify which origin types ought to be cleared. If this object isn't specified, it defaults to clearing only "unprotected" origins. Please ensure that you <em>really</em> want to remove application data before adding 'protectedWeb' or 'extensions'.
-         */
-        var originTypes: OriginTypes? = null
+    var since: Date? = null,
+    var hostnames: Array<String>? = null,
+    var originTypes: OriginTypes? = null
 )
 
 /**
  * A set of data types. Missing data types are interpreted as <code>false</code>.
+ * @param cache The browser's cache. Note: when removing data, this clears the <em>entire</em> cache: it is not limited to the range you specify.
+ * @param cookies The browser's cookies.
+ * @param downloads The browser's download list.
+ * @param formData The browser's stored form data.
+ * @param history The browser's history.
+ * @param indexedDB Websites' IndexedDB data.
+ * @param localStorage Websites' local storage data.
+ * @param serverBoundCertificates Server-bound certificates.
+ * @param passwords Stored passwords.
+ * @param pluginData Plugins' data.
+ * @param serviceWorkers Service Workers.
  */
 class DataTypeSet(
-        /**
-         * The browser's cache. Note: when removing data, this clears the <em>entire</em> cache: it is not limited to the range you specify.
-         */
-        var cache: Boolean? = null,
-        /**
-         * The browser's cookies.
-         */
-        var cookies: Boolean? = null,
-        /**
-         * The browser's download list.
-         */
-        var downloads: Boolean? = null,
-        /**
-         * The browser's stored form data.
-         */
-        var formData: Boolean? = null,
-        /**
-         * The browser's history.
-         */
-        var history: Boolean? = null,
-        /**
-         * Websites' IndexedDB data.
-         */
-        var indexedDB: Boolean? = null,
-        /**
-         * Websites' local storage data.
-         */
-        var localStorage: Boolean? = null,
-        /**
-         * Server-bound certificates.
-         */
-        var serverBoundCertificates: Boolean? = null,
-        /**
-         * Stored passwords.
-         */
-        var passwords: Boolean? = null,
-        /**
-         * Plugins' data.
-         */
-        var pluginData: Boolean? = null,
-        /**
-         * Service Workers.
-         */
-        var serviceWorkers: Boolean? = null
+    var cache: Boolean? = null,
+    var cookies: Boolean? = null,
+    var downloads: Boolean? = null,
+    var formData: Boolean? = null,
+    var history: Boolean? = null,
+    var indexedDB: Boolean? = null,
+    var localStorage: Boolean? = null,
+    var serverBoundCertificates: Boolean? = null,
+    var passwords: Boolean? = null,
+    var pluginData: Boolean? = null,
+    var serviceWorkers: Boolean? = null
 )
 
 /**
  * An object whose properties specify which origin types ought to be cleared. If this object isn't specified, it defaults to clearing only "unprotected" origins. Please ensure that you <em>really</em> want to remove application data before adding 'protectedWeb' or 'extensions'.
+ * @param unprotectedWeb Normal websites.
+ * @param protectedWeb Websites that have been installed as hosted applications (be careful!).
+ * @param extension Extensions and packaged applications a user has installed (be _really_ careful!).
  */
 class OriginTypes(
-        /**
-         * Normal websites.
-         */
-        var unprotectedWeb: Boolean? = null,
-        /**
-         * Websites that have been installed as hosted applications (be careful!).
-         */
-        var protectedWeb: Boolean? = null,
-        /**
-         * Extensions and packaged applications a user has installed (be _really_ careful!).
-         */
-        var extension: Boolean? = null
+    var unprotectedWeb: Boolean? = null,
+    var protectedWeb: Boolean? = null,
+    var extension: Boolean? = null
 )
 
+/**
+ * @param dataToRemove All of the types will be present in the result, with values of <code>true</code> if they are both selected to be removed and permitted to be removed, otherwise <code>false</code>.
+ * @param dataRemovalPermitted All of the types will be present in the result, with values of <code>true</code> if they are permitted to be removed (e.g., by enterprise policy) and <code>false</code> if not.
+ */
 class Result(
-        var options: RemovalOptions,
-        /**
-         * All of the types will be present in the result, with values of <code>true</code> if they are both selected to be removed and permitted to be removed, otherwise <code>false</code>.
-         */
-        var dataToRemove: DataTypeSet,
-        /**
-         * All of the types will be present in the result, with values of <code>true</code> if they are permitted to be removed (e.g., by enterprise policy) and <code>false</code> if not.
-         */
-        var dataRemovalPermitted: DataTypeSet
+    var options: RemovalOptions,
+    var dataToRemove: DataTypeSet,
+    var dataRemovalPermitted: DataTypeSet
 )
 
 external class BrowsingDataNamespace {

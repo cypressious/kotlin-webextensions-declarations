@@ -6,20 +6,23 @@ import webextensions.Event
 
 /**
  * Info provided in the onUpdated listener.
+ * @param theme The new theme after update
+ * @param windowId The id of the window the theme has been applied to
  */
-class ThemeUpdateInfo(/**
- * The new theme after update
- */
-var theme: Theme, /**
- * The id of the window the theme has been applied to
- */
-var windowId: Int? = null)
+class ThemeUpdateInfo(
+    var theme: Theme,
+    var windowId: Int? = null
+)
 
 /**
  * The new theme after update */
 typealias Theme = Any
 
 external class ThemeNamespace {
+    /**
+     * Fired when a new theme has been applied
+     *
+     * @param updateInfo Details of the theme update */
     val onUpdated: Event<(updateInfo: ThemeUpdateInfo) -> Unit>
 
     /**

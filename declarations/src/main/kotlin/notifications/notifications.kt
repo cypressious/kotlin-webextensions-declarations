@@ -8,114 +8,71 @@ typealias TemplateType = String
 
 typealias PermissionLevel = String
 
-class NotificationItem(/**
- * Title of one item of a list notification.
+/**
+ * @param title Title of one item of a list notification.
+ * @param message Additional details about this item.
  */
-var title: String, /**
- * Additional details about this item.
- */
-var message: String)
-
-class CreateNotificationOptions(
-        /**
-         * Which type of notification to display.
-         */
-        var type: TemplateType,
-        /**
-         * A URL to the sender's avatar, app icon, or a thumbnail for image notifications.
-         */
-        var iconUrl: String? = null,
-        /**
-         * A URL to the app icon mask.
-         */
-        var appIconMaskUrl: String? = null,
-        /**
-         * Title of the notification (e.g. sender name for email).
-         */
-        var title: String,
-        /**
-         * Main notification content.
-         */
-        var message: String,
-        /**
-         * Alternate notification content with a lower-weight font.
-         */
-        var contextMessage: String? = null,
-        /**
-         * Priority ranges from -2 to 2. -2 is lowest priority. 2 is highest. Zero is default.
-         */
-        var priority: Int? = null,
-        /**
-         * A timestamp associated with the notification, in milliseconds past the epoch.
-         */
-        var eventTime: Int? = null,
-        /**
-         * A URL to the image thumbnail for image-type notifications.
-         */
-        var imageUrl: String? = null,
-        /**
-         * Items for multi-item notifications.
-         */
-        var items: Array<NotificationItem>? = null,
-        /**
-         * Current progress ranges from 0 to 100.
-         */
-        var progress: Int? = null,
-        /**
-         * Whether to show UI indicating that the app will visibly respond to clicks on the body of a notification.
-         */
-        var isClickable: Boolean? = null
+class NotificationItem(
+    var title: String,
+    var message: String
 )
 
+/**
+ * @param type Which type of notification to display.
+ * @param iconUrl A URL to the sender's avatar, app icon, or a thumbnail for image notifications.
+ * @param appIconMaskUrl A URL to the app icon mask.
+ * @param title Title of the notification (e.g. sender name for email).
+ * @param message Main notification content.
+ * @param contextMessage Alternate notification content with a lower-weight font.
+ * @param priority Priority ranges from -2 to 2. -2 is lowest priority. 2 is highest. Zero is default.
+ * @param eventTime A timestamp associated with the notification, in milliseconds past the epoch.
+ * @param imageUrl A URL to the image thumbnail for image-type notifications.
+ * @param items Items for multi-item notifications.
+ * @param progress Current progress ranges from 0 to 100.
+ * @param isClickable Whether to show UI indicating that the app will visibly respond to clicks on the body of a notification.
+ */
+class CreateNotificationOptions(
+    var type: TemplateType,
+    var iconUrl: String? = null,
+    var appIconMaskUrl: String? = null,
+    var title: String,
+    var message: String,
+    var contextMessage: String? = null,
+    var priority: Int? = null,
+    var eventTime: Float? = null,
+    var imageUrl: String? = null,
+    var items: Array<NotificationItem>? = null,
+    var progress: Int? = null,
+    var isClickable: Boolean? = null
+)
+
+/**
+ * @param type Which type of notification to display.
+ * @param iconUrl A URL to the sender's avatar, app icon, or a thumbnail for image notifications.
+ * @param appIconMaskUrl A URL to the app icon mask.
+ * @param title Title of the notification (e.g. sender name for email).
+ * @param message Main notification content.
+ * @param contextMessage Alternate notification content with a lower-weight font.
+ * @param priority Priority ranges from -2 to 2. -2 is lowest priority. 2 is highest. Zero is default.
+ * @param eventTime A timestamp associated with the notification, in milliseconds past the epoch.
+ * @param imageUrl A URL to the image thumbnail for image-type notifications.
+ * @param items Items for multi-item notifications.
+ * @param progress Current progress ranges from 0 to 100.
+ * @param isClickable Whether to show UI indicating that the app will visibly respond to clicks on the body of a notification.
+ */
 class UpdateNotificationOptions(
-        /**
-         * Which type of notification to display.
-         */
-        var type: TemplateType? = null,
-        /**
-         * A URL to the sender's avatar, app icon, or a thumbnail for image notifications.
-         */
-        var iconUrl: String? = null,
-        /**
-         * A URL to the app icon mask.
-         */
-        var appIconMaskUrl: String? = null,
-        /**
-         * Title of the notification (e.g. sender name for email).
-         */
-        var title: String? = null,
-        /**
-         * Main notification content.
-         */
-        var message: String? = null,
-        /**
-         * Alternate notification content with a lower-weight font.
-         */
-        var contextMessage: String? = null,
-        /**
-         * Priority ranges from -2 to 2. -2 is lowest priority. 2 is highest. Zero is default.
-         */
-        var priority: Int? = null,
-        /**
-         * A timestamp associated with the notification, in milliseconds past the epoch.
-         */
-        var eventTime: Int? = null,
-        /**
-         * A URL to the image thumbnail for image-type notifications.
-         */
-        var imageUrl: String? = null,
-        /**
-         * Items for multi-item notifications.
-         */
-        var items: Array<NotificationItem>? = null,
-        /**
-         * Current progress ranges from 0 to 100.
-         */
-        var progress: Int? = null,
-        /**
-         * Whether to show UI indicating that the app will visibly respond to clicks on the body of a notification.
-         */
-        var isClickable: Boolean? = null
+    var type: TemplateType? = null,
+    var iconUrl: String? = null,
+    var appIconMaskUrl: String? = null,
+    var title: String? = null,
+    var message: String? = null,
+    var contextMessage: String? = null,
+    var priority: Int? = null,
+    var eventTime: Float? = null,
+    var imageUrl: String? = null,
+    var items: Array<NotificationItem>? = null,
+    var progress: Int? = null,
+    var isClickable: Boolean? = null
 )
 
 class Buttons(var title: String, var iconUrl: String? = null)
@@ -134,12 +91,30 @@ class Notifications() {
 }
 
 external class NotificationsNamespace {
+    /**
+     * Fired when the notification closed, either by the system or by user action.
+     *
+     * @param notificationId The notificationId of the closed notification.
+     * @param byUser True if the notification was closed by the user. */
     val onClosed: Event<(notificationId: String, byUser: Boolean) -> Unit>
 
+    /**
+     * Fired when the user clicked in a non-button area of the notification.
+     *
+     * @param notificationId The notificationId of the clicked notification. */
     val onClicked: Event<(notificationId: String) -> Unit>
 
-    val onButtonClicked: Event<(notificationId: String, buttonIndex: Int) -> Unit>
+    /**
+     * Fired when the  user pressed a button in the notification.
+     *
+     * @param notificationId The notificationId of the clicked notification.
+     * @param buttonIndex The index of the button clicked by the user. */
+    val onButtonClicked: Event<(notificationId: String, buttonIndex: Float) -> Unit>
 
+    /**
+     * Fired when the notification is shown.
+     *
+     * @param notificationId The notificationId of the shown notification. */
     val onShown: Event<(notificationId: String) -> Unit>
 
     /**

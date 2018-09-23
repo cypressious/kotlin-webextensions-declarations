@@ -9,31 +9,27 @@ typealias ViewType = String
 
 /**
  * Set for the lifetime of a callback if an ansychronous extension api has resulted in an error. If no error has occured lastError will be <var>undefined</var>.
+ * @param message Description of the error that has taken place.
  */
 @Suppress("NOTHING_TO_INLINE", "UnsafeCastFromDynamic")
-class LastError(/**
- * Description of the error that has taken place.
- */
-var message: String) {
+class LastError(
+    var message: String
+) {
     inline operator fun get(key: String): dynamic = asDynamic()[key]
     inline operator fun set(key: String, value: dynamic) {
         asDynamic()[key] = value
     }
 }
 
+/**
+ * @param type The type of view to get. If omitted, returns all views (including background pages and tabs). Valid values: 'tab', 'popup', 'sidebar'.
+ * @param windowId The window to restrict the search to. If omitted, returns all views.
+ * @param tabId Find a view according to a tab id. If this field is omitted, returns all views.
+ */
 class FetchProperties(
-        /**
-         * The type of view to get. If omitted, returns all views (including background pages and tabs). Valid values: 'tab', 'popup', 'sidebar'.
-         */
-        var type: ViewType? = null,
-        /**
-         * The window to restrict the search to. If omitted, returns all views.
-         */
-        var windowId: Int? = null,
-        /**
-         * Find a view according to a tab id. If this field is omitted, returns all views.
-         */
-        var tabId: Int? = null
+    var type: ViewType? = null,
+    var windowId: Int? = null,
+    var tabId: Int? = null
 )
 
 @Suppress("NOTHING_TO_INLINE", "UnsafeCastFromDynamic")

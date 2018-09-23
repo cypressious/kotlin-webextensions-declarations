@@ -1,16 +1,16 @@
 package devtools
 
-import kotlin.Suppress
-import kotlin.js.Promise
+import manifest.ExtensionURL
 import webextensions.Event
+import kotlin.js.Promise
 
 /**
  * A resource within the inspected page, such as a document, a script, or an image.
+ * @param url The URL of the resource.
  */
-class Resource(/**
- * The URL of the resource.
- */
-var url: String)
+class Resource(
+    var url: String
+)
 
 /**
  * The options parameter can contain one or more options.
@@ -19,47 +19,31 @@ class Options()
 
 /**
  * An object providing details if an exception occurred while evaluating the expression.
+ * @param isError Set if the error occurred on the DevTools side before the expression is evaluated.
+ * @param code Set if the error occurred on the DevTools side before the expression is evaluated.
+ * @param description Set if the error occurred on the DevTools side before the expression is evaluated.
+ * @param details Set if the error occurred on the DevTools side before the expression is evaluated, contains the array of the values that may be substituted into the description string to provide more information about the cause of the error.
+ * @param isException Set if the evaluated code produces an unhandled exception.
+ * @param value Set if the evaluated code produces an unhandled exception.
  */
 class ExceptionInfo(
-        /**
-         * Set if the error occurred on the DevTools side before the expression is evaluated.
-         */
-        var isError: Boolean,
-        /**
-         * Set if the error occurred on the DevTools side before the expression is evaluated.
-         */
-        var code: String,
-        /**
-         * Set if the error occurred on the DevTools side before the expression is evaluated.
-         */
-        var description: String,
-        /**
-         * Set if the error occurred on the DevTools side before the expression is evaluated, contains the array of the values that may be substituted into the description string to provide more information about the cause of the error.
-         */
-        var details: Array<dynamic>,
-        /**
-         * Set if the evaluated code produces an unhandled exception.
-         */
-        var isException: Boolean,
-        /**
-         * Set if the evaluated code produces an unhandled exception.
-         */
-        var value: String
+    var isError: Boolean,
+    var code: String,
+    var description: String,
+    var details: Array<dynamic>,
+    var isException: Boolean,
+    var value: String
 )
 
+/**
+ * @param ignoreCache When true, the loader will bypass the cache for all inspected page resources loaded before the <code>load</code> event is fired. The effect is similar to pressing Ctrl+Shift+R in the inspected window or within the Developer Tools window.
+ * @param userAgent If specified, the string will override the value of the <code>User-Agent</code> HTTP header that's sent while loading the resources of the inspected page. The string will also override the value of the <code>navigator.userAgent</code> property that's returned to any scripts that are running within the inspected page.
+ * @param injectedScript If specified, the script will be injected into every frame of the inspected page immediately upon load, before any of the frame's scripts. The script will not be injected after subsequent reloads&mdash;for example, if the user presses Ctrl+R.
+ */
 class ReloadOptions(
-        /**
-         * When true, the loader will bypass the cache for all inspected page resources loaded before the <code>load</code> event is fired. The effect is similar to pressing Ctrl+Shift+R in the inspected window or within the Developer Tools window.
-         */
-        var ignoreCache: Boolean? = null,
-        /**
-         * If specified, the string will override the value of the <code>User-Agent</code> HTTP header that's sent while loading the resources of the inspected page. The string will also override the value of the <code>navigator.userAgent</code> property that's returned to any scripts that are running within the inspected page.
-         */
-        var userAgent: String? = null,
-        /**
-         * If specified, the script will be injected into every frame of the inspected page immediately upon load, before any of the frame's scripts. The script will not be injected after subsequent reloads&mdash;for example, if the user presses Ctrl+R.
-         */
-        var injectedScript: String? = null
+    var ignoreCache: Boolean? = null,
+    var userAgent: String? = null,
+    var injectedScript: String? = null
 )
 
 external class InspectedWindowNamespace {
@@ -90,7 +74,22 @@ class HarLog() {
 }
 
 external class NetworkNamespace {
+    /**
+     * Fired when a network request is finished and all request data are available.
+     *
+     * @param request Description of a network request in the form of a HAR entry. See HAR specification for details. */
+    val onRequestFinished: Event<(request: Request) -> Unit>
+
+    /**
+     * Fired when the inspected window navigates to a new page.
+     *
+     * @param url URL of the new page. */
     val onNavigated: Event<(url: String) -> Unit>
+
+    /**
+     * Returns HAR log that contains all known network requests.
+     */
+    fun getHAR(): Promise<HarLog>
 }
 
 /**
@@ -113,16 +112,33 @@ typealias ExtensionSidebarPane = Any
  * A button created by the extension. */
 typealias Button = Any
 
+/**
+ * Path of the panel's icon relative to the extension directory, or an empty string to use the default extension icon as the panel icon. */
+typealias IconPath = Any
+
 external class PanelsNamespace {
+    /**
+     * Fired when the devtools theme changes.
+     *
+     * @param themeName The name of the current devtools theme. */
     val onThemeChanged: Event<(themeName: String) -> Unit>
+
+//    /**
+//     * Creates an extension panel.
+//     */
+//    fun create(
+//        title: String,
+//        iconPath: String,
+//        pagePath: ExtensionURL
+//    ): Promise<ExtensionPanel>
 
     /**
      * Creates an extension panel.
      */
     fun create(
-            title: String,
-            iconPath: String,
-            pagePath: String
+        title: String,
+        iconPath: ExtensionURL,
+        pagePath: ExtensionURL
     ): Promise<ExtensionPanel>
 }
 

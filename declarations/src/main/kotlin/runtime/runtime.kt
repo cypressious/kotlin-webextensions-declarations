@@ -7,18 +7,16 @@ import tabs.Tab
 
 /**
  * An object which allows two way communication with other pages.
+ * @param sender This property will <b>only</b> be present on ports passed to onConnect/onConnectExternal listeners.
  */
 @Suppress("NOTHING_TO_INLINE", "UnsafeCastFromDynamic")
 class Port(
-        var name: String,
-        var disconnect: () -> Unit,
-        var onDisconnect: Event,
-        var onMessage: Event,
-        var postMessage: (Any) -> Unit,
-        /**
-         * This property will <b>only</b> be present on ports passed to onConnect/onConnectExternal listeners.
-         */
-        var sender: MessageSender? = null
+    var name: String,
+    var disconnect: () -> Unit,
+    var onDisconnect: Event,
+    var onMessage: Event,
+    var postMessage: (Any) -> Unit,
+    var sender: MessageSender? = null
 ) {
     inline operator fun get(key: String): dynamic = asDynamic()[key]
     inline operator fun set(key: String, value: dynamic) {
@@ -28,24 +26,16 @@ class Port(
 
 /**
  * An object containing information about the script context that sent a message or request.
+ * @param tab The $(ref:tabs.Tab) which opened the connection, if any. This property will <strong>only</strong> be present when the connection was opened from a tab (including content scripts), and <strong>only</strong> if the receiver is an extension, not an app.
+ * @param frameId The $(topic:frame_ids)[frame] that opened the connection. 0 for top-level frames, positive for child frames. This will only be set when <code>tab</code> is set.
+ * @param id The ID of the extension or app that opened the connection, if any.
+ * @param url The URL of the page or frame that opened the connection. If the sender is in an iframe, it will be iframe's URL not the URL of the page which hosts it.
  */
 class MessageSender(
-        /**
-         * The $(ref:tabs.Tab) which opened the connection, if any. This property will <strong>only</strong> be present when the connection was opened from a tab (including content scripts), and <strong>only</strong> if the receiver is an extension, not an app.
-         */
-        var tab: Tab? = null,
-        /**
-         * The $(topic:frame_ids)[frame] that opened the connection. 0 for top-level frames, positive for child frames. This will only be set when <code>tab</code> is set.
-         */
-        var frameId: Int? = null,
-        /**
-         * The ID of the extension or app that opened the connection, if any.
-         */
-        var id: String? = null,
-        /**
-         * The URL of the page or frame that opened the connection. If the sender is in an iframe, it will be iframe's URL not the URL of the page which hosts it.
-         */
-        var url: String? = null
+    var tab: Tab? = null,
+    var frameId: Int? = null,
+    var id: String? = null,
+    var url: String? = null
 )
 
 /**
@@ -58,35 +48,26 @@ typealias PlatformArch = String
 
 /**
  * An object containing information about the current platform.
+ * @param os The operating system the browser is running on.
+ * @param arch The machine's processor architecture.
  */
-class PlatformInfo(/**
- * The operating system the browser is running on.
- */
-var os: PlatformOs, /**
- * The machine's processor architecture.
- */
-var arch: PlatformArch)
+class PlatformInfo(
+    var os: PlatformOs,
+    var arch: PlatformArch
+)
 
 /**
  * An object containing information about the current browser.
+ * @param name The name of the browser, for example 'Firefox'.
+ * @param vendor The name of the browser vendor, for example 'Mozilla'.
+ * @param version The browser's version, for example '42.0.0' or '0.8.1pre'.
+ * @param buildID The browser's build ID/date, for example '20160101'.
  */
 class BrowserInfo(
-        /**
-         * The name of the browser, for example 'Firefox'.
-         */
-        var name: String,
-        /**
-         * The name of the browser vendor, for example 'Mozilla'.
-         */
-        var vendor: String,
-        /**
-         * The browser's version, for example '42.0.0' or '0.8.1pre'.
-         */
-        var version: String,
-        /**
-         * The browser's build ID/date, for example '20160101'.
-         */
-        var buildID: String
+    var name: String,
+    var vendor: String,
+    var version: String,
+    var buildID: String
 )
 
 /**
@@ -103,12 +84,12 @@ typealias OnRestartRequiredReason = String
 
 /**
  * This will be defined during an API method callback if there was an error
+ * @param message Details about the error which occurred.
  */
 @Suppress("NOTHING_TO_INLINE", "UnsafeCastFromDynamic")
-class LastError(/**
- * Details about the error which occurred.
- */
-var message: String? = null) {
+class LastError(
+    var message: String? = null
+) {
     inline operator fun get(key: String): dynamic = asDynamic()[key]
     inline operator fun set(key: String, value: dynamic) {
         asDynamic()[key] = value
@@ -139,24 +120,27 @@ class GetManifestResult() {
 
 /**
  * If an update is available, this contains more information about the available update.
+ * @param version The version of the available update.
  */
-class Details(/**
- * The version of the available update.
- */
-var version: String)
+class Details(
+    var version: String
+)
 
-class ConnectInfo(/**
- * Will be passed into onConnect for processes that are listening for the connection event.
+/**
+ * @param name Will be passed into onConnect for processes that are listening for the connection event.
+ * @param includeTlsChannelId Whether the TLS channel ID will be passed into onConnectExternal for processes that are listening for the connection event.
  */
-var name: String? = null, /**
- * Whether the TLS channel ID will be passed into onConnectExternal for processes that are listening for the connection event.
- */
-var includeTlsChannelId: Boolean? = null)
+class ConnectInfo(
+    var name: String? = null,
+    var includeTlsChannelId: Boolean? = null
+)
 
-class Options(/**
- * If true, the message will be directed to the extension's proxy sandbox.
+/**
+ * @param toProxyScript If true, the message will be directed to the extension's proxy sandbox.
  */
-var toProxyScript: Boolean? = null)
+class Options(
+    var toProxyScript: Boolean? = null
+)
 
 @Suppress("NOTHING_TO_INLINE", "UnsafeCastFromDynamic")
 class DirectoryEntry() {
@@ -166,29 +150,25 @@ class DirectoryEntry() {
     }
 }
 
+/**
+ * @param reason The reason that this event is being dispatched.
+ * @param previousVersion Indicates the previous version of the extension, which has just been updated. This is present only if 'reason' is 'update'.
+ * @param temporary Indicates whether the addon is installed as a temporary extension.
+ */
 class Details2(
-        /**
-         * The reason that this event is being dispatched.
-         */
-        var reason: OnInstalledReason,
-        /**
-         * Indicates the previous version of the extension, which has just been updated. This is present only if 'reason' is 'update'.
-         */
-        var previousVersion: String? = null,
-        /**
-         * Indicates whether the addon is installed as a temporary extension.
-         */
-        var temporary: Boolean
+    var reason: OnInstalledReason,
+    var previousVersion: String? = null,
+    var temporary: Boolean
 )
 
 /**
  * The manifest details of the available update.
+ * @param version The version number of the available update.
  */
 @Suppress("NOTHING_TO_INLINE", "UnsafeCastFromDynamic")
-class Details3(/**
- * The version number of the available update.
- */
-var version: String) {
+class Details3(
+    var version: String
+) {
     inline operator fun get(key: String): dynamic = asDynamic()[key]
     inline operator fun set(key: String, value: dynamic) {
         asDynamic()[key] = value
@@ -196,26 +176,57 @@ var version: String) {
 }
 
 external class RuntimeNamespace {
+    /**
+     * Fired when a profile that has this extension installed first starts up. This event is not fired for incognito profiles.
+     */
     val onStartup: webextensions.Event<() -> Unit>
 
+    /**
+     * Fired when the extension is first installed, when the extension is updated to a new version, and when the browser is updated to a new version.
+     *
+     * @param details null */
     val onInstalled: webextensions.Event<(details: Details2) -> Unit>
 
+    /**
+     * Fired when an update is available, but isn't installed immediately because the app is currently running. If you do nothing, the update will be installed the next time the background page gets unloaded, if you want it to be installed sooner you can explicitly call $(ref:runtime.reload). If your extension is using a persistent background page, the background page of course never gets unloaded, so unless you call $(ref:runtime.reload) manually in response to this event the update will not get installed until the next time the browser itself restarts. If no handlers are listening for this event, and your extension has a persistent background page, it behaves as if $(ref:runtime.reload) is called in response to this event.
+     *
+     * @param details The manifest details of the available update. */
     val onUpdateAvailable: webextensions.Event<(details: Details3) -> Unit>
 
+    /**
+     * Fired when a connection is made from either an extension process or a content script.
+     *
+     * @param port null */
     val onConnect: webextensions.Event<(port: Port) -> Unit>
 
+    /**
+     * Fired when a connection is made from another extension.
+     *
+     * @param port null */
     val onConnectExternal: webextensions.Event<(port: Port) -> Unit>
 
+    /**
+     * Fired when a message is sent from either an extension process or a content script.
+     *
+     * @param message The message sent by the calling script.
+     * @param sender null
+     * @param sendResponse Function to call (at most once) when you have a response. The argument should be any JSON-ifiable object. If you have more than one <code>onMessage</code> listener in the same document, then only one may send a response. This function becomes invalid when the event listener returns, unless you return true from the event listener to indicate you wish to send a response asynchronously (this will keep the message channel open to the other end until <code>sendResponse</code> is called). */
     val onMessage: webextensions.Event<(
-            message: dynamic,
-            sender: MessageSender,
-            sendResponse: () -> Unit
+        message: dynamic,
+        sender: MessageSender,
+        sendResponse: () -> Unit
     ) -> Unit>
 
+    /**
+     * Fired when a message is sent from another extension/app. Cannot be used in a content script.
+     *
+     * @param message The message sent by the calling script.
+     * @param sender null
+     * @param sendResponse Function to call (at most once) when you have a response. The argument should be any JSON-ifiable object. If you have more than one <code>onMessage</code> listener in the same document, then only one may send a response. This function becomes invalid when the event listener returns, unless you return true from the event listener to indicate you wish to send a response asynchronously (this will keep the message channel open to the other end until <code>sendResponse</code> is called). */
     val onMessageExternal: webextensions.Event<(
-            message: dynamic,
-            sender: MessageSender,
-            sendResponse: () -> Unit
+        message: dynamic,
+        sender: MessageSender,
+        sendResponse: () -> Unit
     ) -> Unit>
 
     /**
@@ -262,9 +273,9 @@ external class RuntimeNamespace {
      * Sends a single message to event listeners within your extension/app or a different extension/app. Similar to $(ref:runtime.connect) but only sends a single message, with an optional response. If sending to your extension, the $(ref:runtime.onMessage) event will be fired in each page, or $(ref:runtime.onMessageExternal), if a different extension. Note that extensions cannot send messages to content scripts using this method. To send messages to content scripts, use $(ref:tabs.sendMessage).
      */
     fun sendMessage(
-            extensionId: String? = definedExternally,
-            message: dynamic,
-            options: Options? = definedExternally
+        extensionId: String? = definedExternally,
+        message: dynamic,
+        options: Options? = definedExternally
     ): Promise<dynamic>
 
     /**
