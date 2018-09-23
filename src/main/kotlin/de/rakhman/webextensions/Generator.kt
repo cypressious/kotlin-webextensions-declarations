@@ -129,7 +129,10 @@ class Generator(val dir: File) {
                 )
             )
 
-        return PropertySpec.builder(event.name, type).build()
+        return PropertySpec
+            .builder(event.name, type)
+            .apply { event.description?.let { addKdoc(it.cleanupDescription()) } }
+            .build()
     }
 
     private fun generateType(type: Type, fileBuilder: FileSpec.Builder) {
@@ -177,7 +180,7 @@ class Generator(val dir: File) {
             .addProperties(properties.map {
                 PropertySpec
                     .varBuilder(it.key, parameterType(it.key, it.value))
-                    .apply { it.value.description?.let { addKdoc(it.replace("%", "%%") + "\n") } }
+                    .apply { it.value.description?.let { addKdoc(it.cleanupDescription()) } }
                     .initializer(it.key)
                     .build()
             })
@@ -405,3 +408,5 @@ private fun List<Parameter>.getResolvedChoices(): List<List<Parameter>> {
 }
 
 private fun String.nameSpaceName() = capitalize() + "Namespace"
+
+private fun String.cleanupDescription() = replace("%", "%%") + "\n"
