@@ -134,7 +134,16 @@ class Generator(val dir: File) {
 
         return PropertySpec
             .builder(event.name, type)
-            .apply { event.description?.let { addKdoc(it.cleanupDescription()) } }
+            .apply { event.description?.let { addKdoc(buildString {
+                append(it.cleanupDescription())
+                event.parameters?.forEach {
+                    append('\n')
+                    append("@param ")
+                    append(it.name)
+                    append(' ')
+                    append(it.description)
+                }
+            }) } }
             .build()
     }
 
