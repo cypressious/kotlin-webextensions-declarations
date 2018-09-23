@@ -134,16 +134,20 @@ class Generator(val dir: File) {
 
         return PropertySpec
             .builder(event.name, type)
-            .apply { event.description?.let { addKdoc(buildString {
-                append(it.cleanupDescription())
-                event.parameters?.forEach {
-                    append('\n')
-                    append("@param ")
-                    append(it.name)
-                    append(' ')
-                    append(it.description)
+            .apply {
+                event.description?.let {
+                    addKdoc(buildString {
+                        append(it.cleanupDescription())
+                        event.parameters?.forEach {
+                            append('\n')
+                            append("@param ")
+                            append(it.name)
+                            append(' ')
+                            append(it.description)
+                        }
+                    })
                 }
-            }) } }
+            }
             .build()
     }
 
@@ -272,7 +276,11 @@ class Generator(val dir: File) {
             FunSpec.builder("set")
                 .addModifiers(KModifier.OPERATOR, KModifier.INLINE)
                 .addParameter("key", ClassName.bestGuess("String"))
-                .addParameter("value", parameterType("", type))
+                .addParameter(
+                    "value",
+                    parameterType("", type),
+                    *if (type.type == "function") arrayOf(KModifier.NOINLINE) else arrayOf()
+                )
                 .addCode("asDynamic()[key] = value\n")
                 .build()
         )
