@@ -33,6 +33,7 @@ class Generator(val dir: File) {
                     .addFunction(
                         FunSpec
                             .builder("addListener")
+                            .addModifiers(KModifier.EXTERNAL)
                             .addParameter(
                                 ParameterSpec.builder(
                                     "listener",
@@ -44,6 +45,7 @@ class Generator(val dir: File) {
                     .addFunction(
                         FunSpec
                             .builder("removeListener")
+                            .addModifiers(KModifier.EXTERNAL)
                             .addParameter(
                                 ParameterSpec.builder(
                                     "listener",
@@ -55,6 +57,7 @@ class Generator(val dir: File) {
                     .addFunction(
                         FunSpec
                             .builder("hasListener")
+                            .addModifiers(KModifier.EXTERNAL)
                             .addParameter(
                                 ParameterSpec.builder(
                                     "listener",
@@ -181,7 +184,7 @@ class Generator(val dir: File) {
                 PropertySpec
                     .varBuilder(it.key, parameterType(it.key, it.value))
                     .apply { it.value.description?.let { addKdoc(it.cleanupDescription()) } }
-                    .initializer(it.key)
+                    .initializer(it.key.escapeIfKeyword())
                     .build()
             })
             .primaryConstructor(FunSpec.constructorBuilder()
@@ -277,7 +280,7 @@ class Generator(val dir: File) {
     }
 
     private fun generateFunction(f: Function, parameters: List<Parameter>): FunSpec {
-        val builder = FunSpec.builder(f.name)
+        val builder = FunSpec.builder(f.name).addModifiers(KModifier.EXTERNAL)
 
         f.description?.let { builder.addKdoc(it + "\n") }
 
