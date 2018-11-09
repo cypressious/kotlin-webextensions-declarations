@@ -22,7 +22,7 @@ and
 ```groovy 
 dependencies {
     // ...
-    compile 'com.github.cypressious.kotlin-webextensions-declarations:webextensions-declarations:v0.2'
+    compile 'com.github.cypressious.kotlin-webextensions-declarations:webextensions-declarations:v0.3'
 }
 ```
 
