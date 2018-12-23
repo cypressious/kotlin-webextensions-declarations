@@ -195,7 +195,8 @@ class Generator(val dir: File) {
         val typeBuilder = TypeSpec.classBuilder(name)
             .addProperties(properties.map {
                 PropertySpec
-                    .varBuilder(it.key, parameterType(it.key, it.value))
+                    .builder(it.key, parameterType(it.key, it.value))
+                    .mutable(true)
                     .apply { it.value.description?.let { addKdoc(it.cleanupDescription()) } }
                     .initializer(it.key.escapeIfKeyword())
                     .build()
@@ -377,7 +378,7 @@ class Generator(val dir: File) {
         }
 
         return if (parameter.optional) {
-            type.asNullable()
+            type.copy(nullable = true)
         } else {
             type
         }
