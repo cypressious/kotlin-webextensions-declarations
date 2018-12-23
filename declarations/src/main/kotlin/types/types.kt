@@ -1,5 +1,50 @@
 package types
 
+import kotlin.js.Promise
+
+/**
+ * Which setting to consider.
+ * @param incognito Whether to return the value that applies to the incognito session (default
+        false).
+ */
+class Details(
+    var incognito: Boolean? = null
+)
+
+/**
+ * Details of the currently effective value.
+ * @param value The value of the setting.
+ * @param levelOfControl The level of control of the setting.
+ * @param incognitoSpecific Whether the effective value is specific to the incognito
+        session.<br/>This property will <em>only</em> be present if the <var>incognito</var>
+        property in the <var>details</var> parameter of <code>get()</code> was true.
+ */
+class Details2(
+    var value: dynamic,
+    var levelOfControl: LevelOfControl,
+    var incognitoSpecific: Boolean? = null
+)
+
+/**
+ * Which setting to change.
+ * @param value The value of the setting. <br/>Note that every setting has a specific value type,
+        which is described together with the setting. An extension should <em>not</em> set a value
+        of a different type.
+ * @param scope Where to set the setting (default: regular).
+ */
+class Details3(
+    var value: dynamic,
+    var scope: SettingScope? = null
+)
+
+/**
+ * Which setting to clear.
+ * @param scope Where to clear the setting (default: regular).
+ */
+class Details4(
+    var scope: SettingScope? = null
+)
+
 /**
  * The scope of the Setting. One of<ul><li><var>regular</var>: setting for the regular profile
         (which is inherited by the incognito profile if not overridden
@@ -20,6 +65,21 @@ typealias SettingScope = String
         extension</li></ul> */
 typealias LevelOfControl = String
 
-typealias Setting = Any
+external class Setting {
+    /**
+     * Gets the value of a setting.
+     */
+    fun get(details: Details): Promise<Details2>
+
+    /**
+     * Sets the value of a setting.
+     */
+    fun set(details: Details3): Promise<Any>
+
+    /**
+     * Clears the setting, restoring any default value.
+     */
+    fun clear(details: Details4): Promise<Any>
+}
 
 external class TypesNamespace

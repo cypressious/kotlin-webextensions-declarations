@@ -2,6 +2,7 @@ package manifest
 
 import experiments.ExperimentAPI
 import extensionTypes.RunAt
+import kotlin.Suppress
 
 typealias OptionalPermission = Any
 

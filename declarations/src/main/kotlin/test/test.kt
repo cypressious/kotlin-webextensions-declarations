@@ -1,7 +1,7 @@
 package test
 
-import webextensions.Event
 import kotlin.js.Promise
+import webextensions.Event
 
 typealias ExpectedError = Any
 

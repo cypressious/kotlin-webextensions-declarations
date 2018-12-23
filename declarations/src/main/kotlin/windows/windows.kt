@@ -183,6 +183,16 @@ external class WindowsNamespace {
     val onFocusChanged: Event<(windowId: Int) -> Unit>
 
     /**
+     * The windowId value that represents the absence of a browser window.
+     */
+    var WINDOW_ID_NONE: Double
+
+    /**
+     * The windowId value that represents the $(topic:current-window)[current window].
+     */
+    var WINDOW_ID_CURRENT: Double
+
+    /**
      * Gets details about a window.
      */
     fun get(windowId: Int, getInfo: GetInfo? = definedExternally): Promise<Window>

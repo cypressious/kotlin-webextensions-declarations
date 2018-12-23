@@ -644,6 +644,13 @@ external class WebRequestNamespace {
     val onErrorOccurred: Event<(details: Details9) -> Unit>
 
     /**
+     * The maximum number of times that <code>handlerBehaviorChanged</code> can be called per 10
+            minute sustained interval. <code>handlerBehaviorChanged</code> is an expensive function
+            call that shouldn't be called often.
+     */
+    var MAX_HANDLER_BEHAVIOR_CHANGED_CALLS_PER_10_MINUTES: Double
+
+    /**
      * Needs to be called when the behavior of the webRequest handlers has changed to prevent
             incorrect handling due to caching. This function call is expensive. Don't call it often.
      */

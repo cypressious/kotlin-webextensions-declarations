@@ -5,12 +5,35 @@ import webextensions.Event
 import kotlin.js.Promise
 
 /**
- * A resource within the inspected page, such as a document, a script, or an image.
- * @param url The URL of the resource.
+ * Set to undefined if the resource content was set successfully; describes error otherwise.
  */
-class Resource(
+@Suppress("NOTHING_TO_INLINE", "UnsafeCastFromDynamic")
+class Error() {
+    inline operator fun get(key: String): dynamic = asDynamic()[key]
+    inline operator fun set(key: String, value: dynamic) {
+        asDynamic()[key] = value
+    }
+}
+
+/**
+ * A resource within the inspected page, such as a document, a script, or an image.
+ */
+external class Resource {
+    /**
+     * The URL of the resource.
+     */
     var url: String
-)
+
+    /**
+     * Gets the content of the resource.
+     */
+    fun getContent(): Promise<String>
+
+    /**
+     * Sets the content of the resource.
+     */
+    fun setContent(content: String, commit: Boolean): Promise<Error?>
+}
 
 /**
  * The options parameter can contain one or more options.
@@ -58,6 +81,11 @@ class ReloadOptions(
 
 external class InspectedWindowNamespace {
     /**
+     * The ID of the tab being inspected. This ID may be used with chrome.tabs.* API.
+     */
+    var tabId: Int
+
+    /**
      * Evaluates a JavaScript expression in the context of the main frame of the inspected page. The
             expression must evaluate to a JSON-compliant object, otherwise an exception is thrown.
             The eval function can report either a DevTools-side error or a JavaScript exception that
@@ -78,8 +106,14 @@ external class InspectedWindowNamespace {
 
 /**
  * Represents a network request for a document resource (script, image and so on). See HAR
-        Specification for reference. */
-typealias Request = Any
+        Specification for reference.
+ */
+external class Request {
+    /**
+     * Returns content of the response body.
+     */
+    fun getContent(): Promise<String>
+}
 
 /**
  * A HAR log. See HAR specification for details.
@@ -113,24 +147,79 @@ external class NetworkNamespace {
 }
 
 /**
- * Represents the Elements panel. */
-typealias ElementsPanel = Any
+ * Represents the Elements panel.
+ */
+external class ElementsPanel {
+    /**
+     * Creates a pane within panel's sidebar.
+     */
+    fun createSidebarPane(title: String): Promise<ExtensionSidebarPane>
+}
 
 /**
- * Represents the Sources panel. */
-typealias SourcesPanel = Any
+ * Represents the Sources panel.
+ */
+external class SourcesPanel {
+    /**
+     * Creates a pane within panel's sidebar.
+     */
+    fun createSidebarPane(title: String, callback: (() -> Unit)? = definedExternally)
+}
 
 /**
- * Represents a panel created by extension. */
-typealias ExtensionPanel = Any
+ * Represents a panel created by extension.
+ */
+external class ExtensionPanel {
+    /**
+     * Appends a button to the status bar of the panel.
+     */
+    fun createStatusBarButton(
+        iconPath: String,
+        tooltipText: String,
+        disabled: Boolean
+    ): Button
+}
 
 /**
- * A sidebar created by the extension. */
-typealias ExtensionSidebarPane = Any
+ * A sidebar created by the extension.
+ */
+external class ExtensionSidebarPane {
+    /**
+     * Sets the height of the sidebar.
+     */
+    fun setHeight(height: String)
+
+    /**
+     * Sets an expression that is evaluated within the inspected page. The result is displayed in
+            the sidebar pane.
+     */
+    fun setExpression(expression: String, rootTitle: String? = definedExternally): Promise<Any>
+
+    /**
+     * Sets a JSON-compliant object to be displayed in the sidebar pane.
+     */
+    fun setObject(jsonObject: String, rootTitle: String? = definedExternally): Promise<Any>
+
+    /**
+     * Sets an HTML page to be displayed in the sidebar pane.
+     */
+    fun setPage(path: ExtensionURL): Promise<Any>
+}
 
 /**
- * A button created by the extension. */
-typealias Button = Any
+ * A button created by the extension.
+ */
+external class Button {
+    /**
+     * Updates the attributes of the button. If some of the arguments are omitted or
+            <code>null</code>, the corresponding attributes are not updated.
+     */
+    fun update(
+        iconPath: String? = definedExternally,
+        tooltipText: String? = definedExternally,
+        disabled: Boolean? = definedExternally
+    )
+}
 
 /**
  * Path of the panel's icon relative to the extension directory, or an empty string to use the
@@ -143,6 +232,21 @@ external class PanelsNamespace {
      *
      * @param themeName The name of the current devtools theme. */
     val onThemeChanged: Event<(themeName: String) -> Unit>
+
+    /**
+     * Elements panel.
+     */
+    var elements: ElementsPanel
+
+    /**
+     * Sources panel.
+     */
+    var sources: SourcesPanel
+
+    /**
+     * The name of the current devtools theme.
+     */
+    var themeName: String
 
 //    /**
 //     * Creates an extension panel.

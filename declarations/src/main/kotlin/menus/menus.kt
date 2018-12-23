@@ -248,6 +248,12 @@ external class MenusNamespace {
     val onHidden: Event<() -> Unit>
 
     /**
+     * The maximum number of top level extension items that can be added to an extension action
+            context menu. Any items beyond this limit will be ignored.
+     */
+    var ACTION_MENU_TOP_LEVEL_LIMIT: Double
+
+    /**
      * Creates a new context menu item. Note that if an error occurs during creation, you may not
             find out until the creation callback fires (the details will be in
             $(ref:runtime.lastError)).

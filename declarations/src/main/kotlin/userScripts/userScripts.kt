@@ -3,9 +3,9 @@ package userScripts
 import extensionTypes.ExtensionFileOrCode
 import extensionTypes.PlainJSONValue
 import extensionTypes.RunAt
+import kotlin.js.Promise
 import manifest.MatchPattern
 import webextensions.Event
-import kotlin.js.Promise
 
 /**
  * Details of a user script
@@ -33,8 +33,14 @@ class UserScriptOptions(
 )
 
 /**
- * An object that represents a user script registered programmatically */
-typealias RegisteredUserScript = Any
+ * An object that represents a user script registered programmatically
+ */
+external class RegisteredUserScript {
+    /**
+     * Unregister a user script registered programmatically
+     */
+    fun unregister(): Promise<Any>
+}
 
 /**
  * A plain object whose properties are exported as userScript globals */

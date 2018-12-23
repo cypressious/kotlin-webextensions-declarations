@@ -19,7 +19,9 @@ data class Type(
         val actual: Boolean,
         val items: Parameter?,
         val additionalProperties: Parameter?,
-        val patternProperties: Map<String, Parameter>?
+        val patternProperties: Map<String, Parameter>?,
+        val functions: List<Function>?,
+        val isExternal: Boolean = false
 )
 
 data class Function(
@@ -47,7 +49,8 @@ data class Parameter(
         val choices: List<Parameter>? = null,
         val unsupported: Boolean = false,
         val additionalProperties: Parameter? = null,
-        val patternProperties: Map<String, Parameter>? = null
+        val patternProperties: Map<String, Parameter>? = null,
+        val value: Any? = null
 )
 
 data class Event(

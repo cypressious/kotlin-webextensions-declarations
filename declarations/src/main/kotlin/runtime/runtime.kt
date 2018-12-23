@@ -261,6 +261,16 @@ external class RuntimeNamespace {
     ) -> Unit>
 
     /**
+     * This will be defined during an API method callback if there was an error
+     */
+    var lastError: LastError?
+
+    /**
+     * The ID of the extension/app.
+     */
+    var id: String
+
+    /**
      * Retrieves the JavaScript 'window' object for the background page running inside the current
             extension/app. If the background page is an event page, the system will ensure it is
             loaded before calling the callback. If there is no background page, an error is set.

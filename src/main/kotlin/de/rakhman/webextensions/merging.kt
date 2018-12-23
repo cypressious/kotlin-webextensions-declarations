@@ -29,7 +29,10 @@ fun merge(list: List<Namespace>): Namespace {
 }
 
 private fun mergeTypes(types: List<Type>): MutableMap<String?, Type> {
-    val result = types
+    val result = mutableMapOf<String?, Type>()
+
+    result.putAll(types
+        .map { it.copy(functions = it.functions?.map { it.resolve(result) }) }
         .groupingBy { it.id ?: it.`$extend` }
         .reduceTo(mutableMapOf()) { key, left, right ->
             Type(
@@ -42,9 +45,10 @@ private fun mergeTypes(types: List<Type>): MutableMap<String?, Type> {
                 actual = false,
                 items = left.items ?: right.items,
                 additionalProperties = left.additionalProperties ?: right.additionalProperties,
-                patternProperties = (left.patternProperties.orEmpty() + right.patternProperties.orEmpty()).takeUnless { it.isEmpty() }
+                patternProperties = (left.patternProperties.orEmpty() + right.patternProperties.orEmpty()).takeUnless { it.isEmpty() },
+                functions = (left.functions.orEmpty() + right.functions.orEmpty()).takeUnless { it.isEmpty() }
             )
-        }
+        })
 
     for ((key, value) in result.toMap()) {
         if (key == null) continue
@@ -133,7 +137,8 @@ private fun Parameter.resolve(
                 actual = actual,
                 items = null,
                 additionalProperties = additionalProperties,
-                patternProperties = patternProperties
+                patternProperties = patternProperties,
+                functions = null
             )
         )
 

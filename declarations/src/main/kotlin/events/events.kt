@@ -17,8 +17,53 @@ class Rule(
 )
 
 /**
- * An object which allows the addition and removal of listeners for a Chrome event. */
-typealias Event = Any
+ * An object which allows the addition and removal of listeners for a Chrome event.
+ */
+external class Event {
+    /**
+     * Registers an event listener <em>callback</em> to an event.
+     */
+    fun addListener(callback: () -> Unit)
+
+    /**
+     * Deregisters an event listener <em>callback</em> from an event.
+     */
+    fun removeListener(callback: () -> Unit)
+
+    fun hasListener(callback: () -> Unit): Boolean
+
+    fun hasListeners(): Boolean
+
+    /**
+     * Registers rules to handle events.
+     */
+    fun addRules(
+        eventName: String,
+        webViewInstanceId: Int,
+        rules: Array<Rule>,
+        callback: (() -> Unit)? = definedExternally
+    )
+
+    /**
+     * Returns currently registered rules.
+     */
+    fun getRules(
+        eventName: String,
+        webViewInstanceId: Int,
+        ruleIdentifiers: Array<String>? = definedExternally,
+        callback: () -> Unit
+    )
+
+    /**
+     * Unregisters currently registered rules.
+     */
+    fun removeRules(
+        eventName: String,
+        webViewInstanceId: Int,
+        ruleIdentifiers: Array<String>? = definedExternally,
+        callback: (() -> Unit)? = definedExternally
+    )
+}
 
 /**
  * Filters URLs for various criteria. See <a href='events#filtered'>event filtering</a>. All

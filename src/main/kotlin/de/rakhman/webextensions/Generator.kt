@@ -5,7 +5,7 @@ import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
 import java.io.File
 
 
-class Generator(val dir: File) {
+class Generator(private val dir: File) {
     fun generate(list: List<Namespace>) {
         generateBrowser(list)
         list.groupBy { it.namespace.substringBefore(".") }.forEach(this::generateMainNamespace)
@@ -108,13 +108,27 @@ class Generator(val dir: File) {
         ns.types?.forEach { generateType(it, fileBuilder) }
 
         val name = ns.namespace.substringAfter(".").nameSpaceName()
-        val functions = ns.functions?.filterNot { it.unsupported } ?: emptyList()
-        val events = ns.events?.filterNot { it.unsupported } ?: emptyList()
+        val functions = ns.functions?.filterNot { it.unsupported }.orEmpty()
+        val events = ns.events?.filterNot { it.unsupported }.orEmpty()
+        val properties = ns.properties?.filterNot { it.value.unsupported }.orEmpty()
 
         return TypeSpec.classBuilder(ClassName.bestGuess(name))
             .addModifiers(KModifier.EXTERNAL)
             .addFunctions(functions.flatMap { generateFunctionWithOverloads(it) })
             .addProperties(events.map { generateEvent(it) })
+            .addProperties(properties.map { generateProperty(it.key, it.value) })
+    }
+
+    private fun generateProperty(key: String, type: Parameter): PropertySpec {
+        return PropertySpec
+            .builder(key, parameterType(key, type))
+            .mutable(true)
+            .apply {
+                type.description?.let {
+                    addKdoc(it.cleanupDescription())
+                }
+            }
+            .build()
     }
 
     private fun generateEvent(event: Event): PropertySpec {
@@ -177,8 +191,10 @@ class Generator(val dir: File) {
 
         val additionalProperties = type.additionalProperties
         val patternProperties = type.patternProperties
+        val functions = type.functions
+        val hasFunctions = !functions.isNullOrEmpty()
 
-        if (type.properties == null && additionalProperties == null && patternProperties == null) {
+        if (type.properties == null && additionalProperties == null && patternProperties == null && !hasFunctions) {
             require(type.type == "object" || type.type == null) {
                 "Unxpected type $type"
             }
@@ -193,15 +209,19 @@ class Generator(val dir: File) {
         val properties = (type.properties ?: emptyMap()).entries.filter { !it.value.unsupported }
 
         val typeBuilder = TypeSpec.classBuilder(name)
+
+        typeBuilder
             .addProperties(properties.map {
                 PropertySpec
                     .builder(it.key, parameterType(it.key, it.value))
                     .mutable(true)
                     .apply { it.value.description?.let { addKdoc(it.cleanupDescription()) } }
-                    .initializer(it.key.escapeIfKeyword())
+                    .apply { if (!hasFunctions) initializer(it.key.escapeIfKeyword()) }
                     .build()
             })
-            .primaryConstructor(FunSpec.constructorBuilder()
+
+        if (!hasFunctions) {
+            typeBuilder.primaryConstructor(FunSpec.constructorBuilder()
                 .addParameters(
                     properties.map {
                         ParameterSpec
@@ -211,6 +231,12 @@ class Generator(val dir: File) {
                     }
                 )
                 .build())
+        }
+
+        if (hasFunctions) {
+            typeBuilder.addFunctions(functions!!.flatMap(this::generateFunctionWithOverloads))
+            typeBuilder.addModifiers(KModifier.EXTERNAL)
+        }
 
         generateIndexers(additionalProperties, patternProperties, typeBuilder)
 
@@ -392,6 +418,10 @@ class Generator(val dir: File) {
                 "UnrecognizedProperty" -> "manifest.UnrecognizedProperty"
                 else -> it
             }
+        }
+
+        if (p.value != null) {
+            return p.value::class.simpleName!!
         }
 
         return when (p.type) {

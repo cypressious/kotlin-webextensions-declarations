@@ -2,6 +2,7 @@ package proxy
 
 import kotlin.Deprecated
 import kotlin.js.Promise
+import types.Setting
 import webRequest.HttpHeaders
 import webRequest.ResourceType
 import webextensions.Event
@@ -94,6 +95,11 @@ external class ProxyNamespace {
      *
      * @param error null */
     val onProxyError: Event<(error: Error2) -> Unit>
+
+    /**
+     * Configures proxy settings. This setting's value is an object of type ProxyConfig.
+     */
+    var settings: Setting
 
     /**
      * Registers the proxy script for the extension.

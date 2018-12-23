@@ -46,6 +46,11 @@ external class SessionsNamespace {
     val onChanged: Event<() -> Unit>
 
     /**
+     * The maximum number of $(ref:sessions.Session) that will be included in a requested list.
+     */
+    var MAX_SESSION_RESULTS: Double
+
+    /**
      * Forget a recently closed tab.
      */
     fun forgetClosedTab(windowId: Int, sessionId: String): Promise<Any>

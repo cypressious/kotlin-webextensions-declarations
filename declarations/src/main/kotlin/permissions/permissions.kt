@@ -1,9 +1,9 @@
 package permissions
 
+import kotlin.js.Promise
 import manifest.MatchPattern
 import manifest.OptionalPermission
 import manifest.Permission
-import kotlin.js.Promise
 
 class Permissions(var permissions: Array<OptionalPermission>? = null, var origins:
         Array<MatchPattern>? = null)

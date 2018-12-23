@@ -2,10 +2,10 @@ package tabs
 
 import extensionTypes.ImageDetails
 import extensionTypes.InjectDetails
-import kotlin.js.Promise
 import runtime.Port
 import webextensions.Event
 import windows.Window
+import kotlin.js.Promise
 
 /**
  * An event that caused a muted state change. */
@@ -607,6 +607,11 @@ external class TabsNamespace {
      *
      * @param ZoomChangeInfo null */
     val onZoomChange: Event<(ZoomChangeInfo: ZoomChangeInfo) -> Unit>
+
+    /**
+     * An ID which represents the absence of a browser tab.
+     */
+    var TAB_ID_NONE: Double
 
     /**
      * Retrieves details about the specified tab.

@@ -31,8 +31,14 @@ class RegisteredContentScriptOptions(
 )
 
 /**
- * An object that represents a content script registered programmatically */
-typealias RegisteredContentScript = Any
+ * An object that represents a content script registered programmatically
+ */
+external class RegisteredContentScript {
+    /**
+     * Unregister a content script registered programmatically
+     */
+    fun unregister(): Promise<Any>
+}
 
 external class ContentScriptsNamespace {
     /**
