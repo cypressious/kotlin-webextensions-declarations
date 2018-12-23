@@ -21,8 +21,15 @@ class Rule(
 typealias Event = Any
 
 /**
- * Filters URLs for various criteria. See <a href='events#filtered'>event filtering</a>. All criteria are case sensitive.
- * @param hostContains Matches if the host name of the URL contains a specified string. To test whether a host name component has a prefix 'foo', use hostContains: '.foo'. This matches 'www.foobar.com' and 'foo.com', because an implicit dot is added at the beginning of the host name. Similarly, hostContains can be used to match against component suffix ('foo.') and to exactly match against components ('.foo.'). Suffix- and exact-matching for the last components need to be done separately using hostSuffix, because no implicit dot is added at the end of the host name.
+ * Filters URLs for various criteria. See <a href='events#filtered'>event filtering</a>. All
+        criteria are case sensitive.
+ * @param hostContains Matches if the host name of the URL contains a specified string. To test
+        whether a host name component has a prefix 'foo', use hostContains: '.foo'. This matches
+        'www.foobar.com' and 'foo.com', because an implicit dot is added at the beginning of the
+        host name. Similarly, hostContains can be used to match against component suffix ('foo.')
+        and to exactly match against components ('.foo.'). Suffix- and exact-matching for the last
+        components need to be done separately using hostSuffix, because no implicit dot is added at
+        the end of the host name.
  * @param hostEquals Matches if the host name of the URL is equal to a specified string.
  * @param hostPrefix Matches if the host name of the URL starts with a specified string.
  * @param hostSuffix Matches if the host name of the URL ends with a specified string.
@@ -34,14 +41,27 @@ typealias Event = Any
  * @param queryEquals Matches if the query segment of the URL is equal to a specified string.
  * @param queryPrefix Matches if the query segment of the URL starts with a specified string.
  * @param querySuffix Matches if the query segment of the URL ends with a specified string.
- * @param urlContains Matches if the URL (without fragment identifier) contains a specified string. Port numbers are stripped from the URL if they match the default port number.
- * @param urlEquals Matches if the URL (without fragment identifier) is equal to a specified string. Port numbers are stripped from the URL if they match the default port number.
- * @param urlMatches Matches if the URL (without fragment identifier) matches a specified regular expression. Port numbers are stripped from the URL if they match the default port number. The regular expressions use the <a href="https://github.com/google/re2/blob/master/doc/syntax.txt">RE2 syntax</a>.
- * @param originAndPathMatches Matches if the URL without query segment and fragment identifier matches a specified regular expression. Port numbers are stripped from the URL if they match the default port number. The regular expressions use the <a href="https://github.com/google/re2/blob/master/doc/syntax.txt">RE2 syntax</a>.
- * @param urlPrefix Matches if the URL (without fragment identifier) starts with a specified string. Port numbers are stripped from the URL if they match the default port number.
- * @param urlSuffix Matches if the URL (without fragment identifier) ends with a specified string. Port numbers are stripped from the URL if they match the default port number.
- * @param schemes Matches if the scheme of the URL is equal to any of the schemes specified in the array.
- * @param ports Matches if the port of the URL is contained in any of the specified port lists. For example <code>[80, 443, [1000, 1200]]</code> matches all requests on port 80, 443 and in the range 1000-1200.
+ * @param urlContains Matches if the URL (without fragment identifier) contains a specified string.
+        Port numbers are stripped from the URL if they match the default port number.
+ * @param urlEquals Matches if the URL (without fragment identifier) is equal to a specified string.
+        Port numbers are stripped from the URL if they match the default port number.
+ * @param urlMatches Matches if the URL (without fragment identifier) matches a specified regular
+        expression. Port numbers are stripped from the URL if they match the default port number.
+        The regular expressions use the <a
+        href="https://github.com/google/re2/blob/master/doc/syntax.txt">RE2 syntax</a>.
+ * @param originAndPathMatches Matches if the URL without query segment and fragment identifier
+        matches a specified regular expression. Port numbers are stripped from the URL if they match
+        the default port number. The regular expressions use the <a
+        href="https://github.com/google/re2/blob/master/doc/syntax.txt">RE2 syntax</a>.
+ * @param urlPrefix Matches if the URL (without fragment identifier) starts with a specified string.
+        Port numbers are stripped from the URL if they match the default port number.
+ * @param urlSuffix Matches if the URL (without fragment identifier) ends with a specified string.
+        Port numbers are stripped from the URL if they match the default port number.
+ * @param schemes Matches if the scheme of the URL is equal to any of the schemes specified in the
+        array.
+ * @param ports Matches if the port of the URL is contained in any of the specified port lists. For
+        example <code>[80, 443, [1000, 1200]]</code> matches all requests on port 80, 443 and in the
+        range 1000-1200.
  */
 class UrlFilter(
     var hostContains: String? = null,

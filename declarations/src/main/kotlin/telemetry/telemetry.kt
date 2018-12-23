@@ -4,14 +4,16 @@ import kotlin.Suppress
 import kotlin.js.Promise
 
 /**
- * Type of scalar: 'count' for numeric values, 'string' for string values, 'boolean' for boolean values. Maps to <code>nsITelemetry.SCALAR_TYPE_*</code>. */
+ * Type of scalar: 'count' for numeric values, 'string' for string values, 'boolean' for boolean
+        values. Maps to <code>nsITelemetry.SCALAR_TYPE_*</code>. */
 typealias ScalarType = String
 
 /**
  * Represents registration data for a Telemetry scalar.
  * @param keyed True if this is a keyed scalar.
  * @param record_on_release True if this data should be recorded on release.
- * @param expired True if this scalar entry is expired. This allows recording it without error, but it will be discarded.
+ * @param expired True if this scalar entry is expired. This allows recording it without error, but
+        it will be discarded.
  */
 class ScalarData(
     var kind: ScalarType,
@@ -26,7 +28,8 @@ class ScalarData(
  * @param objects List of objects for this event entry.
  * @param extra_keys List of allowed extra keys for this event entry.
  * @param record_on_release True if this data should be recorded on release.
- * @param expired True if this event entry is expired. This allows recording it without error, but it will be discarded.
+ * @param expired True if this event entry is expired. This allows recording it without error, but
+        it will be discarded.
  */
 class EventData(
     var methods: Array<String>,
@@ -96,7 +99,8 @@ class Extra() {
 }
 
 /**
- * An object that contains registration data for multiple scalars. Each property name is the scalar name, and the corresponding property value is an object of ScalarData type.
+ * An object that contains registration data for multiple scalars. Each property name is the scalar
+        name, and the corresponding property value is an object of ScalarData type.
  */
 @Suppress("NOTHING_TO_INLINE", "UnsafeCastFromDynamic")
 class Data() {
@@ -107,7 +111,8 @@ class Data() {
 }
 
 /**
- * An object that contains registration data for 1+ events. Each property name is the category name, and the corresponding property value is an object of EventData type.
+ * An object that contains registration data for 1+ events. Each property name is the category name,
+        and the corresponding property value is an object of EventData type.
  */
 @Suppress("NOTHING_TO_INLINE", "UnsafeCastFromDynamic")
 class Data2() {
@@ -119,7 +124,8 @@ class Data2() {
 
 external class TelemetryNamespace {
     /**
-     * Submits a custom ping to the Telemetry back-end. See <code>submitExternalPing</code> inside TelemetryController.jsm for more details.
+     * Submits a custom ping to the Telemetry back-end. See <code>submitExternalPing</code> inside
+            TelemetryController.jsm for more details.
      */
     fun submitPing(
         type: String,
@@ -138,22 +144,26 @@ external class TelemetryNamespace {
     fun scalarAdd(name: String, value: Int): Promise<Any>
 
     /**
-     * Sets the named scalar to the given value. Throws if the value type doesn't match the scalar type.
+     * Sets the named scalar to the given value. Throws if the value type doesn't match the scalar
+            type.
      */
     fun scalarSet(name: String, value: String): Promise<Any>
 
     /**
-     * Sets the named scalar to the given value. Throws if the value type doesn't match the scalar type.
+     * Sets the named scalar to the given value. Throws if the value type doesn't match the scalar
+            type.
      */
     fun scalarSet(name: String, value: Boolean): Promise<Any>
 
     /**
-     * Sets the named scalar to the given value. Throws if the value type doesn't match the scalar type.
+     * Sets the named scalar to the given value. Throws if the value type doesn't match the scalar
+            type.
      */
     fun scalarSet(name: String, value: Int): Promise<Any>
 
     /**
-     * Sets the named scalar to the given value. Throws if the value type doesn't match the scalar type.
+     * Sets the named scalar to the given value. Throws if the value type doesn't match the scalar
+            type.
      */
     fun scalarSet(name: String, value: Value): Promise<Any>
 
@@ -184,7 +194,8 @@ external class TelemetryNamespace {
     fun registerEvents(category: String, data: Data2): Promise<Any>
 
     /**
-     * Enable recording of events in a category. Events default to recording disabled. This allows to toggle recording for all events in the specified category.
+     * Enable recording of events in a category. Events default to recording disabled. This allows
+            to toggle recording for all events in the specified category.
      */
     fun setEventRecordingEnabled(category: String, enabled: Boolean): Promise<Any>
 }

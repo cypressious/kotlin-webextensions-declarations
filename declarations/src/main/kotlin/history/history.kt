@@ -15,7 +15,8 @@ typealias TransitionType = String
  * @param title The title of the page when it was last loaded.
  * @param lastVisitTime When this page was last loaded, represented in milliseconds since the epoch.
  * @param visitCount The number of times the user has navigated to this page.
- * @param typedCount The number of times the user has navigated to this page by typing in the address.
+ * @param typedCount The number of times the user has navigated to this page by typing in the
+        address.
  */
 class HistoryItem(
     var id: String,
@@ -32,7 +33,8 @@ class HistoryItem(
  * @param visitId The unique identifier for this visit.
  * @param visitTime When this visit occurred, represented in milliseconds since the epoch.
  * @param referringVisitId The visit ID of the referrer.
- * @param transition The $(topic:transition-types)[transition type] for this visit from its referrer.
+ * @param transition The $(topic:transition-types)[transition type] for this visit from its
+        referrer.
  */
 class VisitItem(
     var id: String,
@@ -44,7 +46,8 @@ class VisitItem(
 
 /**
  * @param text A free-text query to the history service.  Leave empty to retrieve all pages.
- * @param startTime Limit results to those visited after this date. If not specified, this defaults to 24 hours in the past.
+ * @param startTime Limit results to those visited after this date. If not specified, this defaults
+        to 24 hours in the past.
  * @param endTime Limit results to those visited before this date.
  * @param maxResults The maximum number of results to retrieve.  Defaults to 100.
  */
@@ -56,7 +59,8 @@ class Query(
 )
 
 /**
- * @param url The URL for which to retrieve visit information.  It must be in the format as returned from a call to history.search.
+ * @param url The URL for which to retrieve visit information.  It must be in the format as returned
+        from a call to history.search.
  */
 class Details(
     var url: String
@@ -65,7 +69,8 @@ class Details(
 /**
  * @param url The URL to add. Must be a valid URL that can be added to history.
  * @param title The title of the page.
- * @param transition The $(topic:transition-types)[transition type] for this visit from its referrer.
+ * @param transition The $(topic:transition-types)[transition type] for this visit from its
+        referrer.
  * @param visitTime The date when this visit occurred.
  */
 class Details2(
@@ -110,13 +115,15 @@ class Changed(
 
 external class HistoryNamespace {
     /**
-     * Fired when a URL is visited, providing the HistoryItem data for that URL.  This event fires before the page has loaded.
+     * Fired when a URL is visited, providing the HistoryItem data for that URL.  This event fires
+            before the page has loaded.
      *
      * @param result null */
     val onVisited: Event<(result: HistoryItem) -> Unit>
 
     /**
-     * Fired when one or more URLs are removed from the history service.  When all visits have been removed the URL is purged from history.
+     * Fired when one or more URLs are removed from the history service.  When all visits have been
+            removed the URL is purged from history.
      *
      * @param removed null */
     val onVisitRemoved: Event<(removed: Removed) -> Unit>
@@ -138,7 +145,8 @@ external class HistoryNamespace {
     fun getVisits(details: Details): Promise<Array<VisitItem>>
 
     /**
-     * Adds a URL to the history with a default visitTime of the current time and a default $(topic:transition-types)[transition type] of "link".
+     * Adds a URL to the history with a default visitTime of the current time and a default
+            $(topic:transition-types)[transition type] of "link".
      */
     fun addUrl(details: Details2): Promise<Any>
 
@@ -148,7 +156,8 @@ external class HistoryNamespace {
     fun deleteUrl(details: Details3): Promise<Any>
 
     /**
-     * Removes all items within the specified date range from the history.  Pages will not be removed from the history unless all visits fall within the range.
+     * Removes all items within the specified date range from the history.  Pages will not be
+            removed from the history unless all visits fall within the range.
      */
     fun deleteRange(range: Range): Promise<Any>
 

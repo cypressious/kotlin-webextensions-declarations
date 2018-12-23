@@ -50,9 +50,13 @@ typealias KeyName = String
 
 /**
  * Represents a protocol handler definition.
- * @param name A user-readable title string for the protocol handler. This will be displayed to the user in interface objects as needed.
- * @param protocol The protocol the site wishes to handle, specified as a string. For example, you can register to handle SMS text message links by registering to handle the "sms" scheme.
- * @param uriTemplate The URL of the handler, as a string. This string should include "%s" as a placeholder which will be replaced with the escaped URL of the document to be handled. This URL might be a true URL, or it could be a phone number, email address, or so forth.
+ * @param name A user-readable title string for the protocol handler. This will be displayed to the
+        user in interface objects as needed.
+ * @param protocol The protocol the site wishes to handle, specified as a string. For example, you
+        can register to handle SMS text message links by registering to handle the "sms" scheme.
+ * @param uriTemplate The URL of the handler, as a string. This string should include "%s" as a
+        placeholder which will be replaced with the escaped URL of the document to be handled. This
+        URL might be a true URL, or it could be a phone number, email address, or so forth.
  */
 class ProtocolHandler(
     var name: String,
@@ -88,7 +92,8 @@ class WebExtensionLangpackManifest(
 /**
  * Represents a WebExtension dictionary manifest.json file
  */
-class WebExtensionDictionaryManifest(var homepage_url: String? = null, var dictionaries: Dictionaries)
+class WebExtensionDictionaryManifest(var homepage_url: String? = null, var dictionaries:
+        Dictionaries)
 
 /**
  * @param light A light icon to use for dark themes
@@ -133,20 +138,25 @@ typealias MatchPattern = Any
 typealias MatchPatternRestricted = Any
 
 /**
- * Mostly unrestricted match patterns for privileged add-ons. This should technically be rejected for unprivileged add-ons, but, reasons. The MatchPattern class will still refuse privileged schemes for those extensions. */
+ * Mostly unrestricted match patterns for privileged add-ons. This should technically be rejected
+        for unprivileged add-ons, but, reasons. The MatchPattern class will still refuse privileged
+        schemes for those extensions. */
 typealias MatchPatternUnestricted = Any
 
 /**
- * Same as MatchPattern above, but includes moz-extension protocol */
-typealias MatchPatternInternal = Any
-
-/**
- * Details of the script or CSS to inject. Either the code or the file property must be set, but both may not be set at the same time. Based on InjectDetails, but using underscore rather than camel case naming conventions.
+ * Details of the script or CSS to inject. Either the code or the file property must be set, but
+        both may not be set at the same time. Based on InjectDetails, but using underscore rather
+        than camel case naming conventions.
  * @param css The list of CSS files to inject
  * @param js The list of JS files to inject
- * @param all_frames If allFrames is <code>true</code>, implies that the JavaScript or CSS should be injected into all frames of current page. By default, it's <code>false</code> and is only injected into the top frame.
- * @param match_about_blank If matchAboutBlank is true, then the code is also injected in about:blank and about:srcdoc frames if your extension has access to its parent document. Code cannot be inserted in top-level about:-frames. By default it is <code>false</code>.
- * @param run_at The soonest that the JavaScript or CSS will be injected into the tab. Defaults to "document_idle".
+ * @param all_frames If allFrames is <code>true</code>, implies that the JavaScript or CSS should be
+        injected into all frames of current page. By default, it's <code>false</code> and is only
+        injected into the top frame.
+ * @param match_about_blank If matchAboutBlank is true, then the code is also injected in
+        about:blank and about:srcdoc frames if your extension has access to its parent document.
+        Code cannot be inserted in top-level about:-frames. By default it is <code>false</code>.
+ * @param run_at The soonest that the JavaScript or CSS will be injected into the tab. Defaults to
+        "document_idle".
  */
 @Suppress("NOTHING_TO_INLINE", "UnsafeCastFromDynamic")
 class ContentScript(
@@ -214,7 +224,8 @@ class ThemeManifest(
 
 /**
  * @param theme_icons Specifies icons to use for dark and light themes
- * @param default_area Defines the location the browserAction will appear by default.  The default location is navbar.
+ * @param default_area Defines the location the browserAction will appear by default.  The default
+        location is navbar.
  */
 @Suppress("NOTHING_TO_INLINE", "UnsafeCastFromDynamic")
 class Browser_action(
@@ -232,7 +243,27 @@ class Browser_action(
 }
 
 /**
+ * @param name A url parameter name
+ * @param condition The type of param can be either "purpose" or "pref".
+ * @param pref The preference to retreive the value from.
+ * @param purpose The context that initiates a search, required if condition is "purpose".
+ * @param value A url parameter value.
+ */
+class Params(
+    var name: String,
+    var condition: String? = null,
+    var pref: String? = null,
+    var purpose: String? = null,
+    var value: String? = null
+)
+
+/**
+ * @param search_url_post_params POST parameters to the search_url as a query string.
+ * @param suggest_url_post_params POST parameters to the suggest_url as a query string.
+ * @param encoding Encoding of the search term.
  * @param is_default Sets the default engine to a built-in engine only.
+ * @param params A list of optional search url parameters. This allows the additon of search url
+        parameters based on how the search is performed in Firefox.
  */
 @Suppress("NOTHING_TO_INLINE", "UnsafeCastFromDynamic")
 class Search_provider(
@@ -244,11 +275,14 @@ class Search_provider(
     var instant_url: String? = null,
     var image_url: String? = null,
     var search_url_post_params: String? = null,
+    var suggest_url_post_params: String? = null,
     var instant_url_post_params: String? = null,
     var image_url_post_params: String? = null,
     var alternate_urls: Array<String>? = null,
     var prepopulated_id: Int? = null,
-    var is_default: Boolean? = null
+    var encoding: String? = null,
+    var is_default: Boolean? = null,
+    var params: Array<Params>? = null
 ) {
     inline operator fun get(key: String): UnrecognizedProperty = asDynamic()[key]
     inline operator fun set(key: String, value: UnrecognizedProperty) {
@@ -257,7 +291,8 @@ class Search_provider(
 }
 
 @Suppress("NOTHING_TO_INLINE", "UnsafeCastFromDynamic")
-class Chrome_settings_overrides(var homepage: String? = null, var search_provider: Search_provider? = null) {
+class Chrome_settings_overrides(var homepage: String? = null, var search_provider: Search_provider?
+        = null) {
     inline operator fun get(key: String): UnrecognizedProperty = asDynamic()[key]
     inline operator fun set(key: String, value: UnrecognizedProperty) {
         asDynamic()[key] = value
@@ -316,7 +351,8 @@ class Background(var page: ExtensionURL, var persistent: PersistentBackgroundPro
 }
 
 @Suppress("NOTHING_TO_INLINE", "UnsafeCastFromDynamic")
-class Background2(var scripts: Array<ExtensionURL>, var persistent: PersistentBackgroundProperty? = null) {
+class Background2(var scripts: Array<ExtensionURL>, var persistent: PersistentBackgroundProperty? =
+        null) {
     inline operator fun get(key: String): UnrecognizedProperty = asDynamic()[key]
     inline operator fun set(key: String, value: UnrecognizedProperty) {
         asDynamic()[key] = value
@@ -355,7 +391,8 @@ class Page_action(
     var default_popup: String? = null,
     var browser_style: Boolean? = null,
     var show_matches: Array<MatchPattern>? = null,
-    var hide_matches: Array<MatchPatternRestricted>? = null
+    var hide_matches: Array<MatchPatternRestricted>? = null,
+    var pinned: Boolean? = null
 ) {
     inline operator fun get(key: String): UnrecognizedProperty = asDynamic()[key]
     inline operator fun set(key: String, value: UnrecognizedProperty) {
@@ -364,7 +401,8 @@ class Page_action(
 }
 
 /**
- * @param open_at_install Whether or not the sidebar is opened at install. Default is <code>true</code>.
+ * @param open_at_install Whether or not the sidebar is opened at install. Default is
+        <code>true</code>.
  */
 @Suppress("NOTHING_TO_INLINE", "UnsafeCastFromDynamic")
 class Sidebar_action(
@@ -391,11 +429,14 @@ class User_scripts(var api_script: ExtensionURL? = null) {
 }
 
 /**
- * The protocol the site wishes to handle, specified as a string. For example, you can register to handle SMS text message links by registering to handle the "sms" scheme. */
+ * The protocol the site wishes to handle, specified as a string. For example, you can register to
+        handle SMS text message links by registering to handle the "sms" scheme. */
 typealias Protocol = Any
 
 /**
- * The URL of the handler, as a string. This string should include "%s" as a placeholder which will be replaced with the escaped URL of the document to be handled. This URL might be a true URL, or it could be a phone number, email address, or so forth. */
+ * The URL of the handler, as a string. This string should include "%s" as a placeholder which will
+        be replaced with the escaped URL of the document to be handled. This URL might be a true
+        URL, or it could be a phone number, email address, or so forth. */
 typealias UriTemplate = Any
 
 class Applications(var gecko: FirefoxSpecificProperties? = null)
@@ -626,7 +667,8 @@ class Icons2(
 }
 
 @Suppress("NOTHING_TO_INLINE", "UnsafeCastFromDynamic")
-class Properties2(var additional_backgrounds_alignment: Array<String>? = null, var additional_backgrounds_tiling: Array<String>? = null) {
+class Properties2(var additional_backgrounds_alignment: Array<String>? = null, var
+        additional_backgrounds_tiling: Array<String>? = null) {
     inline operator fun get(key: String): String = asDynamic()[key]
     inline operator fun set(key: String, value: String) {
         asDynamic()[key] = value

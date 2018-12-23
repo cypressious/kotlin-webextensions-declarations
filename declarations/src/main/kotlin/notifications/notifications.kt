@@ -24,12 +24,14 @@ class NotificationItem(
  * @param title Title of the notification (e.g. sender name for email).
  * @param message Main notification content.
  * @param contextMessage Alternate notification content with a lower-weight font.
- * @param priority Priority ranges from -2 to 2. -2 is lowest priority. 2 is highest. Zero is default.
+ * @param priority Priority ranges from -2 to 2. -2 is lowest priority. 2 is highest. Zero is
+        default.
  * @param eventTime A timestamp associated with the notification, in milliseconds past the epoch.
  * @param imageUrl A URL to the image thumbnail for image-type notifications.
  * @param items Items for multi-item notifications.
  * @param progress Current progress ranges from 0 to 100.
- * @param isClickable Whether to show UI indicating that the app will visibly respond to clicks on the body of a notification.
+ * @param isClickable Whether to show UI indicating that the app will visibly respond to clicks on
+        the body of a notification.
  */
 class CreateNotificationOptions(
     var type: TemplateType,
@@ -53,12 +55,14 @@ class CreateNotificationOptions(
  * @param title Title of the notification (e.g. sender name for email).
  * @param message Main notification content.
  * @param contextMessage Alternate notification content with a lower-weight font.
- * @param priority Priority ranges from -2 to 2. -2 is lowest priority. 2 is highest. Zero is default.
+ * @param priority Priority ranges from -2 to 2. -2 is lowest priority. 2 is highest. Zero is
+        default.
  * @param eventTime A timestamp associated with the notification, in milliseconds past the epoch.
  * @param imageUrl A URL to the image thumbnail for image-type notifications.
  * @param items Items for multi-item notifications.
  * @param progress Current progress ranges from 0 to 100.
- * @param isClickable Whether to show UI indicating that the app will visibly respond to clicks on the body of a notification.
+ * @param isClickable Whether to show UI indicating that the app will visibly respond to clicks on
+        the body of a notification.
  */
 class UpdateNotificationOptions(
     var type: TemplateType? = null,
@@ -120,7 +124,8 @@ external class NotificationsNamespace {
     /**
      * Creates and displays a notification.
      */
-    fun create(notificationId: String? = definedExternally, options: CreateNotificationOptions): Promise<String>
+    fun create(notificationId: String? = definedExternally, options: CreateNotificationOptions):
+            Promise<String>
 
     /**
      * Clears an existing notification.

@@ -27,7 +27,6 @@ import idle.IdleNamespace
 import management.ManagementNamespace
 import manifest.ManifestNamespace
 import menus.MenusNamespace
-import menusInternal.MenusInternalNamespace
 import notifications.NotificationsNamespace
 import omnibox.OmniboxNamespace
 import pageAction.PageActionNamespace
@@ -105,8 +104,6 @@ external class Browser {
     val contextMenus: ContextMenusNamespace
 
     val menus: MenusNamespace
-
-    val menusInternal: MenusInternalNamespace
 
     val notifications: NotificationsNamespace
 

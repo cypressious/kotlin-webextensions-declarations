@@ -1,6 +1,5 @@
 package storage
 
-import kotlin.Suppress
 import webextensions.Event
 
 /**
@@ -15,7 +14,8 @@ class StorageChange(
 typealias StorageArea = Any
 
 /**
- * Object mapping each key that changed to its corresponding $(ref:storage.StorageChange) for that item.
+ * Object mapping each key that changed to its corresponding $(ref:storage.StorageChange) for that
+        item.
  */
 @Suppress("NOTHING_TO_INLINE", "UnsafeCastFromDynamic")
 class Changes() {
@@ -29,7 +29,9 @@ external class StorageNamespace {
     /**
      * Fired when one or more items change.
      *
-     * @param changes Object mapping each key that changed to its corresponding $(ref:storage.StorageChange) for that item.
-     * @param areaName The name of the storage area (<code>"sync"</code>, <code>"local"</code> or <code>"managed"</code>) the changes are for. */
+     * @param changes Object mapping each key that changed to its corresponding
+            $(ref:storage.StorageChange) for that item.
+     * @param areaName The name of the storage area (<code>"sync"</code>, <code>"local"</code> or
+            <code>"managed"</code>) the changes are for. */
     val onChanged: Event<(changes: Changes, areaName: String) -> Unit>
 }

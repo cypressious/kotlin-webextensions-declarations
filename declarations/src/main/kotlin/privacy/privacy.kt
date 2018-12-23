@@ -15,7 +15,8 @@ typealias TrackingProtectionModeOption = String
 /**
  * The settings for cookies.
  * @param behavior The type of cookies to allow.
- * @param nonPersistentCookies Whether to create all cookies as nonPersistent (i.e., session) cookies.
+ * @param nonPersistentCookies Whether to create all cookies as nonPersistent (i.e., session)
+        cookies.
  */
 class CookieConfig(
     var behavior: String? = null,

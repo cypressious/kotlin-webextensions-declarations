@@ -4,7 +4,8 @@ import kotlin.js.Promise
 
 /**
  * An object encapsulating a DNS Record.
- * @param canonicalName The canonical hostname for this record.  this value is empty if the record was not fetched with the 'canonical_name' flag.
+ * @param canonicalName The canonical hostname for this record.  this value is empty if the record
+        was not fetched with the 'canonical_name' flag.
  * @param isTRR Record retreived with TRR.
  */
 class DNSRecord(

@@ -17,7 +17,8 @@ class MostVisitedURL(
 /**
  * @param limit The number of top sites to return, defaults to the value used by Firefox
  * @param onePerDomain Limit the result to a single top site link per domain
- * @param includeBlocked Include sites that the user has blocked from appearing on the Firefox new tab.
+ * @param includeBlocked Include sites that the user has blocked from appearing on the Firefox new
+        tab.
  * @param includeFavicon Include sites favicon if available.
  */
 class Options(

@@ -6,9 +6,14 @@ import tabs.Tab
 import webextensions.Event
 
 /**
- * Specifies to which tab or window the value should be set, or from which one it should be retrieved. If no tab nor window is specified, the global value is set or retrieved.
- * @param tabId When setting a value, it will be specific to the specified tab, and will automatically reset when the tab navigates. When getting, specifies the tab to get the value from; if there is no tab-specific value, the window one will be inherited.
- * @param windowId When setting a value, it will be specific to the specified window. When getting, specifies the window to get the value from; if there is no window-specific value, the global one will be inherited.
+ * Specifies to which tab or window the value should be set, or from which one it should be
+        retrieved. If no tab nor window is specified, the global value is set or retrieved.
+ * @param tabId When setting a value, it will be specific to the specified tab, and will
+        automatically reset when the tab navigates. When getting, specifies the tab to get the value
+        from; if there is no tab-specific value, the window one will be inherited.
+ * @param windowId When setting a value, it will be specific to the specified window. When getting,
+        specifies the window to get the value from; if there is no window-specific value, the global
+        one will be inherited.
  */
 class Details(
     var tabId: Int? = null,
@@ -18,7 +23,8 @@ class Details(
 typealias ColorArray = Array<Int>
 
 /**
- * Pixel data for an image. Must be an ImageData object (for example, from a <code>canvas</code> element).
+ * Pixel data for an image. Must be an ImageData object (for example, from a <code>canvas</code>
+        element).
  */
 @Suppress("NOTHING_TO_INLINE", "UnsafeCastFromDynamic")
 class ImageDataType() {
@@ -29,7 +35,9 @@ class ImageDataType() {
 }
 
 /**
- * An array of four integers in the range [0,255] that make up the RGBA color of the badge. For example, opaque red is <code>[255, 0, 0, 255]</code>. Can also be a string with a CSS value, with opaque red being <code>#FF0000</code> or <code>#F00</code>. */
+ * An array of four integers in the range [0,255] that make up the RGBA color of the badge. For
+        example, opaque red is <code>[255, 0, 0, 255]</code>. Can also be a string with a CSS value,
+        with opaque red being <code>#FF0000</code> or <code>#F00</code>. */
 typealias ColorValue = Any
 
 /**
@@ -52,7 +60,12 @@ class ImageData() {
 }
 
 /**
- * Either an ImageData object or a dictionary {size -> ImageData} representing icon to be set. If the icon is specified as a dictionary, the actual image to be used is chosen depending on screen's pixel density. If the number of image pixels that fit into one screen space unit equals <code>scale</code>, then image with size <code>scale</code> * 19 will be selected. Initially only scales 1 and 2 will be supported. At least one image must be specified. Note that 'details.imageData = foo' is equivalent to 'details.imageData = {'19': foo}' */
+ * Either an ImageData object or a dictionary {size -> ImageData} representing icon to be set. If
+        the icon is specified as a dictionary, the actual image to be used is chosen depending on
+        screen's pixel density. If the number of image pixels that fit into one screen space unit
+        equals <code>scale</code>, then image with size <code>scale</code> * 19 will be selected.
+        Initially only scales 1 and 2 will be supported. At least one image must be specified. Note
+        that 'details.imageData = foo' is equivalent to 'details.imageData = {'19': foo}' */
 typealias ImageData2 = Any
 
 @Suppress("NOTHING_TO_INLINE", "UnsafeCastFromDynamic")
@@ -64,12 +77,30 @@ class Path() {
 }
 
 /**
- * Either a relative image path or a dictionary {size -> relative image path} pointing to icon to be set. If the icon is specified as a dictionary, the actual image to be used is chosen depending on screen's pixel density. If the number of image pixels that fit into one screen space unit equals <code>scale</code>, then image with size <code>scale</code> * 19 will be selected. Initially only scales 1 and 2 will be supported. At least one image must be specified. Note that 'details.path = foo' is equivalent to 'details.imageData = {'19': foo}' */
+ * Either a relative image path or a dictionary {size -> relative image path} pointing to icon to be
+        set. If the icon is specified as a dictionary, the actual image to be used is chosen
+        depending on screen's pixel density. If the number of image pixels that fit into one screen
+        space unit equals <code>scale</code>, then image with size <code>scale</code> * 19 will be
+        selected. Initially only scales 1 and 2 will be supported. At least one image must be
+        specified. Note that 'details.path = foo' is equivalent to 'details.imageData = {'19': foo}'
+        */
 typealias Path2 = Any
 
 /**
- * @param imageData Either an ImageData object or a dictionary {size -> ImageData} representing icon to be set. If the icon is specified as a dictionary, the actual image to be used is chosen depending on screen's pixel density. If the number of image pixels that fit into one screen space unit equals <code>scale</code>, then image with size <code>scale</code> * 19 will be selected. Initially only scales 1 and 2 will be supported. At least one image must be specified. Note that 'details.imageData = foo' is equivalent to 'details.imageData = {'19': foo}'
- * @param path Either a relative image path or a dictionary {size -> relative image path} pointing to icon to be set. If the icon is specified as a dictionary, the actual image to be used is chosen depending on screen's pixel density. If the number of image pixels that fit into one screen space unit equals <code>scale</code>, then image with size <code>scale</code> * 19 will be selected. Initially only scales 1 and 2 will be supported. At least one image must be specified. Note that 'details.path = foo' is equivalent to 'details.imageData = {'19': foo}'
+ * @param imageData Either an ImageData object or a dictionary {size -> ImageData} representing icon
+        to be set. If the icon is specified as a dictionary, the actual image to be used is chosen
+        depending on screen's pixel density. If the number of image pixels that fit into one screen
+        space unit equals <code>scale</code>, then image with size <code>scale</code> * 19 will be
+        selected. Initially only scales 1 and 2 will be supported. At least one image must be
+        specified. Note that 'details.imageData = foo' is equivalent to 'details.imageData = {'19':
+        foo}'
+ * @param path Either a relative image path or a dictionary {size -> relative image path} pointing
+        to icon to be set. If the icon is specified as a dictionary, the actual image to be used is
+        chosen depending on screen's pixel density. If the number of image pixels that fit into one
+        screen space unit equals <code>scale</code>, then image with size <code>scale</code> * 19
+        will be selected. Initially only scales 1 and 2 will be supported. At least one image must
+        be specified. Note that 'details.path = foo' is equivalent to 'details.imageData = {'19':
+        foo}'
  */
 class Details3(
     var imageData: ImageData2? = null,
@@ -81,7 +112,8 @@ class Details3(
 typealias Popup = Any
 
 /**
- * @param popup The html file to show in a popup.  If set to the empty string (''), no popup is shown.
+ * @param popup The html file to show in a popup.  If set to the empty string (''), no popup is
+        shown.
  */
 class Details4(
     var popup: Popup
@@ -104,7 +136,8 @@ class Details7(var color: ColorValue)
 
 external class BrowserActionNamespace {
     /**
-     * Fired when a browser action icon is clicked.  This event will not fire if the browser action has a popup.
+     * Fired when a browser action icon is clicked.  This event will not fire if the browser action
+            has a popup.
      *
      * @param tab null */
     val onClicked: Event<(tab: Tab) -> Unit>
@@ -120,12 +153,15 @@ external class BrowserActionNamespace {
     fun getTitle(details: Details): Promise<String>
 
     /**
-     * Sets the icon for the browser action. The icon can be specified either as the path to an image file or as the pixel data from a canvas element, or as dictionary of either one of those. Either the <b>path</b> or the <b>imageData</b> property must be specified.
+     * Sets the icon for the browser action. The icon can be specified either as the path to an
+            image file or as the pixel data from a canvas element, or as dictionary of either one of
+            those. Either the <b>path</b> or the <b>imageData</b> property must be specified.
      */
     fun setIcon(details: Details3): Promise<Any>
 
     /**
-     * Sets the html document to be opened as a popup when the user clicks on the browser action's icon.
+     * Sets the html document to be opened as a popup when the user clicks on the browser action's
+            icon.
      */
     fun setPopup(details: Details4): Promise<Any>
 
@@ -140,7 +176,8 @@ external class BrowserActionNamespace {
     fun setBadgeText(details: Details5): Promise<Any>
 
     /**
-     * Gets the badge text of the browser action. If no tab nor window is specified is specified, the global badge text is returned.
+     * Gets the badge text of the browser action. If no tab nor window is specified is specified,
+            the global badge text is returned.
      */
     fun getBadgeText(details: Details): Promise<String>
 

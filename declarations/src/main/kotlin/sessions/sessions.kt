@@ -6,16 +6,20 @@ import webextensions.Event
 import windows.Window
 
 /**
- * @param maxResults The maximum number of entries to be fetched in the requested list. Omit this parameter to fetch the maximum number of entries ($(ref:sessions.MAX_SESSION_RESULTS)).
+ * @param maxResults The maximum number of entries to be fetched in the requested list. Omit this
+        parameter to fetch the maximum number of entries ($(ref:sessions.MAX_SESSION_RESULTS)).
  */
 class Filter(
     var maxResults: Int? = null
 )
 
 /**
- * @param lastModified The time when the window or tab was closed or modified, represented in milliseconds since the epoch.
- * @param tab The $(ref:tabs.Tab), if this entry describes a tab. Either this or $(ref:sessions.Session.window) will be set.
- * @param window The $(ref:windows.Window), if this entry describes a window. Either this or $(ref:sessions.Session.tab) will be set.
+ * @param lastModified The time when the window or tab was closed or modified, represented in
+        milliseconds since the epoch.
+ * @param tab The $(ref:tabs.Tab), if this entry describes a tab. Either this or
+        $(ref:sessions.Session.window) will be set.
+ * @param window The $(ref:windows.Window), if this entry describes a window. Either this or
+        $(ref:sessions.Session.tab) will be set.
  */
 class Session(
     var lastModified: Int,
@@ -25,7 +29,8 @@ class Session(
 
 /**
  * @param deviceName The name of the foreign device.
- * @param sessions A list of open window sessions for the foreign device, sorted from most recently to least recently modified session.
+ * @param sessions A list of open window sessions for the foreign device, sorted from most recently
+        to least recently modified session.
  */
 class Device(
     var info: String,
@@ -35,7 +40,8 @@ class Device(
 
 external class SessionsNamespace {
     /**
-     * Fired when recently closed tabs and/or windows are changed. This event does not monitor synced sessions changes.
+     * Fired when recently closed tabs and/or windows are changed. This event does not monitor
+            synced sessions changes.
      */
     val onChanged: Event<() -> Unit>
 
@@ -55,7 +61,8 @@ external class SessionsNamespace {
     fun getRecentlyClosed(filter: Filter? = definedExternally): Promise<Array<Session>>
 
     /**
-     * Reopens a $(ref:windows.Window) or $(ref:tabs.Tab), with an optional callback to run when the entry has been restored.
+     * Reopens a $(ref:windows.Window) or $(ref:tabs.Tab), with an optional callback to run when the
+            entry has been restored.
      */
     fun restore(sessionId: String? = definedExternally): Promise<Session>
 

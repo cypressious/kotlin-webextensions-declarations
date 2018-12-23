@@ -5,7 +5,8 @@ import manifest.HttpURL
 
 /**
  * An object encapsulating an OAuth account id.
- * @param id A unique identifier for the account. This ID will not change for the lifetime of the account. 
+ * @param id A unique identifier for the account. This ID will not change for the lifetime of the
+        account. 
  */
 class AccountInfo(
     var id: String

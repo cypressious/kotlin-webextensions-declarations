@@ -44,7 +44,8 @@ external class CommandsNamespace {
     fun reset(name: String): Promise<Any>
 
     /**
-     * Returns all the registered extension commands for this extension and their shortcut (if active).
+     * Returns all the registered extension commands for this extension and their shortcut (if
+            active).
      */
     fun getAll(): Promise<Array<Command>>
 }

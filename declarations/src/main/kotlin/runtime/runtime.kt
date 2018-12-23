@@ -7,7 +7,8 @@ import tabs.Tab
 
 /**
  * An object which allows two way communication with other pages.
- * @param sender This property will <b>only</b> be present on ports passed to onConnect/onConnectExternal listeners.
+ * @param sender This property will <b>only</b> be present on ports passed to
+        onConnect/onConnectExternal listeners.
  */
 @Suppress("NOTHING_TO_INLINE", "UnsafeCastFromDynamic")
 class Port(
@@ -26,10 +27,14 @@ class Port(
 
 /**
  * An object containing information about the script context that sent a message or request.
- * @param tab The $(ref:tabs.Tab) which opened the connection, if any. This property will <strong>only</strong> be present when the connection was opened from a tab (including content scripts), and <strong>only</strong> if the receiver is an extension, not an app.
- * @param frameId The $(topic:frame_ids)[frame] that opened the connection. 0 for top-level frames, positive for child frames. This will only be set when <code>tab</code> is set.
+ * @param tab The $(ref:tabs.Tab) which opened the connection, if any. This property will
+        <strong>only</strong> be present when the connection was opened from a tab (including
+        content scripts), and <strong>only</strong> if the receiver is an extension, not an app.
+ * @param frameId The $(topic:frame_ids)[frame] that opened the connection. 0 for top-level frames,
+        positive for child frames. This will only be set when <code>tab</code> is set.
  * @param id The ID of the extension or app that opened the connection, if any.
- * @param url The URL of the page or frame that opened the connection. If the sender is in an iframe, it will be iframe's URL not the URL of the page which hosts it.
+ * @param url The URL of the page or frame that opened the connection. If the sender is in an
+        iframe, it will be iframe's URL not the URL of the page which hosts it.
  */
 class MessageSender(
     var tab: Tab? = null,
@@ -79,7 +84,10 @@ typealias RequestUpdateCheckStatus = String
 typealias OnInstalledReason = String
 
 /**
- * The reason that the event is being dispatched. 'app_update' is used when the restart is needed because the application is updated to a newer version. 'os_update' is used when the restart is needed because the browser/OS is updated to a newer version. 'periodic' is used when the system runs for more than the permitted uptime set in the enterprise policy. */
+ * The reason that the event is being dispatched. 'app_update' is used when the restart is needed
+        because the application is updated to a newer version. 'os_update' is used when the restart
+        is needed because the browser/OS is updated to a newer version. 'periodic' is used when the
+        system runs for more than the permitted uptime set in the enterprise policy. */
 typealias OnRestartRequiredReason = String
 
 /**
@@ -127,8 +135,10 @@ class Details(
 )
 
 /**
- * @param name Will be passed into onConnect for processes that are listening for the connection event.
- * @param includeTlsChannelId Whether the TLS channel ID will be passed into onConnectExternal for processes that are listening for the connection event.
+ * @param name Will be passed into onConnect for processes that are listening for the connection
+        event.
+ * @param includeTlsChannelId Whether the TLS channel ID will be passed into onConnectExternal for
+        processes that are listening for the connection event.
  */
 class ConnectInfo(
     var name: String? = null,
@@ -152,7 +162,8 @@ class DirectoryEntry() {
 
 /**
  * @param reason The reason that this event is being dispatched.
- * @param previousVersion Indicates the previous version of the extension, which has just been updated. This is present only if 'reason' is 'update'.
+ * @param previousVersion Indicates the previous version of the extension, which has just been
+        updated. This is present only if 'reason' is 'update'.
  * @param temporary Indicates whether the addon is installed as a temporary extension.
  */
 class Details2(
@@ -177,18 +188,28 @@ class Details3(
 
 external class RuntimeNamespace {
     /**
-     * Fired when a profile that has this extension installed first starts up. This event is not fired for incognito profiles.
+     * Fired when a profile that has this extension installed first starts up. This event is not
+            fired for incognito profiles.
      */
     val onStartup: webextensions.Event<() -> Unit>
 
     /**
-     * Fired when the extension is first installed, when the extension is updated to a new version, and when the browser is updated to a new version.
+     * Fired when the extension is first installed, when the extension is updated to a new version,
+            and when the browser is updated to a new version.
      *
      * @param details null */
     val onInstalled: webextensions.Event<(details: Details2) -> Unit>
 
     /**
-     * Fired when an update is available, but isn't installed immediately because the app is currently running. If you do nothing, the update will be installed the next time the background page gets unloaded, if you want it to be installed sooner you can explicitly call $(ref:runtime.reload). If your extension is using a persistent background page, the background page of course never gets unloaded, so unless you call $(ref:runtime.reload) manually in response to this event the update will not get installed until the next time the browser itself restarts. If no handlers are listening for this event, and your extension has a persistent background page, it behaves as if $(ref:runtime.reload) is called in response to this event.
+     * Fired when an update is available, but isn't installed immediately because the app is
+            currently running. If you do nothing, the update will be installed the next time the
+            background page gets unloaded, if you want it to be installed sooner you can explicitly
+            call $(ref:runtime.reload). If your extension is using a persistent background page, the
+            background page of course never gets unloaded, so unless you call $(ref:runtime.reload)
+            manually in response to this event the update will not get installed until the next time
+            the browser itself restarts. If no handlers are listening for this event, and your
+            extension has a persistent background page, it behaves as if $(ref:runtime.reload) is
+            called in response to this event.
      *
      * @param details The manifest details of the available update. */
     val onUpdateAvailable: webextensions.Event<(details: Details3) -> Unit>
@@ -210,7 +231,12 @@ external class RuntimeNamespace {
      *
      * @param message The message sent by the calling script.
      * @param sender null
-     * @param sendResponse Function to call (at most once) when you have a response. The argument should be any JSON-ifiable object. If you have more than one <code>onMessage</code> listener in the same document, then only one may send a response. This function becomes invalid when the event listener returns, unless you return true from the event listener to indicate you wish to send a response asynchronously (this will keep the message channel open to the other end until <code>sendResponse</code> is called). */
+     * @param sendResponse Function to call (at most once) when you have a response. The argument
+            should be any JSON-ifiable object. If you have more than one <code>onMessage</code>
+            listener in the same document, then only one may send a response. This function becomes
+            invalid when the event listener returns, unless you return true from the event listener
+            to indicate you wish to send a response asynchronously (this will keep the message
+            channel open to the other end until <code>sendResponse</code> is called). */
     val onMessage: webextensions.Event<(
         message: dynamic,
         sender: MessageSender,
@@ -222,7 +248,12 @@ external class RuntimeNamespace {
      *
      * @param message The message sent by the calling script.
      * @param sender null
-     * @param sendResponse Function to call (at most once) when you have a response. The argument should be any JSON-ifiable object. If you have more than one <code>onMessage</code> listener in the same document, then only one may send a response. This function becomes invalid when the event listener returns, unless you return true from the event listener to indicate you wish to send a response asynchronously (this will keep the message channel open to the other end until <code>sendResponse</code> is called). */
+     * @param sendResponse Function to call (at most once) when you have a response. The argument
+            should be any JSON-ifiable object. If you have more than one <code>onMessage</code>
+            listener in the same document, then only one may send a response. This function becomes
+            invalid when the event listener returns, unless you return true from the event listener
+            to indicate you wish to send a response asynchronously (this will keep the message
+            channel open to the other end until <code>sendResponse</code> is called). */
     val onMessageExternal: webextensions.Event<(
         message: dynamic,
         sender: MessageSender,
@@ -230,17 +261,24 @@ external class RuntimeNamespace {
     ) -> Unit>
 
     /**
-     * Retrieves the JavaScript 'window' object for the background page running inside the current extension/app. If the background page is an event page, the system will ensure it is loaded before calling the callback. If there is no background page, an error is set.
+     * Retrieves the JavaScript 'window' object for the background page running inside the current
+            extension/app. If the background page is an event page, the system will ensure it is
+            loaded before calling the callback. If there is no background page, an error is set.
      */
     fun getBackgroundPage(): Promise<BackgroundPage?>
 
     /**
-     * <p>Open your Extension's options page, if possible.</p><p>The precise behavior may depend on your manifest's <code>$(topic:optionsV2)[options_ui]</code> or <code>$(topic:options)[options_page]</code> key, or what the browser happens to support at the time.</p><p>If your Extension does not declare an options page, or the browser failed to create one for some other reason, the callback will set $(ref:lastError).</p>
+     * <p>Open your Extension's options page, if possible.</p><p>The precise behavior may depend on
+            your manifest's <code>$(topic:optionsV2)[options_ui]</code> or
+            <code>$(topic:options)[options_page]</code> key, or what the browser happens to support
+            at the time.</p><p>If your Extension does not declare an options page, or the browser
+            failed to create one for some other reason, the callback will set $(ref:lastError).</p>
      */
     fun openOptionsPage(): Promise<Any>
 
     /**
-     * Returns details about the app or extension from the manifest. The object returned is a serialization of the full $(topic:manifest)[manifest file].
+     * Returns details about the app or extension from the manifest. The object returned is a
+            serialization of the full $(topic:manifest)[manifest file].
      */
     fun getManifest(): GetManifestResult
 
@@ -250,7 +288,8 @@ external class RuntimeNamespace {
     fun getURL(path: String): String
 
     /**
-     * Sets the URL to be visited upon uninstallation. This may be used to clean up server-side data, do analytics, and implement surveys. Maximum 255 characters.
+     * Sets the URL to be visited upon uninstallation. This may be used to clean up server-side
+            data, do analytics, and implement surveys. Maximum 255 characters.
      */
     fun setUninstallURL(url: String): Promise<Any>
 
@@ -260,9 +299,15 @@ external class RuntimeNamespace {
     fun reload()
 
     /**
-     * Attempts to connect to connect listeners within an extension/app (such as the background page), or other extensions/apps. This is useful for content scripts connecting to their extension processes, inter-app/extension communication, and $(topic:manifest/externally_connectable)[web messaging]. Note that this does not connect to any listeners in a content script. Extensions may connect to content scripts embedded in tabs via $(ref:tabs.connect).
+     * Attempts to connect to connect listeners within an extension/app (such as the background
+            page), or other extensions/apps. This is useful for content scripts connecting to their
+            extension processes, inter-app/extension communication, and
+            $(topic:manifest/externally_connectable)[web messaging]. Note that this does not connect
+            to any listeners in a content script. Extensions may connect to content scripts embedded
+            in tabs via $(ref:tabs.connect).
      */
-    fun connect(extensionId: String? = definedExternally, connectInfo: ConnectInfo? = definedExternally): Port
+    fun connect(extensionId: String? = definedExternally, connectInfo: ConnectInfo? =
+            definedExternally): Port
 
     /**
      * Connects to a native application in the host machine.
@@ -270,7 +315,12 @@ external class RuntimeNamespace {
     fun connectNative(application: String): Port
 
     /**
-     * Sends a single message to event listeners within your extension/app or a different extension/app. Similar to $(ref:runtime.connect) but only sends a single message, with an optional response. If sending to your extension, the $(ref:runtime.onMessage) event will be fired in each page, or $(ref:runtime.onMessageExternal), if a different extension. Note that extensions cannot send messages to content scripts using this method. To send messages to content scripts, use $(ref:tabs.sendMessage).
+     * Sends a single message to event listeners within your extension/app or a different
+            extension/app. Similar to $(ref:runtime.connect) but only sends a single message, with
+            an optional response. If sending to your extension, the $(ref:runtime.onMessage) event
+            will be fired in each page, or $(ref:runtime.onMessageExternal), if a different
+            extension. Note that extensions cannot send messages to content scripts using this
+            method. To send messages to content scripts, use $(ref:tabs.sendMessage).
      */
     fun sendMessage(
         extensionId: String? = definedExternally,

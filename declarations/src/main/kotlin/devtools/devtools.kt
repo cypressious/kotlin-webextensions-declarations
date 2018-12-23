@@ -21,8 +21,11 @@ class Options()
  * An object providing details if an exception occurred while evaluating the expression.
  * @param isError Set if the error occurred on the DevTools side before the expression is evaluated.
  * @param code Set if the error occurred on the DevTools side before the expression is evaluated.
- * @param description Set if the error occurred on the DevTools side before the expression is evaluated.
- * @param details Set if the error occurred on the DevTools side before the expression is evaluated, contains the array of the values that may be substituted into the description string to provide more information about the cause of the error.
+ * @param description Set if the error occurred on the DevTools side before the expression is
+        evaluated.
+ * @param details Set if the error occurred on the DevTools side before the expression is evaluated,
+        contains the array of the values that may be substituted into the description string to
+        provide more information about the cause of the error.
  * @param isException Set if the evaluated code produces an unhandled exception.
  * @param value Set if the evaluated code produces an unhandled exception.
  */
@@ -36,9 +39,16 @@ class ExceptionInfo(
 )
 
 /**
- * @param ignoreCache When true, the loader will bypass the cache for all inspected page resources loaded before the <code>load</code> event is fired. The effect is similar to pressing Ctrl+Shift+R in the inspected window or within the Developer Tools window.
- * @param userAgent If specified, the string will override the value of the <code>User-Agent</code> HTTP header that's sent while loading the resources of the inspected page. The string will also override the value of the <code>navigator.userAgent</code> property that's returned to any scripts that are running within the inspected page.
- * @param injectedScript If specified, the script will be injected into every frame of the inspected page immediately upon load, before any of the frame's scripts. The script will not be injected after subsequent reloads&mdash;for example, if the user presses Ctrl+R.
+ * @param ignoreCache When true, the loader will bypass the cache for all inspected page resources
+        loaded before the <code>load</code> event is fired. The effect is similar to pressing
+        Ctrl+Shift+R in the inspected window or within the Developer Tools window.
+ * @param userAgent If specified, the string will override the value of the <code>User-Agent</code>
+        HTTP header that's sent while loading the resources of the inspected page. The string will
+        also override the value of the <code>navigator.userAgent</code> property that's returned to
+        any scripts that are running within the inspected page.
+ * @param injectedScript If specified, the script will be injected into every frame of the inspected
+        page immediately upon load, before any of the frame's scripts. The script will not be
+        injected after subsequent reloads&mdash;for example, if the user presses Ctrl+R.
  */
 class ReloadOptions(
     var ignoreCache: Boolean? = null,
@@ -48,7 +58,15 @@ class ReloadOptions(
 
 external class InspectedWindowNamespace {
     /**
-     * Evaluates a JavaScript expression in the context of the main frame of the inspected page. The expression must evaluate to a JSON-compliant object, otherwise an exception is thrown. The eval function can report either a DevTools-side error or a JavaScript exception that occurs during evaluation. In either case, the <code>result</code> parameter of the callback is <code>undefined</code>. In the case of a DevTools-side error, the <code>isException</code> parameter is non-null and has <code>isError</code> set to true and <code>code</code> set to an error code. In the case of a JavaScript error, <code>isException</code> is set to true and <code>value</code> is set to the string value of thrown object.
+     * Evaluates a JavaScript expression in the context of the main frame of the inspected page. The
+            expression must evaluate to a JSON-compliant object, otherwise an exception is thrown.
+            The eval function can report either a DevTools-side error or a JavaScript exception that
+            occurs during evaluation. In either case, the <code>result</code> parameter of the
+            callback is <code>undefined</code>. In the case of a DevTools-side error, the
+            <code>isException</code> parameter is non-null and has <code>isError</code> set to true
+            and <code>code</code> set to an error code. In the case of a JavaScript error,
+            <code>isException</code> is set to true and <code>value</code> is set to the string
+            value of thrown object.
      */
     fun eval(expression: String, options: Options? = definedExternally): Promise<dynamic>
 
@@ -59,7 +77,8 @@ external class InspectedWindowNamespace {
 }
 
 /**
- * Represents a network request for a document resource (script, image and so on). See HAR Specification for reference. */
+ * Represents a network request for a document resource (script, image and so on). See HAR
+        Specification for reference. */
 typealias Request = Any
 
 /**
@@ -77,7 +96,8 @@ external class NetworkNamespace {
     /**
      * Fired when a network request is finished and all request data are available.
      *
-     * @param request Description of a network request in the form of a HAR entry. See HAR specification for details. */
+     * @param request Description of a network request in the form of a HAR entry. See HAR
+            specification for details. */
     val onRequestFinished: Event<(request: Request) -> Unit>
 
     /**
@@ -113,7 +133,8 @@ typealias ExtensionSidebarPane = Any
 typealias Button = Any
 
 /**
- * Path of the panel's icon relative to the extension directory, or an empty string to use the default extension icon as the panel icon. */
+ * Path of the panel's icon relative to the extension directory, or an empty string to use the
+        default extension icon as the panel icon. */
 typealias IconPath = Any
 
 external class PanelsNamespace {

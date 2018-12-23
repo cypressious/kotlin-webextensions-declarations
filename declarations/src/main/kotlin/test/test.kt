@@ -1,7 +1,7 @@
 package test
 
-import kotlin.js.Promise
 import webextensions.Event
+import kotlin.js.Promise
 
 typealias ExpectedError = Any
 
@@ -18,12 +18,14 @@ external class TestNamespace {
     val onMessage: Event<(message: String, argument: dynamic) -> Unit>
 
     /**
-     * Notifies the browser process that test code running in the extension failed.  This is only used for internal unit testing.
+     * Notifies the browser process that test code running in the extension failed.  This is only
+            used for internal unit testing.
      */
     fun notifyFail(message: String)
 
     /**
-     * Notifies the browser process that test code running in the extension passed.  This is only used for internal unit testing.
+     * Notifies the browser process that test code running in the extension passed.  This is only
+            used for internal unit testing.
      */
     fun notifyPass(message: String? = definedExternally)
 
@@ -33,7 +35,8 @@ external class TestNamespace {
     fun log(message: String)
 
     /**
-     * Sends a string message to the browser process, generating a Notification that C++ test code can wait for.
+     * Sends a string message to the browser process, generating a Notification that C++ test code
+            can wait for.
      */
     fun sendMessage(arg1: dynamic = definedExternally, arg2: dynamic = definedExternally)
 

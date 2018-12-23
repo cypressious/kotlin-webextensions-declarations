@@ -5,9 +5,15 @@ import kotlin.js.Promise
 
 /**
  * Options that determine exactly what data will be removed.
- * @param since Remove data accumulated on or after this date, represented in milliseconds since the epoch (accessible via the <code>getTime</code> method of the JavaScript <code>Date</code> object). If absent, defaults to 0 (which would remove all browsing data).
- * @param hostnames Only remove data associated with these hostnames (only applies to cookies and localStorage).
- * @param originTypes An object whose properties specify which origin types ought to be cleared. If this object isn't specified, it defaults to clearing only "unprotected" origins. Please ensure that you <em>really</em> want to remove application data before adding 'protectedWeb' or 'extensions'.
+ * @param since Remove data accumulated on or after this date, represented in milliseconds since the
+        epoch (accessible via the <code>getTime</code> method of the JavaScript <code>Date</code>
+        object). If absent, defaults to 0 (which would remove all browsing data).
+ * @param hostnames Only remove data associated with these hostnames (only applies to cookies and
+        localStorage).
+ * @param originTypes An object whose properties specify which origin types ought to be cleared. If
+        this object isn't specified, it defaults to clearing only "unprotected" origins. Please
+        ensure that you <em>really</em> want to remove application data before adding 'protectedWeb'
+        or 'extensions'.
  */
 class RemovalOptions(
     var since: Date? = null,
@@ -17,7 +23,8 @@ class RemovalOptions(
 
 /**
  * A set of data types. Missing data types are interpreted as <code>false</code>.
- * @param cache The browser's cache. Note: when removing data, this clears the <em>entire</em> cache: it is not limited to the range you specify.
+ * @param cache The browser's cache. Note: when removing data, this clears the <em>entire</em>
+        cache: it is not limited to the range you specify.
  * @param cookies The browser's cookies.
  * @param downloads The browser's download list.
  * @param formData The browser's stored form data.
@@ -44,10 +51,14 @@ class DataTypeSet(
 )
 
 /**
- * An object whose properties specify which origin types ought to be cleared. If this object isn't specified, it defaults to clearing only "unprotected" origins. Please ensure that you <em>really</em> want to remove application data before adding 'protectedWeb' or 'extensions'.
+ * An object whose properties specify which origin types ought to be cleared. If this object isn't
+        specified, it defaults to clearing only "unprotected" origins. Please ensure that you
+        <em>really</em> want to remove application data before adding 'protectedWeb' or
+        'extensions'.
  * @param unprotectedWeb Normal websites.
  * @param protectedWeb Websites that have been installed as hosted applications (be careful!).
- * @param extension Extensions and packaged applications a user has installed (be _really_ careful!).
+ * @param extension Extensions and packaged applications a user has installed (be _really_
+        careful!).
  */
 class OriginTypes(
     var unprotectedWeb: Boolean? = null,
@@ -56,8 +67,12 @@ class OriginTypes(
 )
 
 /**
- * @param dataToRemove All of the types will be present in the result, with values of <code>true</code> if they are both selected to be removed and permitted to be removed, otherwise <code>false</code>.
- * @param dataRemovalPermitted All of the types will be present in the result, with values of <code>true</code> if they are permitted to be removed (e.g., by enterprise policy) and <code>false</code> if not.
+ * @param dataToRemove All of the types will be present in the result, with values of
+        <code>true</code> if they are both selected to be removed and permitted to be removed,
+        otherwise <code>false</code>.
+ * @param dataRemovalPermitted All of the types will be present in the result, with values of
+        <code>true</code> if they are permitted to be removed (e.g., by enterprise policy) and
+        <code>false</code> if not.
  */
 class Result(
     var options: RemovalOptions,
@@ -67,7 +82,9 @@ class Result(
 
 external class BrowsingDataNamespace {
     /**
-     * Reports which types of data are currently selected in the 'Clear browsing data' settings UI.  Note: some of the data types included in this API are not available in the settings UI, and some UI settings control more than one data type listed here.
+     * Reports which types of data are currently selected in the 'Clear browsing data' settings UI. 
+            Note: some of the data types included in this API are not available in the settings UI,
+            and some UI settings control more than one data type listed here.
      */
     fun settings(): Promise<Result>
 
@@ -82,7 +99,8 @@ external class BrowsingDataNamespace {
     fun removeCache(options: RemovalOptions): Promise<Any>
 
     /**
-     * Clears the browser's cookies and server-bound certificates modified within a particular timeframe.
+     * Clears the browser's cookies and server-bound certificates modified within a particular
+            timeframe.
      */
     fun removeCookies(options: RemovalOptions): Promise<Any>
 
